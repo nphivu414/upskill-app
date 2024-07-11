@@ -1,5 +1,6 @@
 import { Card, CardBody, CardHeader, Image } from '@nextui-org/react';
-import { Theme, useTheme } from 'app/theme/theme-provider';
+
+import { Theme, useTheme } from '../theme/theme-provider';
 
 export default function Index() {
   const [, setTheme] = useTheme();

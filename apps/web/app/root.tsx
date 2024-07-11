@@ -14,6 +14,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
+import { AppContainer, NavigationBar } from '@upskill-app/ui/web';
 
 import twStyles from './tailwind.css';
 import { ThemeHead, ThemeProvider, useTheme } from './theme/theme-provider';
@@ -52,7 +53,8 @@ function App({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <NextUIProvider>
-          {children}
+          <NavigationBar />
+          <AppContainer>{children}</AppContainer>
           <ScrollRestoration />
           <Scripts />
           <LiveReload />

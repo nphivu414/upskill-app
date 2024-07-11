@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@upskill-app/ui/web": ["libs/ui/src/web/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
