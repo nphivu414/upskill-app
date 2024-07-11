@@ -4,10 +4,12 @@
   "license": "MIT",
   "scripts": {
     "start": "nx run web:dev",
-    "start:web": "nx run web:dev"
+    "start:web": "nx run web:dev",
+    "lint:web": "nx lint web --fix"
   },
   "private": true,
   "dependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.3.0",
     "@nextui-org/react": "^2.4.2",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
@@ -36,7 +38,9 @@
     "@typescript-eslint/parser": "^7.3.0",
     "eslint": "~8.57.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-tailwindcss": "^3.17.4",
     "nx": "19.4.1",
     "prettier": "^2.6.2",
     "typescript": "~5.4.2"

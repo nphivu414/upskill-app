@@ -1,18 +1,18 @@
-import {Card, CardHeader, CardBody, Image} from "@nextui-org/react";
-import { Theme, useTheme } from "app/theme/theme-provider";
+import { Card, CardBody, CardHeader, Image } from '@nextui-org/react';
+import { Theme, useTheme } from 'app/theme/theme-provider';
 
 export default function Index() {
   const [, setTheme] = useTheme();
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>
-      prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT,
+      prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
     );
   };
   return (
     <div className="max-w-[300px]">
       <button onClick={toggleTheme}>Toggle</button>
-    
+
       <Card className="py-4">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">Daily Mix</p>

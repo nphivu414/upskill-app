@@ -2,7 +2,7 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nx", "@typescript-eslint"],
+  "plugins": ["@nx", "@typescript-eslint", "tailwindcss", "prettier"],
   "settings": {
     "react": {
       "version": "detect"
@@ -33,11 +33,13 @@
         "plugin:@nx/typescript",
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
       ],
       "rules": {
         "react/react-in-jsx-scope": "off",
-        "indent": ["warn", 2]
+        "indent": ["warn", 2],
+        "prettier/prettier": "warn"
       }
     },
     {
