@@ -1,7 +1,5 @@
-type AppContainerProps = {
-  children: React.ReactNode;
-};
+import { ComponentWithChildren } from '@upskill-app/types';
 
-export const AppContainer = ({ children }: AppContainerProps) => {
+export const AppContainer = ({ children }: ComponentWithChildren) => {
   return <div className="container mx-auto">{children}</div>;
 };

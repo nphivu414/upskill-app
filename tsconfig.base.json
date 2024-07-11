@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@upskill-app/types": ["libs/types/src/index.ts"],
       "@upskill-app/ui/web": ["libs/ui/src/web/index.ts"]
     }
   },
