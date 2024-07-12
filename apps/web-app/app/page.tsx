@@ -1,13 +1,9 @@
-import { Theme, useTheme } from '../theme/theme-provider';
-
 export default function Index() {
-  const [, setTheme] = useTheme();
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) =>
-      prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
-    );
-  };
+  /*
+   * Replace the elements below with your own.
+   *
+   * Note: The corresponding styles are in the ./index.tailwind file.
+   */
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <main className="flex-1">
