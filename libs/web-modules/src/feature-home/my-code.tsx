@@ -18,7 +18,8 @@ const mark: AnnotationHandler = {
     />
   ),
 };
+
 export async function MyCode({ codeblock }: { codeblock: RawCode }) {
   const highlighted = await highlight(codeblock, 'github-dark');
-  return <Pre code={highlighted} handlers={[mark]} />;
+  return <Pre className="bg-content1" code={highlighted} handlers={[mark]} />;
 }

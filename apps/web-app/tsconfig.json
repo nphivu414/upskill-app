@@ -33,7 +33,7 @@
     "../../dist/apps/web-app/.next/types/**/*.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-, "next.config.mjs"  ],
+, "next.config.mjs", "../../mdx.d.ts"  ],
   "exclude": [
     "node_modules",
     "jest.config.ts",

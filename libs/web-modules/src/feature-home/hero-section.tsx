@@ -1,5 +1,8 @@
 import { Button, Link } from '@nextui-org/react';
 
+import Content from './content.mdx';
+import { MyCode } from './my-code';
+
 export const HeroSection = () => {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
@@ -35,13 +38,9 @@ export const HeroSection = () => {
               </Button>
             </div>
           </div>
-          <img
-            src="https://generated.vusercontent.net/placeholder.svg"
-            width="550"
-            height="550"
-            alt="Hero"
-            className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"
-          />
+          <div className="flex w-[550px] h-[550px] justify-center items-center bg-content1 rounded-xl">
+            <Content components={{ MyCode }} />
+          </div>
         </div>
       </div>
     </section>
