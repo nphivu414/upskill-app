@@ -16,5 +16,7 @@ module.exports = {
     extend: {},
   },
   darkMode: 'selector',
-  plugins: [nextui()],
+  plugins: [
+    nextui(),
+  ],
 };

@@ -1,8 +1,11 @@
-import { AppContainer, NavigationBar } from '@upskill-app/ui/web';
+import {
+  AppContainer,
+  AppFooter,
+  AppUiProvider,
+  NavigationBar,
+} from '@upskill-app/ui/web';
 
 import './global.css';
-
-import { NextUIProvider } from '@nextui-org/react';
 
 export const metadata = {
   title: 'Welcome to web-app',
@@ -17,10 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body>
-        <NextUIProvider>
+        <AppUiProvider>
           <NavigationBar />
           <AppContainer>{children}</AppContainer>
-        </NextUIProvider>
+          <AppFooter />
+        </AppUiProvider>
       </body>
     </html>
   );
