@@ -1,7 +1,7 @@
 import { Button, Link } from '@nextui-org/react';
 
-import Content from './content.mdx';
-import { MyCode } from './my-code';
+import HeroCodeContent from '../../content/hero-code.mdx';
+import { MyCode } from './hero-code';
 
 export const HeroSection = () => {
   return (
@@ -39,7 +39,7 @@ export const HeroSection = () => {
             </div>
           </div>
           <div className="flex w-[550px] h-[550px] justify-center items-center bg-content1 rounded-xl">
-            <Content components={{ MyCode }} />
+            <HeroCodeContent components={{ MyCode }} />
           </div>
         </div>
       </div>

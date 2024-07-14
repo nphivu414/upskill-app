@@ -1,3 +1,6 @@
+import KeyFeatureCodeContent from '../../content/key-feature-code.mdx';
+import { CodeWithTabs } from './feature-code';
+
 export const KeyFeaturesSection = () => {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
@@ -48,13 +51,9 @@ export const KeyFeaturesSection = () => {
               </li>
             </ul>
           </div>
-          <img
-            src="https://generated.vusercontent.net/placeholder.svg"
-            width="550"
-            height="310"
-            alt="Features"
-            className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
-          />
+          <div className="w-[550] h-[310] ">
+            <KeyFeatureCodeContent components={{ CodeWithTabs }} />
+          </div>
         </div>
       </div>
     </section>
