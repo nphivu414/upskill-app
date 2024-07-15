@@ -4,6 +4,7 @@ import {
   CardFooter,
   CardHeader,
   Image,
+  Link,
 } from '@nextui-org/react';
 
 export const CourseOfferingsSection = () => {
@@ -23,7 +24,7 @@ export const CourseOfferingsSection = () => {
           </p>
         </div>
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Card isPressable>
+          <Card isPressable as={Link} href="/tutorials/name">
             <CardHeader>
               <Image
                 src="https://nextui.org/images/card-example-2.jpeg"
