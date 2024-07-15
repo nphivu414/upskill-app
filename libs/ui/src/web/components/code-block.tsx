@@ -19,7 +19,7 @@ export const CodeBock = React.forwardRef<
       </div>
       <Pre
         ref={ref}
-        className={cn('bg-content1', className)}
+        className={cn('bg-content1 text-sm scrollbar-thin', className)}
         code={highlightedCode}
         {...props}
       />

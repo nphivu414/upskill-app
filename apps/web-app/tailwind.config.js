@@ -17,6 +17,7 @@ module.exports = {
   },
   darkMode: 'selector',
   plugins: [
+    require('tailwind-scrollbar'),
     nextui(),
   ],
 };

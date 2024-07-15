@@ -46,14 +46,14 @@ export function CustomTabs(props: {
             <Card>
               <CardBody>
                 {tab.meta === 'Preview' ? (
-                  <div className="flex h-[320px] items-center justify-center">
+                  <div className="flex h-[300px] items-center justify-center">
                     <tab.value />
                   </div>
                 ) : (
                   <CodeBock
                     code={highlightedCode}
                     showCopyButton
-                    className="bg-content1 m-0 max-h-[320px] overflow-auto rounded-none"
+                    className="bg-content1 m-0 h-[300px] overflow-auto rounded-none"
                   />
                 )}
               </CardBody>
