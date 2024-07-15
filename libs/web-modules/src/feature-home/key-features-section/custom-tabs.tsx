@@ -53,7 +53,7 @@ export function CustomTabs(props: {
                   <CodeBock
                     code={highlightedCode}
                     showCopyButton
-                    className="bg-content1 m-0 h-[300px] overflow-auto rounded-none"
+                    className="bg-content1 h-[300px] overflow-auto rounded-none"
                   />
                 )}
               </CardBody>

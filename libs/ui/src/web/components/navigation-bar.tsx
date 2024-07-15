@@ -1,5 +1,4 @@
 import {
-  Button,
   Link,
   Navbar,
   NavbarBrand,
@@ -7,13 +6,15 @@ import {
   NavbarItem,
 } from '@nextui-org/react';
 
+import { ThemeToggle } from './theme-toggle';
+
 export const NavigationBar = () => {
   return (
     <Navbar shouldHideOnScroll maxWidth="2xl">
       <NavbarBrand>
-        <p className="font-bold text-inherit">Up Skill App</p>
+        <p className="font-bold text-inherit">Up Skill</p>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarItem>
           <Link color="foreground" href="#">
             Features
@@ -31,14 +32,7 @@ export const NavigationBar = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
+        <ThemeToggle />
       </NavbarContent>
     </Navbar>
   );
