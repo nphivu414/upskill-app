@@ -5,7 +5,7 @@ import {
   NavigationBar,
 } from '@upskill-app/ui/web';
 
-import './global.css';
+import './styles/global.css';
 
 import { ComponentWithChildren } from '@upskill-app/types';
 
