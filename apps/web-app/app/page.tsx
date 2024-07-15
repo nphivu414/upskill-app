@@ -6,7 +6,7 @@ import {
 
 export default function Index() {
   return (
-    <div className="flex flex-col min-h-[100dvh]">
+    <div className="flex min-h-dvh flex-col">
       <main className="flex-1">
         <HeroSection />
         <KeyFeaturesSection />

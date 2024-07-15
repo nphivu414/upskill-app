@@ -1,7 +1,7 @@
 import { Button, Link } from '@nextui-org/react';
 
 import HeroCodeContent from '../../content/hero-code.mdx';
-import { MyCode } from './hero-code';
+import { HeroCode } from './hero-code';
 
 export const HeroSection = () => {
   return (
@@ -13,7 +13,7 @@ export const HeroSection = () => {
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                 Unlock Your Potential with Our Online Learning Platform
               </h1>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl">
+              <p className="text-muted-foreground max-w-[600px] md:text-xl">
                 Discover a world of knowledge at your fingertips. Explore a wide
                 range of courses, learn from industry experts, and achieve your
                 goals.
@@ -38,8 +38,8 @@ export const HeroSection = () => {
               </Button>
             </div>
           </div>
-          <div className="flex w-[550px] h-[550px] justify-center items-center bg-content1 rounded-xl">
-            <HeroCodeContent components={{ MyCode }} />
+          <div className="bg-content1 flex size-[550px] items-center justify-center rounded-xl">
+            <HeroCodeContent components={{ Code: HeroCode }} />
           </div>
         </div>
       </div>

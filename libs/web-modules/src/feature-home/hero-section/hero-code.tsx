@@ -1,8 +1,8 @@
+import { CodeBock } from '@upskill-app/ui/web';
 import {
   AnnotationHandler,
   highlight,
   InnerLine,
-  Pre,
   RawCode,
 } from 'codehike/code';
 
@@ -14,12 +14,12 @@ const mark: AnnotationHandler = {
   Line: (props) => (
     <InnerLine
       merge={props}
-      className="px-2 border-l-2 border-transparent data-[mark]:border-blue-400 data-[mark]:bg-blue-400/10"
+      className="border-l-2 border-transparent px-2 data-[mark]:border-blue-400 data-[mark]:bg-blue-400/10"
     />
   ),
 };
 
-export async function MyCode({ codeblock }: { codeblock: RawCode }) {
+export async function HeroCode({ codeblock }: { codeblock: RawCode }) {
   const highlighted = await highlight(codeblock, 'github-dark');
-  return <Pre className="bg-content1" code={highlighted} handlers={[mark]} />;
+  return <CodeBock code={highlighted} handlers={[mark]} />;
 }

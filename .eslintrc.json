@@ -34,12 +34,18 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:tailwindcss/recommended",
         "prettier"
       ],
       "rules": {
+        "react/jsx-key": "off",
+        "@next/next/no-html-link-for-pages": "off",
+        "@next/next/no-img-element": "off",
+        "tailwindcss/no-custom-classname": "off",
         "react/react-in-jsx-scope": "off",
         "indent": ["warn", 2],
-        "prettier/prettier": "warn"
+        "prettier/prettier": "warn",
+        "react/prop-types": "off"
       }
     },
     {

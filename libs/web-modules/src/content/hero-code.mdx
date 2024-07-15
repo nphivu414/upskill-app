@@ -1,11 +1,11 @@
 ```jsx
 function VideoList({ videos, emptyHeading }) {
-  const count = videos.length;
-  let heading = emptyHeading;
+  const count = videos.length
+  let heading = emptyHeading
   if (count > 0) {
     // !mark(1:2)
-    const noun = count > 1 ? 'Videos' : 'Video';
-    heading = count + ' ' + noun;
+    const noun = count > 1 ? 'Videos' : 'Video'
+    heading = count + ' ' + noun
   }
   return (
     <section>
@@ -14,6 +14,6 @@ function VideoList({ videos, emptyHeading }) {
         <Video key={video.id} video={video} />
       ))}
     </section>
-  );
+  )
 }
 ```

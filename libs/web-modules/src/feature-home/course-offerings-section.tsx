@@ -3,7 +3,7 @@ export const CourseOfferingsSection = () => {
     <section className="w-full py-12 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
         <div className="space-y-4 text-center">
-          <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
+          <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
             Popular Courses
           </div>
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
@@ -14,17 +14,17 @@ export const CourseOfferingsSection = () => {
             perfect one to suit your learning needs.
           </p>
         </div>
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div
-            className="rounded-lg border bg-card text-card-foreground shadow-sm"
+            className="bg-card text-card-foreground rounded-lg border shadow-sm"
             data-v0-t="card"
           >
-            <div className="p-6 space-y-2">
+            <div className="space-y-2 p-6">
               <img
                 src="https://generated.vusercontent.net/placeholder.svg"
                 height="200"
                 alt="Course"
-                className="rounded-t-md object-cover aspect-video w-full"
+                className="aspect-video w-full rounded-t-md object-cover"
               />
               <h3 className="text-xl font-bold">
                 Introduction to Web Development
@@ -44,12 +44,12 @@ export const CourseOfferingsSection = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4 text-muted-foreground"
+                  className="text-muted-foreground size-4"
                 >
                   <circle cx="12" cy="12" r="10"></circle>
                   <polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
-                <span className="text-sm text-muted-foreground">12 hours</span>
+                <span className="text-muted-foreground text-sm">12 hours</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -60,26 +60,26 @@ export const CourseOfferingsSection = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4 text-muted-foreground"
+                  className="text-muted-foreground size-4"
                 >
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-muted-foreground text-sm">
                   4.8 (1,234 reviews)
                 </span>
               </div>
             </div>
           </div>
           <div
-            className="rounded-lg border bg-card text-card-foreground shadow-sm"
+            className="bg-card text-card-foreground rounded-lg border shadow-sm"
             data-v0-t="card"
           >
-            <div className="p-6 space-y-2">
+            <div className="space-y-2 p-6">
               <img
                 src="https://generated.vusercontent.net/placeholder.svg"
                 height="200"
                 alt="Course"
-                className="rounded-t-md object-cover aspect-video w-full"
+                className="aspect-video w-full rounded-t-md object-cover"
               />
               <h3 className="text-xl font-bold">Data Analysis with Python</h3>
               <p className="text-muted-foreground">
@@ -97,12 +97,12 @@ export const CourseOfferingsSection = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4 text-muted-foreground"
+                  className="text-muted-foreground size-4"
                 >
                   <circle cx="12" cy="12" r="10"></circle>
                   <polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
-                <span className="text-sm text-muted-foreground">18 hours</span>
+                <span className="text-muted-foreground text-sm">18 hours</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -113,26 +113,26 @@ export const CourseOfferingsSection = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4 text-muted-foreground"
+                  className="text-muted-foreground size-4"
                 >
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-muted-foreground text-sm">
                   4.7 (987 reviews)
                 </span>
               </div>
             </div>
           </div>
           <div
-            className="rounded-lg border bg-card text-card-foreground shadow-sm"
+            className="bg-card text-card-foreground rounded-lg border shadow-sm"
             data-v0-t="card"
           >
-            <div className="p-6 space-y-2">
+            <div className="space-y-2 p-6">
               <img
                 src="https://generated.vusercontent.net/placeholder.svg"
                 height="200"
                 alt="Course"
-                className="rounded-t-md object-cover aspect-video w-full"
+                className="aspect-video w-full rounded-t-md object-cover"
               />
               <h3 className="text-xl font-bold">Mastering Digital Marketing</h3>
               <p className="text-muted-foreground">
@@ -150,12 +150,12 @@ export const CourseOfferingsSection = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4 text-muted-foreground"
+                  className="text-muted-foreground size-4"
                 >
                   <circle cx="12" cy="12" r="10"></circle>
                   <polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
-                <span className="text-sm text-muted-foreground">24 hours</span>
+                <span className="text-muted-foreground text-sm">24 hours</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -166,11 +166,11 @@ export const CourseOfferingsSection = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4 text-muted-foreground"
+                  className="text-muted-foreground size-4"
                 >
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-muted-foreground text-sm">
                   4.9 (1,567 reviews)
                 </span>
               </div>

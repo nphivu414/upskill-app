@@ -2,15 +2,15 @@ import { Avatar, Card, CardBody, Link } from '@nextui-org/react';
 
 export default function TutorialDetail() {
   return (
-    <div className="flex flex-col min-h-[100dvh]">
+    <div className="flex min-h-dvh flex-col">
       <section className="w-full pt-12 md:pt-24 lg:pt-32">
-        <div className="container space-y-10 xl:space-y-16 px-4 md:px-6">
+        <div className="container space-y-10 px-4 md:px-6 xl:space-y-16">
           <div className="grid gap-4 md:grid-cols-2 md:gap-16">
             <div>
               <h1 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
                 Mastering React: A Comprehensive Course
               </h1>
-              <div className="flex items-center gap-4 mt-4">
+              <div className="mt-4 flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   <Avatar
                     isBordered
@@ -24,7 +24,7 @@ export default function TutorialDetail() {
                   </div>
                 </div>
               </div>
-              <p className="mt-6 text-muted-foreground md:text-xl">
+              <p className="text-muted-foreground mt-6 md:text-xl">
                 Dive deep into the world of React and master the art of building
                 modern, scalable web applications. This comprehensive course
                 covers everything from the fundamentals to advanced concepts,
@@ -49,7 +49,7 @@ export default function TutorialDetail() {
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
                 Course Curriculum
               </h2>
-              <p className="mt-2 text-muted-foreground md:text-xl">
+              <p className="text-muted-foreground mt-2 md:text-xl">
                 Explore the comprehensive curriculum and dive into the world of
                 React.
               </p>
@@ -119,14 +119,14 @@ export default function TutorialDetail() {
           </div>
         </div>
       </section>
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+      <section className="bg-muted w-full py-12 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
             <div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
                 About the Instructor
               </h2>
-              <div className="flex items-center gap-4 mt-4">
+              <div className="mt-4 flex items-center gap-4">
                 <Avatar
                   isBordered
                   src="https://i.pravatar.cc/150?u=a04258114e29026708c"
@@ -138,7 +138,7 @@ export default function TutorialDetail() {
                   </p>
                 </div>
               </div>
-              <p className="mt-4 text-muted-foreground md:text-xl">
+              <p className="text-muted-foreground mt-4 md:text-xl">
                 John Doe is a seasoned React expert with over 10 years of
                 experience in building scalable and performant web applications.
                 He is currently a lead developer at Vercel, where he contributes
@@ -165,11 +165,11 @@ export default function TutorialDetail() {
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
                 Related Courses
               </h2>
-              <p className="mt-2 text-muted-foreground md:text-xl">
+              <p className="text-muted-foreground mt-2 md:text-xl">
                 Check out these other courses that might interest you.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               <Card>
                 <CardBody>
                   <div className="flex flex-col items-start gap-2">
@@ -189,7 +189,7 @@ export default function TutorialDetail() {
                     </p>
                     <Link
                       href="#"
-                      className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                      className="focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
                     >
                       Enroll Now
                     </Link>
@@ -215,7 +215,7 @@ export default function TutorialDetail() {
                     </p>
                     <Link
                       href="#"
-                      className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                      className="focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
                     >
                       Enroll Now
                     </Link>
@@ -241,7 +241,7 @@ export default function TutorialDetail() {
                     </p>
                     <Link
                       href="#"
-                      className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                      className="focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
                     >
                       Enroll Now
                     </Link>
@@ -267,7 +267,7 @@ export default function TutorialDetail() {
                     </p>
                     <Link
                       href="#"
-                      className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                      className="focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
                     >
                       Enroll Now
                     </Link>

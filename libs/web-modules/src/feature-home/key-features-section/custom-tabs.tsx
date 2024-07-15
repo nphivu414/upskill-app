@@ -2,7 +2,19 @@
 
 import React from 'react';
 import { Card, CardBody, Tab, Tabs } from '@nextui-org/react';
-import { HighlightedCode, Pre, RawCode } from 'codehike/code';
+import { CodeBock } from '@upskill-app/ui/web';
+import { HighlightedCode, RawCode } from 'codehike/code';
+
+import { DemoComponent } from './demo-component';
+
+const PreviewComponent = () => (
+  <DemoComponent
+    title="Daily Mix"
+    subTitle="12 Tracks"
+    caption="Frontend Radio"
+    coverPhotoUrl="https://nextui.org/images/hero-card-complete.jpeg"
+  />
+);
 
 export function CustomTabs(props: {
   tabs: RawCode[];
@@ -10,7 +22,14 @@ export function CustomTabs(props: {
 }) {
   const { tabs, highlighted } = props;
   const [selected, setSelected] = React.useState(tabs?.[0].meta);
-  const tabsWithIndex = tabs.map((tab, index) => ({ ...tab, index }));
+  const tabsWithIndex = [
+    ...tabs,
+    {
+      lang: '',
+      meta: 'Preview',
+      value: PreviewComponent,
+    },
+  ].map((tab, index) => ({ ...tab, index }));
 
   return (
     <Tabs
@@ -21,14 +40,22 @@ export function CustomTabs(props: {
       onSelectionChange={(key) => setSelected(key.toString())}
     >
       {(tab) => {
+        const highlightedCode = highlighted[tab.index];
         return (
           <Tab key={tab.meta} title={tab.meta}>
             <Card>
               <CardBody>
-                <Pre
-                  code={highlighted[tab.index]}
-                  className="m-0 rounded-none bg-content1"
-                />
+                {tab.meta === 'Preview' ? (
+                  <div className="flex h-[320px] items-center justify-center">
+                    <tab.value />
+                  </div>
+                ) : (
+                  <CodeBock
+                    code={highlightedCode}
+                    showCopyButton
+                    className="bg-content1 m-0 max-h-[320px] overflow-auto rounded-none"
+                  />
+                )}
               </CardBody>
             </Card>
           </Tab>

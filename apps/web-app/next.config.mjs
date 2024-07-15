@@ -5,7 +5,7 @@ import createMDX from "@next/mdx"
 
 /** @type {import('codehike/mdx').CodeHikeConfig} */
 const chConfig = {
-  components: { code: "MyCode" },
+  components: { code: "Code" },
   syntaxHighlighting: {
     theme: "github-dark",
   },

@@ -19,5 +19,14 @@
   "importOrderBuiltinModulesToTop": true,
   "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
   "importOrderMergeDuplicateImports": true,
-  "importOrderCombineTypeAndValueImports": true
+  "importOrderCombineTypeAndValueImports": true,
+  "overrides": [
+    {
+      "files": ["*.mdx", "*.md"],
+      "options": {
+        "printWidth": 62,
+        "semi": false
+      }
+    }
+  ]
 }

@@ -3,17 +3,17 @@ import { CodeWithTabs } from './feature-code';
 
 export const KeyFeaturesSection = () => {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+    <section className="bg-muted w-full py-12 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
+            <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
               Key Features
             </div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
               Elevate Your Learning Experience
             </h2>
-            <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            <p className="text-muted-foreground max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               Our online learning platform offers a comprehensive suite of
               features to help you succeed in your educational journey.
             </p>
@@ -51,7 +51,7 @@ export const KeyFeaturesSection = () => {
               </li>
             </ul>
           </div>
-          <div className="w-[550] h-[310] ">
+          <div className="w-full">
             <KeyFeatureCodeContent components={{ CodeWithTabs }} />
           </div>
         </div>
