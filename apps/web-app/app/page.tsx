@@ -1,8 +1,8 @@
+import { TestComponent } from '@upskill-app/tutorial-elements';
 import {
   CourseOfferingsSection,
   HeroSection,
   KeyFeaturesSection,
-  TestComponent,
 } from '@upskill-app/web-modules/home';
 
 export default function Index() {

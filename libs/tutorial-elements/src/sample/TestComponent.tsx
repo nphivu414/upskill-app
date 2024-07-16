@@ -3,7 +3,7 @@
 import React from 'react';
 import { createComponent } from '@lit/react';
 
-import { MyElement } from '../lit/MyElement';
+import { MyElement } from './MyElement';
 
 export const TestComponent = createComponent({
   tagName: 'my-element',

@@ -48,7 +48,9 @@
   },
   "generators": {
     "@nx/react": {
-      "library": {}
+      "library": {
+        "unitTestRunner": "none"
+      }
     },
     "@nx/next": {
       "application": {

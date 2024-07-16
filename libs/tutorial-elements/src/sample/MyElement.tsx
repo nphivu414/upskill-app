@@ -2,6 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { createRoot } from 'react-dom/client';
 
+import { ElementContainer } from './ElementContainer';
 import { MyReactComponent } from './MyReactComponent';
 
 @customElement('my-element')
@@ -10,10 +11,7 @@ export class MyElement extends LitElement {
     const basePath = process.env.NEXT_PUBLIC_APP_URL || '';
     return html`
       <head>
-        <link
-          rel="stylesheet"
-          href="${basePath}_next/static/css/app/page.css"
-        />
+        <link rel="stylesheet" href="${basePath}/tw.css" />
       </head>
       <body>
         <div id="react-root"></div>
@@ -26,12 +24,14 @@ export class MyElement extends LitElement {
     if (container) {
       const root = createRoot(container);
       root.render(
-        <MyReactComponent
-          title="Daily Mix"
-          subTitle="12 Tracks"
-          caption="Frontend Radio"
-          coverPhotoUrl="https://nextui.org/images/hero-card-complete.jpeg"
-        />
+        <ElementContainer>
+          <MyReactComponent
+            title="Daily Mix"
+            subTitle="12 Tracks"
+            caption="Frontend Radio"
+            coverPhotoUrl="https://nextui.org/images/hero-card-complete.jpeg"
+          />
+        </ElementContainer>
       );
     }
   }
