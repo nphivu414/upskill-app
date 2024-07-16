@@ -2,6 +2,7 @@ import {
   CourseOfferingsSection,
   HeroSection,
   KeyFeaturesSection,
+  TestComponent,
 } from '@upskill-app/web-modules/home';
 
 export default function Index() {
@@ -11,6 +12,7 @@ export default function Index() {
         <HeroSection />
         <KeyFeaturesSection />
         <CourseOfferingsSection />
+        <TestComponent />
       </main>
     </div>
   );
