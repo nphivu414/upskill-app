@@ -1,4 +1,3 @@
-import { TestComponent } from '@upskill-app/tutorial-elements';
 import {
   CourseOfferingsSection,
   HeroSection,
@@ -12,7 +11,6 @@ export default function Index() {
         <HeroSection />
         <KeyFeaturesSection />
         <CourseOfferingsSection />
-        <TestComponent />
       </main>
     </div>
   );

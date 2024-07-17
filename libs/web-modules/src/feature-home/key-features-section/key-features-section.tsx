@@ -1,4 +1,4 @@
-import KeyFeatureCodeContent from '../../content/key-feature-code.mdx';
+import KeyFeatureCodeContent from '../content/key-feature-code.mdx';
 import { CodeWithTabs } from './feature-code';
 
 export const KeyFeaturesSection = () => {
@@ -13,7 +13,7 @@ export const KeyFeaturesSection = () => {
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
               Elevate Your Learning Experience
             </h2>
-            <p className="text-muted-foreground max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               Our online learning platform offers a comprehensive suite of
               features to help you succeed in your educational journey.
             </p>
@@ -25,7 +25,7 @@ export const KeyFeaturesSection = () => {
               <li>
                 <div className="grid gap-1">
                   <h3 className="text-xl font-bold">Interactive Courses</h3>
-                  <p className="text-muted-foreground">
+                  <p>
                     Engage with multimedia-rich courses that combine video
                     lectures, interactive quizzes, and hands-on projects.
                   </p>
@@ -34,7 +34,7 @@ export const KeyFeaturesSection = () => {
               <li>
                 <div className="grid gap-1">
                   <h3 className="text-xl font-bold">Personalized Learning</h3>
-                  <p className="text-muted-foreground">
+                  <p>
                     Customize your learning experience with personalized
                     recommendations, progress tracking, and adaptive content.
                   </p>
@@ -43,7 +43,7 @@ export const KeyFeaturesSection = () => {
               <li>
                 <div className="grid gap-1">
                   <h3 className="text-xl font-bold">Expert Instructors</h3>
-                  <p className="text-muted-foreground">
+                  <p>
                     Learn from industry-leading experts who are passionate about
                     sharing their knowledge and guiding you to success.
                   </p>

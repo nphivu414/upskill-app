@@ -18,7 +18,7 @@ export const CourseOfferingsSection = () => {
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
             Explore Our Course Offerings
           </h2>
-          <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <p className="md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             Browse through our diverse selection of online courses and find the
             perfect one to suit your learning needs.
           </p>
@@ -38,7 +38,7 @@ export const CourseOfferingsSection = () => {
                 <h3 className="text-xl font-bold">
                   Introduction to Web Development
                 </h3>
-                <p className="text-muted-foreground">
+                <p>
                   Learn the fundamentals of HTML, CSS, and JavaScript to build
                   responsive and interactive websites.
                 </p>
@@ -55,12 +55,12 @@ export const CourseOfferingsSection = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-muted-foreground size-4"
+                className="size-4"
               >
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              <span className="text-muted-foreground text-sm">12 hours</span>
+              <span className="text-sm">12 hours</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -71,13 +71,11 @@ export const CourseOfferingsSection = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-muted-foreground size-4"
+                className="size-4"
               >
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
-              <span className="text-muted-foreground text-sm">
-                4.8 (1,234 reviews)
-              </span>
+              <span className="text-sm">4.8 (1,234 reviews)</span>
             </CardFooter>
           </Card>
           <Card isPressable>
@@ -94,7 +92,7 @@ export const CourseOfferingsSection = () => {
                 <h3 className="text-xl font-bold">
                   Introduction to Web Development
                 </h3>
-                <p className="text-muted-foreground">
+                <p>
                   Learn the fundamentals of HTML, CSS, and JavaScript to build
                   responsive and interactive websites.
                 </p>
@@ -111,12 +109,12 @@ export const CourseOfferingsSection = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-muted-foreground size-4"
+                className="size-4"
               >
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              <span className="text-muted-foreground text-sm">12 hours</span>
+              <span className="text-sm">12 hours</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -127,13 +125,11 @@ export const CourseOfferingsSection = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-muted-foreground size-4"
+                className="size-4"
               >
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
-              <span className="text-muted-foreground text-sm">
-                4.8 (1,234 reviews)
-              </span>
+              <span className="text-sm">4.8 (1,234 reviews)</span>
             </CardFooter>
           </Card>
           <Card isPressable>
@@ -150,7 +146,7 @@ export const CourseOfferingsSection = () => {
                 <h3 className="text-xl font-bold">
                   Introduction to Web Development
                 </h3>
-                <p className="text-muted-foreground">
+                <p>
                   Learn the fundamentals of HTML, CSS, and JavaScript to build
                   responsive and interactive websites.
                 </p>
@@ -167,12 +163,12 @@ export const CourseOfferingsSection = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-muted-foreground size-4"
+                className="size-4"
               >
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              <span className="text-muted-foreground text-sm">12 hours</span>
+              <span className="text-sm">12 hours</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -183,13 +179,11 @@ export const CourseOfferingsSection = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-muted-foreground size-4"
+                className="size-4"
               >
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
-              <span className="text-muted-foreground text-sm">
-                4.8 (1,234 reviews)
-              </span>
+              <span className="text-sm">4.8 (1,234 reviews)</span>
             </CardFooter>
           </Card>
         </div>

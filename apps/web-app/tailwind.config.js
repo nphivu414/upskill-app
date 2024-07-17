@@ -18,6 +18,21 @@ module.exports = {
   darkMode: 'selector',
   plugins: [
     require('tailwind-scrollbar'),
-    nextui(),
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            background: "#fafafa",
+            foreground: "#171717"
+          }
+        },
+        dark: {
+          colors: {
+            background: "#09090b",
+            foreground: "#f5f5f5",
+          },
+        },
+      },
+    }),
   ],
 };

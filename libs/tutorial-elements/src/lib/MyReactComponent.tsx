@@ -16,7 +16,7 @@ export const MyReactComponent = ({
   title,
 }: PlayListCardProps) => {
   return (
-    <Card className="py-4" isBlurred isPressable>
+    <Card className="py-4" isPressable>
       <CardHeader className="flex-col items-start px-4 pb-0 pt-2 md:mt-1">
         <p className="text-tiny font-bold uppercase">{title}</p>
         <small className="text-default-500">{subTitle}</small>

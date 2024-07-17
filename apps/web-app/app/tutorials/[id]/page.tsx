@@ -1,47 +1,19 @@
 import { Avatar, Card, CardBody, Link } from '@nextui-org/react';
+import { HeadingSection } from '@upskill-app/web-modules/tutorial-detail';
 
 export default function TutorialDetail() {
   return (
     <div className="flex min-h-dvh flex-col">
-      <section className="w-full pt-12 md:pt-24 lg:pt-32">
-        <div className="container space-y-10 px-4 md:px-6 xl:space-y-16">
-          <div className="grid gap-4 md:grid-cols-2 md:gap-16">
-            <div>
-              <h1 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
-                Mastering React: A Comprehensive Course
-              </h1>
-              <div className="mt-4 flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <Avatar
-                    isBordered
-                    src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                  />
-                  <div>
-                    <h3 className="text-lg font-semibold">John Doe</h3>
-                    <p className="text-muted-foreground text-sm">
-                      React Expert, Vercel
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <p className="text-muted-foreground mt-6 md:text-xl">
-                Dive deep into the world of React and master the art of building
-                modern, scalable web applications. This comprehensive course
-                covers everything from the fundamentals to advanced concepts,
-                equipping you with the skills to become a proficient React
-                developer.
-              </p>
-            </div>
-            <img
-              src="https://generated.vusercontent.net/placeholder.svg"
-              width="600"
-              height="400"
-              alt="Course Thumbnail"
-              className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full"
-            />
-          </div>
-        </div>
-      </section>
+      <HeadingSection
+        author={{
+          avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026024d',
+          name: 'John Doe',
+          description: 'React Expert, Vercel',
+        }}
+        description="Dive deep into the world of React and master the art of building modern, scalable web applications. This comprehensive course covers everything from the fundamentals to advanced concepts, equipping you with the skills to become a proficient React developer."
+        thumbnailUrl="https://nextui.org/images/fruit-4.jpeg?_rq_delayed=true"
+        title="Mastering React: A Comprehensive Course"
+      />
       <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="space-y-6">
@@ -49,7 +21,7 @@ export default function TutorialDetail() {
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
                 Course Curriculum
               </h2>
-              <p className="text-muted-foreground mt-2 md:text-xl">
+              <p className="mt-2 md:text-xl">
                 Explore the comprehensive curriculum and dive into the world of
                 React.
               </p>
@@ -60,9 +32,9 @@ export default function TutorialDetail() {
                   <h3 className="text-lg font-semibold">
                     Introduction to React
                   </h3>
-                  <span className="text-muted-foreground text-sm">30 min</span>
+                  <span className="text-sm">30 min</span>
                 </div>
-                <p className="text-muted-foreground">
+                <p>
                   Learn the fundamentals of React, including its history,
                   architecture, and key concepts.
                 </p>
@@ -72,9 +44,9 @@ export default function TutorialDetail() {
                   <h3 className="text-lg font-semibold">
                     Setting up a React Development Environment
                   </h3>
-                  <span className="text-muted-foreground text-sm">45 min</span>
+                  <span className="text-sm">45 min</span>
                 </div>
-                <p className="text-muted-foreground">
+                <p>
                   Explore the tools and setup required to start building React
                   applications.
                 </p>
@@ -84,9 +56,9 @@ export default function TutorialDetail() {
                   <h3 className="text-lg font-semibold">
                     React Components and State Management
                   </h3>
-                  <span className="text-muted-foreground text-sm">1 hr</span>
+                  <span className="text-sm">1 hr</span>
                 </div>
-                <p className="text-muted-foreground">
+                <p>
                   Dive into the core concepts of React, including components,
                   props, and state management.
                 </p>
@@ -96,9 +68,9 @@ export default function TutorialDetail() {
                   <h3 className="text-lg font-semibold">
                     Routing and Navigation in React
                   </h3>
-                  <span className="text-muted-foreground text-sm">45 min</span>
+                  <span className="text-sm">45 min</span>
                 </div>
-                <p className="text-muted-foreground">
+                <p>
                   Learn how to implement client-side routing and navigation in
                   your React applications.
                 </p>
@@ -108,9 +80,9 @@ export default function TutorialDetail() {
                   <h3 className="text-lg font-semibold">
                     Advanced React Concepts
                   </h3>
-                  <span className="text-muted-foreground text-sm">2 hr</span>
+                  <span className="text-sm">2 hr</span>
                 </div>
-                <p className="text-muted-foreground">
+                <p>
                   Explore advanced React concepts, such as hooks, context,
                   performance optimization, and more.
                 </p>
@@ -133,12 +105,10 @@ export default function TutorialDetail() {
                 />
                 <div>
                   <h3 className="text-lg font-semibold">John Doe</h3>
-                  <p className="text-muted-foreground text-sm">
-                    React Expert, Vercel
-                  </p>
+                  <p className="text-sm">React Expert, Vercel</p>
                 </div>
               </div>
-              <p className="text-muted-foreground mt-4 md:text-xl">
+              <p className="mt-4 md:text-xl">
                 John Doe is a seasoned React expert with over 10 years of
                 experience in building scalable and performant web applications.
                 He is currently a lead developer at Vercel, where he contributes
@@ -165,7 +135,7 @@ export default function TutorialDetail() {
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
                 Related Courses
               </h2>
-              <p className="text-muted-foreground mt-2 md:text-xl">
+              <p className="mt-2 md:text-xl">
                 Check out these other courses that might interest you.
               </p>
             </div>
@@ -183,7 +153,7 @@ export default function TutorialDetail() {
                     <h3 className="text-lg font-semibold">
                       Mastering TypeScript: From Beginner to Expert
                     </h3>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-sm">
                       Learn the ins and outs of TypeScript and how to leverage
                       its power in your projects.
                     </p>
@@ -209,7 +179,7 @@ export default function TutorialDetail() {
                     <h3 className="text-lg font-semibold">
                       Mastering Vue.js: A Step-by-Step Guide
                     </h3>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-sm">
                       Dive into the world of Vue.js and learn how to build
                       modern, responsive web applications.
                     </p>
@@ -235,7 +205,7 @@ export default function TutorialDetail() {
                     <h3 className="text-lg font-semibold">
                       Mastering Angular: From Beginner to Advanced
                     </h3>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-sm">
                       Explore the powerful features of Angular and learn how to
                       build complex web applications.
                     </p>
@@ -261,7 +231,7 @@ export default function TutorialDetail() {
                     <h3 className="text-lg font-semibold">
                       Mastering JavaScript: From Beginner to Expert
                     </h3>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-sm">
                       Dive deep into the world of JavaScript and learn how to
                       write clean, efficient, and maintainable code.
                     </p>

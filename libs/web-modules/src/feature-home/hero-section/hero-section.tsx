@@ -1,6 +1,6 @@
 import { Button, Link } from '@nextui-org/react';
 
-import HeroCodeContent from '../../content/hero-code.mdx';
+import HeroCodeContent from '../content/hero-code.mdx';
 import { HeroCode } from './hero-code';
 
 export const HeroSection = () => {
@@ -13,7 +13,7 @@ export const HeroSection = () => {
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                 Unlock Your Potential with Our Online Learning Platform
               </h1>
-              <p className="text-muted-foreground max-w-[600px] md:text-xl">
+              <p className="max-w-[600px] md:text-xl">
                 Discover a world of knowledge at your fingertips. Explore a wide
                 range of courses, learn from industry experts, and achieve your
                 goals.
