@@ -1,2 +1,1 @@
-export * from './heading-section';
 export * from './content-section';

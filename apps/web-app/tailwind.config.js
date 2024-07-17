@@ -22,14 +22,12 @@ module.exports = {
       themes: {
         light: {
           colors: {
-            background: "#fafafa",
-            foreground: "#171717"
+            muted: "#71717a"
           }
         },
         dark: {
           colors: {
-            background: "#09090b",
-            foreground: "#f5f5f5",
+            muted: "#a1a1aa"
           },
         },
       },

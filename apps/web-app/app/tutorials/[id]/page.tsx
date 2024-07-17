@@ -1,5 +1,8 @@
 import { Avatar, Card, CardBody, Link } from '@nextui-org/react';
-import { HeadingSection } from '@upskill-app/web-modules/tutorial-detail';
+import {
+  ContentSection,
+  HeadingSection,
+} from '@upskill-app/web-modules/tutorial-detail';
 
 export default function TutorialDetail() {
   return (
@@ -14,84 +17,8 @@ export default function TutorialDetail() {
         thumbnailUrl="https://nextui.org/images/fruit-4.jpeg?_rq_delayed=true"
         title="Mastering React: A Comprehensive Course"
       />
+      <ContentSection />
       <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                Course Curriculum
-              </h2>
-              <p className="mt-2 md:text-xl">
-                Explore the comprehensive curriculum and dive into the world of
-                React.
-              </p>
-            </div>
-            <div className="grid gap-6">
-              <div className="grid gap-2 rounded-lg border p-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold">
-                    Introduction to React
-                  </h3>
-                  <span className="text-sm">30 min</span>
-                </div>
-                <p>
-                  Learn the fundamentals of React, including its history,
-                  architecture, and key concepts.
-                </p>
-              </div>
-              <div className="grid gap-2 rounded-lg border p-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold">
-                    Setting up a React Development Environment
-                  </h3>
-                  <span className="text-sm">45 min</span>
-                </div>
-                <p>
-                  Explore the tools and setup required to start building React
-                  applications.
-                </p>
-              </div>
-              <div className="grid gap-2 rounded-lg border p-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold">
-                    React Components and State Management
-                  </h3>
-                  <span className="text-sm">1 hr</span>
-                </div>
-                <p>
-                  Dive into the core concepts of React, including components,
-                  props, and state management.
-                </p>
-              </div>
-              <div className="grid gap-2 rounded-lg border p-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold">
-                    Routing and Navigation in React
-                  </h3>
-                  <span className="text-sm">45 min</span>
-                </div>
-                <p>
-                  Learn how to implement client-side routing and navigation in
-                  your React applications.
-                </p>
-              </div>
-              <div className="grid gap-2 rounded-lg border p-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold">
-                    Advanced React Concepts
-                  </h3>
-                  <span className="text-sm">2 hr</span>
-                </div>
-                <p>
-                  Explore advanced React concepts, such as hooks, context,
-                  performance optimization, and more.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="bg-muted w-full py-12 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
             <div>
