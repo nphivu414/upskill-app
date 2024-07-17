@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
 import { Card, CardBody, CardHeader, Image } from '@nextui-org/react';
 
-type PlayListCardProps = {
+export type PlayListCardProps = {
   title: string;
   subTitle: string;
   caption: string;
