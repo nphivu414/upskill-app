@@ -5,36 +5,33 @@ import { Accordion, AccordionItem } from '@nextui-org/react';
 import { Heading3, Paragraph } from '@upskill-app/ui/web';
 import StickyBox from 'react-sticky-box';
 
-// import Code from './content/code.mdx';
-// import { TutorialCode } from './tutorial-code';
+import Code from './content/code.mdx';
+import { TutorialCode } from './tutorial-code';
 
 export const CurriculumSection = () => {
   // State to track the currently expanded item
-  const [expandedKey, setExpandedKey] = React.useState();
-  console.log('🚀 ~ CurriculumSection ~ expandedKey:', expandedKey);
+  // const [expandedKey, setExpandedKey] = React.useState();
+  // console.log('🚀 ~ CurriculumSection ~ expandedKey:', expandedKey);
 
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Assuming each AccordionItem has a unique 'key' prop
-            const key = entry.target.getAttribute('data-key');
-            setExpandedKey(key); // Update to set a singular value
-          }
-        });
-      },
-      { rootMargin: '0px', threshold: 0.5 }
-    );
+  // React.useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting) {
+  //           const key = entry.target.getAttribute('data-key');
+  //           setExpandedKey(key); // Update to set a singular value
+  //         }
+  //       });
+  //     },
+  //     { rootMargin: '0px', threshold: 0.5 }
+  //   );
 
-    // Observe each AccordionItem
-    document.querySelectorAll('.accordion-item').forEach((item) => {
-      observer.observe(item);
-    });
+  //   document.querySelectorAll('.accordion-item').forEach((item) => {
+  //     observer.observe(item);
+  //   });
 
-    // Cleanup
-    return () => observer.disconnect();
-  }, []);
+  //   return () => observer.disconnect();
+  // }, []);
 
   return (
     <div className="flex items-start">
@@ -43,7 +40,7 @@ export const CurriculumSection = () => {
           variant="splitted"
           selectionMode="single"
           defaultExpandedKeys={['1']}
-          selectedKeys={expandedKey}
+          // selectedKeys={expandedKey}
           itemClasses={{
             base: 'accordion-item',
           }}
@@ -194,7 +191,7 @@ export const CurriculumSection = () => {
       </div>
       <StickyBox className="flex-1" offsetTop={60}>
         <div className="flex flex-col items-center justify-center p-4">
-          {/* <Code components={{ Code: TutorialCode }} /> */}
+          <Code components={{ Code: TutorialCode }} />
         </div>
       </StickyBox>
     </div>

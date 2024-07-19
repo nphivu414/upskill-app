@@ -8,7 +8,7 @@ type CodeBlockProps = React.ComponentPropsWithoutRef<typeof Pre> & {
   showCopyButton?: boolean;
 };
 
-export const CodeBock = React.forwardRef<
+export const CodeBlock = React.forwardRef<
   React.ElementRef<typeof Pre>,
   CodeBlockProps
 >(({ className, showCopyButton, code: highlightedCode, ...props }, ref) => {
@@ -27,4 +27,4 @@ export const CodeBock = React.forwardRef<
   );
 });
 
-CodeBock.displayName = 'CodeBock';
+CodeBlock.displayName = 'CodeBlock';

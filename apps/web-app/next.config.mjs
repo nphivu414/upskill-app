@@ -8,7 +8,7 @@ import withLitSSR from '@lit-labs/nextjs'
 const chConfig = {
   components: { code: "Code" },
   syntaxHighlighting: {
-    theme: "github-dark",
+    theme: "github-from-css",
   },
 }
 

@@ -1,10 +1,6 @@
-import { CodeBock } from '@upskill-app/ui/web';
-import {
-  AnnotationHandler,
-  highlight,
-  InnerLine,
-  RawCode,
-} from 'codehike/code';
+import { CodeBlockProps } from '@upskill-app/types';
+import { CodeBlock } from '@upskill-app/ui/web';
+import { AnnotationHandler, InnerLine } from 'codehike/code';
 
 const mark: AnnotationHandler = {
   name: 'mark',
@@ -19,7 +15,6 @@ const mark: AnnotationHandler = {
   ),
 };
 
-export async function HeroCode({ codeblock }: { codeblock: RawCode }) {
-  const highlighted = await highlight(codeblock, 'github-dark');
-  return <CodeBock code={highlighted} handlers={[mark]} />;
+export function HeroCode({ codeblock }: CodeBlockProps) {
+  return <CodeBlock code={codeblock} handlers={[mark]} />;
 }

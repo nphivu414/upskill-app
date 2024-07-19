@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Card, CardBody, Tab, Tabs } from '@nextui-org/react';
-import { CodeBock } from '@upskill-app/ui/web';
+import { CodeBlock } from '@upskill-app/ui/web';
 import { HighlightedCode, RawCode } from 'codehike/code';
 
 import { DemoComponent } from './demo-component';
@@ -50,7 +50,7 @@ export function CustomTabs(props: {
                     <tab.value />
                   </div>
                 ) : (
-                  <CodeBock
+                  <CodeBlock
                     code={highlightedCode}
                     showCopyButton
                     className="bg-content1 h-[300px] overflow-auto rounded-none"
