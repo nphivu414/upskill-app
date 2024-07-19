@@ -9,7 +9,7 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
-
+  staticDirs: ['../static'],
   viteFinal: async (config) =>
     mergeConfig(config, {
       plugins: [nxViteTsPaths()],

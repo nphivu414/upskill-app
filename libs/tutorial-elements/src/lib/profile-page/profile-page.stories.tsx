@@ -2,6 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ProfilePage } from './profile-page';
 
+const defaultPhotos = [
+  '/profile-cover.png',
+  '/profile-cover-2.png',
+  '/profile-cover-3.png',
+];
+
 const meta: Meta<typeof ProfilePage> = {
   component: ProfilePage,
 };
@@ -11,9 +17,6 @@ type Story = StoryObj<typeof ProfilePage>;
 
 export const Primary: Story = {
   args: {
-    title: 'Chill Vibes',
-    subTitle: 'Relax and unwind',
-    caption: 'A collection of smooth beats',
-    coverPhotoUrl: 'https://nextui.org/images/hero-card-complete.jpeg',
+    featurePhotos: defaultPhotos,
   },
 };

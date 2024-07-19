@@ -3,11 +3,15 @@ import { ScrollShadow } from '@nextui-org/react';
 import { MockupBrowser } from '../components';
 import { FeaturePhotos } from './feature-photos';
 
-export const ProfilePage = () => {
+type ProfilePageProps = {
+  featurePhotos: string[];
+};
+
+export const ProfilePage = ({ featurePhotos }: ProfilePageProps) => {
   return (
     <MockupBrowser>
       <ScrollShadow className="h-[600px]">
-        <FeaturePhotos />
+        <FeaturePhotos photos={featurePhotos} />
         <div className="h-[800px]" />
       </ScrollShadow>
     </MockupBrowser>

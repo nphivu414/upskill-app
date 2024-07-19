@@ -1,46 +1,51 @@
-import React from 'react';
 import { Image } from '@nextui-org/react';
+import { cn } from '@upskill-app/ui/web';
 import useEmblaCarousel from 'embla-carousel-react';
 
-import profileCover2 from '../static/profile-cover-2.png';
-import profileCover3 from '../static/profile-cover-3.png';
-import profileCover from '../static/profile-cover.png';
 import { CarouselDotButton, useDotButton } from './carousel-dot-buttons';
 
-import './carousel.css';
+type FeaturePhotosProps = {
+  photos: string[];
+};
 
-const images = [profileCover, profileCover2, profileCover3];
-
-export const FeaturePhotos = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel();
+export const FeaturePhotos = ({ photos }: FeaturePhotosProps) => {
+  const [carouselRef, carouselApi] = useEmblaCarousel();
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
+    useDotButton(carouselApi);
+
+  const handleDotButtonClick = (index: number) => {
+    return () => {
+      onDotButtonClick(index);
+    };
+  };
 
   return (
-    <section className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
-          {images.map((index) => (
-            <div className="embla__slide" key={index}>
+    <section className="relative">
+      <div className="overflow-hidden" ref={carouselRef}>
+        <div className="flex touch-pan-y touch-pinch-zoom">
+          {photos.map((index) => (
+            <div className="min-w-0 shrink-0 grow-0 basis-full" key={index}>
               <Image
                 src={index}
                 alt="profile cover"
-                // className="w-screen"
-                className="h-[200px] w-screen object-cover"
+                className="h-[200px] w-screen rounded-none object-cover"
               />
             </div>
           ))}
         </div>
       </div>
-      <div className="embla__controls">
-        <div className="embla__dots">
+      <div className="grid-cols-auto-1fr grid justify-between gap-4">
+        <div className="absolute bottom-2 flex w-full flex-wrap items-center justify-end pr-2">
           {scrollSnaps.map((_, index) => (
             <CarouselDotButton
               key={index}
-              onClick={() => onDotButtonClick(index)}
-              className={'embla__dot'.concat(
-                index === selectedIndex ? ' embla__dot--selected' : ''
+              onClick={handleDotButtonClick(index)}
+              className={cn(
+                'inline-flex cursor-pointer border-0 p-0 m-0 w-2 h-2 items-center justify-center rounded-[50%] ml-2 appearance-none bg-gray-300 opacity-50',
+                {
+                  'bg-gray-300 opacity-100': index === selectedIndex,
+                }
               )}
             />
           ))}
