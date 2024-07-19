@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Accordion, AccordionItem } from '@nextui-org/react';
+import { ProfilePage } from '@upskill-app/tutorial-elements';
 import { Heading3, Paragraph } from '@upskill-app/ui/web';
 import StickyBox from 'react-sticky-box';
 
@@ -191,7 +192,8 @@ export const CurriculumSection = () => {
       </div>
       <StickyBox className="flex-1" offsetTop={60}>
         <div className="flex flex-col items-center justify-center p-4">
-          <Code components={{ Code: TutorialCode }} />
+          {/* <Code components={{ Code: TutorialCode }} /> */}
+          <ProfilePage />
         </div>
       </StickyBox>
     </div>
