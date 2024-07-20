@@ -2,11 +2,8 @@ import { Image } from '@nextui-org/react';
 import { cn } from '@upskill-app/ui/web';
 import useEmblaCarousel from 'embla-carousel-react';
 
+import { FeaturePhotosProps } from '../types';
 import { CarouselDotButton, useDotButton } from './carousel-dot-buttons';
-
-type FeaturePhotosProps = {
-  photos: string[];
-};
 
 export const FeaturePhotos = ({ photos }: FeaturePhotosProps) => {
   const [carouselRef, carouselApi] = useEmblaCarousel();
@@ -29,7 +26,7 @@ export const FeaturePhotos = ({ photos }: FeaturePhotosProps) => {
               <Image
                 src={index}
                 alt="profile cover"
-                className="h-[200px] w-screen rounded-none object-cover"
+                className="h-[150px] w-screen rounded-none object-cover"
               />
             </div>
           ))}
@@ -42,7 +39,7 @@ export const FeaturePhotos = ({ photos }: FeaturePhotosProps) => {
               key={index}
               onClick={handleDotButtonClick(index)}
               className={cn(
-                'inline-flex cursor-pointer border-0 p-0 m-0 w-2 h-2 items-center justify-center rounded-[50%] ml-2 appearance-none bg-gray-300 opacity-50',
+                'inline-flex cursor-pointer border-0 p-0 m-0 size-2 items-center justify-center rounded-[50%] ml-2 appearance-none bg-gray-300 opacity-50',
                 {
                   'bg-gray-300 opacity-100': index === selectedIndex,
                 }

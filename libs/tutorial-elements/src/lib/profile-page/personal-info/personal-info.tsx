@@ -1,23 +1,36 @@
 import { Avatar, Button, Link, Spacer } from '@nextui-org/react';
 import { Paragraph, Subtle } from '@upskill-app/ui/web';
+import { Link as LinkIcon, MapPin } from 'lucide-react';
 
-export const PersonalInfo = () => {
+import { PersonalInfoProps } from '../types';
+import { InfoLine } from './info-line';
+
+export const PersonalInfo = ({
+  profile: { name, username, avatar, title, bio, location, website },
+  company,
+}: PersonalInfoProps) => {
+  const fallBackName = name.substring(0, 1);
+
   return (
-    <div className="bg-content1">
+    <section className="bg-content1 pb-4">
       <div className="flex justify-between">
         <div className="flex flex-col">
           <Avatar
-            src="https://i.pravatar.cc/150?img=57"
+            src={avatar}
+            fallback={fallBackName}
             className="text-large ml-2 mt-[-40px] !size-20"
           />
           <Spacer y={1} />
           <div className="pl-4">
-            <p className="text-lg font-bold">Vu Nguyen</p>
-            <Subtle>@nphivu414</Subtle>
+            <p className="text-lg font-bold">{name}</p>
+            <Subtle>@{username}</Subtle>
             <Spacer y={2} />
-            <p className="text-sm">
-              Software Engineer <Link className="text-xs">@upskill</Link>{' '}
-            </p>
+            {title ? <span className="text-sm">{title}</span> : null}
+            {company ? (
+              <Link className="ml-1 text-xs" href={company.website} isExternal>
+                {company.name}
+              </Link>
+            ) : null}
           </div>
         </div>
         <div className="p-2">
@@ -26,13 +39,28 @@ export const PersonalInfo = () => {
           </Button>
         </div>
       </div>
-      <div className="p-4">
-        <Paragraph>
-          A tech enthusiast with a dream to create amazing products. Experienced
-          in software engineering, specializing in creating websites and mobile
-          apps with beautiful UI and UX.
-        </Paragraph>
+      {bio ? (
+        <>
+          <Spacer y={2} />
+          <div className="px-4">
+            <Paragraph className="text-sm">{bio}</Paragraph>
+          </div>
+        </>
+      ) : null}
+      <div>
+        {location ? (
+          <InfoLine className="mt-4" icon={<MapPin size={12} />}>
+            {location}
+          </InfoLine>
+        ) : null}
+        {website ? (
+          <InfoLine icon={<LinkIcon size={12} />}>
+            <Link className="text-sm" href={website} isExternal>
+              {website}
+            </Link>
+          </InfoLine>
+        ) : null}
       </div>
-    </div>
+    </section>
   );
 };
