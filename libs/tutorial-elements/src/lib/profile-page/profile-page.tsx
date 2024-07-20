@@ -4,6 +4,7 @@ import { MockupBrowser } from '../components';
 import { FeaturePhotos } from './feature-photos';
 import { ProfileInfo } from './profile-info';
 import { ProfileStats } from './profile-stats';
+import { ProfileTimeline } from './profile-timeline';
 import { ProfilePageProps } from './types';
 
 export const ProfilePage = ({
@@ -19,7 +20,8 @@ export const ProfilePage = ({
         <ProfileInfo profile={profile} company={company} />
         <Spacer y={1} />
         <ProfileStats stats={profileStats} />
-        <div className="h-[800px]" />
+        <Spacer y={1} />
+        <ProfileTimeline />
       </ScrollShadow>
     </MockupBrowser>
   );

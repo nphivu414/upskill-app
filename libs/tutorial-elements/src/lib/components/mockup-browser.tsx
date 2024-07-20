@@ -13,7 +13,7 @@ export const MockupBrowser = ({ className, children }: MockupBrowserProps) => {
       <div className="mockup-browser-toolbar">
         <div className="input text-foreground-500">upskill.app</div>
       </div>
-      <div className="bg-base-200">
+      <div className="bg-background">
         <div>{children}</div>
       </div>
     </div>
