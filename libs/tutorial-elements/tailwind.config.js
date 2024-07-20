@@ -16,5 +16,18 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [nextui()],
+  plugins: [nextui({
+    themes: {
+      light: {
+        colors: {
+          muted: "#71717a"
+        }
+      },
+      dark: {
+        colors: {
+          muted: "#a1a1aa"
+        },
+      },
+    },
+  })],
 };

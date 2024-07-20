@@ -2,13 +2,13 @@ import { Avatar, Button, Link, Spacer } from '@nextui-org/react';
 import { Paragraph, Subtle } from '@upskill-app/ui/web';
 import { Link as LinkIcon, MapPin } from 'lucide-react';
 
-import { PersonalInfoProps } from '../types';
+import { ProfileInfoProps } from '../types';
 import { InfoLine } from './info-line';
 
-export const PersonalInfo = ({
+export const ProfileInfo = ({
   profile: { name, username, avatar, title, bio, location, website },
   company,
-}: PersonalInfoProps) => {
+}: ProfileInfoProps) => {
   const fallBackName = name.substring(0, 1);
 
   return (

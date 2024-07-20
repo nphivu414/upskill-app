@@ -13,7 +13,13 @@ export interface Profile {
   website?: string;
 }
 
-export type PersonalInfoProps = {
+export interface ProfileStats {
+  followers: number;
+  following: number;
+  posts: number;
+}
+
+export type ProfileInfoProps = {
   profile: Profile;
   company?: Company;
 };
@@ -27,8 +33,18 @@ export type InforLineProps = {
   children: React.ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;
 
+export type StatsBlockProps = {
+  label: string;
+  value: string;
+};
+
+export type ProfileStatsProps = {
+  stats: ProfileStats;
+};
+
 export type ProfilePageProps = {
   featurePhotos: string[];
   profile: Profile;
+  profileStats: ProfileStats;
   company?: Company;
 };
