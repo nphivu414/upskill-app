@@ -3,21 +3,20 @@ import { Paragraph, Subtle } from '@upskill-app/ui/web';
 import { Link as LinkIcon, MapPin } from 'lucide-react';
 
 import { ProfileInfoProps } from '../types';
+import { getAvatarFallback } from '../utils';
 import { InfoLine } from './info-line';
 
 export const ProfileInfo = ({
   profile: { name, username, avatar, title, bio, location, website },
   company,
 }: ProfileInfoProps) => {
-  const fallBackName = name.substring(0, 1);
-
   return (
     <section className="bg-content1 pb-4">
       <div className="flex justify-between">
         <div className="flex flex-col">
           <Avatar
             src={avatar}
-            fallback={fallBackName}
+            fallback={getAvatarFallback(name)}
             className="text-large ml-2 mt-[-40px] !size-20"
           />
           <Spacer y={1} />

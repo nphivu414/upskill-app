@@ -6,3 +6,4 @@ export * from './code-block';
 export * from './theme-toggle';
 export * from './app-ui-provider';
 export * from './typography';
+export * from './markdown-renderer';
