@@ -1,3 +1,5 @@
+import { CardProps } from '@nextui-org/react';
+
 export interface Company {
   name: string;
   website: string;
@@ -62,23 +64,51 @@ export type ProfileStatsProps = {
   stats: ProfileStats;
 };
 
+export type PostActionType =
+  | 'toggleLike'
+  | 'comment'
+  | 'repost'
+  | 'share'
+  | 'bookmark';
+
+export type PostMenuActionType =
+  | 'delete'
+  | 'addToHighlights'
+  | 'changeViewPermission'
+  | 'report'
+  | 'unlike';
+
+export type PostAction = {
+  title?: string;
+  type: PostActionType;
+  icon?: React.ReactNode;
+};
+
+export type PostMenuAction = Pick<PostAction, 'title' | 'icon'> & {
+  type: PostMenuActionType;
+};
+
+type PostActionHandler = (postId: string) => void;
+
 export type PostsProps = {
   posts: Post[];
 };
 
-export type PostCardProps = {
+export type PostCardProps = CardProps & {
   postId: string;
   authorName: string;
   authorUsername: string;
   avatar?: string;
   createdAt: string;
-  likes: number;
-  comments: number;
-  reposts: number;
   content: string;
-  onDelete?: (postId: string) => void;
-  onAddToHighlights?: (postId: string) => void;
-  onChangeViewPermission?: (postId: string) => void;
+  postActionConfig: Record<
+    PostActionType,
+    {
+      content?: React.ReactNode;
+      handler: PostActionHandler;
+    }
+  >;
+  postMenuActionConfig: Record<PostMenuActionType, PostActionHandler>;
 };
 
 export type PhotoCardProps = {

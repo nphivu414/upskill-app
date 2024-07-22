@@ -1,4 +1,3 @@
-import { Key } from 'react';
 import {
   Button,
   Card,
@@ -12,54 +11,55 @@ import {
   Link,
   User,
 } from '@nextui-org/react';
-import { MarkdownRenderer, Subtle } from '@upskill-app/ui/web';
-import {
-  Bookmark,
-  Ellipsis,
-  Heart,
-  MessageCircle,
-  Repeat2,
-  Share,
-  SquarePen,
-  Star,
-  Trash,
-} from 'lucide-react';
+import { cn, MarkdownRenderer, Subtle } from '@upskill-app/ui/web';
+import { Ellipsis } from 'lucide-react';
 
-import { PostCardProps } from '../../types';
+import { PostActionType, PostCardProps, PostMenuActionType } from '../../types';
+import { useProfile } from '../../use-profile';
 import { formatDate, getAvatarFallback } from '../../utils';
+import { usePostActions, usePostMenuActions } from './use-post-actions';
 
 export const PostCard = ({
   postId,
-  comments,
-  likes,
-  reposts,
   createdAt,
   content,
   authorName,
   authorUsername,
   avatar,
-  onAddToHighlights,
-  onChangeViewPermission,
-  onDelete,
+  postActionConfig,
+  postMenuActionConfig,
+  className,
+  ...rest
 }: PostCardProps) => {
-  const handleOnDropdownAction = (action: Key) => {
-    switch (action) {
-    case 'delete':
-      onDelete?.(postId);
-      break;
-    case 'add':
-      onAddToHighlights?.(postId);
-      break;
-    case 'edit':
-      onChangeViewPermission?.(postId);
-      break;
-    default:
-      break;
+  const currentProfile = useProfile();
+  const postActions = usePostActions();
+  const postMenuActions = usePostMenuActions({
+    isSelfPost: authorUsername === currentProfile.username,
+  });
+
+  const handleOnMenuDropdownAction = (type: PostMenuActionType) => {
+    return () => postMenuActionConfig[type](postId);
+  };
+
+  const handleOnPostAction = (type: PostActionType) => {
+    return () => postActionConfig[type].handler(postId);
+  };
+
+  const getPostActionContent = (type: PostActionType) => {
+    switch (type) {
+      case 'comment':
+        return postActionConfig.comment.content;
+      case 'repost':
+        return postActionConfig.repost.content;
+      case 'toggleLike':
+        return postActionConfig.toggleLike.content;
+      default:
+        return null;
     }
   };
 
   return (
-    <Card isPressable className="mb-4 last:mb-0">
+    <Card isPressable className={cn('mb-4 last:mb-0', className)} {...rest}>
       <CardHeader className="justify-between">
         <div className="flex gap-1">
           <User
@@ -87,58 +87,40 @@ export const PostCard = ({
               <Ellipsis size={14} />
             </Button>
           </DropdownTrigger>
-          <DropdownMenu
-            aria-label="Post actions"
-            onAction={handleOnDropdownAction}
-          >
-            <DropdownItem
-              key="delete"
-              startContent={<Trash size={14} />}
-              className="text-danger"
-              color="danger"
-            >
-              Delete post
-            </DropdownItem>
-            <DropdownItem key="add" startContent={<Star size={14} />}>
-              Add to Highlights
-            </DropdownItem>
-            <DropdownItem key="edit" startContent={<SquarePen size={14} />}>
-              Change view permission
-            </DropdownItem>
+          <DropdownMenu>
+            {postMenuActions.map(({ title, icon, type }) => (
+              <DropdownItem
+                key={type}
+                aria-label={title}
+                color={type === 'delete' ? 'danger' : 'default'}
+                endContent={icon}
+                onClick={handleOnMenuDropdownAction(type)}
+              >
+                {title}
+              </DropdownItem>
+            ))}
           </DropdownMenu>
         </Dropdown>
       </CardHeader>
       <CardBody className="text-sm">
         <MarkdownRenderer>{content}</MarkdownRenderer>
       </CardBody>
-      <CardFooter className="flex justify-between">
-        <div className="flex justify-center">
-          <Button
-            size="sm"
-            variant="light"
-            startContent={<MessageCircle size={14} />}
-          >
-            {comments}
-          </Button>
-          <Button
-            size="sm"
-            variant="light"
-            startContent={<Repeat2 size={14} />}
-          >
-            {reposts}
-          </Button>
-          <Button size="sm" variant="light" startContent={<Heart size={14} />}>
-            {likes}
-          </Button>
-        </div>
-        <div className="flex justify-center">
-          <Button size="sm" variant="light" isIconOnly>
-            <Bookmark size={14} />
-          </Button>
-          <Button size="sm" variant="light" isIconOnly>
-            <Share size={14} />
-          </Button>
-        </div>
+      <CardFooter className="flex justify-around">
+        {postActions.map(({ icon, type }) => {
+          const content = getPostActionContent(type);
+          return (
+            <Button
+              key={type}
+              size="sm"
+              variant="light"
+              startContent={icon}
+              isIconOnly={content === null}
+              onClick={handleOnPostAction(type)}
+            >
+              {content}
+            </Button>
+          );
+        })}
       </CardFooter>
     </Card>
   );
