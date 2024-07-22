@@ -4,10 +4,15 @@ import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: ['../src/lib/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  addons: ['@storybook/addon-essentials', 'storybook-addon-themes'],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-themes'],
   framework: {
     name: '@storybook/react-vite',
     options: {},
+  },
+  docs: {
+    //👇 See the table below for the list of supported options
+    autodocs: 'tag',
+    defaultName: 'Documentation',
   },
   staticDirs: ['../static'],
   viteFinal: async (config) =>

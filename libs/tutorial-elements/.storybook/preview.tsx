@@ -1,14 +1,28 @@
+import { withThemeByClassName } from '@storybook/addon-themes';
+import { Preview, ReactRenderer } from '@storybook/react';
+import { themes } from '@storybook/theming';
+
 import './tw-global.css';
 
-export const decorators = [(Story: any) => <Story />];
-
-export const parameters = {
-  themes: {
-    default: 'dark',
-    list: [
-      { name: 'dark', class: 'dark', color: '#333' },
-      { name: 'light', class: 'light', color: 'white' },
-    ],
-    target: 'html',
+const preview: Preview = {
+  globalTypes: {
+    theme: { type: 'string' },
+  },
+  decorators: [
+    withThemeByClassName<ReactRenderer>({
+      themes: {
+        light: '',
+        dark: 'dark',
+      },
+      parentSelector: 'html',
+      defaultTheme: 'dark',
+    }),
+  ],
+  parameters: {
+    docs: {
+      theme: themes.dark,
+    },
   },
 };
+
+export default preview;

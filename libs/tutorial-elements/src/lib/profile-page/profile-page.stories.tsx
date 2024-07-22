@@ -14,6 +14,7 @@ import { ProfilePage } from './profile-page';
 
 const meta: Meta<typeof ProfilePage> = {
   component: ProfilePage,
+  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <ScreenContainer>
