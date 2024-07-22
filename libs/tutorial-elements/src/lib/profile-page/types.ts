@@ -94,6 +94,7 @@ export type PhotosProps = {
 export type ProfileTimelineProps = {
   posts: Post[];
   photos: PostPhoto[];
+  likedPosts: Post[];
 };
 
 export type ProfilePageProps = {
@@ -101,6 +102,5 @@ export type ProfilePageProps = {
   profile: Profile;
   profileStats: ProfileStats;
   company?: Company;
-  posts: Post[];
-  photos: PostPhoto[];
+  profileTimeline: ProfileTimelineProps;
 };

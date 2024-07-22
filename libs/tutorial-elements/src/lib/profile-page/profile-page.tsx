@@ -12,8 +12,7 @@ export const ProfilePage = ({
   profile,
   company,
   profileStats,
-  posts,
-  photos,
+  profileTimeline: { posts, photos, likedPosts },
 }: ProfilePageProps) => {
   return (
     <MockupBrowser>
@@ -23,7 +22,11 @@ export const ProfilePage = ({
         <Spacer y={1} />
         <ProfileStats stats={profileStats} />
         <Spacer y={1} />
-        <ProfileTimeline posts={posts} photos={photos} />
+        <ProfileTimeline
+          posts={posts}
+          photos={photos}
+          likedPosts={likedPosts}
+        />
       </ScrollShadow>
     </MockupBrowser>
   );
