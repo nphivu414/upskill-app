@@ -94,6 +94,19 @@ export type PostsProps = {
   posts: Post[];
 };
 
+export type PostActionConfig = Record<
+  PostActionType,
+  {
+    content?: React.ReactNode;
+    handler: PostActionHandler;
+  }
+>;
+
+export type PostMenuActionConfig = Record<
+  PostMenuActionType,
+  PostActionHandler
+>;
+
 export type PostCardProps = CardProps & {
   postId: string;
   authorName: string;
@@ -101,14 +114,8 @@ export type PostCardProps = CardProps & {
   avatar?: string;
   createdAt: string;
   content: string;
-  postActionConfig: Record<
-    PostActionType,
-    {
-      content?: React.ReactNode;
-      handler: PostActionHandler;
-    }
-  >;
-  postMenuActionConfig: Record<PostMenuActionType, PostActionHandler>;
+  postActionConfig: PostActionConfig;
+  postMenuActionConfig: PostMenuActionConfig;
 };
 
 export type PhotoCardProps = {

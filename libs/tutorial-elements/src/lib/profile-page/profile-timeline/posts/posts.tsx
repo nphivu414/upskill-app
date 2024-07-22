@@ -1,9 +1,6 @@
 import { PostsProps } from '../../types';
-import {
-  getPostActionsConfig,
-  getPostMenuActionsConfig,
-} from './post-actions-config';
 import { PostCard } from './post-card';
+import { getPostActionsConfig, getPostMenuActionsConfig } from './post.utils';
 
 export const Posts = ({ posts }: PostsProps) => {
   return (

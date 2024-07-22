@@ -17,7 +17,11 @@ import { Ellipsis } from 'lucide-react';
 import { PostActionType, PostCardProps, PostMenuActionType } from '../../types';
 import { useProfile } from '../../use-profile';
 import { formatDate, getAvatarFallback } from '../../utils';
-import { usePostActions, usePostMenuActions } from './use-post-actions';
+import {
+  getPostActionContent,
+  getPostActions,
+  getPostMenuActions,
+} from './post-card.utils';
 
 export const PostCard = ({
   postId,
@@ -32,8 +36,8 @@ export const PostCard = ({
   ...rest
 }: PostCardProps) => {
   const currentProfile = useProfile();
-  const postActions = usePostActions();
-  const postMenuActions = usePostMenuActions({
+  const postActions = getPostActions();
+  const postMenuActions = getPostMenuActions({
     isSelfPost: authorUsername === currentProfile.username,
   });
 
@@ -43,19 +47,6 @@ export const PostCard = ({
 
   const handleOnPostAction = (type: PostActionType) => {
     return () => postActionConfig[type].handler(postId);
-  };
-
-  const getPostActionContent = (type: PostActionType) => {
-    switch (type) {
-      case 'comment':
-        return postActionConfig.comment.content;
-      case 'repost':
-        return postActionConfig.repost.content;
-      case 'toggleLike':
-        return postActionConfig.toggleLike.content;
-      default:
-        return null;
-    }
   };
 
   return (
@@ -107,7 +98,7 @@ export const PostCard = ({
       </CardBody>
       <CardFooter className="flex justify-around">
         {postActions.map(({ icon, type }) => {
-          const content = getPostActionContent(type);
+          const content = getPostActionContent(type, postActionConfig);
           return (
             <Button
               key={type}

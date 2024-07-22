@@ -11,7 +11,12 @@ import {
   Trash,
 } from 'lucide-react';
 
-import { PostAction, PostMenuAction } from '../../types';
+import {
+  PostAction,
+  PostActionConfig,
+  PostActionType,
+  PostMenuAction,
+} from '../../types';
 
 const defaultIconSize = 14;
 
@@ -69,16 +74,32 @@ const otherPostMenuActions: PostMenuAction[] = [
   },
 ];
 
-type UsePostMenuActionsOptions = {
+type GetPostMenuActionsOptions = {
   isSelfPost: boolean;
 };
 
-export const usePostMenuActions = ({
+export const getPostMenuActions = ({
   isSelfPost,
-}: UsePostMenuActionsOptions) => {
+}: GetPostMenuActionsOptions) => {
   return isSelfPost ? selfPostMenuActions : otherPostMenuActions;
 };
 
-export const usePostActions = () => {
+export const getPostActions = () => {
   return postActions;
+};
+
+export const getPostActionContent = (
+  type: PostActionType,
+  config: PostActionConfig
+) => {
+  switch (type) {
+    case 'comment':
+      return config.comment.content;
+    case 'repost':
+      return config.repost.content;
+    case 'toggleLike':
+      return config.toggleLike.content;
+    default:
+      return null;
+  }
 };
