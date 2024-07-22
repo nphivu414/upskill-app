@@ -6,6 +6,7 @@ import { ProfileStats } from './profile-stats';
 
 const meta: Meta<typeof ProfileStats> = {
   component: ProfileStats,
+  title: 'Tutorials/Profile UI/Profile Stats',
   decorators: [
     (Story) => (
       <ScreenContainer>

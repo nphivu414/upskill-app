@@ -6,6 +6,7 @@ import { ProfileTimeline } from './profile-timeline';
 
 const meta: Meta<typeof ProfileTimeline> = {
   component: ProfileTimeline,
+  title: 'Tutorials/Profile UI/Profile Timeline',
   decorators: [
     (Story) => (
       <ScreenContainer>

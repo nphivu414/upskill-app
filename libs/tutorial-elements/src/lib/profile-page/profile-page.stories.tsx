@@ -14,7 +14,7 @@ import { ProfilePage } from './profile-page';
 
 const meta: Meta<typeof ProfilePage> = {
   component: ProfilePage,
-  tags: ['autodocs'],
+  title: 'Tutorials/Profile UI/Full Page',
   decorators: [
     (Story) => (
       <ScreenContainer>
@@ -28,7 +28,7 @@ export default meta;
 
 type Story = StoryObj<typeof ProfilePage>;
 
-export const Screen: Story = {
+export const Default: Story = {
   args: {
     featurePhotos: defaultFeaturePhotos,
     profile: defaultProfile,

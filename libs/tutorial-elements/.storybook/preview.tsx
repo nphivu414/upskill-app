@@ -5,9 +5,6 @@ import { themes } from '@storybook/theming';
 import './tw-global.css';
 
 const preview: Preview = {
-  globalTypes: {
-    theme: { type: 'string' },
-  },
   decorators: [
     withThemeByClassName<ReactRenderer>({
       themes: {
@@ -21,6 +18,20 @@ const preview: Preview = {
   parameters: {
     docs: {
       theme: themes.dark,
+      toc: true,
+    },
+    options: {
+      storySort: {
+        includeNames: true,
+        order: [
+          'Intro',
+          'Page',
+          ['ProfilePage', 'Login', 'Admin'],
+          'Components',
+          '*',
+          'WIP',
+        ],
+      },
     },
   },
 };

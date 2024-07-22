@@ -9,9 +9,15 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  typescript: {
+    // Overrides the default Typescript configuration to allow multi-package components to be documented via Autodocs.
+    reactDocgen: 'react-docgen',
+    skipBabel: true,
+    check: false,
+  },
   docs: {
     //👇 See the table below for the list of supported options
-    autodocs: 'tag',
+    autodocs: true,
     defaultName: 'Documentation',
   },
   staticDirs: ['../static'],
