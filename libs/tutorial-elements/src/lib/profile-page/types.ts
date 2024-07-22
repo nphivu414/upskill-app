@@ -48,6 +48,7 @@ export type ProfileInfoProps = {
 
 export type FeaturePhotosProps = {
   photos: string[];
+  showDots?: boolean;
 };
 
 export type InforLineProps = {

@@ -28,7 +28,7 @@ export const ProfilePage = ({
     <MockupBrowser>
       <ScrollShadow ref={ref} className="h-[550px]" size={15}>
         <ParallaxContainer y={y}>
-          <FeaturePhotos photos={featurePhotos} />
+          <FeaturePhotos photos={featurePhotos} showDots />
         </ParallaxContainer>
         <ProfileInfo profile={profile} company={company} />
         <Spacer y={1} />

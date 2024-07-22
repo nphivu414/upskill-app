@@ -5,7 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { FeaturePhotosProps } from '../types';
 import { CarouselDotButton, useDotButton } from './carousel-dot-buttons';
 
-export const FeaturePhotos = ({ photos }: FeaturePhotosProps) => {
+export const FeaturePhotos = ({ photos, showDots }: FeaturePhotosProps) => {
   const [carouselRef, carouselApi] = useEmblaCarousel();
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
@@ -32,7 +32,7 @@ export const FeaturePhotos = ({ photos }: FeaturePhotosProps) => {
           ))}
         </div>
       </div>
-      <div className="grid-cols-auto-1fr grid justify-between gap-4">
+      {showDots && (
         <div className="absolute bottom-2 flex w-full flex-wrap items-center justify-end pr-2">
           {scrollSnaps.map((_, index) => (
             <CarouselDotButton
@@ -47,7 +47,7 @@ export const FeaturePhotos = ({ photos }: FeaturePhotosProps) => {
             />
           ))}
         </div>
-      </div>
+      )}
     </section>
   );
 };
