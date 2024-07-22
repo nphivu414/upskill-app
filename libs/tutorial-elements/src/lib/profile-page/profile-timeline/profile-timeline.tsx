@@ -20,7 +20,7 @@ export const ProfileTimeline = ({
         items={tabs}
         destroyInactiveTabPanel={false}
         classNames={{
-          base: 'sticky top-[2px] z-50 bg-background',
+          base: 'sticky top-0 z-50 bg-background',
         }}
       >
         {(item) => (

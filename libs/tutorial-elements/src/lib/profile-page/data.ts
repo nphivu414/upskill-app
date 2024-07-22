@@ -9,7 +9,7 @@ export const defaultFeaturePhotos = [
 export const defaultProfile: Profile = {
   name: 'Vu Nguyen',
   username: 'nphivu',
-  avatar: 'https://i.pravatar.cc/150?img=57',
+  avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
   bio: '🚀 Tech aficionado crafting digital magic. 🎨 UI/UX maestro building visually stunning websites and apps.',
   location: 'Saigon, Vietnam',
   title: 'Software Engineer',

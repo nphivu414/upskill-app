@@ -11,7 +11,7 @@ export const ProfileInfo = ({
   company,
 }: ProfileInfoProps) => {
   return (
-    <section className="bg-content1 pb-4">
+    <section className="bg-content1 relative pb-4">
       <div className="flex justify-between">
         <div className="flex flex-col">
           <Avatar

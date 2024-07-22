@@ -26,7 +26,7 @@ export const FeaturePhotos = ({ photos }: FeaturePhotosProps) => {
               <Image
                 src={index}
                 alt="profile cover"
-                className="h-[150px] w-screen rounded-none object-cover"
+                className="h-[260px] w-screen rounded-none object-cover"
               />
             </div>
           ))}
