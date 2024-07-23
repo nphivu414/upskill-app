@@ -27,7 +27,7 @@ export const ProfileInfo = ({
             {title ? <span className="text-sm">{title}</span> : null}
             {company ? (
               <Link className="ml-1 text-xs" href={company.website} isExternal>
-                {company.name}
+                @{company.name}
               </Link>
             ) : null}
           </div>

@@ -23,7 +23,7 @@ export const defaultProfileStats: ProfileStats = {
 };
 
 export const defaultCompany: Company = {
-  name: '@upskill',
+  name: 'upskill',
   website: 'https://upskill.app',
 };
 
