@@ -18,7 +18,7 @@ const config: StorybookConfig = {
   docs: {
     //👇 See the table below for the list of supported options
     autodocs: true,
-    defaultName: 'Documentation',
+    defaultName: 'Docs',
   },
   staticDirs: ['../static'],
   viteFinal: async (config) =>

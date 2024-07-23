@@ -6,7 +6,7 @@ import { ProfileInfo } from './profile-info';
 
 const meta: Meta<typeof ProfileInfo> = {
   component: ProfileInfo,
-  title: 'Tutorials/Profile UI/Profile Info',
+  title: 'Tutorials/Profile UI/Components/Profile Info',
   decorators: [
     (Story) => (
       <ScreenContainer>

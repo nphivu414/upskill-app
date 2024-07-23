@@ -14,7 +14,7 @@ import { ProfilePage } from './profile-page';
 
 const meta: Meta<typeof ProfilePage> = {
   component: ProfilePage,
-  title: 'Tutorials/Profile UI/Full Page',
+  title: 'Tutorials/Profile UI/Page/Screen',
   decorators: [
     (Story) => (
       <ScreenContainer>

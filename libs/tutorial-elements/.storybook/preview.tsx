@@ -22,15 +22,8 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        includeNames: true,
-        order: [
-          'Intro',
-          'Page',
-          ['ProfilePage', 'Login', 'Admin'],
-          'Components',
-          '*',
-          'WIP',
-        ],
+        method: '',
+        order: ['Tutorials', ['Profile UI', ['Page', 'Components']], '*'],
       },
     },
   },

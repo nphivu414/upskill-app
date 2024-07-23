@@ -6,7 +6,7 @@ import { FeaturePhotos } from './feature-photos';
 
 const meta: Meta<typeof FeaturePhotos> = {
   component: FeaturePhotos,
-  title: 'Tutorials/Profile UI/Feature Photos',
+  title: 'Tutorials/Profile UI/Components/Feature Photos',
   decorators: [
     (Story) => (
       <ScreenContainer>
