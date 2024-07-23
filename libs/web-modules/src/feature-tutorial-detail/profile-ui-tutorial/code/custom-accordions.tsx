@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { Accordion, AccordionItem } from '@nextui-org/react';
-import { CodeBlock, Heading3 } from '@upskill-app/ui/web';
-import { HighlightedCode, RawCode } from 'codehike/code';
+import { Heading3 } from '@upskill-app/ui/web';
 import StickyBox from 'react-sticky-box';
 
 export function CustomAccordion({
@@ -14,14 +13,6 @@ export function CustomAccordion({
     children?: React.ReactNode;
   }[];
 }) {
-  // const { accordions, highlighted } = props;
-  // console.log('🚀 ~ highlighted:', highlighted);
-  // console.log('🚀 ~ accordions:', accordions);
-  // const [selected, setSelected] = React.useState(accordions?.[0].meta);
-  // console.log('🚀 ~ selected:', selected);
-  // const tabsWithIndex = accordions.map((tab, index) => ({ ...tab, index }));
-  // console.log('🚀 ~ tabsWithIndex:', tabsWithIndex);
-
   return (
     <div className="flex items-start">
       <div className="flex-1">
@@ -44,16 +35,6 @@ export function CustomAccordion({
               {accordionItem.children}
             </AccordionItem>
           ))}
-          {/* <AccordionItem
-            key="1"
-            data-key="1"
-            aria-label="Introduction to React"
-            title={<Heading3>Introduction to React</Heading3>}
-            subtitle="Learn the fundamentals of React, including its history,
-    architecture, and key concepts."
-          >
-            
-          </AccordionItem> */}
         </Accordion>
       </div>
       <StickyBox className="flex-1" offsetTop={60}>

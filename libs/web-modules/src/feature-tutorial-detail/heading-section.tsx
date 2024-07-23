@@ -1,4 +1,4 @@
-import { Image, Spacer, User } from '@nextui-org/react';
+import { Spacer, User } from '@nextui-org/react';
 import { Heading1 } from '@upskill-app/ui/web';
 
 type AuthorProps = {
@@ -9,7 +9,7 @@ type AuthorProps = {
 
 type HeadingSectionProps = {
   title: string;
-  description: string;
+  description: React.ReactNode;
   thumbnailUrl: string;
   author: AuthorProps;
 };
@@ -21,7 +21,7 @@ export const HeadingSection = ({
   title,
 }: HeadingSectionProps) => {
   return (
-    <section className="w-full pt-12 md:pt-24 lg:pt-32">
+    <section className="w-full pt-12">
       <div className="container space-y-10 px-4 md:px-6 xl:space-y-16">
         <div className="grid gap-4 md:grid-cols-2 md:gap-16">
           <div>
@@ -37,7 +37,7 @@ export const HeadingSection = ({
               />
             </div>
             <Spacer y={6} />
-            <p className="text-muted md:text-xl">{description}</p>
+            <div className="md:text-xl">{description}</div>
           </div>
           {/* <Image
             src={thumbnailUrl}
