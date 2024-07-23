@@ -39,14 +39,21 @@ export const HeadingSection = ({
             <Spacer y={6} />
             <p className="text-muted md:text-xl">{description}</p>
           </div>
-          <Image
+          {/* <Image
             src={thumbnailUrl}
             width={600}
             height={400}
             alt={`${title} thumbnail`}
             isZoomed
             className="mx-auto aspect-video object-cover sm:w-full"
-          />
+          /> */}
+          <div>
+            <iframe
+              src="http://localhost:65294/iframe.html?args=&id=tutorials-profile-ui-page-screen--default&viewMode=docs&shortcuts=false&singleStory=true"
+              width={400}
+              height={650}
+            />
+          </div>
         </div>
       </div>
     </section>
