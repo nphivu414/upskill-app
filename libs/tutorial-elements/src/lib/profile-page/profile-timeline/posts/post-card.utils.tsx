@@ -75,7 +75,7 @@ const otherPostMenuActions: PostMenuAction[] = [
 ];
 
 type GetPostMenuActionsOptions = {
-  isSelfPost: boolean;
+  isSelfPost?: boolean;
 };
 
 export const getPostMenuActions = ({

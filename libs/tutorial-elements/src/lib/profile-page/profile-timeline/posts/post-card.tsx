@@ -15,7 +15,6 @@ import { cn, MarkdownRenderer, Subtle } from '@upskill-app/ui/web';
 import { Ellipsis } from 'lucide-react';
 
 import { PostActionType, PostCardProps, PostMenuActionType } from '../../types';
-import { useProfile } from '../../use-profile';
 import { formatDate, getAvatarFallback } from '../../utils';
 import {
   getPostActionContent,
@@ -30,23 +29,23 @@ export const PostCard = ({
   authorName,
   authorUsername,
   avatar,
+  isSelfPost,
   postActionConfig,
   postMenuActionConfig,
   className,
   ...rest
 }: PostCardProps) => {
-  const currentProfile = useProfile();
   const postActions = getPostActions();
   const postMenuActions = getPostMenuActions({
-    isSelfPost: authorUsername === currentProfile.username,
+    isSelfPost,
   });
 
   const handleOnMenuDropdownAction = (type: PostMenuActionType) => {
-    return () => postMenuActionConfig[type](postId);
+    return () => postMenuActionConfig?.[type](postId);
   };
 
   const handleOnPostAction = (type: PostActionType) => {
-    return () => postActionConfig[type].handler(postId);
+    return () => postActionConfig?.[type].handler(postId);
   };
 
   return (
@@ -67,52 +66,56 @@ export const PostCard = ({
           />
           <Subtle className="mt-1 text-xs">· {formatDate(createdAt)}</Subtle>
         </div>
-        <Dropdown
-          placement="bottom-end"
-          classNames={{
-            content: 'bg-content2',
-          }}
-        >
-          <DropdownTrigger>
-            <Button size="sm" variant="light" isIconOnly>
-              <Ellipsis size={14} />
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu>
-            {postMenuActions.map(({ title, icon, type }) => (
-              <DropdownItem
-                key={type}
-                aria-label={title}
-                color={type === 'delete' ? 'danger' : 'default'}
-                endContent={icon}
-                onClick={handleOnMenuDropdownAction(type)}
-              >
-                {title}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
+        {postMenuActionConfig ? (
+          <Dropdown
+            placement="bottom-end"
+            classNames={{
+              content: 'bg-content2',
+            }}
+          >
+            <DropdownTrigger>
+              <Button size="sm" variant="light" isIconOnly>
+                <Ellipsis size={14} />
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu>
+              {postMenuActions.map(({ title, icon, type }) => (
+                <DropdownItem
+                  key={type}
+                  aria-label={title}
+                  color={type === 'delete' ? 'danger' : 'default'}
+                  endContent={icon}
+                  onClick={handleOnMenuDropdownAction(type)}
+                >
+                  {title}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+        ) : null}
       </CardHeader>
       <CardBody className="text-sm">
         <MarkdownRenderer>{content}</MarkdownRenderer>
       </CardBody>
-      <CardFooter className="flex justify-around">
-        {postActions.map(({ icon, type }) => {
-          const content = getPostActionContent(type, postActionConfig);
-          return (
-            <Button
-              key={type}
-              size="sm"
-              variant="light"
-              startContent={icon}
-              isIconOnly={content === null}
-              onClick={handleOnPostAction(type)}
-            >
-              {content}
-            </Button>
-          );
-        })}
-      </CardFooter>
+      {postActionConfig ? (
+        <CardFooter className="flex justify-around">
+          {postActions.map(({ icon, type }) => {
+            const content = getPostActionContent(type, postActionConfig);
+            return (
+              <Button
+                key={type}
+                size="sm"
+                variant="light"
+                startContent={icon}
+                isIconOnly={content === null}
+                onClick={handleOnPostAction(type)}
+              >
+                {content}
+              </Button>
+            );
+          })}
+        </CardFooter>
+      ) : null}
     </Card>
   );
 };

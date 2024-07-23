@@ -113,10 +113,11 @@ export type PostCardProps = CardProps & {
   authorName: string;
   authorUsername: string;
   avatar?: string;
-  createdAt: string;
   content: string;
-  postActionConfig: PostActionConfig;
-  postMenuActionConfig: PostMenuActionConfig;
+  isSelfPost?: boolean;
+  createdAt: string;
+  postActionConfig?: PostActionConfig;
+  postMenuActionConfig?: PostMenuActionConfig;
 };
 
 export type PhotoCardProps = {
