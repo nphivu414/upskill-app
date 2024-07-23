@@ -9,7 +9,7 @@ import { ProfileInfo } from './profile-info';
 import { ProfileStats } from './profile-stats';
 import { ProfileTimeline } from './profile-timeline';
 import { ProfilePageProps } from './types';
-import { useParallax } from './use-parallax-header';
+import { useParallaxHeader } from './use-parallax-header';
 
 export const ProfilePage = ({
   featurePhotos,
@@ -22,7 +22,7 @@ export const ProfilePage = ({
   const { scrollYProgress } = useScroll({
     container: ref,
   });
-  const y = useParallax(scrollYProgress);
+  const y = useParallaxHeader(scrollYProgress);
 
   return (
     <MockupBrowser>

@@ -2,6 +2,7 @@ import { Image } from '@nextui-org/react';
 import { cn } from '@upskill-app/ui/web';
 import useEmblaCarousel from 'embla-carousel-react';
 
+import { FEATURE_HEADER_HEIGHT } from '../constants';
 import { FeaturePhotosProps } from '../types';
 import { CarouselDotButton, useDotButton } from './carousel-dot-buttons';
 
@@ -26,7 +27,7 @@ export const FeaturePhotos = ({ photos, showDots }: FeaturePhotosProps) => {
               <Image
                 src={index}
                 alt="profile cover"
-                className="h-[260px] w-screen rounded-none object-cover"
+                className={`h-[${FEATURE_HEADER_HEIGHT}px] w-screen rounded-none object-cover`}
               />
             </div>
           ))}

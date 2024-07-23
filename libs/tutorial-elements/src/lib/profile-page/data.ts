@@ -39,7 +39,6 @@ Let's connect and create something awesome together! ✨
 
 **#softwareengineer #UIUX**
 
----
 ![Alt text](https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQesMK3LuHjvgFzf_Do3dz_tcZN-pp5NWnd3xszkSqUXR419GZLLd_OBoRo1KU0 "Image of person working on a laptop with code displayed on the screen")
 `,
     createdAt: '2021-10-01T00:00:00Z',
