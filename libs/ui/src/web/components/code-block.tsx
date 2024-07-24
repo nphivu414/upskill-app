@@ -14,7 +14,7 @@ export const CodeBlock = React.forwardRef<
 >(({ className, showCopyButton, code: highlightedCode, ...props }, ref) => {
   return (
     <div className="relative">
-      <div className="absolute right-4 top-0">
+      <div className="absolute right-2 top-1">
         {showCopyButton && <CopyButton text={highlightedCode.code} />}
       </div>
       <Pre

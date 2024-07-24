@@ -26,7 +26,7 @@ module.exports = {
       },
       dark: {
         colors: {
-          muted: "#a1a1aa"
+          muted: "#d4d4d8"
         },
       },
     },

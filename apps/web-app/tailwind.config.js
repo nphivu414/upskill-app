@@ -17,6 +17,7 @@ module.exports = {
   },
   darkMode: 'selector',
   plugins: [
+    require('@tailwindcss/typography'),
     require('tailwind-scrollbar'),
     nextui({
       themes: {
@@ -27,7 +28,7 @@ module.exports = {
         },
         dark: {
           colors: {
-            muted: "#a1a1aa"
+            muted: "#d4d4d8"
           },
         },
       },
