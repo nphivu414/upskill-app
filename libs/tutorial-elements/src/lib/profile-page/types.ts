@@ -51,10 +51,11 @@ export type FeaturePhotosProps = {
   showDots?: boolean;
 };
 
-export type InforLineProps = {
+export type InfoLineProps = {
   icon: React.ReactNode;
+  className?: string;
   children: React.ReactNode;
-} & React.HTMLAttributes<HTMLDivElement>;
+};
 
 export type StatsBlockProps = {
   label: string;

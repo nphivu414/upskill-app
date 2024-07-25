@@ -2,10 +2,11 @@
 
 import React from 'react';
 import { Accordion, AccordionItem, Image } from '@nextui-org/react';
-import { Heading3, Subtle } from '@upskill-app/ui/web';
+import { Subtle } from '@upskill-app/ui/web';
 import StickyBox from 'react-sticky-box';
 
 import FeaturePhotosCodeContent from '../content/feature-photos-content.mdx';
+import ProfileInfoCodeContent from '../content/profile-info-content.mdx';
 import { Code } from '../profile-content';
 import { CodeWithTabs } from './tutorial-code';
 
@@ -17,8 +18,7 @@ export function CustomAccordion({
     children?: React.ReactNode;
   }[];
 }) {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['1']));
-  console.log('🚀 ~ selectedKeys:', selectedKeys);
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['2']));
 
   const renderStepSide = () => {
     if (selectedKeys.has('0')) {
@@ -37,14 +37,16 @@ export function CustomAccordion({
       );
     } else if (selectedKeys.has('1')) {
       return <FeaturePhotosCodeContent components={{ CodeWithTabs, Code }} />;
+    } else if (selectedKeys.has('2')) {
+      return <ProfileInfoCodeContent components={{ CodeWithTabs, Code }} />;
     }
   };
 
   return (
-    <div className="flex-5 flex items-start">
+    <div className="flex-5 flex items-start gap-4">
       <div className="flex-3">
         <Accordion
-          variant="splitted"
+          variant="shadow"
           selectionMode="single"
           selectedKeys={selectedKeys}
           onSelectionChange={(keys) => setSelectedKeys(keys as Set<string>)}
@@ -58,7 +60,7 @@ export function CustomAccordion({
               key={index}
               data-key={index}
               aria-label={accordionItem.title}
-              title={<Heading3>{accordionItem.title}</Heading3>}
+              title={accordionItem.title}
             >
               <div className="prose prose-zinc dark:prose-invert">
                 {accordionItem.children}
@@ -67,8 +69,8 @@ export function CustomAccordion({
           ))}
         </Accordion>
       </div>
-      <StickyBox className="flex-1" offsetTop={60}>
-        <div className="bg-content1 flex flex-col items-center justify-center rounded-lg p-4">
+      <StickyBox className="w-[400px] flex-1" offsetTop={80}>
+        <div className="flex flex-col items-center justify-center rounded-lg">
           {renderStepSide()}
         </div>
       </StickyBox>

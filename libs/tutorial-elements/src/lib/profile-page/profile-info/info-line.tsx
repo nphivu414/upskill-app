@@ -1,21 +1,14 @@
-import { Spacer } from '@nextui-org/react';
-import { cn } from '@upskill-app/ui/web';
+import { cn, Spacer } from '@nextui-org/react';
 
-import { InforLineProps } from '../types';
+import { InfoLineProps } from '../types';
 
-export const InfoLine = ({
-  icon,
-  className,
-  children,
-  ...rest
-}: InforLineProps) => {
+export const InfoLine = ({ icon, className, children }: InfoLineProps) => {
   return (
     <div
       className={cn(
         'flex items-center px-4 [&:not(:first-child)]:mt-2',
         className
       )}
-      {...rest}
     >
       {icon}
       <Spacer x={1} />

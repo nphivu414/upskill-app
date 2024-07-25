@@ -74,7 +74,7 @@ export const HeadingSection = ({
           /> */}
           <div>
             <iframe
-              src="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/iframe.html?args=&id=tutorials-profile-ui-page-screen--default"
+              src="http://localhost:50905/iframe.html?args=&id=tutorials-profile-ui-page-screen--default"
               width={400}
               height={650}
             />

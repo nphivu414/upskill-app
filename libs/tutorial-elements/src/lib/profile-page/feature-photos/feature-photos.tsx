@@ -1,5 +1,4 @@
-import { Image } from '@nextui-org/react';
-import { cn } from '@upskill-app/ui/web';
+import { cn, Image } from '@nextui-org/react';
 import useEmblaCarousel from 'embla-carousel-react';
 
 import { FEATURE_HEADER_HEIGHT } from '../constants';

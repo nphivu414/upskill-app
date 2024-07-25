@@ -10,7 +10,7 @@ const meta: Meta<typeof ProfileInfo> = {
   decorators: [
     (Story) => (
       <ScreenContainer>
-        <div style={{ padding: 40 }}>
+        <div style={{ paddingTop: 40 }}>
           <Story />
         </div>
       </ScreenContainer>
