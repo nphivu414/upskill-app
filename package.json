@@ -7,8 +7,7 @@
     "start:web": "nx run web-app:dev",
     "lint:web": "nx lint web-app --fix",
     "storybook:start": "nx storybook tutorial-elements",
-    "storybook:build": "nx build-storybook tutorial-elements",
-    "chromatic": "npx chromatic --project-token=chpt_3687a7a0dc1c670 --buildScriptName storybook:build --verbose"
+    "storybook:build": "nx build-storybook tutorial-elements"
   },
   "private": true,
   "dependencies": {
