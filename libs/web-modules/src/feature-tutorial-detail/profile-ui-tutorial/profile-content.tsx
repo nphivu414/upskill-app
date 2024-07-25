@@ -3,9 +3,9 @@ import { CodeBlockProps } from '@upskill-app/types';
 import { CodeBlock, codeLineMark } from '@upskill-app/ui/web';
 
 import { CodeWithAccoridions } from './code/tutorial-code';
-import ProfileMdx from './content.mdx';
+import ProfileMdx from './content/main-content.mdx';
 
-function Code({ codeblock }: CodeBlockProps) {
+export function Code({ codeblock }: CodeBlockProps) {
   return (
     <CodeBlock
       code={codeblock}

@@ -1,9 +1,13 @@
 'use client';
 
 import React from 'react';
-import { Accordion, AccordionItem, Image, select } from '@nextui-org/react';
-import { Heading3 } from '@upskill-app/ui/web';
+import { Accordion, AccordionItem, Image } from '@nextui-org/react';
+import { Heading3, Subtle } from '@upskill-app/ui/web';
 import StickyBox from 'react-sticky-box';
+
+import FeaturePhotosCodeContent from '../content/feature-photos-content.mdx';
+import { Code } from '../profile-content';
+import { CodeWithTabs } from './tutorial-code';
 
 export function CustomAccordion({
   data,
@@ -13,18 +17,26 @@ export function CustomAccordion({
     children?: React.ReactNode;
   }[];
 }) {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['0']));
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['1']));
   console.log('🚀 ~ selectedKeys:', selectedKeys);
 
   const renderStepSide = () => {
     if (selectedKeys.has('0')) {
       return (
-        <Image
-          src="/startup-screen.png"
-          className="mx-auto w-1/2 border"
-          alt="Profile UI Project Startup Screen"
-        />
+        <div className="flex flex-col items-center justify-center">
+          <Subtle className="mb-2">
+            Expected outcome after completing this step
+          </Subtle>
+          <Image
+            src="/startup-screen.png"
+            className="mx-auto w-[400px] border"
+            alt="Profile UI Project Startup Screen"
+          />
+          <Subtle className="mt-2">(NextUI Startup Screen)</Subtle>
+        </div>
       );
+    } else if (selectedKeys.has('1')) {
+      return <FeaturePhotosCodeContent components={{ CodeWithTabs, Code }} />;
     }
   };
 
@@ -56,16 +68,7 @@ export function CustomAccordion({
         </Accordion>
       </div>
       <StickyBox className="flex-1" offsetTop={60}>
-        <div className="flex flex-col items-center justify-center">
-          {/* <Code components={{ Code: TutorialCode }} /> */}
-          {/* <ProfilePage /> */}
-          {/* <iframe
-            src="http://localhost:65294/iframe.html?args=&id=tutorials-profile-ui-page-screen--default&"
-            width={400}
-            height={700}
-          /> */}
-          {/* <ProfileFullPageDemo /> */}
-          {/* <TestComponent /> */}
+        <div className="bg-content1 flex flex-col items-center justify-center rounded-lg p-4">
           {renderStepSide()}
         </div>
       </StickyBox>
