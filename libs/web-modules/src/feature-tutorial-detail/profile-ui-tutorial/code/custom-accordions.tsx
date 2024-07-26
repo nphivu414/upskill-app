@@ -9,6 +9,7 @@ import {
   Selection,
 } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
+import { useTheme } from 'next-themes';
 import StickyBox from 'react-sticky-box';
 
 import FeaturePhotosCodeContent from '../content/feature-photos-content.mdx';
@@ -25,7 +26,16 @@ export function CustomAccordion({
     children?: React.ReactNode;
   }[];
 }) {
+  const { theme } = useTheme();
+  console.log('🚀 ~ theme:', theme);
   const [selectedKeys, setSelectedKeys] = React.useState(new Set(['0']));
+  const [step1ImageSrc, setStep1ImageSrc] = React.useState('');
+
+  React.useEffect(() => {
+    setStep1ImageSrc(
+      theme === 'dark' ? '/startup-screen-dark.jpg' : '/startup-screen.jpg'
+    );
+  }, [theme]);
 
   const onSelectionChange = (keys: Selection) => {
     setSelectedKeys(keys as Set<string>);
@@ -43,7 +53,7 @@ export function CustomAccordion({
             Expected outcome after completing this step
           </Subtle>
           <Image
-            src="/startup-screen.png"
+            src={step1ImageSrc}
             className="mx-auto w-[400px] border"
             alt="Profile UI Project Startup Screen"
           />
@@ -97,7 +107,7 @@ export function CustomAccordion({
       onSelectionChange={onSelectionChange}
       keepContentMounted
       itemClasses={{
-        base: 'accordion-item',
+        content: 'py-4',
       }}
     >
       {data.map((accordionItem, index) => (
