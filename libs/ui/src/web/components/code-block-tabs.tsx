@@ -31,7 +31,8 @@ export function CodeBlockTabs(props: {
             {
               <div
                 className={cn({
-                  'flex items-center justify-center': tab.title === 'Preview',
+                  'flex items-center justify-center py-4':
+                    tab.title === 'Preview',
                 })}
               >
                 {tab.children}

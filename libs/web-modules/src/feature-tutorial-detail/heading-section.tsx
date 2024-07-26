@@ -27,8 +27,8 @@ export const HeadingSection = ({
   return (
     <section className="w-full pt-12">
       <div className="container space-y-10 px-4 md:px-6 xl:space-y-16">
-        <div className="grid gap-4 md:grid-cols-5 md:gap-16">
-          <div className="col-span-3">
+        <div className="flex items-start gap-4">
+          <div className="flex-1">
             <Heading1>{title}</Heading1>
             <Spacer y={4} />
             <div className="flex items-center gap-4">
@@ -52,11 +52,6 @@ export const HeadingSection = ({
             <div>
               <p className="text-muted text-lg">Prerequisites</p>
               <Spacer y={2} />
-              {/* <ul className="ml-4 list-disc">
-                <li>Node.js and yarn installed</li>
-                <li>Basic understanding of React</li>
-                <li>Familiarity with CSS or Tailwind</li>
-              </ul> */}
               <ul className="ml-4 list-disc">
                 {prerequisites?.map((prerequisite, index) => (
                   <li key={index}>{prerequisite}</li>
@@ -64,20 +59,14 @@ export const HeadingSection = ({
               </ul>
             </div>
           </div>
-          {/* <Image
-            src={thumbnailUrl}
-            width={600}
-            height={400}
-            alt={`${title} thumbnail`}
-            isZoomed
-            className="mx-auto aspect-video object-cover sm:w-full"
-          /> */}
-          <div>
-            <iframe
-              src="http://localhost:50905/iframe.html?args=&id=tutorials-profile-ui-page-screen--default"
-              width={400}
-              height={650}
-            />
+          <div className="w-1/2">
+            <div className="flex flex-col items-center justify-center">
+              <iframe
+                src="http://localhost:9009/iframe.html?args=&id=tutorials-profile-ui-page-screen--default"
+                width={400}
+                height={650}
+              />
+            </div>
           </div>
         </div>
       </div>

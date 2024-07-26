@@ -7,6 +7,7 @@ import StickyBox from 'react-sticky-box';
 
 import FeaturePhotosCodeContent from '../content/feature-photos-content.mdx';
 import ProfileInfoCodeContent from '../content/profile-info-content.mdx';
+import ProfileStatsContent from '../content/profile-stats-content.mdx';
 import { Code } from '../profile-content';
 import { CodeWithTabs } from './tutorial-code';
 
@@ -18,7 +19,7 @@ export function CustomAccordion({
     children?: React.ReactNode;
   }[];
 }) {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['2']));
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['3']));
 
   const renderStepSide = () => {
     if (selectedKeys.has('0')) {
@@ -39,18 +40,19 @@ export function CustomAccordion({
       return <FeaturePhotosCodeContent components={{ CodeWithTabs, Code }} />;
     } else if (selectedKeys.has('2')) {
       return <ProfileInfoCodeContent components={{ CodeWithTabs, Code }} />;
+    } else if (selectedKeys.has('3')) {
+      return <ProfileStatsContent components={{ CodeWithTabs, Code }} />;
     }
   };
 
   return (
-    <div className="flex-5 flex items-start gap-4">
-      <div className="flex-3">
+    <div className="flex items-start gap-4">
+      <div className="w-full flex-1 ">
         <Accordion
           variant="shadow"
           selectionMode="single"
           selectedKeys={selectedKeys}
           onSelectionChange={(keys) => setSelectedKeys(keys as Set<string>)}
-          // selectedKeys={expandedKey}
           itemClasses={{
             base: 'accordion-item',
           }}
@@ -62,15 +64,15 @@ export function CustomAccordion({
               aria-label={accordionItem.title}
               title={accordionItem.title}
             >
-              <div className="prose prose-zinc dark:prose-invert">
+              <div className="prose prose-zinc dark:prose-invert max-w-full">
                 {accordionItem.children}
               </div>
             </AccordionItem>
           ))}
         </Accordion>
       </div>
-      <StickyBox className="w-[400px] flex-1" offsetTop={80}>
-        <div className="flex flex-col items-center justify-center rounded-lg">
+      <StickyBox className="w-1/2" offsetTop={80}>
+        <div className="flex flex-col items-center justify-center">
           {renderStepSide()}
         </div>
       </StickyBox>
