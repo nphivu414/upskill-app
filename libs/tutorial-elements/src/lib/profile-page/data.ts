@@ -1,9 +1,9 @@
 import { Company, Post, PostPhoto, Profile, ProfileStats } from './types';
 
 export const defaultFeaturePhotos = [
-  '/profile-cover.png',
-  '/profile-cover-2.png',
-  '/profile-cover-3.png',
+  '/profile-cover.jpg',
+  '/profile-cover-2.jpg',
+  '/profile-cover-3.jpg',
 ];
 
 export const defaultProfile: Profile = {

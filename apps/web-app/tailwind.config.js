@@ -23,6 +23,7 @@ module.exports = {
       themes: {
         light: {
           colors: {
+            background: "#f9f9f9",
             muted: "#71717a"
           }
         },

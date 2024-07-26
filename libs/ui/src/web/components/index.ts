@@ -8,3 +8,4 @@ export * from './app-ui-provider';
 export * from './typography';
 export * from './markdown-renderer';
 export * from './code-block-tabs';
+export * from './embed-story';
