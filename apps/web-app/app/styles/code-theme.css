@@ -1,3 +1,7 @@
+pre[data-theme="github-from-css"] {
+  font-size: 0.75rem
+}
+
 :root {
   --ch-0: dark;
   --ch-1: #8b949e;

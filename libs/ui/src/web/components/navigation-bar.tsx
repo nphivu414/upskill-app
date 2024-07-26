@@ -10,7 +10,7 @@ import { ThemeToggle } from './theme-toggle';
 
 export const NavigationBar = () => {
   return (
-    <Navbar shouldHideOnScroll maxWidth="2xl">
+    <Navbar maxWidth="2xl">
       <NavbarBrand>
         <p className="font-bold text-inherit">Up Skill</p>
       </NavbarBrand>

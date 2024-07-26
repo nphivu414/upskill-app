@@ -26,7 +26,7 @@ export const HeadingSection = ({
 }: HeadingSectionProps) => {
   return (
     <section className="w-full pt-12">
-      <div className="container space-y-10 px-4 md:px-6 xl:space-y-16">
+      <div className="space-y-10 px-4 md:px-6 xl:space-y-16">
         <div className="flex items-start gap-4">
           <div className="flex-1">
             <Heading1>{title}</Heading1>

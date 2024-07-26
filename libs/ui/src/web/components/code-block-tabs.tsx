@@ -17,10 +17,12 @@ export function CodeBlockTabs(props: {
       id="opencode"
       color="primary"
       selectedKey={selected}
+      size="sm"
       items={tabs}
       destroyInactiveTabPanel={false}
       onSelectionChange={(key) => setSelected(key.toString())}
       classNames={{
+        base: 'overflow-x-auto max-w-full',
         panel:
           'w-full bg-content2 rounded-lg overflow-x-auto mt-4 min-h-[50px] py-0',
       }}

@@ -1,7 +1,13 @@
 'use client';
 
 import React from 'react';
-import { Accordion, AccordionItem, Image } from '@nextui-org/react';
+import {
+  Accordion,
+  AccordionItem,
+  cn,
+  Image,
+  Selection,
+} from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
 import StickyBox from 'react-sticky-box';
 
@@ -19,12 +25,20 @@ export function CustomAccordion({
     children?: React.ReactNode;
   }[];
 }) {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['3']));
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['0']));
 
-  const renderStepSide = () => {
-    if (selectedKeys.has('0')) {
-      return (
-        <div className="flex flex-col items-center justify-center">
+  const onSelectionChange = (keys: Selection) => {
+    setSelectedKeys(keys as Set<string>);
+  };
+
+  const renderStepSide = (index: number) => {
+    return (
+      <div>
+        <div
+          className={cn('flex flex-col items-center justify-center', {
+            hidden: index !== 0,
+          })}
+        >
           <Subtle className="mb-2">
             Expected outcome after completing this step
           </Subtle>
@@ -35,47 +49,77 @@ export function CustomAccordion({
           />
           <Subtle className="mt-2">(NextUI Startup Screen)</Subtle>
         </div>
-      );
-    } else if (selectedKeys.has('1')) {
-      return <FeaturePhotosCodeContent components={{ CodeWithTabs, Code }} />;
-    } else if (selectedKeys.has('2')) {
-      return <ProfileInfoCodeContent components={{ CodeWithTabs, Code }} />;
-    } else if (selectedKeys.has('3')) {
-      return <ProfileStatsContent components={{ CodeWithTabs, Code }} />;
-    }
+        <div
+          className={cn({
+            hidden: index !== 1,
+          })}
+        >
+          <FeaturePhotosCodeContent components={{ CodeWithTabs, Code }} />
+        </div>
+        <div
+          className={cn({
+            hidden: index !== 2,
+          })}
+        >
+          <ProfileInfoCodeContent components={{ CodeWithTabs, Code }} />
+        </div>
+        <div
+          className={cn({
+            hidden: index !== 3,
+          })}
+        >
+          <ProfileStatsContent components={{ CodeWithTabs, Code }} />
+        </div>
+      </div>
+    );
+  };
+
+  const onAccordionItemPress = (index: number) => {
+    return () => {
+      const element = document.getElementById(`accordion-item-${index}`);
+      setTimeout(() => {
+        element?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'center',
+        });
+      }, 200);
+    };
   };
 
   return (
-    <div className="flex items-start gap-4">
-      <div className="w-full flex-1 ">
-        <Accordion
-          variant="shadow"
-          selectionMode="single"
-          selectedKeys={selectedKeys}
-          onSelectionChange={(keys) => setSelectedKeys(keys as Set<string>)}
-          itemClasses={{
-            base: 'accordion-item',
-          }}
+    <Accordion
+      disallowEmptySelection
+      fullWidth
+      variant="shadow"
+      selectionMode="multiple"
+      selectedKeys={selectedKeys}
+      onSelectionChange={onSelectionChange}
+      keepContentMounted
+      itemClasses={{
+        base: 'accordion-item',
+      }}
+    >
+      {data.map((accordionItem, index) => (
+        <AccordionItem
+          id={`accordion-item-${index}`}
+          className="scroll-mt-16"
+          key={index}
+          data-key={index}
+          aria-label={accordionItem.title}
+          title={<p className="text-lg font-bold">{accordionItem.title}</p>}
+          onPress={onAccordionItemPress(index)}
         >
-          {data.map((accordionItem, index) => (
-            <AccordionItem
-              key={index}
-              data-key={index}
-              aria-label={accordionItem.title}
-              title={accordionItem.title}
-            >
-              <div className="prose prose-zinc dark:prose-invert max-w-full">
-                {accordionItem.children}
-              </div>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-      <StickyBox className="w-1/2" offsetTop={80}>
-        <div className="flex flex-col items-center justify-center">
-          {renderStepSide()}
-        </div>
-      </StickyBox>
-    </div>
+          <div className="prose prose-zinc dark:prose-invert max-w-full">
+            <div className="flex items-start">
+              <div className="w-1/2 flex-none">{accordionItem.children}</div>
+              <StickyBox offsetTop={80} className="flex w-1/2 flex-col pl-8">
+                {renderStepSide(index)}
+              </StickyBox>
+            </div>
+          </div>
+        </AccordionItem>
+      ))}
+    </Accordion>
   );
 }
