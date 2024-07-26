@@ -12,9 +12,23 @@ module.exports = {
     "../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     ...createGlobPatternsForDependencies(__dirname),
   ],
-  darkMode: ['class', '[data-mode="dark"]'],
+  darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {},
   },
-  plugins: [nextui()],
+  plugins: [nextui({
+    themes: {
+      light: {
+        colors: {
+          muted: "#71717a",
+          background: "#FAFAFA",
+        }
+      },
+      dark: {
+        colors: {
+          muted: "#d4d4d8"
+        },
+      },
+    },
+  })],
 };

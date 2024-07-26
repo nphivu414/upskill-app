@@ -1,24 +1,43 @@
 import { Avatar, Card, CardBody, Link } from '@nextui-org/react';
+import { Paragraph } from '@upskill-app/ui/web';
 import {
   ContentSection,
   HeadingSection,
+  ProfileContent,
 } from '@upskill-app/web-modules/tutorial-detail';
 
-export default function TutorialDetail() {
+export default function ProfileUiPage() {
   return (
     <div className="flex min-h-dvh flex-col">
       <HeadingSection
+        title="Crafting Profile Page with React, Tailwind and NextUI"
         author={{
-          avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026024d',
-          name: 'John Doe',
-          description: 'React Expert, Vercel',
+          avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
+          name: 'Vu Nguyen',
+          description: 'Software Engineer, NAB',
         }}
-        description="Dive deep into the world of React and master the art of building modern, scalable web applications. This comprehensive course covers everything from the fundamentals to advanced concepts, equipping you with the skills to become a proficient React developer."
-        thumbnailUrl="https://nextui.org/images/fruit-4.jpeg?_rq_delayed=true"
-        title="Mastering React: A Comprehensive Course"
+        description={
+          <div>
+            <Paragraph>
+              Let&apos;s build a profile page with the power of React, Tailwind
+              and NextUI. This hands-on guide will walk you through building a
+              modern, interactive profile UI that is not only beautiful but also
+              designed for easy integration with your existing projects.
+            </Paragraph>
+          </div>
+        }
+        targetAudience="Beginner to intermediate React developers familiar with basic component structure and styling concepts."
+        prerequisites={[
+          'Node.js and yarn: Make sure you have these installed on your system.',
+          'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
+          "A little TypeScript, CSS, and Tailwind knowledge: Some familiarity with these will help, but you don't need to be an expert – we'll guide you through!",
+        ]}
+        thumbnailUrl="https://images.unsplash.com/photo-1622838320000-4b3b3b3b3b3b"
       />
-      <ContentSection />
-      <section className="w-full py-12 md:py-24 lg:py-32">
+      <ContentSection introText="Explore the comprehensive curriculum and dive into the world of React.">
+        <ProfileContent />
+      </ContentSection>
+      <section className="w-full py-12">
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
             <div>
@@ -55,7 +74,7 @@ export default function TutorialDetail() {
           </div>
         </div>
       </section>
-      <section className="w-full py-12 md:py-24 lg:py-32">
+      <section className="w-full py-12">
         <div className="container px-4 md:px-6">
           <div className="space-y-6">
             <div>

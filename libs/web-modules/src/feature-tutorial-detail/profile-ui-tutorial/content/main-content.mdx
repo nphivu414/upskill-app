@@ -1,0 +1,134 @@
+import { Link } from '@nextui-org/react'
+
+<CodeWithAccoridions>
+## !!accordions Section 1: Setup and initialize a new React project with NextUI
+
+Before we dive into coding the profile page, let's set up our project:
+
+1.  **Prerequisites:** Ensure you have Node.js and yarn (or npm) installed on your machine.
+2.  **NextUI CLI:** Open your terminal and run the following command to install the NextUI CLI globally, execute the following command in your terminal:
+
+```bash
+yarn add nextui-cli -g
+```
+
+3.  **Init a new NextUI project :** Initialize a new NextUI project using the init command. This sets up your project with the necessary configurations:
+
+```bash
+nextui init my-nextui-app
+```
+
+You will be prompted to configure your project:
+
+```bash
+? Which components would you like to add? › - Space to select. Return to submit
+
+Instructions:
+    ↑/↓: Highlight option
+    ←/→/[space]: Toggle selection
+    [a,b,c]/delete: Filter choices
+    enter/return: Complete answer
+
+Filtered results for: Enter something to filter
+    ◯  accordion
+    ◯  autocomplete
+    ◯  avatar
+    ◯  badge
+    ◯  breadcrumbs◉  button
+    ◯  card
+    ◯  checkbox
+    ◯  chip
+    ◯  code
+```
+
+You can just use the default configuration and add all the components for now.
+
+4.  **Start Development Server:** Install the dependencies to start the local server:
+
+```bash
+cd my-nextui-app && yarn install
+```
+
+```bash
+yarn dev
+```
+
+You should now have a NextUI startup screen at `http://localhost:3000/` in your browser, ready for us to transform into a stunning profile page!
+
+## !!accordions Section 2: Building the FeaturePhotos component
+
+In this section, we'll craft a captivating header showcasing a rotating carousel of feature photos using NextUI for styling, Embla Carousel React for the core carousel functionality, and Tailwind CSS for additional customization.
+
+**Step-by-Step Guide:**
+This React component, `FeaturePhotos`, displays a carousel of profile's feature photos and optionally shows navigation dots for scrolling through the photos.
+
+Now let's open the `feature-photo.tsx` tab and we will break it down step by step:
+
+1. **Carousel Setup:**
+
+   - `useEmblaCarousel` to control the carousel. It's a handy hook provided from `embla-carousel-react` giving us a `ref` to attach to our wrapping element, which is needed to cover the scroll overflow
+   - `useDotButton` to manage the state of the navigation dots. It provides the selected index, an array of scroll snap points, and a function to handle dot button clicks.
+   - `<CarouselDotButton/>` is a custom component that renders a dot button for each photo. It receives an `onClick` function to handle the click event and a `className` to style the button based on its active state.
+   - If you want to learn more about Embla Carousel, check out the <a href="https://www.embla-carousel.com/get-started/react/#accessing-the-carousel-api" target="_blank">Embla Carousel</a>
+
+2. **Handling Dot Button Clicks:**
+
+   - `handleDotButtonClick` is a function that takes an index and returns another function. This returned function, when called, triggers the `onDotButtonClick` function with the provided index. This pattern is known as a closure, allowing each dot button to have its own specific behavior when clicked.
+   - If you're not familiar with closures, check out this <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank">MDN Web Docs</a> article for a detailed explanation.
+
+3. **Rendering:**
+
+   - The component returns a `<section>` element with two main parts:
+     - A block containing the carousel. Photos are mapped elements containing an `<Image>` component from '@nextui-org/react' for each photo. Each image's height is set to `FEATURE_HEADER_HEIGHT` pixels, and the width is set to fill the screen.
+     - A conditional block that renders navigation dots using `<CarouselDotButton/>` if `showDots` to visually indicate the currently selected dot.
+
+4. **Styling:**
+   - The carousel and its elements are styled using Tailwind CSS classes for layout and appearance. The `className` properties dynamically apply styles based on the component's state and props, such as adjusting the opacity of the active dot.
+
+**A few notes:**
+
+- The `photos` prop allows dynamic photo urls, enabling reusability across different profile pages.
+- The `showDots` prop offers customization for the carousel's navigation, allowing users to toggle the dots on or off.
+- We use `cn` util class from NextUI to conditionally apply classes based on the active state of the dot.
+- There's the full demo of the `FeaturePhotos` component in Storybook: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-feature-photos--docs" target="_blank">FeaturePhotos Story</a>
+
+Now that we've built the `FeaturePhotos` component, we can move on to the next section of our profile page.
+
+## !!accordions Section 3: Designing the Profile Information Section
+
+In this section, we'll create the ProfileInfo component which is responsible for displaying the main information section of a user's profile page.<br/>
+
+**Step-by-Step Guide:**
+This component presents the user's avatar, name, username, title (optional), bio (optional), location (optional), website (optional), and a button to edit the profile.
+
+Now let's open the `profile-info.tsx` tab and we will break it down step by step:
+
+- `Avatar` component from '@nextui-org/react' is used to display the user's avatar. If the avatar URL is not provided, we use a fallback text generated from the user's name with the `getAvatarFallback` util function.
+- `Link` component from '@nextui-org/react' is used to display the user's company name as a clickable link to their website.
+- `Spacer` component is used to add vertical spacing between elements.
+- `Paragraph` and `Subtle` components are custom typography components for displaying text like the user's name, username, and bio.
+- Icons like `Link` and `MapPin` are imported from `lucide-react` library. So you will need to install it `yarn add lucide-react` if you haven't already.
+- `InfoLine` is a reusable component that displays an icon and text in a row. It's used to show the user's location and website. You can open the `info-line.tsx` tab to see its implementation.
+
+**A few notes:**
+
+- The `ProfileInfo` component receives a `profile` prop containing the user's information and a `company` prop containing the company's information.
+- The `Edit profile` button is a placeholder for now. You can replace it with a real button component and add functionality to edit the profile.
+- There's the full demo of the `ProfileInfo` component in Storybook: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-info--docs" target="_blank">ProfileInfo Story</a>
+
+So far, we've created the `FeaturePhotos` and `ProfileInfo` components. Next, we'll implement the Profile Stats section.
+
+## !!accordions Section 4: Creating the Profile Stats Section
+
+In this section, we'll build the ProfileStats component, which displays the user's profile statistics like followers, following, and posts count.<br/>
+Since it's a pretty straightforward component, let's dive into the implementation by opening the `profile-stats.tsx` tab:
+- The `ProfileStats` component receives a `stats` prop containing the user's statistics.
+- We built a `formatNumber` utility function to format the numbers with commas and a maximum of 3 decimal places.
+- `StatsBlock` is a component that displays a label and value in a column. It's used to show the followers, following, and posts count.
+- There's the full demo of the `ProfileStats` component in Storybook: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-stats--docs" target="_blank">ProfileStats Story</a>
+
+## !!accordions Section 5: Implementing the Profile Timeline
+
+In this section, we'll create the ProfileTimeline component, which displays a list of posts in a user's profile.<br/>
+
+</CodeWithAccoridions>

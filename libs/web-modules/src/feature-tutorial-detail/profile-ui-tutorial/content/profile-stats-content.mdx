@@ -1,0 +1,79 @@
+import { EmbedStory } from '@upskill-app/ui/web';
+
+<CodeWithTabs>
+
+### !!tabs Preview
+
+<EmbedStory
+  storyId="tutorials-profile-ui-components-profile-stats--default"
+  width={320}
+  height={200}
+/>
+
+### !!tabs profile-stats.tsx
+
+```tsx
+import { ProfileStatsProps } from '../types';
+import { formatNumber } from '../utils';
+import { StatsBlock } from './stats-block';
+
+export const ProfileStats = ({
+  stats: { followers, following, posts },
+}: ProfileStatsProps) => {
+  return (
+    <section className="bg-content1 flex justify-between p-4">
+      <StatsBlock label="Followers" value={formatNumber(followers)} />
+      <StatsBlock label="Following" value={formatNumber(following)} />
+      <StatsBlock label="Posts" value={formatNumber(posts)} />
+    </section>
+  );
+};
+
+```
+
+### !!tabs stat-block.tsx
+
+```tsx
+import { StatsBlockProps } from './types';
+
+export const StatsBlock = ({ label, value }: StatsBlockProps) => {
+  return (
+    <div>
+      <p className="text-muted">{label}</p>
+      <p className="w-20 truncate text-xl font-bold">{value}</p>
+    </div>
+  );
+};
+
+```
+
+### !!tabs utils.ts
+
+```ts
+export const formatNumber = (num: number, maximumFractionDigits = 3) => {
+  return Intl.NumberFormat(undefined, {
+    maximumFractionDigits,
+  }).format(num);
+};
+```
+
+### !!tabs types.ts
+
+```ts
+export interface ProfileStats {
+  followers: number;
+  following: number;
+  posts: number;
+}
+
+export type StatsBlockProps = {
+  label: string;
+  value: string;
+};
+
+export type ProfileStatsProps = {
+  stats: ProfileStats;
+};
+```
+
+</CodeWithTabs>

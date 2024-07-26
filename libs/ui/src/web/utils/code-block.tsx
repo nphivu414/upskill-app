@@ -1,8 +1,6 @@
-import { CodeBlockProps } from '@upskill-app/types';
-import { CodeBlock } from '@upskill-app/ui/web';
 import { AnnotationHandler, InnerLine } from 'codehike/code';
 
-const mark: AnnotationHandler = {
+export const codeLineMark: AnnotationHandler = {
   name: 'mark',
   AnnotatedLine: ({ annotation, ...props }) => (
     <InnerLine merge={props} data-mark={true} />
@@ -14,7 +12,3 @@ const mark: AnnotationHandler = {
     />
   ),
 };
-
-export function TutorialCode({ codeblock }: CodeBlockProps) {
-  return <CodeBlock code={codeblock} handlers={[mark]} />;
-}

@@ -17,17 +17,19 @@ module.exports = {
   },
   darkMode: 'selector',
   plugins: [
+    require('@tailwindcss/typography'),
     require('tailwind-scrollbar'),
     nextui({
       themes: {
         light: {
           colors: {
+            background: "#f9f9f9",
             muted: "#71717a"
           }
         },
         dark: {
           colors: {
-            muted: "#a1a1aa"
+            muted: "#d4d4d8"
           },
         },
       },

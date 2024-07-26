@@ -1,4 +1,5 @@
-import { cn } from '../../utils';
+import { cn } from '@nextui-org/react';
+
 import { TypographyProps } from './types';
 
 export function Paragraph({ text, className, children }: TypographyProps) {

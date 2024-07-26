@@ -1,0 +1,152 @@
+import { EmbedStory } from '@upskill-app/ui/web';
+
+<CodeWithTabs>
+
+### !!tabs Preview
+
+<EmbedStory
+  storyId="tutorials-profile-ui-components-feature-photos--with-pagination-dots"
+  width={320}
+  height={320}
+/>
+
+### !!tabs feature-photo.tsx
+
+```tsx
+import { Image, cn } from '@nextui-org/react';
+import useEmblaCarousel from 'embla-carousel-react';
+
+import { FEATURE_HEADER_HEIGHT } from './constants';
+import { FeaturePhotosProps } from './types';
+import { CarouselDotButton, useDotButton } from './carousel-dot-buttons';
+
+export const FeaturePhotos = ({ photos, showDots }: FeaturePhotosProps) => {
+  const [carouselRef, carouselApi] = useEmblaCarousel();
+
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(carouselApi);
+
+  const handleDotButtonClick = (index: number) => {
+    return () => {
+      onDotButtonClick(index);
+    };
+  };
+
+  return (
+    <section className="relative">
+      <div className="overflow-hidden" ref={carouselRef}>
+        <div className="flex touch-pan-y touch-pinch-zoom">
+          {photos.map((index) => (
+            <div className="min-w-0 shrink-0 grow-0 basis-full" key={index}>
+              <Image
+                src={index}
+                alt="profile cover"
+                className={`h-[${FEATURE_HEADER_HEIGHT}px] w-screen rounded-none object-cover`}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      {showDots && (
+        <div className="absolute bottom-2 flex w-full flex-wrap items-center justify-end pr-2">
+          {scrollSnaps.map((_, index) => (
+            <CarouselDotButton
+              key={index}
+              onClick={handleDotButtonClick(index)}
+              className={cn(
+                'inline-flex cursor-pointer border-0 p-0 m-0 size-2 items-center justify-center rounded-[50%] ml-2 appearance-none bg-gray-300 opacity-50',
+                {
+                  'bg-gray-300 opacity-100': index === selectedIndex,
+                }
+              )}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+  );
+};
+
+```
+
+### !!tabs carousel-dot-buttons.tsx
+```tsx
+import React, {
+  ComponentPropsWithRef,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+import { EmblaCarouselType } from 'embla-carousel';
+
+type UseDotButtonType = {
+  selectedIndex: number;
+  scrollSnaps: number[];
+  onDotButtonClick: (index: number) => void;
+};
+
+export const useDotButton = (
+  emblaApi: EmblaCarouselType | undefined
+): UseDotButtonType => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const onDotButtonClick = useCallback(
+    (index: number) => {
+      if (!emblaApi) return;
+      emblaApi.scrollTo(index);
+    },
+    [emblaApi]
+  );
+
+  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
+    setScrollSnaps(emblaApi.scrollSnapList());
+  }, []);
+
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onInit(emblaApi);
+    onSelect(emblaApi);
+    emblaApi.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect);
+  }, [emblaApi, onInit, onSelect]);
+
+  return {
+    selectedIndex,
+    scrollSnaps,
+    onDotButtonClick,
+  };
+};
+
+type PropType = ComponentPropsWithRef<'button'>;
+
+export const CarouselDotButton: React.FC<PropType> = (props) => {
+  const { children, ...restProps } = props;
+
+  return (
+    <button type="button" {...restProps}>
+      {children}
+    </button>
+  );
+};
+
+```
+
+### !!tabs constants.ts
+```ts
+export const FEATURE_HEADER_HEIGHT = 260;
+```
+
+### !!tabs types.ts
+```ts
+export type FeaturePhotosProps = {
+  photos: string[];
+  showDots?: boolean;
+};
+```
+</CodeWithTabs>
+

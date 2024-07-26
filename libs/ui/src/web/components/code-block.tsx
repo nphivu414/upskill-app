@@ -14,12 +14,12 @@ export const CodeBlock = React.forwardRef<
 >(({ className, showCopyButton, code: highlightedCode, ...props }, ref) => {
   return (
     <div className="relative">
-      <div className="absolute right-4 top-0">
+      <div className="absolute right-2 top-2">
         {showCopyButton && <CopyButton text={highlightedCode.code} />}
       </div>
       <Pre
         ref={ref}
-        className={cn('bg-content1 text-sm scrollbar-thin', className)}
+        className={cn('bg-content1 text-sm scrollbar-thin py-4', className)}
         code={highlightedCode}
         {...props}
       />
