@@ -6,7 +6,7 @@
     "start": "nx run web-app:dev",
     "start:web": "nx run web-app:dev",
     "lint:web": "nx lint web-app --fix",
-    "storybook:start": "nx storybook tutorial-elements",
+    "storybook:start": "nx storybook tutorial-elements -p 9009",
     "storybook:build": "nx build-storybook tutorial-elements"
   },
   "private": true,

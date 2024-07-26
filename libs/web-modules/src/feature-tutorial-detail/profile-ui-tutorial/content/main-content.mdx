@@ -120,10 +120,15 @@ So far, we've created the `FeaturePhotos` and `ProfileInfo` components. Next, we
 
 ## !!accordions Creating the Profile Stats Section
 
-hello 2
+In this section, we'll build the ProfileStats component, which displays the user's profile statistics like followers, following, and posts count.<br/>
+Since it's a pretty straightforward component, let's dive into the implementation by opening the `profile-stats.tsx` tab:
+- The `ProfileStats` component receives a `stats` prop containing the user's statistics.
+- We built a `formatNumber` utility function to format the numbers with commas and a maximum of 3 decimal places.
+- `StatsBlock` is a component that displays a label and value in a column. It's used to show the followers, following, and posts count.
+- There's the full demo of the `ProfileStats` component in Storybook: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-stats--docs" target="_blank">ProfileStats Story</a>
 
 ## !!accordions Implementing the Profile Timeline
 
-hello 2
+In this section, we'll create the ProfileTimeline component, which displays a list of posts in a user's profile.<br/>
 
 </CodeWithAccoridions>
