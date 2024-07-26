@@ -33,7 +33,7 @@ export function CustomAccordion({
 
   const renderStepSide = (index: number) => {
     return (
-      <div>
+      <div className="pt-6">
         <div
           className={cn('flex flex-col items-center justify-center', {
             hidden: index !== 0,
@@ -113,7 +113,7 @@ export function CustomAccordion({
           <div className="prose prose-zinc dark:prose-invert max-w-full">
             <div className="flex items-start">
               <div className="w-1/2 flex-none">{accordionItem.children}</div>
-              <StickyBox offsetTop={80} className="flex w-1/2 flex-col pl-8">
+              <StickyBox offsetTop={50} className="flex w-1/2 flex-col pl-8">
                 {renderStepSide(index)}
               </StickyBox>
             </div>
