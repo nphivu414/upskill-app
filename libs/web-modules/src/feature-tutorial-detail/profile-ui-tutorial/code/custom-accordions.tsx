@@ -27,7 +27,6 @@ export function CustomAccordion({
   }[];
 }) {
   const { theme } = useTheme();
-  console.log('🚀 ~ theme:', theme);
   const [selectedKeys, setSelectedKeys] = React.useState(new Set(['0']));
   const [step1ImageSrc, setStep1ImageSrc] = React.useState('');
 
@@ -86,6 +85,10 @@ export function CustomAccordion({
 
   const onAccordionItemPress = (index: number) => {
     return () => {
+      if (!selectedKeys.has(index.toString())) {
+        return;
+      }
+
       const element = document.getElementById(`accordion-item-${index}`);
       setTimeout(() => {
         element?.scrollIntoView({

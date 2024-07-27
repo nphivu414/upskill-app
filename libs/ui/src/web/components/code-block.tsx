@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pre } from 'codehike/code';
 
-import { cn } from '../utils';
+import { bgHandler, borderHandler, cn, codeLineMarkHander } from '../utils';
 import { CopyButton } from './copy-button';
 
 type CodeBlockProps = React.ComponentPropsWithoutRef<typeof Pre> & {
@@ -21,6 +21,7 @@ export const CodeBlock = React.forwardRef<
         ref={ref}
         className={cn('bg-content1 text-sm scrollbar-thin py-4', className)}
         code={highlightedCode}
+        handlers={[codeLineMarkHander, bgHandler, borderHandler]}
         {...props}
       />
     </div>
