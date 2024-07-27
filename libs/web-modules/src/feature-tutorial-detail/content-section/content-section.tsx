@@ -11,7 +11,7 @@ export const ContentSection = ({
   children,
 }: ContentSectionProps) => {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
+    <section className="w-full">
       <div className="container px-4 md:px-6">
         <div className="space-y-6">
           <div>
