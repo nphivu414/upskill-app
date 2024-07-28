@@ -1,2 +1,2 @@
 export * from './tailwind';
-export * from './code-block';
+export * from './code-annotation-handler';

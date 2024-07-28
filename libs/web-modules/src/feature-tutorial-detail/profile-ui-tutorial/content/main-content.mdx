@@ -59,43 +59,94 @@ You should now have a NextUI startup screen at `http://localhost:3000/` in your 
 
 In this section, we'll craft a captivating header showcasing a rotating carousel of feature photos using NextUI for styling, Embla Carousel React for the core carousel functionality, and Tailwind CSS for additional customization.
 
-**Step-by-Step Guide:**
-This React component, `FeaturePhotos`, displays a carousel of profile's feature photos and optionally shows navigation dots for scrolling through the photos.
+1. Files and Structure:
 
-// TODO:
-// Try to list all the files needed to create the FeaturePhotos component then we can break down each file step by step.
-// Explain more about the cn util class from NextUI
+   - `feature-photos.tsx`: The main component file for the FeaturePhotos component.
+   - `carousel-dot-buttons.tsx`: A component for rendering navigation dots in the carousel.
+   - `constants.ts`: A file containing constants for styling.
+   - `types.ts`: TypeScript file for defining the component's prop types.
 
+2. Dependencies:
 
-Now let's open the `feature-photo.tsx` tab and we will break it down step by step:
+   - `embla-carousel-react`: A lightweight carousel library for React. Install it using `yarn add embla-carousel-react`.
+   - `@nextui-org/react`: NextUI components for building the UI
 
-1. **Carousel Setup:**
+3. Deep dive into `feature-photo.tsx` file:
 
-   - `useEmblaCarousel` to control the carousel. It's a handy hook provided from `embla-carousel-react` giving us a `ref` to attach to our wrapping element, which is needed to cover the scroll overflow
-   - `useDotButton` to manage the state of the navigation dots. It provides the selected index, an array of scroll snap points, and a function to handle dot button clicks.
-   - `<CarouselDotButton/>` is a custom component that renders a dot button for each photo. It receives an `onClick` function to handle the click event and a `className` to style the button based on its active state.
-   - If you want to learn more about Embla Carousel, check out the <a href="https://www.embla-carousel.com/get-started/react/#accessing-the-carousel-api" target="_blank">Embla Carousel</a>
+   - **Props:**
 
-2. **Handling Dot Button Clicks:**
+     - `photos`: An array of photo URLs to display in the carousel.
+     - `showDots`: A boolean to toggle the visibility of navigation dots.
 
-   - `handleDotButtonClick` is a function that takes an index and returns another function. This returned function, when called, triggers the `onDotButtonClick` function with the provided index. This pattern is known as a closure, allowing each dot button to have its own specific behavior when clicked.
-   - If you're not familiar with closures, check out this <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank">MDN Web Docs</a> article for a detailed explanation.
+   - **Carousel Setup:**
 
-3. **Rendering:**
+     - `useEmblaCarousel` to control the carousel. It's a handy hook provided from `embla-carousel-react` giving us a `ref` to attach to our wrapping element, which is needed to cover the scroll overflow
+     - `useDotButton` to manage the state of the navigation dots. It provides the selected index, an array of scroll snap points, and a function to handle dot button clicks.
+     - `<CarouselDotButton/>` is a custom component that renders a dot button for each photo. It receives an `onClick` function to handle the click event and a `className` to style the button based on its active state.
+     - We will break down the `CarouselDotButton` component and `useDotButton` hook later.
 
-   - The component returns a `<section>` element with two main parts:
-     - A block containing the carousel. Photos are mapped elements containing an `<Image>` component from '@nextui-org/react' for each photo. Each image's height is set to `FEATURE_HEADER_HEIGHT` pixels, and the width is set to fill the screen.
-     - A conditional block that renders navigation dots using `<CarouselDotButton/>` if `showDots` to visually indicate the currently selected dot.
+   - **Handling Navigation Dot Button Clicks:**
 
-4. **Styling:**
-   - The carousel and its elements are styled using Tailwind CSS classes for layout and appearance. The `className` properties dynamically apply styles based on the component's state and props, such as adjusting the opacity of the active dot.
+     - `handleDotButtonClick` is a function that takes an index and returns another function. This returned function, when called, triggers the `onDotButtonClick` function with the provided index.
 
-**A few notes:**
+     ```ts
+     const handleDotButtonClick = (index: number) => {
+       // !border(1:3)
+       return () => {
+         onDotButtonClick(index)
+       }
+     }
+     ```
 
-- The `photos` prop allows dynamic photo urls, enabling reusability across different profile pages.
-- The `showDots` prop offers customization for the carousel's navigation, allowing users to toggle the dots on or off.
-- We use `cn` util class from NextUI to conditionally apply classes based on the active state of the dot.
-- There's the full demo of the `FeaturePhotos` component in Storybook: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-feature-photos--docs" target="_blank">FeaturePhotos Story</a>
+     ```tsx
+     <CarouselDotButton
+       ...
+       // !border(1:1)
+       onClick={handleDotButtonClick(index)}
+       ...
+     />
+     ```
+
+     - This pattern is known as a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank">closure</a>, allowing each dot button to have its own specific behavior when clicked.
+
+   - **Rendering:**
+
+     - The component returns a `<section>` element with two main parts:
+       - A block containing the carousel. Photos are mapped elements containing an `<Image>` component from '@nextui-org/react' for each photo. Each image's height is set to `FEATURE_HEADER_HEIGHT` pixels, and the width is set to fill the screen.
+       - A conditional block that renders navigation dots using `<CarouselDotButton/>` if `showDots` to visually indicate the currently selected dot.
+
+   - **Styling:**
+      - The carousel and its elements are styled using Tailwind CSS classes for layout and appearance. The `className` properties dynamically apply styles based on the component's state and props, such as adjusting the opacity of the active dot.
+      - We use the `cn` utility class from NextUI to conditionally apply classes based on the active state of the dot. This util function is also used to join `classNames` together avoiding the TailwindCSS classes conflicts.
+      ```tsx
+      <CarouselDotButton
+         ...
+         className={cn(
+            'inline-flex cursor-pointer border-0 p-0 m-0 size-2 items-center justify-center rounded-[50%] ml-2 appearance-none bg-gray-300 opacity-50',
+            {
+               // !callout[/bg-gray-300 opacity-100/] This class will be applied when the index is equal to the selectedIndex
+               'bg-gray-300 opacity-100': index === selectedIndex,
+            }
+         )}
+      />
+      ```
+
+4. Deep dive into `carousel-dot-buttons.tsx` file: <br/>
+
+   - **`useDotButton` hook:**
+
+     - The main purpose of this hook is to manage the state of the navigation dots in the carousel. It takes `emblaApi` as an argument, which is the carousel API needed for interacting with the carousel.
+     - It has an effect that listens to the `reInit` and `select` from embla carousel API to update the selected index.
+     - The `onDotButtonClick` function execute the `scrollTo` method from the embla carousel API to scroll to the selected photo.
+     - The `scrollSnaps` array contains the scroll snap points for each photo in the carousel.
+     - The `selectedIndex` variable holds the index of the currently selected photo.
+     - The `useDotButton` hook returns an object with the selected index, scroll snaps, and a function to handle dot button clicks. So we can use this object in the `FeaturePhotos` component.
+
+   - **`CarouselDotButton` component:**
+     - This component is just a wrapper of the native html button element. It takes all the props that a button element can take, so we can style the button based on its active state and handle the click event from the `FeaturePhotos` component.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `FeaturePhotos` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-feature-photos--docs" target="_blank">FeaturePhotos Story</a>
 
 Now that we've built the `FeaturePhotos` component, we can move on to the next section of our profile page.
 
@@ -127,6 +178,7 @@ So far, we've created the `FeaturePhotos` and `ProfileInfo` components. Next, we
 
 In this section, we'll build the ProfileStats component, which displays the user's profile statistics like followers, following, and posts count.<br/>
 Since it's a pretty straightforward component, let's dive into the implementation by opening the `profile-stats.tsx` tab:
+
 - The `ProfileStats` component receives a `stats` prop containing the user's statistics.
 - We built a `formatNumber` utility function to format the numbers with commas and a maximum of 3 decimal places.
 - `StatsBlock` is a component that displays a label and value in a column. It's used to show the followers, following, and posts count.

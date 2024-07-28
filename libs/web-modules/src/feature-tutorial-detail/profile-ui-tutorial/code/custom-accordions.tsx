@@ -27,7 +27,7 @@ export function CustomAccordion({
   }[];
 }) {
   const { theme } = useTheme();
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['0']));
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['1']));
   const [step1ImageSrc, setStep1ImageSrc] = React.useState('');
 
   React.useEffect(() => {
@@ -53,7 +53,7 @@ export function CustomAccordion({
           </Subtle>
           <Image
             src={step1ImageSrc}
-            className="mx-auto w-[400px] border"
+            className="mx-auto w-1/2 border"
             alt="Profile UI Project Startup Screen"
           />
           <Subtle className="mt-2">(NextUI Startup Screen)</Subtle>
