@@ -6,7 +6,7 @@ import { CodeWithAccoridions } from './code/tutorial-code';
 import ProfileMdx from './content/main-content.mdx';
 
 export function Code({ codeblock }: CodeBlockProps) {
-  return <CodeBlock code={codeblock} className="bg-content2" showCopyButton />;
+  return <CodeBlock code={codeblock} className="bg-content2" />;
 }
 
 export const ProfileContent = () => {

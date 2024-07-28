@@ -89,17 +89,16 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
 
      - `handleDotButtonClick` is a function that takes an index and returns another function. This returned function, when called, triggers the `onDotButtonClick` function with the provided index.
 
-     ```ts
+     ```tsx
+     // How we define the function
      const handleDotButtonClick = (index: number) => {
        // !border(1:3)
        return () => {
          onDotButtonClick(index)
        }
      }
-     ```
 
-     ```tsx
-     <CarouselDotButton
+      <CarouselDotButton
        ...
        // !border(1:1)
        onClick={handleDotButtonClick(index)}
@@ -116,20 +115,20 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
        - A conditional block that renders navigation dots using `<CarouselDotButton/>` if `showDots` to visually indicate the currently selected dot.
 
    - **Styling:**
-      - The carousel and its elements are styled using Tailwind CSS classes for layout and appearance. The `className` properties dynamically apply styles based on the component's state and props, such as adjusting the opacity of the active dot.
-      - We use the `cn` utility class from NextUI to conditionally apply classes based on the active state of the dot. This util function is also used to join `classNames` together avoiding the TailwindCSS classes conflicts.
-      ```tsx
-      <CarouselDotButton
-         ...
-         className={cn(
-            'inline-flex cursor-pointer border-0 p-0 m-0 size-2 items-center justify-center rounded-[50%] ml-2 appearance-none bg-gray-300 opacity-50',
-            {
-               // !callout[/bg-gray-300 opacity-100/] This class will be applied when the index is equal to the selectedIndex
-               'bg-gray-300 opacity-100': index === selectedIndex,
-            }
-         )}
-      />
-      ```
+     - The carousel and its elements are styled using Tailwind CSS classes for layout and appearance. The `className` properties dynamically apply styles based on the component's state and props, such as adjusting the opacity of the active dot.
+     - We use the `cn` utility class from NextUI to conditionally apply classes based on the active state of the dot. This util function is also used to join `classNames` together avoiding the TailwindCSS classes conflicts.
+     ```tsx
+     <CarouselDotButton
+        ...
+        className={cn(
+           'inline-flex cursor-pointer border-0 p-0 m-0 size-2 ...',
+           {
+              // !callout[/bg-gray-300 opacity-100/] These classnames will only be applied for the active dot element
+              'bg-gray-300 opacity-100': index === selectedIndex,
+           }
+        )}
+     />
+     ```
 
 4. Deep dive into `carousel-dot-buttons.tsx` file: <br/>
 
@@ -137,6 +136,16 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
 
      - The main purpose of this hook is to manage the state of the navigation dots in the carousel. It takes `emblaApi` as an argument, which is the carousel API needed for interacting with the carousel.
      - It has an effect that listens to the `reInit` and `select` from embla carousel API to update the selected index.
+     ```tsx
+      React.useEffect(() => {
+         if (!emblaApi) return;
+
+         onInit(emblaApi);
+         onSelect(emblaApi);
+         // !border(1:1)
+         emblaApi.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect);
+      }, [emblaApi, onInit, onSelect]);
+     ```
      - The `onDotButtonClick` function execute the `scrollTo` method from the embla carousel API to scroll to the selected photo.
      - The `scrollSnaps` array contains the scroll snap points for each photo in the carousel.
      - The `selectedIndex` variable holds the index of the currently selected photo.
@@ -154,23 +163,38 @@ Now that we've built the `FeaturePhotos` component, we can move on to the next s
 
 In this section, we'll create the ProfileInfo component which is responsible for displaying the main information section of a user's profile page.<br/>
 
-**Step-by-Step Guide:**
-This component presents the user's avatar, name, username, title (optional), bio (optional), location (optional), website (optional), and a button to edit the profile.
+1. Files and Structure:
 
-Now let's open the `profile-info.tsx` tab and we will break it down step by step:
+   - `profile-info.tsx`: The main component file for the ProfileInfo component.
+   - `info-line.tsx`: A reusable component for displaying an icon and text in a row.
+   - `typography.tsx`: Custom typography components for consistent text styling.
+   - `utils.ts`: Utility functions for generating avatar fallback text and formatting the user's location.
+   - `types.ts`: TypeScript file for defining the component's prop types.
 
-- `Avatar` component from '@nextui-org/react' is used to display the user's avatar. If the avatar URL is not provided, we use a fallback text generated from the user's name with the `getAvatarFallback` util function.
-- `Link` component from '@nextui-org/react' is used to display the user's company name as a clickable link to their website.
-- `Spacer` component is used to add vertical spacing between elements.
-- `Paragraph` and `Subtle` components are custom typography components for displaying text like the user's name, username, and bio.
-- Icons like `Link` and `MapPin` are imported from `lucide-react` library. So you will need to install it `yarn add lucide-react` if you haven't already.
-- `InfoLine` is a reusable component that displays an icon and text in a row. It's used to show the user's location and website. You can open the `info-line.tsx` tab to see its implementation.
+2. Dependencies:
+   - `@nextui-org/react`: NextUI components for building the UI
+   - `lucide-react`: A library of simply beautiful open-source icons. Install it using `yarn add lucide-react`.
 
-**A few notes:**
+3. Deep dive into `profile-info.tsx` file:
+   - **Props:**
 
-- The `ProfileInfo` component receives a `profile` prop containing the user's information and a `company` prop containing the company's information.
-- The `Edit profile` button is a placeholder for now. You can replace it with a real button component and add functionality to edit the profile.
-- There's the full demo of the `ProfileInfo` component in Storybook: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-info--docs" target="_blank">ProfileInfo Story</a>
+     - `profile`: An object containing the user's information like name, username, title, bio, location, website, and avatar URL.
+     - `company`: An object containing the company's information like name and website.
+
+   - **Rendering:**
+
+     - The component returns a `<section>` element with the user's avatar, name, username, title, bio, location, website, and an edit profile button.
+     - The user's avatar is displayed using the `Avatar` component from '@nextui-org/react'. If the avatar URL is not provided, a fallback text generated from the user's name is displayed.
+     - The user's company name is displayed as a clickable link to their website using the `Link` component from '@nextui-org/react'.
+     - The user's location and website are displayed using the `InfoLine` component, which shows an icon and text in a row.
+
+4. Deep dive into `info-line.tsx` and `typography.tsx` files:
+      - This component takes an icon, classname, and children as props to display an icon and content in a row.
+      - We're using the `Icon` component from '@nextui-org/react' to render the icon and `Spacer` component for spacing between the icon and content.
+      - The `Paragraph` and `Subtle` components are custom typography components for consistent text styling across the profile page.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `ProfileInfo` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-info--docs" target="_blank">ProfileInfo Story</a>
 
 So far, we've created the `FeaturePhotos` and `ProfileInfo` components. Next, we'll implement the Profile Stats section.
 
@@ -179,10 +203,24 @@ So far, we've created the `FeaturePhotos` and `ProfileInfo` components. Next, we
 In this section, we'll build the ProfileStats component, which displays the user's profile statistics like followers, following, and posts count.<br/>
 Since it's a pretty straightforward component, let's dive into the implementation by opening the `profile-stats.tsx` tab:
 
-- The `ProfileStats` component receives a `stats` prop containing the user's statistics.
-- We built a `formatNumber` utility function to format the numbers with commas and a maximum of 3 decimal places.
-- `StatsBlock` is a component that displays a label and value in a column. It's used to show the followers, following, and posts count.
-- There's the full demo of the `ProfileStats` component in Storybook: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-stats--docs" target="_blank">ProfileStats Story</a>
+1. Files and Structure:
+
+   - `profile-stats.tsx`: The main component file for the ProfileStats component.
+   - `stats-block.tsx`: A reusable component for displaying a label and value in a column.
+   - `utils.ts`: Utility functions for formatting numbers.
+   - `types.ts`: TypeScript file for defining the component's prop types.
+
+2. Deep dive into `profile-stats.tsx` file:
+   - **Props:**
+     - `stats`: An object containing the user's statistics like followers, following, and posts count.
+
+   - **Rendering:**
+     - The component returns a `<section>` element with three `StatsBlock` components for displaying followers, following, and posts count.
+     - The `StatsBlock` component takes a label and value as props and displays them in a column.
+     - The numbers are formatted using the `formatNumber` utility function to include commas and a maximum of 3 decimal places.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `ProfileStats` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-stats--docs" target="_blank">ProfileStats Story</a>
 
 ## !!accordions Section 5: Implementing the Profile Timeline
 

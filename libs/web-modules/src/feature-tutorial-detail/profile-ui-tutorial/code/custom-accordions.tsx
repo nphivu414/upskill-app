@@ -27,7 +27,7 @@ export function CustomAccordion({
   }[];
 }) {
   const { theme } = useTheme();
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['1']));
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['2']));
   const [step1ImageSrc, setStep1ImageSrc] = React.useState('');
 
   React.useEffect(() => {
