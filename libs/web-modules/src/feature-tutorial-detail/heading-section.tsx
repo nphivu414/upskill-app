@@ -41,20 +41,22 @@ export const HeadingSection = ({
               />
             </div>
             <Spacer y={6} />
-            <div className="md:text-xl">{description}</div>
+            <div className="md:text-lg">{description}</div>
             <Spacer y={6} />
             <div>
-              <p className="text-muted text-lg">Target Audience</p>
+              <p className="text-lg font-semibold">Target Audience</p>
               <Spacer y={2} />
-              <p>{targetAudience}</p>
+              <p className="text-sm">{targetAudience}</p>
             </div>
             <Spacer y={6} />
             <div>
-              <p className="text-muted text-lg">Prerequisites</p>
+              <p className="text-lg font-semibold">Prerequisites</p>
               <Spacer y={2} />
               <ul className="ml-4 list-disc">
                 {prerequisites?.map((prerequisite, index) => (
-                  <li key={index}>{prerequisite}</li>
+                  <li key={index} className="py-1 text-sm">
+                    {prerequisite}
+                  </li>
                 ))}
               </ul>
             </div>

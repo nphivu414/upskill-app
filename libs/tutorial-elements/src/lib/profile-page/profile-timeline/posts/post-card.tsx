@@ -4,6 +4,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  cn,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -11,7 +12,7 @@ import {
   Link,
   User,
 } from '@nextui-org/react';
-import { cn, MarkdownRenderer, Subtle } from '@upskill-app/ui/web';
+import { MarkdownRenderer, Subtle } from '@upskill-app/ui/web';
 import { Ellipsis } from 'lucide-react';
 
 import { PostActionType, PostCardProps, PostMenuActionType } from '../../types';

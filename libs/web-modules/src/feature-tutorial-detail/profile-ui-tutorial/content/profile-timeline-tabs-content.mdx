@@ -106,8 +106,8 @@ import {
 import { cn, MarkdownRenderer, Subtle } from '@upskill-app/ui/web';
 import { Ellipsis } from 'lucide-react';
 
-import { PostActionType, PostCardProps, PostMenuActionType } from '../../types';
-import { formatDate, getAvatarFallback } from '../../utils';
+import { PostActionType, PostCardProps, PostMenuActionType } from './types';
+import { formatDate, getAvatarFallback } from './utils';
 import {
   getPostActionContent,
   getPostActions,
@@ -217,12 +217,132 @@ export const PostCard = ({
 ### !!tabs post-card.utils.tsx
 
 ```tsx
+import {
+  Bookmark,
+  Flag,
+  Heart,
+  HeartOff,
+  MessageCircle,
+  Repeat2,
+  Share,
+  SquarePen,
+  Star,
+  Trash,
+} from 'lucide-react';
+
+import {
+  PostAction,
+  PostActionConfig,
+  PostActionType,
+  PostMenuAction,
+} from './types';
+
+const defaultIconSize = 14;
+
+const postActions: PostAction[] = [
+  {
+    type: 'comment',
+    icon: <MessageCircle size={defaultIconSize} />,
+  },
+  {
+    type: 'repost',
+    icon: <Repeat2 size={defaultIconSize} />,
+  },
+  {
+    type: 'toggleLike',
+    icon: <Heart size={defaultIconSize} />,
+  },
+  {
+    type: 'bookmark',
+    icon: <Bookmark size={defaultIconSize} />,
+  },
+  {
+    type: 'share',
+    icon: <Share size={defaultIconSize} />,
+  },
+];
+
+const selfPostMenuActions: PostMenuAction[] = [
+  {
+    type: 'delete',
+    title: 'Delete post',
+    icon: <Trash size={defaultIconSize} />,
+  },
+  {
+    type: 'addToHighlights',
+    title: 'Add to highlights',
+    icon: <Star size={defaultIconSize} />,
+  },
+  {
+    type: 'changeViewPermission',
+    title: 'Change permission',
+    icon: <SquarePen size={defaultIconSize} />,
+  },
+];
+
+const otherPostMenuActions: PostMenuAction[] = [
+  {
+    type: 'report',
+    title: 'Report post',
+    icon: <Flag size={defaultIconSize} />,
+  },
+  {
+    type: 'unlike',
+    title: 'Unlike post',
+    icon: <HeartOff size={defaultIconSize} />,
+  },
+];
+
+type GetPostMenuActionsOptions = {
+  isSelfPost?: boolean;
+};
+
+export const getPostMenuActions = ({
+  isSelfPost,
+}: GetPostMenuActionsOptions) => {
+  return isSelfPost ? selfPostMenuActions : otherPostMenuActions;
+};
+
+export const getPostActions = () => {
+  return postActions;
+};
+
+export const getPostActionContent = (
+  type: PostActionType,
+  config: PostActionConfig
+) => {
+  switch (type) {
+    case 'comment':
+      return config.comment.content;
+    case 'repost':
+      return config.repost.content;
+    case 'toggleLike':
+      return config.toggleLike.content;
+    default:
+      return null;
+  }
+};
 
 ```
 
 ### !!tabs use-profile.ts
 
 ```tsx
+import { Profile } from './types';
+
+// This hook is just for demonstration purposes,
+// in real-world scenarios, you would fetch the profile data from an API here to get the current user's profile
+export const useProfile = (): Profile => {
+  return {
+    name: 'Vu Nguyen',
+    username: 'nphivu',
+    avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
+    bio: '🚀 Tech aficionado crafting digital magic. 🎨 UI/UX maestro building visually stunning websites and apps.',
+    location: 'Saigon, Vietnam',
+    title: 'Software Engineer',
+    website: 'https://x.com/nphivu414',
+  };
+};
 
 ```
 
@@ -230,7 +350,7 @@ export const PostCard = ({
 
 ```tsx
 import { PostsProps } from './types';
-import { useProfile } from '.use-profile';
+import { useProfile } from './use-profile';
 import { PostCard } from './post-card';
 import { getPostActionsConfig, getPostMenuActionsConfig } from './post.utils';
 
@@ -265,30 +385,147 @@ export const Posts = ({ posts }: PostsProps) => {
 ### !!tabs post.utils.ts
 
 ```ts
+import { PostCardProps, PostStats } from './types';
 
-```
+export const getPostActionsConfig = (
+  stats: PostStats
+): PostCardProps['postActionConfig'] => {
+  return {
+    comment: {
+      content: stats.comments,
+      handler: (postId) => {
+        console.log(`Commented on post ${postId} clicked`);
+      },
+    },
+    repost: {
+      content: stats.reposts,
+      handler: (postId) => {
+        console.log(`Reposted post ${postId} clicked`);
+      },
+    },
+    toggleLike: {
+      content: stats.likes,
+      handler: (postId) => {
+        console.log(`Liked post ${postId} clicked`);
+      },
+    },
+    bookmark: {
+      handler: (postId) => {
+        console.log(`Bookmarked post ${postId} clicked`);
+      },
+    },
+    share: {
+      handler: (postId) => {
+        console.log(`Shared post ${postId} clicked`);
+      },
+    },
+  };
+};
 
-### !!tabs photos.tsx
-
-```tsx
+export const getPostMenuActionsConfig =
+  (): PostCardProps['postMenuActionConfig'] => {
+    return {
+      addToHighlights: (postId: string) => {
+        console.log(`Added post ${postId} to highlights`);
+      },
+      changeViewPermission: (postId: string) => {
+        console.log(`Changed view permission for post ${postId}`);
+      },
+      delete: (postId: string) => {
+        console.log(`Deleted post ${postId}`);
+      },
+      report: (postId: string) => {
+        console.log(`Reported post ${postId}`);
+      },
+      unlike: (postId: string) => {
+        console.log(`Unliked post ${postId}`);
+      },
+    };
+  };
 
 ```
 
 ### !!tabs photo-card.tsx
 
 ```tsx
+import { Card, CardBody, Image } from '@nextui-org/react';
+
+import { PhotoCardProps } from './types';
+
+export const PhotoCard = ({ photoId, photoSrc, onPress }: PhotoCardProps) => {
+  const handleOnPress = () => {
+    return () => {
+      onPress?.(photoId);
+    };
+  };
+
+  return (
+    <Card
+      isPressable
+      onPress={handleOnPress}
+      className="p-0"
+      classNames={{
+        body: 'p-0',
+      }}
+    >
+      <CardBody>
+        <Image src={photoSrc} alt="" />
+      </CardBody>
+    </Card>
+  );
+};
+
+```
+
+### !!tabs photos.tsx
+
+```tsx
+import React from 'react';
+
+import { PhotosProps } from './types';
+import { PhotoCard } from './photo-card';
+
+export const Photos = ({ photos }: PhotosProps) => {
+  const columns = React.useMemo(() => {
+    const cols = [];
+    for (let i = 0; i < photos.length; i += 3) {
+      cols.push(photos.slice(i, i + 3));
+    }
+    return cols;
+  }, [photos]);
+
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {columns.map((columnPhotos, colIndex) => (
+        <div key={colIndex} className="grid gap-4">
+          {columnPhotos.map(({ id, src }, photoIndex) => (
+            <PhotoCard key={photoIndex} photoId={id} photoSrc={src} />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 ```
 
 ### !!tabs utils.ts
 
 ```tsx
-
+export const formatDate = (date: string) => {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  });
+};
 ```
 
 ### !!tabs types.ts
 
 ```ts
+import { CardProps } from '@nextui-org/react';
+
 export interface PostStats {
   likes: number;
   comments: number;
@@ -313,6 +550,63 @@ export type ProfileTimelineProps = {
   posts: Post[];
   photos: PostPhoto[];
   likedPosts: Post[];
+};
+
+export type PostActionType =
+  | 'toggleLike'
+  | 'comment'
+  | 'repost'
+  | 'share'
+  | 'bookmark';
+
+export type PostAction = {
+  title?: string;
+  type: PostActionType;
+  icon?: React.ReactNode;
+};
+
+type PostActionHandler = (postId: string) => void;
+
+export type PostMenuActionType =
+  | 'delete'
+  | 'addToHighlights'
+  | 'changeViewPermission'
+  | 'report'
+  | 'unlike';
+
+export type PostActionConfig = Record<
+  PostActionType,
+  {
+    content?: React.ReactNode;
+    handler: PostActionHandler;
+  }
+>;
+
+export type PostMenuActionConfig = Record<
+  PostMenuActionType,
+  PostActionHandler
+>;
+
+export type PostCardProps = CardProps & {
+  postId: string;
+  authorName: string;
+  authorUsername: string;
+  avatar?: string;
+  content: string;
+  isSelfPost?: boolean;
+  createdAt: string;
+  postActionConfig?: PostActionConfig;
+  postMenuActionConfig?: PostMenuActionConfig;
+};
+
+export type PhotoCardProps = {
+  photoId: string;
+  photoSrc: string;
+  onPress?: (id: string) => void;
+};
+
+export type PhotosProps = {
+  photos: PostPhoto[];
 };
 
 ```

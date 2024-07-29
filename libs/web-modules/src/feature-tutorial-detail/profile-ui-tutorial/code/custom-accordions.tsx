@@ -62,12 +62,12 @@ export function CustomAccordion({
           key={index}
           data-key={index}
           aria-label={accordionItem.title}
-          title={<p className="text-lg font-bold">{accordionItem.title}</p>}
+          title={<p className="text-lg font-semibold">{accordionItem.title}</p>}
           onPress={onAccordionItemPress(index)}
         >
           <div className="prose prose-zinc dark:prose-invert max-w-full">
             <div className="flex items-start">
-              <div className="w-1/2 flex-none [&>p:first-child]:mt-0">
+              <div className="w-1/2 flex-none text-sm [&>p:first-child]:mt-0">
                 {accordionItem.children}
               </div>
               <StickyBox offsetTop={65} className="flex w-1/2 flex-col pl-8">
