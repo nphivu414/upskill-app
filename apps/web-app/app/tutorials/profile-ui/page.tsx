@@ -35,7 +35,7 @@ export default function ProfileUiPage() {
         thumbnailUrl="https://images.unsplash.com/photo-1622838320000-4b3b3b3b3b3b"
       />
       <Divider className="my-12" />
-      <ContentSection introText="Explore the comprehensive curriculum and dive into the world of React.">
+      <ContentSection introText="5 sections • 2 hours 30 minutes">
         <ProfileContent />
       </ContentSection>
       <section className="w-full py-12">

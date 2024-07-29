@@ -90,14 +90,13 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
      - `handleDotButtonClick` is a function that takes an index and returns another function. This returned function, when called, triggers the `onDotButtonClick` function with the provided index.
 
      ```tsx
-     // How we define the function
      const handleDotButtonClick = (index: number) => {
        // !border(1:3)
        return () => {
          onDotButtonClick(index)
        }
      }
-
+    
       <CarouselDotButton
        ...
        // !border(1:1)
@@ -222,8 +221,11 @@ Since it's a pretty straightforward component, let's dive into the implementatio
 **Live Demo:** <br/>
 We've created a Storybook story for the `ProfileStats` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-stats--docs" target="_blank">ProfileStats Story</a>
 
-## !!accordions Section 5: Implementing the Profile Timeline
+## !!accordions Section 5: Implementing the Profile Timeline Tabs
 
-In this section, we'll create the ProfileTimeline component, which displays a list of posts in a user's profile.<br/>
+In this section, we'll create the ProfileTimeline tab component, which allows users to switch between different timeline views like posts, photos, and liked posts.
+
+1. Files and Structure:
+
 
 </CodeWithAccoridions>
