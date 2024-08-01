@@ -91,7 +91,7 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
 
      ```tsx
      const handleDotButtonClick = (index: number) => {
-       // !border(1:3)
+       // !mark(1:3)
        return () => {
          onDotButtonClick(index)
        }
@@ -99,7 +99,7 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
     
       <CarouselDotButton
        ...
-       // !border(1:1)
+       // !mark(1:1)
        onClick={handleDotButtonClick(index)}
        ...
      />
@@ -141,7 +141,7 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
 
          onInit(emblaApi);
          onSelect(emblaApi);
-         // !border(1:1)
+         // !mark(1:1)
          emblaApi.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect);
       }, [emblaApi, onInit, onSelect]);
      ```
@@ -228,8 +228,22 @@ In this section, we'll create the ProfileTimeline tab component, which allows us
 1. Files and Structure:
   
    - `profile-timeline.tsx`: The main component file for the ProfileTimeline component.
-   - `use-timeline-tabs.tsx`: A custom hook for managing the active tab state.
-   - `types.ts`: TypeScript file for defining the component's prop types.
+   - `use-timeline-tabs.tsx`: A custom hook for creating tab data.
+   - `post-card.tsx`: A component to display a post card.
+   - `post-card.utils.tsx`: Utility functions for handling post card's content and actions.
+   - `use-profile.ts`: A sample hook for fetching current user profile data.
+   - `posts.tsx`: A component to display a list of posts.
+   - `photo-card.tsx`: A component to display a photo card.
+   - `photos.tsx`: A component to display a list of photos.
+   - `utils.ts`: Utility functions for formatting dates.
+   - `types.ts`: TypeScript file for defining the component's prop types and related interfaces.
+
+2. Dependencies:
+   - `@nextui-org/react`: NextUI components for building the UI
+   - `lucide-react`: A library of popular icons for React. Install it using `yarn add lucide-react`.
+   - `react-markdown`: A library for rendering Markdown content in React. Install it using `yarn add react-markdown`.
+   - `remark-gfm`: A plugin for parsing GitHub Flavored Markdown. Install it using `yarn add remark-gfm`.
+
 
 
 </CodeWithAccoridions>
