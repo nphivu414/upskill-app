@@ -10,7 +10,7 @@ export default function ProfileUiPage() {
   return (
     <div className="flex min-h-dvh flex-col">
       <HeadingSection
-        title="Crafting Profile Page with React, Tailwind and NextUI"
+        title="Crafting Profile Page UI with React, Tailwind and NextUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',

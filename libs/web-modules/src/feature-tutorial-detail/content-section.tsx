@@ -39,7 +39,7 @@ export const ContentSection = ({
             </div>
             <div>
               <Button
-                variant="light"
+                variant="flat"
                 color="primary"
                 startContent={
                   toggleExpand ? <Minus size={14} /> : <Plus size={14} />
