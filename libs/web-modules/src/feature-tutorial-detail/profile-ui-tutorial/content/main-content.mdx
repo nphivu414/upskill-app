@@ -244,6 +244,83 @@ In this section, we'll create the ProfileTimeline tab component, which allows us
    - `react-markdown`: A library for rendering Markdown content in React. Install it using `yarn add react-markdown`.
    - `remark-gfm`: A plugin for parsing GitHub Flavored Markdown. Install it using `yarn add remark-gfm`.
 
+3. Build the Posts tab component:
+   - **Files and Structure:**
+     - `post-card.tsx`: A component to display a post card.
+     - `post-card.utils.tsx`: Utility functions for rendering post's actions such as like, comment, share buttons...
+     - `posts.tsx`: The main component file for rendering a list of posts.
+     - `types.ts`: TypeScript file for defining the component's prop types and related interfaces.
+
+	- **Deep dive into `post-card.tsx` file:**
+		- **Props:**
+			- `createdAt`: The date and time when the post was created.
+			- `content`: The content of the post.
+			- `authorName`: The name of the author of the post.
+			- `authorUsername`: The username of the author.
+			- `avatar`: The URL of the author's avatar image.
+			- `isSelfPost`: A boolean indicating if the post is created by the current user.
+			- `postActionConfig`: Configuration for actions that can be performed on the post.
+			- `postMenuActionConfig`: Configuration for actions available in the post's menu.
+			- `className`: Additional CSS classes for styling.
+			- `...rest`: Any other `Card` props that are passed to the component.
+
+		- **Functions:**
+			- `getPostActions()`: This function is called to get the actions that can be performed on the post.
+			- `getPostMenuActions({ isSelfPost })`: This function is called to get the actions available in the post's menu, considering if the post is created by the current user.
+			- These 2 functions are defined in the `post-card.utils.tsx` file. We will explore them later.
+		- **Event handlers:**
+			- `handleOnMenuDropdownAction(type: PostMenuActionType)`: This function handles menu dropdown actions based on the action type.
+			- `handleOnPostAction(type: PostActionType)`: This function handles post actions based on the action type.
+		
+		- **Rendering:**
+			- The component returns a `Card` component that wraps the entire post.
+			- Inside the `Card`, there is a `CardHeader` that contains:
+				- A `User` component displaying the author's name, username (as a link), and avatar.
+				- A `Subtle` component showing the formatted creation date.
+			- If `postMenuActionConfig` is provided, a `Dropdown` component is rendered:
+				- The `Dropdown` contains a `DropdownTrigger` with a button to open the menu.
+				- The `DropdownMenu` contains `DropdownItem` components for each action in `postMenuActions`.
+			- The `CardBody` contains the post content using `MarkdownRenderer` component to render markdown content.
+			- If `postActionConfig` is provided, a `CardFooter` component is rendered:
+				- The `CardFooter` contains `Button` components for each action in `postActions`.
+
+{/* 6. Deep dive into `profile-timeline.tsx` file:
+   - **Props:**
+     - `posts`: An array of post objects containing the post content, date, and likes.
+     - `photos`: An array of photo objects containing the photo URL and date.
+     - `likedPosts`: An array of liked post objects containing the post content, date, and likes.
+
+   - **Rendering:**
+     - The component returns a `<section>` element with a `Tabs` component from '@nextui-org/react' for switching between different timeline views.
+     - The `Tabs` component uses the `useTimelineTabs` hook to generate tab data for posts, photos, and liked posts. We will explore this hook later in the next discussion.
+     ```tsx
+      const tabs = useTimelineTabs({ likedPosts, photos, posts });
+     ```
+     - `tabs` is an array of tab objects containing the tab label, content, and unique ID. It will be passed to the `Tabs` component as the `items` prop.
+     - The `Tabs` component support <a href="https://legacy.reactjs.org/docs/render-props.html" target="_blank">Render Props</a> technique to render the tab contents based on the data passed via the `items` prop.
+     ```tsx
+      <Tabs
+         aria-label="Profile timeline"
+         color="primary"
+         fullWidth
+         variant="underlined"
+         // !mark(1:1)
+         items={tabs}
+         destroyInactiveTabPanel={false}
+         classNames={{
+            base: 'sticky top-0 z-50 bg-background',
+         }}
+         >
+         {(item) => (
+         // !mark(1:3)
+            <Tab key={item.id} title={item.label}>
+               <div className="px-2">{item.content}</div>
+            </Tab>
+         )}
+      </Tabs>
+     ``` */}
+
 
 
 </CodeWithAccoridions>
+
