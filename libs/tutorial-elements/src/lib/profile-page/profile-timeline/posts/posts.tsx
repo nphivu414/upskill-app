@@ -10,19 +10,19 @@ export const Posts = ({ posts }: PostsProps) => {
   ): PostCardProps['postActionConfig'] => {
     return {
       comment: {
-        content: stats.comments,
+        count: stats.comments,
         handler: (postId) => {
           alert(`Commented on post ${postId} clicked`);
         },
       },
       repost: {
-        content: stats.reposts,
+        count: stats.reposts,
         handler: (postId) => {
           alert(`Reposted post ${postId} clicked`);
         },
       },
       toggleLike: {
-        content: stats.likes,
+        count: stats.likes,
         handler: (postId) => {
           alert(`Liked post ${postId} clicked`);
         },

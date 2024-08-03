@@ -18,7 +18,7 @@ import { Ellipsis } from 'lucide-react';
 import { PostActionType, PostCardProps, PostMenuActionType } from '../../types';
 import { formatDate, getAvatarFallback } from '../../utils';
 import {
-  getPostActionContent,
+  getPostActionCount,
   getPostActions,
   getPostMenuActions,
 } from './post-card.utils';
@@ -101,7 +101,7 @@ export const PostCard = ({
       {postActionConfig ? (
         <CardFooter className="flex justify-around">
           {postActions.map(({ icon, type }) => {
-            const content = getPostActionContent(type, postActionConfig);
+            const content = getPostActionCount(type, postActionConfig);
             return (
               <Button
                 key={type}

@@ -225,7 +225,7 @@ We've created a Storybook story for the `ProfileStats` component to showcase its
 
 In this section, we'll create the ProfileTimeline tab component, which allows users to switch between different timeline views like posts, photos, and liked posts.
 
-1. Files and Structure:
+{/* 1. Files and Structure:
   
    - `profile-timeline.tsx`: The main component file for the ProfileTimeline component.
    - `use-timeline-tabs.tsx`: A custom hook for creating tab data.
@@ -242,9 +242,9 @@ In this section, we'll create the ProfileTimeline tab component, which allows us
    - `@nextui-org/react`: NextUI components for building the UI
    - `lucide-react`: A library of popular icons for React. Install it using `yarn add lucide-react`.
    - `react-markdown`: A library for rendering Markdown content in React. Install it using `yarn add react-markdown`.
-   - `remark-gfm`: A plugin for parsing GitHub Flavored Markdown. Install it using `yarn add remark-gfm`.
+   - `remark-gfm`: A plugin for parsing GitHub Flavored Markdown. Install it using `yarn add remark-gfm`. */}
 
-3. Build the Posts tab component:
+1. Build the Posts component:
    - **Files and Structure:**
      - `post-card.tsx`: A component to display a post card.
      - `post-card.utils.tsx`: Utility functions for rendering post's actions such as like, comment, share buttons...
@@ -283,6 +283,16 @@ In this section, we'll create the ProfileTimeline tab component, which allows us
 			- The `CardBody` contains the post content using `MarkdownRenderer` component to render markdown content.
 			- If `postActionConfig` is provided, a `CardFooter` component is rendered:
 				- The `CardFooter` contains `Button` components for each action in `postActions`.
+   
+   - **Deep dive into `post-card.utils.tsx` file:** <br/> <br/>
+      In this file, we define utility functions for rendering post actions and post menu actions. We have 3 main functions:
+      - `getPostActions()`: This function returns an array of post actions based on the `postActionConfig` provided to the `PostCard` component.
+      - `getPostMenuActions({ isSelfPost })`: This function returns an array of post menu actions based on the `postMenuActionConfig` provided to the `PostCard` component. The `isSelfPost` parameter is used to determine if the post is created by the current user.
+      - `getPostActionCount(type, config)`: This function returns the content for a specific post action such as like counts, comment counts, and repost counts. The `type` parameter specifies the action type, and the `config` parameter contains the action configuration.
+   
+   - **Deep dive into `posts.tsx` file:** <br/> <br/>
+      In this file, we define the `Posts` component that renders a list of posts. The component takes an array of post objects as a prop and maps over them to render individual `PostCard` components.
+
 
 {/* 6. Deep dive into `profile-timeline.tsx` file:
    - **Props:**

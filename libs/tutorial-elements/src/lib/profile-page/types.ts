@@ -99,7 +99,7 @@ export type PostsProps = {
 export type PostActionConfig = Record<
   PostActionType,
   {
-    content?: React.ReactNode;
+    count?: number;
     handler: PostActionHandler;
   }
 >;

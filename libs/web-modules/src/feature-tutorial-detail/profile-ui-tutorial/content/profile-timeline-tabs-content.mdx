@@ -34,7 +34,7 @@ import { Ellipsis } from 'lucide-react';
 import { PostActionType, PostCardProps, PostMenuActionType } from './types';
 import { formatDate, getAvatarFallback } from './utils'; // We've defined the 'getAvatarFallback' function in the Section 3: Designing the Profile Information Section
 import {
-  getPostActionContent,
+  getPostActionCount,
   getPostActions,
   getPostMenuActions,
 } from './post-card.utils';
@@ -117,7 +117,7 @@ export const PostCard = ({
       {postActionConfig ? (
         <CardFooter className="flex justify-around">
           {postActions.map(({ icon, type }) => {
-            const content = getPostActionContent(type, postActionConfig);
+            const content = getPostActionCount(type, postActionConfig);
             return (
               <Button
                 key={type}
@@ -160,7 +160,7 @@ import {
   PostActionConfig,
   PostActionType,
   PostMenuAction,
-} from './types';
+} from '../../types';
 
 const defaultIconSize = 14;
 
@@ -232,17 +232,17 @@ export const getPostActions = () => {
   return postActions;
 };
 
-export const getPostActionContent = (
+export const getPostActionCount = (
   type: PostActionType,
   config: PostActionConfig
 ) => {
   switch (type) {
     case 'comment':
-      return config.comment.content;
+      return config.comment.count;
     case 'repost':
-      return config.repost.content;
+      return config.repost.count;
     case 'toggleLike':
-      return config.toggleLike.content;
+      return config.toggleLike.count;
     default:
       return null;
   }
@@ -612,7 +612,7 @@ export type PostMenuActionType =
 export type PostActionConfig = Record<
   PostActionType,
   {
-    content?: React.ReactNode;
+    count?: number;
     handler: PostActionHandler;
   }
 >;
