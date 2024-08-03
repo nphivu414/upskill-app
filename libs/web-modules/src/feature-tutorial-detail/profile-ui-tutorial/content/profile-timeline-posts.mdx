@@ -336,148 +336,6 @@ export const Posts = ({ posts }: PostsProps) => {
 };
 
 ```
-### !!tabs photo-card.tsx
-
-```tsx
-import { Card, CardBody, Image } from '@nextui-org/react';
-
-import { PhotoCardProps } from './types';
-
-export const PhotoCard = ({ photoId, photoSrc, onPress }: PhotoCardProps) => {
-  const handleOnPress = () => {
-    return () => {
-      onPress?.(photoId);
-    };
-  };
-
-  return (
-    <Card
-      isPressable
-      onPress={handleOnPress}
-      className="p-0"
-      classNames={{
-        body: 'p-0',
-      }}
-    >
-      <CardBody>
-        <Image src={photoSrc} alt="" />
-      </CardBody>
-    </Card>
-  );
-};
-
-```
-
-### !!tabs photos.tsx
-
-```tsx
-import React from 'react';
-
-import { PhotosProps } from './types';
-import { PhotoCard } from './photo-card';
-
-export const Photos = ({ photos }: PhotosProps) => {
-  const columns = React.useMemo(() => {
-    const cols = [];
-    for (let i = 0; i < photos.length; i += 3) {
-      cols.push(photos.slice(i, i + 3));
-    }
-    return cols;
-  }, [photos]);
-
-  return (
-    <div className="grid grid-cols-2 gap-4">
-      {columns.map((columnPhotos, colIndex) => (
-        <div key={colIndex} className="grid gap-4">
-          {columnPhotos.map(({ id, src }, photoIndex) => (
-            <PhotoCard key={photoIndex} photoId={id} photoSrc={src} />
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-};
-
-```
-
-### !!tabs profile-timeline
-
-```tsx
-import { Tab, Tabs } from '@nextui-org/react';
-
-import { ProfileTimelineProps } from './types';
-import { useTimelineTabs } from './use-timeline-tabs';
-
-export const ProfileTimeline = ({
-  posts,
-  photos,
-  likedPosts,
-}: ProfileTimelineProps) => {
-  const tabs = useTimelineTabs({ likedPosts, photos, posts });
-
-  return (
-    <section className="flex w-full flex-col">
-      <Tabs
-        aria-label="Profile timeline"
-        color="primary"
-        fullWidth
-        variant="underlined"
-        items={tabs}
-        destroyInactiveTabPanel={false}
-        classNames={{
-          base: 'sticky top-0 z-50 bg-background',
-        }}
-      >
-        {(item) => (
-          <Tab key={item.id} title={item.label}>
-            <div className="px-2">{item.content}</div>
-          </Tab>
-        )}
-      </Tabs>
-    </section>
-  );
-};
-
-```
-
-### !!tabs use-timeline-tabs.tsx
-
-```tsx
-import React from 'react';
-
-import { ProfileTimelineProps } from '../types';
-import { Photos } from './photos';
-import { Posts } from './posts';
-
-export const useTimelineTabs = ({
-  likedPosts,
-  photos,
-  posts,
-}: ProfileTimelineProps) => {
-  const tabs = React.useMemo(() => {
-    return [
-      {
-        id: 'posts',
-        label: 'Posts',
-        content: <Posts posts={posts} />,
-      },
-      {
-        id: 'photos',
-        label: 'Photos',
-        content: <Photos photos={photos} />,
-      },
-      {
-        id: 'likes',
-        label: 'Likes',
-        content: <Posts posts={likedPosts} />,
-      },
-    ];
-  }, [likedPosts, photos, posts]);
-
-  return tabs;
-};
-
-```
 
 ### !!tabs markdown-renderer.tsx
 
@@ -517,8 +375,6 @@ export const MarkdownRenderer = ({ children, ...rest }: Options) => {
 
 ```
 
-
-
 ### !!tabs use-profile.ts
 
 ```tsx
@@ -539,10 +395,6 @@ export const useProfile = (): Profile => {
 };
 
 ```
-
-
-
-
 
 ### !!tabs utils.ts
 
@@ -575,17 +427,6 @@ export interface Post {
   createdAt: string;
   updatedAt?: string;
 }
-
-export interface PostPhoto {
-  id: string;
-  src: string;
-}
-
-export type ProfileTimelineProps = {
-  posts: Post[];
-  photos: PostPhoto[];
-  likedPosts: Post[];
-};
 
 export type PostActionType =
   | 'toggleLike'
@@ -632,12 +473,6 @@ export type PostCardProps = CardProps & {
   createdAt: string;
   postActionConfig?: PostActionConfig;
   postMenuActionConfig?: PostMenuActionConfig;
-};
-
-export type PhotoCardProps = {
-  photoId: string;
-  photoSrc: string;
-  onPress?: (id: string) => void;
 };
 
 export type PhotosProps = {

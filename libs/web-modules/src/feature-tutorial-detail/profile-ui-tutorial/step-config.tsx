@@ -4,7 +4,7 @@ import FeaturePhotosCodeContent from './content/feature-photos-content.mdx';
 import { IntroductionContent } from './content/introduction-content';
 import ProfileInfoCodeContent from './content/profile-info-content.mdx';
 import ProfileStatsContent from './content/profile-stats-content.mdx';
-import ProfileTimelineTabsContent from './content/profile-timeline-tabs-content.mdx';
+import ProfileTimelinePostsContent from './content/profile-timeline-posts.mdx';
 import { Code } from './profile-content';
 
 export const steps: StepConfig[] = [
@@ -26,6 +26,8 @@ export const steps: StepConfig[] = [
   },
   {
     index: 4,
-    content: <ProfileTimelineTabsContent components={{ CodeWithTabs, Code }} />,
+    content: (
+      <ProfileTimelinePostsContent components={{ CodeWithTabs, Code }} />
+    ),
   },
 ];
