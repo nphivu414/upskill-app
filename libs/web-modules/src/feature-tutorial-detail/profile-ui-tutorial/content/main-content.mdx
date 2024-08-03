@@ -221,34 +221,17 @@ Since it's a pretty straightforward component, let's dive into the implementatio
 **Live Demo:** <br/>
 We've created a Storybook story for the `ProfileStats` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-stats--docs" target="_blank">ProfileStats Story</a>
 
-## !!accordions Section 5: Implementing the Profile Timeline Tabs
+## !!accordions Section 5: Implementing the Profile Post Timeline
 
-In this section, we'll create the ProfileTimeline tab component, which allows users to switch between different timeline views like posts, photos, and liked posts.
+In this section, we'll create the `PostCard` component to display individual posts and the `Posts` component to render a list of posts.
 
-{/* 1. Files and Structure:
-  
-   - `profile-timeline.tsx`: The main component file for the ProfileTimeline component.
-   - `use-timeline-tabs.tsx`: A custom hook for creating tab data.
-   - `post-card.tsx`: A component to display a post card.
-   - `post-card.utils.tsx`: Utility functions for handling post card's content and actions.
-   - `use-profile.ts`: A sample hook for fetching current user profile data.
-   - `posts.tsx`: A component to display a list of posts.
-   - `photo-card.tsx`: A component to display a photo card.
-   - `photos.tsx`: A component to display a list of photos.
-   - `utils.ts`: Utility functions for formatting dates.
-   - `types.ts`: TypeScript file for defining the component's prop types and related interfaces.
-
-2. Dependencies:
-   - `@nextui-org/react`: NextUI components for building the UI
-   - `lucide-react`: A library of popular icons for React. Install it using `yarn add lucide-react`.
-   - `react-markdown`: A library for rendering Markdown content in React. Install it using `yarn add react-markdown`.
-   - `remark-gfm`: A plugin for parsing GitHub Flavored Markdown. Install it using `yarn add remark-gfm`. */}
-
-1. Build Posts components:
    - **Files and Structure:**
      - `post-card.tsx`: A component to display a post card.
      - `post-card.utils.tsx`: Utility functions for rendering post's actions such as like, comment, share buttons...
      - `posts.tsx`: The main component file for rendering a list of posts.
+     - `markdown-renderer.tsx`: A component for rendering markdown content.
+     - `use-profile.ts`: A sample hook for fetching current user profile data.
+     - `utils.ts`: Utility functions for formatting dates.
      - `types.ts`: TypeScript file for defining the component's prop types and related interfaces.
 
 	- **Deep dive into `post-card.tsx` file:**
@@ -424,7 +407,24 @@ In this section, we'll create the ProfileTimeline tab component, which allows us
       </Tabs>
      ``` */}
 
+{/* 1. Files and Structure:
+  
+   - `profile-timeline.tsx`: The main component file for the ProfileTimeline component.
+   - `use-timeline-tabs.tsx`: A custom hook for creating tab data.
+   - `post-card.tsx`: A component to display a post card.
+   - `post-card.utils.tsx`: Utility functions for handling post card's content and actions.
+   - `use-profile.ts`: A sample hook for fetching current user profile data.
+   - `posts.tsx`: A component to display a list of posts.
+   - `photo-card.tsx`: A component to display a photo card.
+   - `photos.tsx`: A component to display a list of photos.
+   - `utils.ts`: Utility functions for formatting dates.
+   - `types.ts`: TypeScript file for defining the component's prop types and related interfaces.
 
+2. Dependencies:
+   - `@nextui-org/react`: NextUI components for building the UI
+   - `lucide-react`: A library of popular icons for React. Install it using `yarn add lucide-react`.
+   - `react-markdown`: A library for rendering Markdown content in React. Install it using `yarn add react-markdown`.
+   - `remark-gfm`: A plugin for parsing GitHub Flavored Markdown. Install it using `yarn add remark-gfm`. */}
 
 </CodeWithAccoridions>
 

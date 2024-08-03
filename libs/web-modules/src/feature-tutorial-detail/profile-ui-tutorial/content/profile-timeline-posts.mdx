@@ -1,0 +1,484 @@
+import { EmbedStory } from '@upskill-app/ui/web';
+
+<CodeWithTabs>
+
+### !!tabs Preview
+
+<EmbedStory
+  storyId="tutorials-profile-ui-components-profile-timeline--default"
+  width={480}
+  height={650}
+/>
+
+### !!tabs post-card.tsx
+
+```tsx
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  cn,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Link,
+  User,
+} from '@nextui-org/react';
+import { Subtle } from './typography.tsx'; // We've defined the 'Subtle' component in the Section 3: Designing the Profile Information Section
+import { MarkdownRenderer } from './markdown-renderer.tsx';
+import { Ellipsis } from 'lucide-react';
+
+import { PostActionType, PostCardProps, PostMenuActionType } from './types';
+import { formatDate, getAvatarFallback } from './utils'; // We've defined the 'getAvatarFallback' function in the Section 3: Designing the Profile Information Section
+import {
+  getPostActionCount,
+  getPostActions,
+  getPostMenuActions,
+} from './post-card.utils';
+
+export const PostCard = ({
+  postId,
+  createdAt,
+  content,
+  authorName,
+  authorUsername,
+  avatar,
+  isSelfPost,
+  postActionConfig,
+  postMenuActionConfig,
+  className,
+  ...rest
+}: PostCardProps) => {
+  const postActions = getPostActions();
+  const postMenuActions = getPostMenuActions({
+    isSelfPost,
+  });
+
+  const handleOnMenuDropdownAction = (type: PostMenuActionType) => {
+    return () => postMenuActionConfig?.[type](postId);
+  };
+
+  const handleOnPostAction = (type: PostActionType) => {
+    return () => postActionConfig?.[type].handler(postId);
+  };
+
+  return (
+    <Card isPressable className={cn('mb-4 last:mb-0', className)} {...rest}>
+      <CardHeader className="justify-between">
+        <div className="flex gap-1">
+          <User
+            name={authorName}
+            description={
+              <Link href="#" size="sm" isExternal>
+                {`@${authorUsername}`}
+              </Link>
+            }
+            avatarProps={{
+              src: avatar,
+              fallback: getAvatarFallback(authorName),
+            }}
+          />
+          <Subtle className="mt-1 text-xs">· {formatDate(createdAt)}</Subtle>
+        </div>
+        {postMenuActionConfig ? (
+          <Dropdown
+            placement="bottom-end"
+            classNames={{
+              content: 'bg-content2',
+            }}
+          >
+            <DropdownTrigger>
+              <Button size="sm" variant="light" isIconOnly>
+                <Ellipsis size={14} />
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu>
+              {postMenuActions.map(({ title, icon, type }) => (
+                <DropdownItem
+                  key={type}
+                  aria-label={title}
+                  color={type === 'delete' ? 'danger' : 'default'}
+                  endContent={icon}
+                  onClick={handleOnMenuDropdownAction(type)}
+                >
+                  {title}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+        ) : null}
+      </CardHeader>
+      <CardBody className="text-sm">
+        <MarkdownRenderer>{content}</MarkdownRenderer>
+      </CardBody>
+      {postActionConfig ? (
+        <CardFooter className="flex justify-around">
+          {postActions.map(({ icon, type }) => {
+            const content = getPostActionCount(type, postActionConfig);
+            return (
+              <Button
+                key={type}
+                size="sm"
+                variant="light"
+                startContent={icon}
+                isIconOnly={content === null}
+                onClick={handleOnPostAction(type)}
+              >
+                {content}
+              </Button>
+            );
+          })}
+        </CardFooter>
+      ) : null}
+    </Card>
+  );
+};
+
+```
+
+### !!tabs post-card.utils.tsx
+
+```tsx
+import {
+  Bookmark,
+  Flag,
+  Heart,
+  HeartOff,
+  MessageCircle,
+  Repeat2,
+  Share,
+  SquarePen,
+  Star,
+  Trash,
+} from 'lucide-react';
+
+import {
+  PostAction,
+  PostActionConfig,
+  PostActionType,
+  PostMenuAction,
+} from '../../types';
+
+const defaultIconSize = 14;
+
+const postActions: PostAction[] = [
+  {
+    type: 'comment',
+    icon: <MessageCircle size={defaultIconSize} />,
+  },
+  {
+    type: 'repost',
+    icon: <Repeat2 size={defaultIconSize} />,
+  },
+  {
+    type: 'toggleLike',
+    icon: <Heart size={defaultIconSize} />,
+  },
+  {
+    type: 'bookmark',
+    icon: <Bookmark size={defaultIconSize} />,
+  },
+  {
+    type: 'share',
+    icon: <Share size={defaultIconSize} />,
+  },
+];
+
+const selfPostMenuActions: PostMenuAction[] = [
+  {
+    type: 'delete',
+    title: 'Delete post',
+    icon: <Trash size={defaultIconSize} />,
+  },
+  {
+    type: 'addToHighlights',
+    title: 'Add to highlights',
+    icon: <Star size={defaultIconSize} />,
+  },
+  {
+    type: 'changeViewPermission',
+    title: 'Change permission',
+    icon: <SquarePen size={defaultIconSize} />,
+  },
+];
+
+const otherPostMenuActions: PostMenuAction[] = [
+  {
+    type: 'report',
+    title: 'Report post',
+    icon: <Flag size={defaultIconSize} />,
+  },
+  {
+    type: 'unlike',
+    title: 'Unlike post',
+    icon: <HeartOff size={defaultIconSize} />,
+  },
+];
+
+type GetPostMenuActionsOptions = {
+  isSelfPost?: boolean;
+};
+
+export const getPostMenuActions = ({
+  isSelfPost,
+}: GetPostMenuActionsOptions) => {
+  return isSelfPost ? selfPostMenuActions : otherPostMenuActions;
+};
+
+export const getPostActions = () => {
+  return postActions;
+};
+
+export const getPostActionCount = (
+  type: PostActionType,
+  config: PostActionConfig
+) => {
+  switch (type) {
+    case 'comment':
+      return config.comment.count;
+    case 'repost':
+      return config.repost.count;
+    case 'toggleLike':
+      return config.toggleLike.count;
+    default:
+      return null;
+  }
+};
+
+```
+
+### !!tabs posts.tsx
+
+```tsx
+import { PostCardProps, PostsProps, PostStats } from './types';
+import { useProfile } from './use-profile';
+import { PostCard } from './post-card';
+
+export const Posts = ({ posts }: PostsProps) => {
+  const currentProfile = useProfile();
+
+  const getPostActionsConfig = (
+    stats: PostStats
+  ): PostCardProps['postActionConfig'] => {
+    return {
+      comment: {
+        content: stats.comments,
+        handler: (postId) => {
+          alert(`Commented on post ${postId} clicked`);
+        },
+      },
+      repost: {
+        content: stats.reposts,
+        handler: (postId) => {
+          alert(`Reposted post ${postId} clicked`);
+        },
+      },
+      toggleLike: {
+        content: stats.likes,
+        handler: (postId) => {
+          alert(`Liked post ${postId} clicked`);
+        },
+      },
+      bookmark: {
+        handler: (postId) => {
+          alert(`Bookmarked post ${postId} clicked`);
+        },
+      },
+      share: {
+        handler: (postId) => {
+          alert(`Shared post ${postId} clicked`);
+        },
+      },
+    };
+  };
+
+  const postMenuActionsConfig: PostCardProps['postMenuActionConfig'] = {
+    addToHighlights: (postId: string) => {
+      alert(`Added post ${postId} to highlights`);
+    },
+    changeViewPermission: (postId: string) => {
+      alert(`Changed view permission for post ${postId}`);
+    },
+    delete: (postId: string) => {
+      alert(`Deleted post ${postId}`);
+    },
+    report: (postId: string) => {
+      alert(`Reported post ${postId}`);
+    },
+    unlike: (postId: string) => {
+      alert(`Unliked post ${postId}`);
+    },
+  };
+
+  return (
+    <div className="flex flex-col">
+      {posts.map(({ content, createdAt, id, profile, stats }) => {
+        return (
+          <PostCard
+            key={id}
+            postId={id}
+            createdAt={createdAt}
+            content={content}
+            authorName={profile.name}
+            authorUsername={profile.username}
+            avatar={profile.avatar}
+            isSelfPost={currentProfile?.username === profile.username}
+            postActionConfig={getPostActionsConfig(stats)}
+            postMenuActionConfig={postMenuActionsConfig}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+```
+
+### !!tabs markdown-renderer.tsx
+
+```tsx
+import React from 'react';
+import { Image } from '@nextui-org/react';
+import Markdown, { Options } from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
+const MemoizedRenderer = React.memo(
+  Markdown,
+  (prevProps, nextProps) =>
+    prevProps.children === nextProps.children &&
+    prevProps.className === nextProps.className
+);
+
+export const MarkdownRenderer = ({ children, ...rest }: Options) => {
+  return (
+    <MemoizedRenderer
+      remarkPlugins={[remarkGfm]}
+      components={{
+        p({ children }) {
+          return <p className="mb-2 last:mb-0">{children}</p>;
+        },
+        img({ src, alt }) {
+          return (
+            <Image src={src} alt={alt as string} width="100%" loading="lazy" />
+          );
+        },
+      }}
+      {...rest}
+    >
+      {children}
+    </MemoizedRenderer>
+  );
+};
+
+```
+
+### !!tabs use-profile.ts
+
+```tsx
+import { Profile } from './types';
+
+// This hook is just for demonstration purposes,
+// in real-world scenarios, you would fetch the profile data from an API here to get the current user's profile
+export const useProfile = (): Profile => {
+  return {
+    name: 'Vu Nguyen',
+    username: 'nphivu',
+    avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
+    bio: '🚀 Tech aficionado crafting digital magic. 🎨 UI/UX maestro building visually stunning websites and apps.',
+    location: 'Saigon, Vietnam',
+    title: 'Software Engineer',
+    website: 'https://x.com/nphivu414',
+  };
+};
+
+```
+
+### !!tabs utils.ts
+
+```tsx
+export const formatDate = (date: string) => {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  });
+};
+```
+
+### !!tabs types.ts
+
+```ts
+import { CardProps } from '@nextui-org/react';
+
+export interface PostStats {
+  likes: number;
+  comments: number;
+  reposts: number;
+}
+
+export interface Post {
+  id: string;
+  content: string;
+  profile: Profile; // 'Profile' interface has been already defined in the Section 3: Designing the Profile Information Section
+  stats: PostStats;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export type PostActionType =
+  | 'toggleLike'
+  | 'comment'
+  | 'repost'
+  | 'share'
+  | 'bookmark';
+
+export type PostAction = {
+  title?: string;
+  type: PostActionType;
+  icon?: React.ReactNode;
+};
+
+type PostActionHandler = (postId: string) => void;
+
+export type PostMenuActionType =
+  | 'delete'
+  | 'addToHighlights'
+  | 'changeViewPermission'
+  | 'report'
+  | 'unlike';
+
+export type PostActionConfig = Record<
+  PostActionType,
+  {
+    count?: number;
+    handler: PostActionHandler;
+  }
+>;
+
+export type PostMenuActionConfig = Record<
+  PostMenuActionType,
+  PostActionHandler
+>;
+
+export type PostCardProps = CardProps & {
+  postId: string;
+  authorName: string;
+  authorUsername: string;
+  avatar?: string;
+  content: string;
+  isSelfPost?: boolean;
+  createdAt: string;
+  postActionConfig?: PostActionConfig;
+  postMenuActionConfig?: PostMenuActionConfig;
+};
+
+export type PhotosProps = {
+  photos: PostPhoto[];
+};
+
+```
+
+</CodeWithTabs>
