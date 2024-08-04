@@ -5,9 +5,9 @@ import { EmbedStory } from '@upskill-app/ui/web';
 ### !!tabs Preview
 
 <EmbedStory
-  storyId="tutorials-profile-ui-components-profile-timeline--default"
+  storyId="tutorials-profile-ui-components-post-card--with-all-actions"
   width={480}
-  height={650}
+  height={560}
 />
 
 ### !!tabs post-card.tsx
@@ -160,7 +160,7 @@ import {
   PostActionConfig,
   PostActionType,
   PostMenuAction,
-} from '../../types';
+} from './types';
 
 const defaultIconSize = 14;
 
@@ -265,19 +265,19 @@ export const Posts = ({ posts }: PostsProps) => {
   ): PostCardProps['postActionConfig'] => {
     return {
       comment: {
-        content: stats.comments,
+        count: stats.comments,
         handler: (postId) => {
           alert(`Commented on post ${postId} clicked`);
         },
       },
       repost: {
-        content: stats.reposts,
+        count: stats.reposts,
         handler: (postId) => {
           alert(`Reposted post ${postId} clicked`);
         },
       },
       toggleLike: {
-        content: stats.likes,
+        count: stats.likes,
         handler: (postId) => {
           alert(`Liked post ${postId} clicked`);
         },

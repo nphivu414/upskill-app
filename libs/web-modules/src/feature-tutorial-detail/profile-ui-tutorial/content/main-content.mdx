@@ -1,4 +1,5 @@
 import { Link } from '@nextui-org/react'
+import { CollapsibleBlock } from '../../collapsible-block.tsx'
 
 <CodeWithAccoridions>
 ## !!accordions Section 1: Setup and initialize a new React project with NextUI
@@ -278,98 +279,100 @@ In this section, we'll create the `PostCard` component to display individual pos
       - **Props:**
          - `posts`: An array of post objects containing the post data.
       - **Action event handlers:**
-         - `getPostActionsConfig(stats)`: This function takes in a `stats` object that contains information about a post's statistics (like the number of comments, reposts, and likes). It returns a configuration object for different actions you can perform on a post. Each action has a handler function that you can add your own logic to, and some actions also display the count of how many times that action has been performed.
+         - `getPostActionsConfig(stats)`: This function takes in a `stats` object that contains information about a post's statistics (like the number of comments, reposts, and likes). It returns a configuration object for different actions you can perform on a post.
          - `postMenuActionsConfig`: This object contains the configuration for the actions available in the post's menu. It includes actions like addToHighlight, editViewPermission, delete, report and unlike.
-         - We decided to create action handlers at the `Posts` component level instead of the `PostCard` component level. Here are some reasons why:
+         <CollapsibleBlock triggerLabel="Why define action handlers at the Posts component level?">
             - **Separation of Concerns**: By defining handlers at the Posts component level, you keep the PostCard component focused on rendering the UI. This separation makes the code easier to maintain and understand.
             - **Reusability**: Handlers defined at the Posts component level can be reused across multiple PostCard instances. This avoids code duplication and makes it easier to manage changes.
             - **State Management**: If the handlers need to interact with shared state or perform actions that affect multiple PostCard components, it's easier to manage this state at a higher level.
             - **Performance**: Defining handlers at the Posts component level can improve performance by avoiding the creation of new handler functions for each PostCard instance.
             - **Testing**: It is easier to test the logic of handlers when they are defined at a higher level, as they are not tightly coupled with the UI rendering logic.
+         </CollapsibleBlock>
 
       In a real-world scenario, you can consider creating custom hooks for each handler, it's a good solution to improve the structure and maintainability of your code. Custom hooks allow you to encapsulate the logic for each handler, making your components cleaner and more focused on rendering. This approach also promotes reusability and easier testing of the handler logic.
-      
-      Here's an example of how you can create custom hooks for post actions:
-         ```tsx
-         // usePostActions.ts
+      <CollapsibleBlock triggerLabel="See example of how you can create custom hooks for post actions">
+         <div>
+            ```tsx
+            // usePostActions.ts
 
-         import { useCallback } from 'react';
+            import { useCallback } from 'react';
 
-         export const useCommentAction = () => {
-            return useCallback((postId: string) => {
-               // Implement the logic for commenting on a post
-               alert(`Commented on post ${postId} clicked`);
-               // Fetch/mutate data logic here
-            }, []);
-         };
-
-         export const useRepostAction = () => {
-            return useCallback((postId: string) => {
-               // Implement the logic for reposting a post
-               alert(`Reposted post ${postId} clicked`);
-               // Fetch/mutate data logic here
-            }, []);
-         };
-
-         // You can define other hooks like useBookmarkAction, useShareAction, etc.
-         ```
-
-         ```tsx
-         // Posts.tsx
-         
-         import React from 'react';
-         import { useCommentAction, useRepostAction, useToggleLikeAction, useBookmarkAction, useShareAction } from './usePostActions';
-
-         const Posts: React.FC<{ posts: Post[] }> = ({ posts }) => {
-            //!mark(1:5)
-            const handleComment = useCommentAction();
-            const handleRepost = useRepostAction();
-            const handleToggleLike = useToggleLikeAction();
-            const handleBookmark = useBookmarkAction();
-            const handleShare = useShareAction();
-
-            const getPostActionsConfig = (stats: PostStats): PostCardProps['postActionConfig'] => {
-               return {
-                  comment: {
-                     count: stats.comments,
-                     //!mark(1:1)
-                     handler: handleComment,
-                  },
-                  repost: {
-                     count: stats.reposts,
-                     //!mark(1:1)
-                     handler: handleRepost,
-                  },
-                  toggleLike: {
-                     count: stats.likes,
-                     //!mark(1:1)
-                     handler: handleToggleLike,
-                  },
-                     bookmark: {
-                     //!mark(1:1)
-                     handler: handleBookmark,
-                  },
-                     share: {
-                     //!mark(1:1)
-                     handler: handleShare,
-                  },
-               };
+            export const useCommentAction = () => {
+               return useCallback((postId: string) => {
+                  // Implement the logic for commenting on a post
+                  alert(`Commented on post ${postId} clicked`);
+                  // Fetch/mutate data logic here
+               }, []);
             };
 
-            return (
-               <div>
-                  {posts.map(post => (
-                     <PostCard
-                        ...
-                        postActionConfig={getPostActionsConfig(post.stats)}
-                        ...
-                     />
-                  ))}
-               </div>
-            );
-         };
-         ```
+            export const useRepostAction = () => {
+               return useCallback((postId: string) => {
+                  // Implement the logic for reposting a post
+                  alert(`Reposted post ${postId} clicked`);
+                  // Fetch/mutate data logic here
+               }, []);
+            };
 
+            // You can define other hooks like useBookmarkAction, useShareAction, etc.
+            ```
+
+            ```tsx
+            // Posts.tsx
+            
+            import React from 'react';
+            import { useCommentAction, useRepostAction, useToggleLikeAction, useBookmarkAction, useShareAction } from './usePostActions';
+
+            const Posts: React.FC<{ posts: Post[] }> = ({ posts }) => {
+               //!mark(1:5)
+               const handleComment = useCommentAction();
+               const handleRepost = useRepostAction();
+               const handleToggleLike = useToggleLikeAction();
+               const handleBookmark = useBookmarkAction();
+               const handleShare = useShareAction();
+
+               const getPostActionsConfig = (stats: PostStats): PostCardProps['postActionConfig'] => {
+                  return {
+                     comment: {
+                        count: stats.comments,
+                        //!mark(1:1)
+                        handler: handleComment,
+                     },
+                     repost: {
+                        count: stats.reposts,
+                        //!mark(1:1)
+                        handler: handleRepost,
+                     },
+                     toggleLike: {
+                        count: stats.likes,
+                        //!mark(1:1)
+                        handler: handleToggleLike,
+                     },
+                        bookmark: {
+                        //!mark(1:1)
+                        handler: handleBookmark,
+                     },
+                        share: {
+                        //!mark(1:1)
+                        handler: handleShare,
+                     },
+                  };
+               };
+
+               return (
+                  <div>
+                     {posts.map(post => (
+                        <PostCard
+                           ...
+                           postActionConfig={getPostActionsConfig(post.stats)}
+                           ...
+                        />
+                     ))}
+                  </div>
+               );
+            };
+            ```
+         </div>
+      </CollapsibleBlock>
 
 {/* 6. Deep dive into `profile-timeline.tsx` file:
    - **Props:**

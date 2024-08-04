@@ -34,25 +34,25 @@ const withActionsArgs: Story['args'] = {
   ...baseArgs,
   postActionConfig: {
     toggleLike: {
-      content: 'Like',
+      count: 10,
       handler: () => {
         console.log('Liked post clicked');
       },
     },
     comment: {
-      content: 'Comment',
+      count: 14,
       handler: () => {
         console.log('Commented on post clicked');
       },
     },
     repost: {
-      content: 'Repost',
+      count: 5,
       handler: () => {
         console.log('Reposted post clicked');
       },
     },
     share: {
-      content: 'Share',
+      count: 4,
       handler: () => {
         console.log('Shared post clicked');
       },

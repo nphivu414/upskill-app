@@ -12,24 +12,26 @@ export const NavigationBar = () => {
   return (
     <Navbar maxWidth="2xl">
       <NavbarBrand>
-        <p className="font-bold text-inherit">Up Skill</p>
+        <Link href="/" color="foreground">
+          <p className="font-bold text-inherit">Home</p>
+        </Link>
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
-        <NavbarItem>
+        {/* <NavbarItem>
           <Link color="foreground" href="#">
             Features
           </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
+        </NavbarItem> */}
+        {/* <NavbarItem isActive>
+          <Link href="/" aria-current="page">
+            Home
           </Link>
-        </NavbarItem>
-        <NavbarItem>
+        </NavbarItem> */}
+        {/* <NavbarItem>
           <Link color="foreground" href="#">
             Integrations
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
       <NavbarContent justify="end">
         <ThemeToggle />

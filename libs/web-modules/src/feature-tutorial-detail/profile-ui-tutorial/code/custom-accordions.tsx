@@ -20,6 +20,7 @@ export function CustomAccordion({
 
   React.useEffect(() => {
     setAllKeys(new Set(data.map((_, index) => index.toString())));
+    setSelectedKeys(new Set('4'));
   }, [data, setAllKeys]);
 
   const onSelectionChange = (keys: Selection) => {
