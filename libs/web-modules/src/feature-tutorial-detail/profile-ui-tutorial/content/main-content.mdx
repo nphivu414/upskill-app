@@ -221,6 +221,7 @@ Since it's a pretty straightforward component, let's dive into the implementatio
 
 **Live Demo:** <br/>
 We've created a Storybook story for the `ProfileStats` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-stats--docs" target="_blank">ProfileStats Story</a>
+Now we'll move on to the next section to implement the Profile Post Timeline.
 
 ## !!accordions Section 5: Implementing the Profile Post Timeline
 
@@ -373,6 +374,42 @@ In this section, we'll create the `PostCard` component to display individual pos
             ```
          </div>
       </CollapsibleBlock>
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `PostCard` component to showcase its functionality and appearance. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-components-post-card--docs" target="_blank">PostCard Story</a>
+Now we'll move on to the next section to implement the Profile Photo Timeline.
+
+## !!accordions Section 6: Implementing the Profile Photo Timeline
+
+In this section, we'll create the `PhotoCard` component to display individual photos and the `Photos` component to render a list of photos.
+
+   - **Files and Structure:**
+     - `photo-card.tsx`: A component to display a photo card.
+     - `photos.tsx`: The main component file for rendering a list of photos.
+     - `types.ts`: TypeScript file for defining the component's prop types.
+
+   - **Deep dive into `photo-card.tsx` file:**
+      - **Props:**
+         - `photoId`: The unique identifier of the photo.
+         - `photoSrc`: The URL of the photo.
+         - `onPress`: A function to handle the press event on the photo card.
+      
+      - **Rendering:**
+         - The component returns a `Card` component that wraps the photo.
+         - Inside the `Card`, there is a `CardBody` that contains an `Image` component displaying the photo.
+         - The `Image` component is from '@nextui-org/react' and displays the photo with the provided URL.
+   
+   - **Deep dive into `photos.tsx` file:** <br/> <br/>
+      In this file, we define the `Photos` component that renders a list of photos. We're using an <a href="https://flowbite.com/docs/components/gallery/#masonry-grid" target="_blank">example from flowbite</a> to create a masonry grid layout for the photos.
+      - **Props:**
+         - `photos`: An array of photo objects containing the photo data.
+      - **Rendering a masonry layout:**
+         - Columns Creation: Photos are divided into columns of 3 photos each.
+         - Grid Layout: The outer grid has 2 columns, and each column contains a sub-grid of photos.
+         - Rendering: Each photo is rendered using the PhotoCard component.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `PhotoCard` component to showcase its functionality and appearance. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-components-photo-card--docs" target="_blank">PhotoCard Story</a>
 
 {/* 6. Deep dive into `profile-timeline.tsx` file:
    - **Props:**
