@@ -1,13 +1,7 @@
 'use client';
 
 import React from 'react';
-import {
-  Accordion,
-  AccordionItem,
-  Button,
-  cn,
-  Selection,
-} from '@nextui-org/react';
+import { Accordion, AccordionItem, cn, Selection } from '@nextui-org/react';
 import StickyBox from 'react-sticky-box';
 
 import { StepContent } from '../../step-content';
