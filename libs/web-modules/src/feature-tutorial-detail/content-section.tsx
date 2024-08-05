@@ -29,29 +29,27 @@ export const ContentSection = ({
   };
 
   return (
-    <section className="w-full">
-      <div className="container px-4 md:px-6">
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <Heading2>Tutorial Content</Heading2>
-              <Subtle className="md:text-lg">{introText}</Subtle>
-            </div>
-            <div>
-              <Button
-                variant="flat"
-                color="primary"
-                startContent={
-                  toggleExpand ? <Minus size={14} /> : <Plus size={14} />
-                }
-                onClick={handleToggleExpand}
-              >
-                {toggleExpand ? 'Collapse All' : 'Expand All'}
-              </Button>
-            </div>
+    <section className="w-full px-4">
+      <div className="space-y-6">
+        <div className="flex justify-between">
+          <div className="flex shrink-0 flex-col">
+            <Heading2>Tutorial Content</Heading2>
+            <Subtle className="md:text-lg">{introText}</Subtle>
           </div>
-          {children}
+          <div>
+            <Button
+              variant="light"
+              color="primary"
+              startContent={
+                toggleExpand ? <Minus size={14} /> : <Plus size={14} />
+              }
+              onClick={handleToggleExpand}
+            >
+              {toggleExpand ? 'Collapse All' : 'Expand All'}
+            </Button>
+          </div>
         </div>
+        {children}
       </div>
     </section>
   );

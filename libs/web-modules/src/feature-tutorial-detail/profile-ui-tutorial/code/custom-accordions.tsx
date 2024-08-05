@@ -21,7 +21,7 @@ export function CustomAccordion({
   React.useEffect(() => {
     setAllKeys(new Set(data.map((_, index) => index.toString())));
     //TODO: Remove this line after the tutorial is completed
-    setSelectedKeys(new Set('7'));
+    setSelectedKeys(new Set('0'));
   }, [data, setAllKeys]);
 
   const onSelectionChange = (keys: Selection) => {
@@ -68,11 +68,14 @@ export function CustomAccordion({
           onPress={onAccordionItemPress(index)}
         >
           <div className="prose prose-zinc dark:prose-invert max-w-full">
-            <div className="flex items-start">
-              <div className="w-1/2 flex-none text-sm [&>p:first-child]:mt-0">
+            <div className="block items-start lg:flex">
+              <div className="w-full flex-none text-sm lg:w-1/2 [&>p:first-child]:mt-0">
                 {accordionItem.children}
               </div>
-              <StickyBox offsetTop={65} className="flex w-1/2 flex-col pl-8">
+              <StickyBox
+                offsetTop={65}
+                className="w-full flex-col lg:flex lg:w-1/2 lg:pl-8"
+              >
                 <StepContent steps={steps} currentIndex={index} />
               </StickyBox>
             </div>

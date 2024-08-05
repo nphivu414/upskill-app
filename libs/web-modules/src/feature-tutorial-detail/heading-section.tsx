@@ -27,7 +27,7 @@ export const HeadingSection = ({
   return (
     <section className="w-full pt-12">
       <div className="space-y-10 px-4 md:px-6 xl:space-y-16">
-        <div className="flex items-start gap-4">
+        <div className="flex flex-col items-start gap-4 lg:flex-row">
           <div className="flex-1">
             <Heading1>{title}</Heading1>
             <Spacer y={4} />
@@ -61,7 +61,7 @@ export const HeadingSection = ({
               </ul>
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="w-full lg:w-1/2">
             <div className="flex flex-col items-center justify-center">
               <EmbedStory
                 storyId="tutorials-profile-ui-page-screen--default"
