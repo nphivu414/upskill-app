@@ -16,15 +16,19 @@ export const codeLineMarkHander: AnnotationHandler = {
 export const borderHandler: AnnotationHandler = {
   name: 'border',
   Block: ({ annotation, children }) => {
-    const borderColor = annotation.query || '#006FEE';
+    const borderColor = annotation.query || '#F5A524';
     return <div style={{ border: '1px solid', borderColor }}>{children}</div>;
+  },
+  Inline: ({ annotation, children }) => {
+    const borderColor = annotation.query || '#F5A524';
+    return <span style={{ border: '1px solid', borderColor }}>{children}</span>;
   },
 };
 
 export const bgHandler: AnnotationHandler = {
   name: 'bg',
   Inline: ({ annotation, children }) => {
-    const background = annotation.query || '#17C964';
+    const background = annotation.query || '#f5a52475';
     return <span style={{ background }}>{children}</span>;
   },
 };
