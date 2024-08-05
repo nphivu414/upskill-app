@@ -21,7 +21,7 @@ export function CustomAccordion({
   React.useEffect(() => {
     setAllKeys(new Set(data.map((_, index) => index.toString())));
     //TODO: Remove this line after the tutorial is completed
-    setSelectedKeys(new Set('5'));
+    setSelectedKeys(new Set('6'));
   }, [data, setAllKeys]);
 
   const onSelectionChange = (keys: Selection) => {

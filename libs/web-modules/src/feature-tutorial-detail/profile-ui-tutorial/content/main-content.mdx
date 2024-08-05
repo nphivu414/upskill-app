@@ -410,61 +410,70 @@ In this section, we'll create the `PhotoCard` component to display individual ph
 
 **Live Demo:** <br/>
 We've created a Storybook story for the `PhotoCard` component to showcase its functionality and appearance. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-components-photo-card--docs" target="_blank">PhotoCard Story</a>
+Now we'll move on to the next section to implement the Profile Timeline Tabs.
 
-{/* 6. Deep dive into `profile-timeline.tsx` file:
-   - **Props:**
-     - `posts`: An array of post objects containing the post content, date, and likes.
-     - `photos`: An array of photo objects containing the photo URL and date.
-     - `likedPosts`: An array of liked post objects containing the post content, date, and likes.
+## !!accordions Section 7: Implementing the Profile Timeline Tabs
+In this section, we'll create the `ProfileTimeline` component, which displays a timeline of posts, photos, and liked posts in a tabbed interface.
 
-   - **Rendering:**
-     - The component returns a `<section>` element with a `Tabs` component from '@nextui-org/react' for switching between different timeline views.
-     - The `Tabs` component uses the `useTimelineTabs` hook to generate tab data for posts, photos, and liked posts. We will explore this hook later in the next discussion.
-     ```tsx
-      const tabs = useTimelineTabs({ likedPosts, photos, posts });
-     ```
-     - `tabs` is an array of tab objects containing the tab label, content, and unique ID. It will be passed to the `Tabs` component as the `items` prop.
-     - The `Tabs` component support <a href="https://legacy.reactjs.org/docs/render-props.html" target="_blank">Render Props</a> technique to render the tab contents based on the data passed via the `items` prop.
-     ```tsx
-      <Tabs
-         aria-label="Profile timeline"
-         color="primary"
-         fullWidth
-         variant="underlined"
-         // !mark(1:1)
-         items={tabs}
-         destroyInactiveTabPanel={false}
-         classNames={{
-            base: 'sticky top-0 z-50 bg-background',
-         }}
-         >
-         {(item) => (
-         // !mark(1:3)
-            <Tab key={item.id} title={item.label}>
-               <div className="px-2">{item.content}</div>
-            </Tab>
-         )}
-      </Tabs>
-     ``` */}
+   - **Files and Structure:**
+     - `profile-timeline.tsx`: The main component file for the ProfileTimeline component.
+     - `use-timeline-tabs.tsx`: A custom hook for generating tab data based on the provided posts, photos, and liked posts.
+     - `types.ts`: TypeScript file for defining the component's prop types.
 
-{/* 1. Files and Structure:
-  
-   - `profile-timeline.tsx`: The main component file for the ProfileTimeline component.
-   - `use-timeline-tabs.tsx`: A custom hook for creating tab data.
-   - `post-card.tsx`: A component to display a post card.
-   - `post-card.utils.tsx`: Utility functions for handling post card's content and actions.
-   - `use-profile.ts`: A sample hook for fetching current user profile data.
-   - `posts.tsx`: A component to display a list of posts.
-   - `photo-card.tsx`: A component to display a photo card.
-   - `photos.tsx`: A component to display a list of photos.
-   - `utils.ts`: Utility functions for formatting dates.
-   - `types.ts`: TypeScript file for defining the component's prop types and related interfaces.
+   - **Deep dive into `profile-timeline.tsx` file:**
+      - **Props:**
+         - `posts`: An array of post objects containing the post content, date, and likes.
+         - `photos`: An array of photo objects containing the photo URL and date.
+         - `likedPosts`: An array of liked post objects containing the post content, date, and likes.
+      
+      - **Rendering:**
+         - The component returns a `<section>` element with a `Tabs` component from '@nextui-org/react' for switching between different timeline views.
+         - The `Tabs` component uses the `useTimelineTabs` hook to generate tab data for posts, photos, and liked posts. We will explore this hook later.
+         ```tsx
+         const tabs = useTimelineTabs({ likedPosts, photos, posts });
+         ```
+         - `tabs` is an array of tab objects containing the tab label, content, and unique ID. It will be passed to the `Tabs` component as the `items` prop.
+         - The `Tabs` component support <a href="https://legacy.reactjs.org/docs/render-props.html" target="_blank">Render Props</a> technique to render the tab contents based on the data passed via the `items` prop.
+         ```tsx
+         <Tabs
+            aria-label="Profile timeline"
+            color="primary"
+            fullWidth
+            variant="underlined"
+            // !mark(1:1)
+            items={tabs}
+            destroyInactiveTabPanel={false}
+            classNames={{
+               base: 'sticky top-0 z-50 bg-background',
+            }}
+            >
+            {(item) => (
+               // !mark(1:3)
+               <Tab key={item.id} title={item.label}>
+                  <div className="px-2">{item.content}</div>
+               </Tab>
+            )}
+         </Tabs>
+         ```
+   - **Deep dive into `use-timeline-tabs.tsx` file:** <br/> <br/>
 
-2. Dependencies:
-   - `@nextui-org/react`: NextUI components for building the UI
-   - `lucide-react`: A library of popular icons for React. Install it using `yarn add lucide-react`.
-   - `react-markdown`: A library for rendering Markdown content in React. Install it using `yarn add react-markdown`.
-   - `remark-gfm`: A plugin for parsing GitHub Flavored Markdown. Install it using `yarn add remark-gfm`. */}
+      - **Params:**
+         - `likedPosts`: An array of liked post objects.
+         - `photos`: An array of photo objects.
+         - `posts`: An array of post objects.
+
+      - **Tab Generation:**
+         - The hook generates tab data for posts, photos, and liked posts based on the provided data.
+         - It creates a tab object for each type of content with a unique ID, label, and content.
+         - The `Posts`, and `Photos` components are used to render the content for each tab. We've already covered these components in previous sections.
+         - The hook returns an array of tab objects that can be used to render the tabs in the `ProfileTimeline` component.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `ProfileTimeline` component to showcase its functionality and appearance. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-components-profile-timeline--docs" target="_blank">ProfileTimeline Story</a>
+
+## !!accordions Section 8: Putting It All Together
+So far, we've built the individual components for the profile page, including `FeaturePhotos`, `ProfileInfo`, `ProfileStats`, `PostCard`, `PhotoCard`, and `ProfileTimeline`. Now, let's put them all together to create the complete profile page.
+
+Open the `profile-page.tsx` tab to see the final implementation of the profile page.
 
 </CodeWithAccoridions>
-
