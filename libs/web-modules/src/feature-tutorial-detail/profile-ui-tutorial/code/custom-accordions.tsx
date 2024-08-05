@@ -1,12 +1,19 @@
 'use client';
 
 import React from 'react';
-import { Accordion, AccordionItem, Selection } from '@nextui-org/react';
+import {
+  Accordion,
+  AccordionItem,
+  Button,
+  cn,
+  Selection,
+} from '@nextui-org/react';
 import StickyBox from 'react-sticky-box';
 
 import { StepContent } from '../../step-content';
 import { useContentAccordion } from '../../stores';
 import { steps } from '../step-config';
+import { ShowCodeModal } from './show-code-modal';
 
 export function CustomAccordion({
   data,
@@ -45,6 +52,10 @@ export function CustomAccordion({
     };
   };
 
+  const renderStepContent = (index: number) => {
+    return <StepContent steps={steps} currentIndex={index} />;
+  };
+
   return (
     <Accordion
       fullWidth
@@ -74,10 +85,17 @@ export function CustomAccordion({
               </div>
               <StickyBox
                 offsetTop={65}
-                className="w-full flex-col lg:flex lg:w-1/2 lg:pl-8"
+                className={cn('w-full flex-col lg:flex lg:w-1/2 lg:pl-8', {
+                  hidden: index !== 0,
+                })}
               >
-                <StepContent steps={steps} currentIndex={index} />
+                {renderStepContent(index)}
               </StickyBox>
+              {index !== 0 && (
+                <ShowCodeModal>
+                  <>{renderStepContent(index)}</>
+                </ShowCodeModal>
+              )}
             </div>
           </div>
         </AccordionItem>

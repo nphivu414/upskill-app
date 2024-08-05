@@ -65,7 +65,7 @@ export const HeadingSection = ({
             <div className="flex flex-col items-center justify-center">
               <EmbedStory
                 storyId="tutorials-profile-ui-page-screen--default"
-                width={400}
+                width={382}
                 height={650}
               />
             </div>
