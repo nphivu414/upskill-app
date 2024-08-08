@@ -4,16 +4,25 @@ import React from 'react';
 import { useTheme } from 'next-themes';
 
 type EmbedStoryProps = {
+  storyBaseURL: string;
   storyId: string;
 } & React.IframeHTMLAttributes<HTMLIFrameElement>;
 
-export const EmbedStory = ({ storyId, ...rest }: EmbedStoryProps) => {
+export const EmbedStory = ({
+  storyId,
+  storyBaseURL,
+  ...rest
+}: EmbedStoryProps) => {
   const [url, setUrl] = React.useState('');
   const { theme } = useTheme();
 
   React.useEffect(() => {
+    if (!storyBaseURL) {
+      return;
+    }
+
     setUrl(
-      `http://localhost:9009/iframe.html?args=&id=${storyId}&globals=theme:${theme}`
+      `${storyBaseURL}iframe.html?args=&id=${storyId}&globals=theme:${theme}`
     );
   }, [storyId, theme]);
 

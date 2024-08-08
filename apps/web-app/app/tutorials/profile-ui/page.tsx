@@ -1,4 +1,4 @@
-import { Avatar, Card, CardBody, Divider, Link } from '@nextui-org/react';
+import { Avatar, Divider } from '@nextui-org/react';
 import { Paragraph } from '@upskill-app/ui/web';
 import {
   ContentSection,

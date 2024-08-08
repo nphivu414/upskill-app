@@ -2,6 +2,8 @@ import { Spacer, User } from '@nextui-org/react';
 import { ProfilePageDemo } from '@upskill-app/tutorial-elements';
 import { Heading1 } from '@upskill-app/ui/web';
 
+import { env } from '../utils';
+
 type AuthorProps = {
   name: string;
   avatar: string;
