@@ -1,5 +1,6 @@
 import { Spacer, User } from '@nextui-org/react';
-import { EmbedStory, Heading1 } from '@upskill-app/ui/web';
+import { ProfilePageDemo } from '@upskill-app/tutorial-elements';
+import { Heading1 } from '@upskill-app/ui/web';
 
 type AuthorProps = {
   name: string;
@@ -63,11 +64,12 @@ export const HeadingSection = ({
           </div>
           <div className="w-full lg:w-1/2">
             <div className="flex flex-col items-center justify-center">
-              <EmbedStory
+              {/* <EmbedStory
                 storyId="tutorials-profile-ui-page-screen--default"
                 width={382}
                 height={650}
-              />
+              /> */}
+              <ProfilePageDemo />
             </div>
           </div>
         </div>

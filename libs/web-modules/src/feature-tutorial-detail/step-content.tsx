@@ -9,7 +9,7 @@ type StepContentProps = {
 
 export const StepContent = ({ currentIndex, steps }: StepContentProps) =>
   steps.map((step) => (
-    <div className={cn({ hidden: step.index !== currentIndex })}>
+    <div className={cn('not-prose', { hidden: step.index !== currentIndex })}>
       {steps[step.index].content}
     </div>
   ));
