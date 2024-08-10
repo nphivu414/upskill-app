@@ -1,4 +1,5 @@
 import { Link } from '@nextui-org/react'
+import { CollapsibleBlock } from '../../collapsible-block.tsx'
 
 <CodeWithAccoridions>
 ## !!accordions Section 1: Setup and initialize a new React project with NextUI
@@ -53,44 +54,108 @@ cd my-nextui-app && yarn install
 yarn dev
 ```
 
-You should now have a NextUI startup screen at `http://localhost:3000/` in your browser, ready for us to transform into a stunning profile page!
+You should have a NextUI startup screen at `http://localhost:3000/` in your browser.
+Now you can safely remove all the default code and start building the profile page components.
 
 ## !!accordions Section 2: Building the FeaturePhotos component
 
 In this section, we'll craft a captivating header showcasing a rotating carousel of feature photos using NextUI for styling, Embla Carousel React for the core carousel functionality, and Tailwind CSS for additional customization.
 
-**Step-by-Step Guide:**
-This React component, `FeaturePhotos`, displays a carousel of profile's feature photos and optionally shows navigation dots for scrolling through the photos.
+1. Files and Structure:
 
-Now let's open the `feature-photo.tsx` tab and we will break it down step by step:
+   - `feature-photos.tsx`: The main component file for the FeaturePhotos component.
+   - `carousel-dot-buttons.tsx`: A component for rendering navigation dots in the carousel.
+   - `constants.ts`: A file containing constants for styling.
+   - `types.ts`: TypeScript file for defining the component's prop types.
 
-1. **Carousel Setup:**
+2. New dependencies:
 
-   - `useEmblaCarousel` to control the carousel. It's a handy hook provided from `embla-carousel-react` giving us a `ref` to attach to our wrapping element, which is needed to cover the scroll overflow
-   - `useDotButton` to manage the state of the navigation dots. It provides the selected index, an array of scroll snap points, and a function to handle dot button clicks.
-   - `<CarouselDotButton/>` is a custom component that renders a dot button for each photo. It receives an `onClick` function to handle the click event and a `className` to style the button based on its active state.
-   - If you want to learn more about Embla Carousel, check out the <a href="https://www.embla-carousel.com/get-started/react/#accessing-the-carousel-api" target="_blank">Embla Carousel</a>
+   - `embla-carousel-react`: A lightweight carousel library for React. Install it using `yarn add embla-carousel-react`.
 
-2. **Handling Dot Button Clicks:**
+3. Deep dive into `feature-photo.tsx` file:
 
-   - `handleDotButtonClick` is a function that takes an index and returns another function. This returned function, when called, triggers the `onDotButtonClick` function with the provided index. This pattern is known as a closure, allowing each dot button to have its own specific behavior when clicked.
-   - If you're not familiar with closures, check out this <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank">MDN Web Docs</a> article for a detailed explanation.
+   - **Props:**
 
-3. **Rendering:**
+     - `photos`: An array of photo URLs to display in the carousel.
+     - `showDots`: A boolean to toggle the visibility of navigation dots.
 
-   - The component returns a `<section>` element with two main parts:
-     - A block containing the carousel. Photos are mapped elements containing an `<Image>` component from '@nextui-org/react' for each photo. Each image's height is set to `FEATURE_HEADER_HEIGHT` pixels, and the width is set to fill the screen.
-     - A conditional block that renders navigation dots using `<CarouselDotButton/>` if `showDots` to visually indicate the currently selected dot.
+   - **Carousel Setup:**
 
-4. **Styling:**
-   - The carousel and its elements are styled using Tailwind CSS classes for layout and appearance. The `className` properties dynamically apply styles based on the component's state and props, such as adjusting the opacity of the active dot.
+     - `useEmblaCarousel` to control the carousel. It's a handy hook provided from `embla-carousel-react` giving us a `ref` to attach to our wrapping element, which is needed to cover the scroll overflow
+     - `useDotButton` to manage the state of the navigation dots. It provides the selected index, an array of scroll snap points, and a function to handle dot button clicks.
+     - `<CarouselDotButton/>` is a custom component that renders a dot button for each photo. It receives an `onClick` function to handle the click event and a `className` to style the button based on its active state.
+     - We will break down the `CarouselDotButton` component and `useDotButton` hook later.
 
-**A few notes:**
+   - **Handling Navigation Dot Button Clicks:**
 
-- The `photos` prop allows dynamic photo urls, enabling reusability across different profile pages.
-- The `showDots` prop offers customization for the carousel's navigation, allowing users to toggle the dots on or off.
-- We use `cn` util class from NextUI to conditionally apply classes based on the active state of the dot.
-- There's the full demo of the `FeaturePhotos` component in Storybook: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-feature-photos--docs" target="_blank">FeaturePhotos Story</a>
+     - `handleDotButtonClick` is a function that takes an index and returns another function. This returned function, when called, triggers the `onDotButtonClick` function with the provided index.
+
+     ```tsx
+     const handleDotButtonClick = (index: number) => {
+       // !mark(1:3)
+       return () => {
+         onDotButtonClick(index)
+       }
+     }
+    
+      <CarouselDotButton
+       ...
+       // !mark(1:1)
+       onClick={handleDotButtonClick(index)}
+       ...
+     />
+     ```
+
+     - This pattern is known as a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank">closure</a>, allowing each dot button to have its own specific behavior when clicked.
+
+   - **Rendering:**
+
+     - The component returns a `<section>` element with two main parts:
+       - A block containing the carousel. Photos are mapped elements containing an `<Image>` component from '@nextui-org/react' for each photo. Each image's height is set to `FEATURE_HEADER_HEIGHT` pixels, and the width is set to fill the screen.
+       - A conditional block that renders navigation dots using `<CarouselDotButton/>` if `showDots` to visually indicate the currently selected dot.
+
+   - **Styling:**
+     - The carousel and its elements are styled using Tailwind CSS classes for layout and appearance. The `className` properties dynamically apply styles based on the component's state and props, such as adjusting the opacity of the active dot.
+     - We use the `cn` utility class from NextUI to conditionally apply classes based on the active state of the dot. This util function is also used to join `classNames` together avoiding the TailwindCSS classes conflicts.
+     ```tsx
+     <CarouselDotButton
+        ...
+        className={cn(
+           'inline-flex cursor-pointer border-0 p-0 m-0 size-2 ...',
+           {
+              // !callout[/bg-gray-300 opacity-100/] These classnames will only be applied for the active dot element
+              'bg-gray-300 opacity-100': index === selectedIndex,
+           }
+        )}
+     />
+     ```
+
+4. Deep dive into `carousel-dot-buttons.tsx` file: <br/>
+
+   - **`useDotButton` hook:**
+
+     - The main purpose of this hook is to manage the state of the navigation dots in the carousel. It takes `emblaApi` as an argument, which is the carousel API needed for interacting with the carousel.
+     - It has an effect that listens to the `reInit` and `select` from embla carousel API to update the selected index.
+     ```tsx
+      React.useEffect(() => {
+         if (!emblaApi) return;
+
+         onInit(emblaApi);
+         onSelect(emblaApi);
+         // !mark(1:1)
+         emblaApi.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect);
+      }, [emblaApi, onInit, onSelect]);
+     ```
+     - The `onDotButtonClick` function execute the `scrollTo` method from the embla carousel API to scroll to the selected photo.
+     - The `scrollSnaps` array contains the scroll snap points for each photo in the carousel.
+     - The `selectedIndex` variable holds the index of the currently selected photo.
+     - The `useDotButton` hook returns an object with the selected index, scroll snaps, and a function to handle dot button clicks. So we can use this object in the `FeaturePhotos` component.
+
+   - **`CarouselDotButton` component:**
+     - This component is just a wrapper of the native html button element. It takes all the props that a button element can take, so we can style the button based on its active state and handle the click event from the `FeaturePhotos` component.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `FeaturePhotos` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-feature-photos--docs" target="_blank">FeaturePhotos Story</a>
 
 Now that we've built the `FeaturePhotos` component, we can move on to the next section of our profile page.
 
@@ -98,23 +163,37 @@ Now that we've built the `FeaturePhotos` component, we can move on to the next s
 
 In this section, we'll create the ProfileInfo component which is responsible for displaying the main information section of a user's profile page.<br/>
 
-**Step-by-Step Guide:**
-This component presents the user's avatar, name, username, title (optional), bio (optional), location (optional), website (optional), and a button to edit the profile.
+1. Files and Structure:
 
-Now let's open the `profile-info.tsx` tab and we will break it down step by step:
+   - `profile-info.tsx`: The main component file for the ProfileInfo component.
+   - `info-line.tsx`: A reusable component for displaying an icon and text in a row.
+   - `typography.tsx`: Custom typography components for consistent text styling.
+   - `utils.ts`: Utility functions for generating avatar fallback text and formatting the user's location.
+   - `types.ts`: TypeScript file for defining the component's prop types.
 
-- `Avatar` component from '@nextui-org/react' is used to display the user's avatar. If the avatar URL is not provided, we use a fallback text generated from the user's name with the `getAvatarFallback` util function.
-- `Link` component from '@nextui-org/react' is used to display the user's company name as a clickable link to their website.
-- `Spacer` component is used to add vertical spacing between elements.
-- `Paragraph` and `Subtle` components are custom typography components for displaying text like the user's name, username, and bio.
-- Icons like `Link` and `MapPin` are imported from `lucide-react` library. So you will need to install it `yarn add lucide-react` if you haven't already.
-- `InfoLine` is a reusable component that displays an icon and text in a row. It's used to show the user's location and website. You can open the `info-line.tsx` tab to see its implementation.
+2. New dependencies:
+   - `lucide-react`: A library of simply beautiful open-source icons. Install it using `yarn add lucide-react`.
 
-**A few notes:**
+3. Deep dive into `profile-info.tsx` file:
+   - **Props:**
 
-- The `ProfileInfo` component receives a `profile` prop containing the user's information and a `company` prop containing the company's information.
-- The `Edit profile` button is a placeholder for now. You can replace it with a real button component and add functionality to edit the profile.
-- There's the full demo of the `ProfileInfo` component in Storybook: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-info--docs" target="_blank">ProfileInfo Story</a>
+     - `profile`: An object containing the user's information like name, username, title, bio, location, website, and avatar URL.
+     - `company`: An object containing the company's information like name and website.
+
+   - **Rendering:**
+
+     - The component returns a `<section>` element with the user's avatar, name, username, title, bio, location, website, and an edit profile button.
+     - The user's avatar is displayed using the `Avatar` component from '@nextui-org/react'. If the avatar URL is not provided, a fallback text generated from the user's name is displayed.
+     - The user's company name is displayed as a clickable link to their website using the `Link` component from '@nextui-org/react'.
+     - The user's location and website are displayed using the `InfoLine` component, which shows an icon and text in a row.
+
+4. Deep dive into `info-line.tsx` and `typography.tsx` files:
+      - This component takes an icon, classname, and children as props to display an icon and content in a row.
+      - We're using the `Icon` component from '@nextui-org/react' to render the icon and `Spacer` component for spacing between the icon and content.
+      - The `Paragraph` and `Subtle` components are custom typography components for consistent text styling across the profile page.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `ProfileInfo` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-info--docs" target="_blank">ProfileInfo Story</a>
 
 So far, we've created the `FeaturePhotos` and `ProfileInfo` components. Next, we'll implement the Profile Stats section.
 
@@ -122,13 +201,336 @@ So far, we've created the `FeaturePhotos` and `ProfileInfo` components. Next, we
 
 In this section, we'll build the ProfileStats component, which displays the user's profile statistics like followers, following, and posts count.<br/>
 Since it's a pretty straightforward component, let's dive into the implementation by opening the `profile-stats.tsx` tab:
-- The `ProfileStats` component receives a `stats` prop containing the user's statistics.
-- We built a `formatNumber` utility function to format the numbers with commas and a maximum of 3 decimal places.
-- `StatsBlock` is a component that displays a label and value in a column. It's used to show the followers, following, and posts count.
-- There's the full demo of the `ProfileStats` component in Storybook: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-stats--docs" target="_blank">ProfileStats Story</a>
 
-## !!accordions Section 5: Implementing the Profile Timeline
+1. Files and Structure:
 
-In this section, we'll create the ProfileTimeline component, which displays a list of posts in a user's profile.<br/>
+   - `profile-stats.tsx`: The main component file for the ProfileStats component.
+   - `stats-block.tsx`: A reusable component for displaying a label and value in a column.
+   - `utils.ts`: Utility functions for formatting numbers.
+   - `types.ts`: TypeScript file for defining the component's prop types.
+
+2. Deep dive into `profile-stats.tsx` file:
+   - **Props:**
+     - `stats`: An object containing the user's statistics like followers, following, and posts count.
+
+   - **Rendering:**
+     - The component returns a `<section>` element with three `StatsBlock` components for displaying followers, following, and posts count.
+     - The `StatsBlock` component takes a label and value as props and displays them in a column.
+     - The numbers are formatted using the `formatNumber` utility function to include commas and a maximum of 3 decimal places.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `ProfileStats` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-stats--docs" target="_blank">ProfileStats Story</a>
+Now we'll move on to the next section to implement the Profile Post Timeline.
+
+## !!accordions Section 5: Implementing the Profile Post Timeline
+
+In this section, we'll create the `PostCard` component to display individual posts and the `Posts` component to render a list of posts.
+
+1. **Files and Structure:**
+   - `post-card.tsx`: A component to display a post card.
+   - `post-card.utils.tsx`: Utility functions for rendering post's actions such as like, comment, share buttons...
+   - `posts.tsx`: The main component file for rendering a list of posts.
+   - `markdown-renderer.tsx`: A component for rendering markdown content.
+   - `use-profile.ts`: A sample hook for fetching current user profile data.
+   - `utils.ts`: Utility functions for formatting dates.
+   - `types.ts`: TypeScript file for defining the component's prop types and related interfaces.
+
+2. **Deep dive into `post-card.tsx` file:**
+   - **Props:**
+      - `createdAt`: The date and time when the post was created.
+      - `content`: The content of the post.
+      - `authorName`: The name of the author of the post.
+      - `authorUsername`: The username of the author.
+      - `avatar`: The URL of the author's avatar image.
+      - `isSelfPost`: A boolean indicating if the post is created by the current user.
+      - `postActionConfig`: Configuration for actions that can be performed on the post.
+      - `postMenuActionConfig`: Configuration for actions available in the post's menu.
+      - `className`: Additional CSS classes for styling.
+      - `...rest`: Any other `Card` props that are passed to the component.
+
+   - **Functions:**
+      - `getPostActions()`: This function is called to get the actions that can be performed on the post.
+      - `getPostMenuActions({ isSelfPost })`: This function is called to get the actions available in the post's menu, considering if the post is created by the current user.
+      - These 2 functions are defined in the `post-card.utils.tsx` file. We will explore them later.
+   - **Event handlers:**
+      - `handleOnMenuDropdownAction(type: PostMenuActionType)`: This function handles menu dropdown actions based on the action type.
+      - `handleOnPostAction(type: PostActionType)`: This function handles post actions based on the action type.
+
+   - **Rendering:**
+      - The component returns a `Card` component that wraps the entire post.
+      - Inside the `Card`, there is a `CardHeader` that contains:
+         - A `User` component displaying the author's name, username (as a link), and avatar.
+         - A `Subtle` component showing the formatted creation date.
+      - If `postMenuActionConfig` is provided, a `Dropdown` component is rendered:
+         - The `Dropdown` contains a `DropdownTrigger` with a button to open the menu.
+         - The `DropdownMenu` contains `DropdownItem` components for each action in `postMenuActions`.
+      - The `CardBody` contains the post content using `MarkdownRenderer` component to render markdown content.
+      - If `postActionConfig` is provided, a `CardFooter` component is rendered:
+         - The `CardFooter` contains `Button` components for each action in `postActions`.
+   
+3. **Deep dive into `post-card.utils.tsx` file:** <br/> <br/>
+   In this file, we define utility functions for rendering post actions and post menu actions. We have 3 main functions:
+   - `getPostActions()`: This function returns an array of post actions based on the `postActionConfig` provided to the `PostCard` component.
+   - `getPostMenuActions({ isSelfPost })`: This function returns an array of post menu actions based on the `postMenuActionConfig` provided to the `PostCard` component. The `isSelfPost` parameter is used to determine if the post is created by the current user.
+   - `getPostActionCount(type, config)`: This function returns the content for a specific post action such as like counts, comment counts, and repost counts. The `type` parameter specifies the action type, and the `config` parameter contains the action configuration.
+   
+4. **Deep dive into `posts.tsx` file:** <br/> <br/>
+   In this file, we define the `Posts` component that renders a list of posts. The component takes an array of post objects as a prop and maps over them to render individual `PostCard` components.
+   - **Props:**
+      - `posts`: An array of post objects containing the post data.
+   - **Action event handlers:**
+      - `getPostActionsConfig(stats)`: This function takes in a `stats` object that contains information about a post's statistics (like the number of comments, reposts, and likes). It returns a configuration object for different actions you can perform on a post.
+      - `postMenuActionsConfig`: This object contains the configuration for the actions available in the post's menu. It includes actions like addToHighlight, editViewPermission, delete, report and unlike.
+      <CollapsibleBlock triggerLabel="Why define action handlers at the Posts component level?">
+         - **Separation of Concerns**: By defining handlers at the Posts component level, you keep the PostCard component focused on rendering the UI. This separation makes the code easier to maintain and understand.
+         - **Reusability**: Handlers defined at the Posts component level can be reused across multiple PostCard instances. This avoids code duplication and makes it easier to manage changes.
+         - **State Management**: If the handlers need to interact with shared state or perform actions that affect multiple PostCard components, it's easier to manage this state at a higher level.
+         - **Performance**: Defining handlers at the Posts component level can improve performance by avoiding the creation of new handler functions for each PostCard instance.
+         - **Testing**: It is easier to test the logic of handlers when they are defined at a higher level, as they are not tightly coupled with the UI rendering logic.
+      </CollapsibleBlock>
+
+   In a real-world scenario, you can consider creating custom hooks for each handler, it's a good solution to improve the structure and maintainability of your code. Custom hooks allow you to encapsulate the logic for each handler, making your components cleaner and more focused on rendering. This approach also promotes reusability and easier testing of the handler logic.
+   <CollapsibleBlock triggerLabel="See example of how you can create custom hooks for post actions">
+      <div>
+         ```tsx
+         // usePostActions.ts
+
+         import { useCallback } from 'react';
+
+         export const useCommentAction = () => {
+            return useCallback((postId: string) => {
+               // Implement the logic for commenting on a post
+               alert(`Commented on post ${postId} clicked`);
+               // Fetch/mutate data logic here
+            }, []);
+         };
+
+         export const useRepostAction = () => {
+            return useCallback((postId: string) => {
+               // Implement the logic for reposting a post
+               alert(`Reposted post ${postId} clicked`);
+               // Fetch/mutate data logic here
+            }, []);
+         };
+
+         // You can define other hooks like useBookmarkAction, useShareAction, etc.
+         ```
+
+         ```tsx
+         // Posts.tsx
+         
+         import React from 'react';
+         import { useCommentAction, useRepostAction, useToggleLikeAction, useBookmarkAction, useShareAction } from './usePostActions';
+
+         const Posts: React.FC<{ posts: Post[] }> = ({ posts }) => {
+            //!mark(1:5)
+            const handleComment = useCommentAction();
+            const handleRepost = useRepostAction();
+            const handleToggleLike = useToggleLikeAction();
+            const handleBookmark = useBookmarkAction();
+            const handleShare = useShareAction();
+
+            const getPostActionsConfig = (stats: PostStats): PostCardProps['postActionConfig'] => {
+               return {
+                  comment: {
+                     count: stats.comments,
+                     //!mark(1:1)
+                     handler: handleComment,
+                  },
+                  repost: {
+                     count: stats.reposts,
+                     //!mark(1:1)
+                     handler: handleRepost,
+                  },
+                  toggleLike: {
+                     count: stats.likes,
+                     //!mark(1:1)
+                     handler: handleToggleLike,
+                  },
+                     bookmark: {
+                     //!mark(1:1)
+                     handler: handleBookmark,
+                  },
+                     share: {
+                     //!mark(1:1)
+                     handler: handleShare,
+                  },
+               };
+            };
+
+            return (
+               <div>
+                  {posts.map(post => (
+                     <PostCard
+                        ...
+                        postActionConfig={getPostActionsConfig(post.stats)}
+                        ...
+                     />
+                  ))}
+               </div>
+            );
+         };
+         ```
+      </div>
+   </CollapsibleBlock>
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `PostCard` component to showcase its functionality and appearance. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-components-post-card--docs" target="_blank">PostCard Story</a>
+Now we'll move on to the next section to implement the Profile Photo Timeline.
+
+## !!accordions Section 6: Implementing the Profile Photo Timeline
+
+In this section, we'll create the `PhotoCard` component to display individual photos and the `Photos` component to render a list of photos.
+
+1. **Files and Structure:**
+   - `photo-card.tsx`: A component to display a photo card.
+   - `photos.tsx`: The main component file for rendering a list of photos.
+   - `types.ts`: TypeScript file for defining the component's prop types.
+
+2. **Deep dive into `photo-card.tsx` file:**
+   - **Props:**
+      - `photoId`: The unique identifier of the photo.
+      - `photoSrc`: The URL of the photo.
+      - `onPress`: A function to handle the press event on the photo card.
+   
+   - **Rendering:**
+      - The component returns a `Card` component that wraps the photo.
+      - Inside the `Card`, there is a `CardBody` that contains an `Image` component displaying the photo.
+      - The `Image` component is from '@nextui-org/react' and displays the photo with the provided URL.
+   
+3. **Deep dive into `photos.tsx` file:** <br/> <br/>
+   In this file, we define the `Photos` component that renders a list of photos. We're using an <a href="https://flowbite.com/docs/components/gallery/#masonry-grid" target="_blank">example from flowbite</a> to create a masonry grid layout for the photos.
+   - **Props:**
+      - `photos`: An array of photo objects containing the photo data.
+   - **Rendering a masonry layout:**
+      - Columns Creation: Photos are divided into columns of 3 photos each.
+      - Grid Layout: The outer grid has 2 columns, and each column contains a sub-grid of photos.
+      - Rendering: Each photo is rendered using the PhotoCard component.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `PhotoCard` component to showcase its functionality and appearance. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-components-photo-card--docs" target="_blank">PhotoCard Story</a>
+Now we'll move on to the next section to implement the Profile Timeline Tabs.
+
+## !!accordions Section 7: Implementing the Profile Timeline Tabs
+In this section, we'll create the `ProfileTimeline` component, which displays a timeline of posts, photos, and liked posts in a tabbed interface.
+
+1. **Files and Structure:**
+   - `profile-timeline.tsx`: The main component file for the ProfileTimeline component.
+   - `use-timeline-tabs.tsx`: A custom hook for generating tab data based on the provided posts, photos, and liked posts.
+   - `types.ts`: TypeScript file for defining the component's prop types.
+
+2. **Deep dive into `profile-timeline.tsx` file:**
+   - **Props:**
+      - `posts`: An array of post objects containing the post content, date, and likes.
+      - `photos`: An array of photo objects containing the photo URL and date.
+      - `likedPosts`: An array of liked post objects containing the post content, date, and likes.
+   
+   - **Rendering:**
+      - The component returns a `<section>` element with a `Tabs` component from '@nextui-org/react' for switching between different timeline views.
+      - The `Tabs` component uses the `useTimelineTabs` hook to generate tab data for posts, photos, and liked posts. We will explore this hook later.
+      ```tsx
+      const tabs = useTimelineTabs({ likedPosts, photos, posts });
+      ```
+      - `tabs` is an array of tab objects containing the tab label, content, and unique ID. It will be passed to the `Tabs` component as the `items` prop.
+      - The `Tabs` component support <a href="https://legacy.reactjs.org/docs/render-props.html" target="_blank">Render Props</a> technique to render the tab contents based on the data passed via the `items` prop.
+      ```tsx
+      <Tabs
+         aria-label="Profile timeline"
+         color="primary"
+         fullWidth
+         variant="underlined"
+         // !mark(1:1)
+         items={tabs}
+         destroyInactiveTabPanel={false}
+         classNames={{
+            base: 'sticky top-0 z-50 bg-background',
+         }}
+         >
+         {(item) => (
+            // !mark(1:3)
+            <Tab key={item.id} title={item.label}>
+               <div className="px-2">{item.content}</div>
+            </Tab>
+         )}
+      </Tabs>
+      ```
+3. **Deep dive into `use-timeline-tabs.tsx` file:**
+   - **Params:**
+      - `likedPosts`: An array of liked post objects.
+      - `photos`: An array of photo objects.
+      - `posts`: An array of post objects.
+
+   - **Tab Generation:**
+      - The hook generates tab data for posts, photos, and liked posts based on the provided data.
+      - It creates a tab object for each type of content with a unique ID, label, and content.
+      - The `Posts`, and `Photos` components are used to render the content for each tab. We've already covered these components in previous sections.
+      - The hook returns an array of tab objects that can be used to render the tabs in the `ProfileTimeline` component.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `ProfileTimeline` component to showcase its functionality and appearance. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-components-profile-timeline--docs" target="_blank">ProfileTimeline Story</a>
+
+## !!accordions Section 8: Putting It All Together
+So far, we've built the individual components for the profile page, including `FeaturePhotos`, `ProfileInfo`, `ProfileStats`, `PostCard`, `PhotoCard`, and `ProfileTimeline`. Now, let's put them all together to create the complete profile page.
+
+1. **Files and Structure:**
+   - `profile-page.tsx`: The main component file for the ProfilePage component.
+   - `parallax-container.tsx`: A component for creating a parallax effect on the header.
+   - `data.ts`: Sample data that you can use to populate the profile page.
+   - `types.ts`: TypeScript file for defining the component's prop types.
+
+2. New dependencies:
+
+   - `framer-motion`: A library for creating animations and interactions in React. Install it using `yarn add framer-motion`.
+
+3. **Deep dive into `profile-page.tsx` file:**
+   - **Props:**
+      - `featurePhotos`: An array of photo URLs for the feature photos carousel.
+      - `profile`: An object containing the user's profile information.
+      - `company`: An object containing the company's information.
+      - `profileStats`: An object containing the user's profile statistics.
+      - `profileTimeline`: An object containing the user's timeline data.
+   
+   - **Rendering:**
+      - We use `ScrollShadow` component from '@nextui-org/react' that wraps the profile page content to create a shadow effect when scrolling.
+      - The `useScroll` hook from `framer-motion` library is used to get the `scrollYProgress` and pass it to the `useParallaxHeader` hook, which calculates the `y` value for the parallax effect.
+      ```tsx
+      export const ProfilePage = (...) => {
+         // !border[/ref/gm]
+         const ref = React.useRef(null);
+         // !mark(1:4)
+         const { scrollYProgress } = useScroll({
+            container: ref,
+         });
+         const y = useParallaxHeader(scrollYProgress);
+
+         // !mark(4:6)
+         return (
+            <MockupBrowser>
+               <ScrollShadow ref={ref} className="h-[550px]" size={15}>
+                  <ParallaxContainer y={y}>
+                     <FeaturePhotos photos={featurePhotos} showDots />
+                  </ParallaxContainer>
+                  ...
+               </ScrollShadow>
+            </MockupBrowser>
+         );
+      };
+      ```
+      - The `ParallaxContainer` component use the `y` value to create a parallax effect on the header. We will explore this component later.
+      - The `FeaturePhotos`, `ProfileInfo`, `ProfileStats`, and `ProfileTimeline` are all the components we've built so far. They are combined to create the complete profile page layout.
+
+4. **Deep dive into `parallax-container.tsx` file:**
+   - **Props:**
+      - `y`: A motion value representing the vertical scroll position.
+   
+   - **Parallax Effect:**
+      - The idea of the parallax effect is when you scroll down the page, the header moves at a slower pace than the rest of the content, creating a visually appealing effect.
+      - The component uses the `motion` library from Framer Motion to create a parallax effect on the header.
+      - It applies a translateY transform to the header based on the scroll position to create a smooth parallax effect.
+      - The `y` prop is passed from the `ProfilePage` component to control the parallax effect based on the scroll position.
+
+**Live Demo:** <br/>
+We've created a Storybook story for the `ProfilePage` component to showcase the complete profile page layout. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-page-screen--docs" target="_blank">ProfilePage Story</a>
+
 
 </CodeWithAccoridions>

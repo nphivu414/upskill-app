@@ -24,7 +24,7 @@ export function CodeBlockTabs(props: {
       classNames={{
         base: 'overflow-x-auto max-w-full',
         panel:
-          'w-full bg-content2 rounded-lg overflow-auto mt-4 min-h-[50px] py-0 max-h-[70vh]',
+          'w-full bg-content2 rounded-lg overflow-auto mt-4 min-h-[60vh] max-h-[60vh] lg:min-h-[50px] py-0 lg:max-h-[75vh]',
       }}
     >
       {(tab) => {

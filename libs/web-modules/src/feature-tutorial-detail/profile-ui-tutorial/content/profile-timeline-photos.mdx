@@ -1,0 +1,95 @@
+import { EmbedStory } from '@upskill-app/ui/web';
+import { PhotoCardPreview } from '@upskill-app/tutorial-elements';
+import { env } from '../../../utils';
+
+<CodeWithTabs>
+
+### !!tabs Preview
+
+<PhotoCardPreview/>
+
+### !!tabs photo-card.tsx
+
+```tsx
+import { Card, CardBody, Image } from '@nextui-org/react';
+
+import { PhotoCardProps } from './types';
+
+export const PhotoCard = ({ photoId, photoSrc, onPress }: PhotoCardProps) => {
+  const handleOnPress = () => {
+    return () => {
+      onPress?.(photoId);
+    };
+  };
+
+  return (
+    <Card
+      isPressable
+      onPress={handleOnPress}
+      className="p-0"
+      classNames={{
+        body: 'p-0',
+      }}
+    >
+      <CardBody>
+        <Image src={photoSrc} alt="My photo" />
+      </CardBody>
+    </Card>
+  );
+};
+
+```
+
+### !!tabs photos.tsx
+
+```tsx
+import React from 'react';
+
+import { PhotosProps } from './types';
+import { PhotoCard } from './photo-card';
+
+export const Photos = ({ photos }: PhotosProps) => {
+  const columns = React.useMemo(() => {
+    const cols = [];
+    for (let i = 0; i < photos.length; i += 3) {
+      cols.push(photos.slice(i, i + 3));
+    }
+    return cols;
+  }, [photos]);
+
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {columns.map((columnPhotos, colIndex) => (
+        <div key={colIndex} className="grid gap-4">
+          {columnPhotos.map(({ id, src }, photoIndex) => (
+            <PhotoCard key={photoIndex} photoId={id} photoSrc={src} />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+```
+
+### !!tabs types.ts
+
+```ts
+export interface PostPhoto {
+  id: string;
+  src: string;
+}
+
+export type PhotoCardProps = {
+  photoId: string;
+  photoSrc: string;
+  onPress?: (id: string) => void;
+};
+
+export type PhotosProps = {
+  photos: PostPhoto[];
+};
+
+```
+
+</CodeWithTabs>

@@ -1,20 +1,18 @@
 import { EmbedStory } from '@upskill-app/ui/web';
+import { env } from '../../../utils';
+import { ProfileStatsPreview } from '@upskill-app/tutorial-elements';
 
 <CodeWithTabs>
 
 ### !!tabs Preview
 
-<EmbedStory
-  storyId="tutorials-profile-ui-components-profile-stats--default"
-  width={320}
-  height={200}
-/>
+<ProfileStatsPreview/>
 
 ### !!tabs profile-stats.tsx
 
 ```tsx
-import { ProfileStatsProps } from '../types';
-import { formatNumber } from '../utils';
+import { ProfileStatsProps } from './types';
+import { formatNumber } from './utils';
 import { StatsBlock } from './stats-block';
 
 export const ProfileStats = ({

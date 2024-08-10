@@ -1,81 +1,52 @@
 'use client';
 
 import React from 'react';
-import {
-  Accordion,
-  AccordionItem,
-  cn,
-  Image,
-  Selection,
-} from '@nextui-org/react';
-import { Subtle } from '@upskill-app/ui/web';
+import { Accordion, AccordionItem, cn, Selection } from '@nextui-org/react';
+import { ComponentWithChildren } from '@upskill-app/types';
 import StickyBox from 'react-sticky-box';
 
-import FeaturePhotosCodeContent from '../content/feature-photos-content.mdx';
-import ProfileInfoCodeContent from '../content/profile-info-content.mdx';
-import ProfileStatsContent from '../content/profile-stats-content.mdx';
-import { Code } from '../profile-content';
-import { CodeWithTabs } from './tutorial-code';
+import { StepContent } from '../../step-content';
+import { useContentSectionQueryState } from '../../useContentSectionQueryState';
+import { steps } from '../step-config';
+import { ShowCodeModal } from './show-code-modal';
 
-export function CustomAccordion({
-  data,
-}: {
-  data: {
-    title?: string | undefined;
-    children?: React.ReactNode;
-  }[];
-}) {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['0']));
+type CustomAccordionData = {
+  title?: string;
+} & ComponentWithChildren;
+
+type CustomAccordionProps = {
+  data: CustomAccordionData[];
+};
+
+export const CustomAccordion = ({ data }: CustomAccordionProps) => {
+  const { selectedSections, setSelectedSections } =
+    useContentSectionQueryState();
+  const [isClosedAll, setIsClosedAll] = React.useState(false);
+
+  React.useEffect(() => {
+    if (selectedSections[0] === 'empty') {
+      setIsClosedAll(true);
+    } else {
+      setIsClosedAll(false);
+    }
+  }, [selectedSections, setSelectedSections]);
+
+  const selectedAccordionKeys = isClosedAll
+    ? []
+    : new Set(selectedSections.map((key) => `${parseInt(key) - 1}`));
 
   const onSelectionChange = (keys: Selection) => {
-    setSelectedKeys(keys as Set<string>);
-  };
-
-  const renderStepSide = (index: number) => {
-    return (
-      <div>
-        <div
-          className={cn('flex flex-col items-center justify-center', {
-            hidden: index !== 0,
-          })}
-        >
-          <Subtle className="mb-2">
-            Expected outcome after completing this step
-          </Subtle>
-          <Image
-            src="/startup-screen.png"
-            className="mx-auto w-[400px] border"
-            alt="Profile UI Project Startup Screen"
-          />
-          <Subtle className="mt-2">(NextUI Startup Screen)</Subtle>
-        </div>
-        <div
-          className={cn({
-            hidden: index !== 1,
-          })}
-        >
-          <FeaturePhotosCodeContent components={{ CodeWithTabs, Code }} />
-        </div>
-        <div
-          className={cn({
-            hidden: index !== 2,
-          })}
-        >
-          <ProfileInfoCodeContent components={{ CodeWithTabs, Code }} />
-        </div>
-        <div
-          className={cn({
-            hidden: index !== 3,
-          })}
-        >
-          <ProfileStatsContent components={{ CodeWithTabs, Code }} />
-        </div>
-      </div>
+    setSelectedSections(
+      Array.from(keys).map((key) => (parseInt(key.toString()) + 1).toString())
     );
   };
 
   const onAccordionItemPress = (index: number) => {
     return () => {
+      if (selectedSections?.indexOf((index + 1).toString()) === -1) {
+        return;
+      }
+
       const element = document.getElementById(`accordion-item-${index}`);
       setTimeout(() => {
         element?.scrollIntoView({
@@ -87,17 +58,20 @@ export function CustomAccordion({
     };
   };
 
+  const renderStepContent = (index: number) => {
+    return <StepContent steps={steps} currentIndex={index} />;
+  };
+
   return (
     <Accordion
-      disallowEmptySelection
       fullWidth
       variant="shadow"
       selectionMode="multiple"
-      selectedKeys={selectedKeys}
+      selectedKeys={selectedAccordionKeys}
       onSelectionChange={onSelectionChange}
       keepContentMounted
       itemClasses={{
-        base: 'accordion-item',
+        content: 'py-4',
       }}
     >
       {data.map((accordionItem, index) => (
@@ -107,21 +81,31 @@ export function CustomAccordion({
           key={index}
           data-key={index}
           aria-label={accordionItem.title}
-          title={<p className="text-lg font-bold">{accordionItem.title}</p>}
+          title={<p className="text-lg font-semibold">{accordionItem.title}</p>}
           onPress={onAccordionItemPress(index)}
         >
           <div className="prose prose-zinc dark:prose-invert max-w-full">
-            <div className="flex items-start">
-              <div className="w-1/2 flex-none [&>p:first-child]:mt-0">
+            <div className="block items-start lg:flex">
+              <div className="w-full flex-none text-sm lg:w-1/2 [&>p:first-child]:mt-0">
                 {accordionItem.children}
               </div>
-              <StickyBox offsetTop={65} className="flex w-1/2 flex-col pl-8">
-                {renderStepSide(index)}
+              <StickyBox
+                offsetTop={65}
+                className={cn('w-full flex-col lg:flex lg:w-1/2 lg:pl-8', {
+                  hidden: index !== 0,
+                })}
+              >
+                {renderStepContent(index)}
               </StickyBox>
+              {index !== 0 && (
+                <ShowCodeModal>
+                  <>{renderStepContent(index)}</>
+                </ShowCodeModal>
+              )}
             </div>
           </div>
         </AccordionItem>
       ))}
     </Accordion>
   );
-}
+};

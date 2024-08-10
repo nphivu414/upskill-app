@@ -88,17 +88,17 @@ export const getPostActions = () => {
   return postActions;
 };
 
-export const getPostActionContent = (
+export const getPostActionCount = (
   type: PostActionType,
   config: PostActionConfig
 ) => {
   switch (type) {
     case 'comment':
-      return config.comment.content;
+      return config.comment.count;
     case 'repost':
-      return config.repost.content;
+      return config.repost.count;
     case 'toggleLike':
-      return config.toggleLike.content;
+      return config.toggleLike.count;
     default:
       return null;
   }

@@ -2,7 +2,6 @@ import React from 'react';
 import { ScrollShadow, Spacer } from '@nextui-org/react';
 import { useScroll } from 'framer-motion';
 
-import { MockupBrowser } from '../components';
 import { FeaturePhotos } from './feature-photos';
 import { ParallaxContainer } from './parallax-container';
 import { ProfileInfo } from './profile-info';
@@ -25,21 +24,15 @@ export const ProfilePage = ({
   const y = useParallaxHeader(scrollYProgress);
 
   return (
-    <MockupBrowser>
-      <ScrollShadow ref={ref} className="h-[550px]" size={15}>
-        <ParallaxContainer y={y}>
-          <FeaturePhotos photos={featurePhotos} showDots />
-        </ParallaxContainer>
-        <ProfileInfo profile={profile} company={company} />
-        <Spacer y={1} />
-        <ProfileStats stats={profileStats} />
-        <Spacer y={1} />
-        <ProfileTimeline
-          posts={posts}
-          photos={photos}
-          likedPosts={likedPosts}
-        />
-      </ScrollShadow>
-    </MockupBrowser>
+    <ScrollShadow ref={ref} className="h-[550px]" size={15}>
+      <ParallaxContainer y={y}>
+        <FeaturePhotos photos={featurePhotos} showDots />
+      </ParallaxContainer>
+      <ProfileInfo profile={profile} company={company} />
+      <Spacer y={1} />
+      <ProfileStats stats={profileStats} />
+      <Spacer y={1} />
+      <ProfileTimeline posts={posts} photos={photos} likedPosts={likedPosts} />
+    </ScrollShadow>
   );
 };

@@ -1,14 +1,12 @@
 import { EmbedStory } from '@upskill-app/ui/web';
+import { env } from '../../../utils';
+import { FeaturePhotosPreview } from '@upskill-app/tutorial-elements';
 
 <CodeWithTabs>
 
 ### !!tabs Preview
 
-<EmbedStory
-  storyId="tutorials-profile-ui-components-feature-photos--with-pagination-dots"
-  width={320}
-  height={320}
-/>
+<FeaturePhotosPreview/>
 
 ### !!tabs feature-photo.tsx
 
@@ -71,12 +69,7 @@ export const FeaturePhotos = ({ photos, showDots }: FeaturePhotosProps) => {
 
 ### !!tabs carousel-dot-buttons.tsx
 ```tsx
-import React, {
-  ComponentPropsWithRef,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import React from 'react';
 import { EmblaCarouselType } from 'embla-carousel';
 
 type UseDotButtonType = {
@@ -86,12 +79,12 @@ type UseDotButtonType = {
 };
 
 export const useDotButton = (
-  emblaApi: EmblaCarouselType | undefined
+  emblaApi?: EmblaCarouselType
 ): UseDotButtonType => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([]);
 
-  const onDotButtonClick = useCallback(
+  const onDotButtonClick = React.useCallback(
     (index: number) => {
       if (!emblaApi) return;
       emblaApi.scrollTo(index);
@@ -99,15 +92,15 @@ export const useDotButton = (
     [emblaApi]
   );
 
-  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
+  const onInit = React.useCallback((emblaApi: EmblaCarouselType) => {
     setScrollSnaps(emblaApi.scrollSnapList());
   }, []);
 
-  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+  const onSelect = React.useCallback((emblaApi: EmblaCarouselType) => {
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!emblaApi) return;
 
     onInit(emblaApi);
@@ -122,9 +115,9 @@ export const useDotButton = (
   };
 };
 
-type PropType = ComponentPropsWithRef<'button'>;
-
-export const CarouselDotButton: React.FC<PropType> = (props) => {
+export const CarouselDotButton = (
+  props: React.ComponentPropsWithRef<'button'>
+) => {
   const { children, ...restProps } = props;
 
   return (

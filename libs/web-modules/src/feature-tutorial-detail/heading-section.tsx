@@ -1,5 +1,6 @@
-import { Spacer, User } from '@nextui-org/react';
-import { EmbedStory, Heading1 } from '@upskill-app/ui/web';
+import { Chip, Spacer, User } from '@nextui-org/react';
+import { ProfilePagePreview } from '@upskill-app/tutorial-elements';
+import { Heading1 } from '@upskill-app/ui/web';
 
 type AuthorProps = {
   name: string;
@@ -27,7 +28,7 @@ export const HeadingSection = ({
   return (
     <section className="w-full pt-12">
       <div className="space-y-10 px-4 md:px-6 xl:space-y-16">
-        <div className="flex items-start gap-4">
+        <div className="flex flex-col items-start gap-4 lg:flex-row">
           <div className="flex-1">
             <Heading1>{title}</Heading1>
             <Spacer y={4} />
@@ -41,31 +42,30 @@ export const HeadingSection = ({
               />
             </div>
             <Spacer y={6} />
-            <div className="md:text-xl">{description}</div>
+            <div className="md:text-lg">{description}</div>
             <Spacer y={6} />
             <div>
-              <p className="text-muted text-lg">Target Audience</p>
+              <p className="text-lg font-semibold">Target Audience</p>
               <Spacer y={2} />
-              <p>{targetAudience}</p>
+              <p className="text-sm">{targetAudience}</p>
             </div>
             <Spacer y={6} />
             <div>
-              <p className="text-muted text-lg">Prerequisites</p>
+              <p className="text-lg font-semibold">Prerequisites</p>
               <Spacer y={2} />
               <ul className="ml-4 list-disc">
                 {prerequisites?.map((prerequisite, index) => (
-                  <li key={index}>{prerequisite}</li>
+                  <li key={index} className="py-1 text-sm">
+                    {prerequisite}
+                  </li>
                 ))}
               </ul>
             </div>
           </div>
-          <div className="w-1/2">
-            <div className="flex flex-col items-center justify-center">
-              <EmbedStory
-                storyId="tutorials-profile-ui-page-screen--default"
-                width={400}
-                height={650}
-              />
+          <div className="w-full lg:w-1/2">
+            <div className="flex flex-col items-center justify-center gap-4">
+              <ProfilePagePreview />
+              <Chip color="secondary">Live Preview</Chip>
             </div>
           </div>
         </div>
