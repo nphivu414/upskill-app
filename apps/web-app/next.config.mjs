@@ -2,7 +2,6 @@
 import { composePlugins, withNx } from '@nx/next'
 import { remarkCodeHike, recmaCodeHike } from "codehike/mdx"
 import createMDX from "@next/mdx"
-import withLitSSR from '@lit-labs/nextjs'
 
 /** @type {import('codehike/mdx').CodeHikeConfig} */
 const chConfig = {
@@ -36,8 +35,7 @@ const withMDX = createMDX({
 
 const plugins = [
   withNx,
-  withLitSSR(),
-  withMDX
+  withMDX,
 ];
 
 export default composePlugins(...plugins)(nextConfig)
