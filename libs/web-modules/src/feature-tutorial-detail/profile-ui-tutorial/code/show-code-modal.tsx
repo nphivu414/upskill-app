@@ -28,6 +28,9 @@ export const ShowCodeModal = ({ children }: ComponentWithChildren) => {
         hideCloseButton
         onOpenChange={onOpenChange}
         placement="bottom-center"
+        classNames={{
+          base: 'max-w-full',
+        }}
       >
         <ModalContent>
           {(onClose) => (

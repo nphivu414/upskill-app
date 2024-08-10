@@ -2,36 +2,48 @@
 
 import React from 'react';
 import { Accordion, AccordionItem, cn, Selection } from '@nextui-org/react';
+import { ComponentWithChildren } from '@upskill-app/types';
 import StickyBox from 'react-sticky-box';
 
 import { StepContent } from '../../step-content';
-import { useContentAccordion } from '../../stores';
+import { useContentSectionQueryState } from '../../useContentSectionQueryState';
 import { steps } from '../step-config';
 import { ShowCodeModal } from './show-code-modal';
 
-export function CustomAccordion({
-  data,
-}: {
-  data: {
-    title?: string | undefined;
-    children?: React.ReactNode;
-  }[];
-}) {
-  const { selectedKeys, setSelectedKeys, setAllKeys } = useContentAccordion();
+type CustomAccordionData = {
+  title?: string;
+} & ComponentWithChildren;
+
+type CustomAccordionProps = {
+  data: CustomAccordionData[];
+};
+
+export const CustomAccordion = ({ data }: CustomAccordionProps) => {
+  const { selectedSections, setSelectedSections } =
+    useContentSectionQueryState();
+  const [isClosedAll, setIsClosedAll] = React.useState(false);
 
   React.useEffect(() => {
-    setAllKeys(new Set(data.map((_, index) => index.toString())));
-    //TODO: Remove this line after the tutorial is completed
-    setSelectedKeys(new Set('0'));
-  }, [data, setAllKeys]);
+    if (selectedSections[0] === 'empty') {
+      setIsClosedAll(true);
+    } else {
+      setIsClosedAll(false);
+    }
+  }, [selectedSections, setSelectedSections]);
+
+  const selectedAccordionKeys = isClosedAll
+    ? []
+    : new Set(selectedSections.map((key) => `${parseInt(key) - 1}`));
 
   const onSelectionChange = (keys: Selection) => {
-    setSelectedKeys(keys as Set<string>);
+    setSelectedSections(
+      Array.from(keys).map((key) => (parseInt(key.toString()) + 1).toString())
+    );
   };
 
   const onAccordionItemPress = (index: number) => {
     return () => {
-      if (!selectedKeys.has(index.toString())) {
+      if (selectedSections?.indexOf((index + 1).toString()) === -1) {
         return;
       }
 
@@ -55,7 +67,7 @@ export function CustomAccordion({
       fullWidth
       variant="shadow"
       selectionMode="multiple"
-      selectedKeys={selectedKeys}
+      selectedKeys={selectedAccordionKeys}
       onSelectionChange={onSelectionChange}
       keepContentMounted
       itemClasses={{
@@ -96,4 +108,4 @@ export function CustomAccordion({
       ))}
     </Accordion>
   );
-}
+};

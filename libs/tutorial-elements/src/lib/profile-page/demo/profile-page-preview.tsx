@@ -1,6 +1,6 @@
 'use client';
 
-import { MockupBrowser } from '../../components';
+import { ClientOnlyContainer, MockupBrowser } from '../../components';
 import {
   defaultCompany,
   defaultFeaturePhotos,
@@ -12,7 +12,7 @@ import {
 } from '../data';
 import { ProfilePage } from '../profile-page';
 
-export const ProfilePageDemo = () => {
+export const ProfilePagePreview = () => {
   const props = {
     featurePhotos: defaultFeaturePhotos,
     profile: defaultProfile,
@@ -25,8 +25,10 @@ export const ProfilePageDemo = () => {
     },
   };
   return (
-    <MockupBrowser>
-      <ProfilePage {...props} />
-    </MockupBrowser>
+    <ClientOnlyContainer loadingContainerClassName="min-h-[604px]">
+      <MockupBrowser>
+        <ProfilePage {...props} />
+      </MockupBrowser>
+    </ClientOnlyContainer>
   );
 };

@@ -6,25 +6,36 @@ import { ComponentWithChildren } from '@upskill-app/types';
 import { Heading2, Subtle } from '@upskill-app/ui/web';
 import { Minus, Plus } from 'lucide-react';
 
-import { useContentAccordion } from './stores';
+import { useContentSectionQueryState } from './useContentSectionQueryState';
 
 type ContentSectionProps = {
   introText: string;
+  totalSections: number;
 } & ComponentWithChildren;
 
 export const ContentSection = ({
   introText,
+  totalSections,
   children,
 }: ContentSectionProps) => {
-  const { collapseAll, expandAll } = useContentAccordion();
+  const { selectedSections, setSelectedSections } =
+    useContentSectionQueryState();
   const [toggleExpand, setToggleExpand] = React.useState(false);
+
+  React.useEffect(() => {
+    if (selectedSections.length === totalSections) {
+      setToggleExpand(true);
+    }
+  }, [selectedSections.length, totalSections]);
 
   const handleToggleExpand = () => {
     setToggleExpand(!toggleExpand);
     if (toggleExpand) {
-      collapseAll();
+      setSelectedSections(['empty']);
     } else {
-      expandAll();
+      setSelectedSections(
+        Array.from(Array(totalSections).keys()).map((num) => String(num + 1))
+      );
     }
   };
 

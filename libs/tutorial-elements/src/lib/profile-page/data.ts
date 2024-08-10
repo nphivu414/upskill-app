@@ -1,9 +1,9 @@
 import { Company, Post, PostPhoto, Profile, ProfileStats } from './types';
 
 export const defaultFeaturePhotos = [
-  '/profile-cover.jpg',
-  '/profile-cover-2.jpg',
-  '/profile-cover-3.jpg',
+  'https://66a1ae67d3806ba8755e9ebe-dtpcopadnd.chromatic.com/profile-cover.jpg',
+  'https://66a1ae67d3806ba8755e9ebe-dtpcopadnd.chromatic.com/profile-cover-2.jpg',
+  'https://66a1ae67d3806ba8755e9ebe-dtpcopadnd.chromatic.com/profile-cover-3.jpg',
 ];
 
 export const defaultProfile: Profile = {
