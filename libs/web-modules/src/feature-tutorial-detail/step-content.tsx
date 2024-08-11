@@ -1,5 +1,3 @@
-import { cn } from '@nextui-org/react';
-
 import { StepConfig } from './types';
 
 type StepContentProps = {
@@ -7,12 +5,6 @@ type StepContentProps = {
   steps: StepConfig[];
 };
 
-export const StepContent = ({ currentIndex, steps }: StepContentProps) =>
-  steps.map((step) => (
-    <div
-      key={step.index}
-      className={cn('not-prose', { hidden: step.index !== currentIndex })}
-    >
-      {steps[step.index].content}
-    </div>
-  ));
+export const StepContent = ({ currentIndex, steps }: StepContentProps) => {
+  return <div className="not-prose">{steps[currentIndex].content}</div>;
+};

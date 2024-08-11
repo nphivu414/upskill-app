@@ -22,13 +22,16 @@ export const CustomAccordion = ({ data }: CustomAccordionProps) => {
   const { selectedSections, setSelectedSections } =
     useContentSectionQueryState();
   const [isClosedAll, setIsClosedAll] = React.useState(false);
+  const [, startCloseAll] = React.useTransition();
 
   React.useEffect(() => {
-    if (selectedSections[0] === 'empty') {
-      setIsClosedAll(true);
-    } else {
-      setIsClosedAll(false);
-    }
+    startCloseAll(() => {
+      if (selectedSections[0] === 'empty') {
+        setIsClosedAll(true);
+      } else {
+        setIsClosedAll(false);
+      }
+    });
   }, [selectedSections, setSelectedSections]);
 
   const selectedAccordionKeys = isClosedAll
@@ -69,7 +72,6 @@ export const CustomAccordion = ({ data }: CustomAccordionProps) => {
       selectionMode="multiple"
       selectedKeys={selectedAccordionKeys}
       onSelectionChange={onSelectionChange}
-      keepContentMounted
       itemClasses={{
         content: 'py-4',
       }}

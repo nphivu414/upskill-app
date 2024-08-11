@@ -10,13 +10,19 @@ export const ProfileTimelinePreview = () => {
   return (
     <LivePreview storybookUrl="#" sourceUrl="#">
       <ClientOnlyContainer
-        contentContainerClassName="h-[600px] w-[350px]"
-        loadingContainerClassName="min-h-[600px]"
+        contentContainerClassName="h-[420px] w-[350px]"
+        loadingContainerClassName="min-h-[420px]"
       >
         <ProfileTimeline
-          posts={defaultPosts}
+          posts={[defaultPosts[1], defaultPosts[2]]}
           likedPosts={defaultLikedPosts}
-          photos={defaultPhotos}
+          photos={[
+            defaultPhotos[5],
+            defaultPhotos[5],
+            defaultPhotos[5],
+            defaultPhotos[5],
+            defaultPhotos[0],
+          ]}
         />
       </ClientOnlyContainer>
     </LivePreview>
