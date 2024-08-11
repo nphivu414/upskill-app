@@ -1,5 +1,7 @@
 'use client';
 
+import { LivePreview } from '@upskill-app/ui/web';
+
 import { ClientOnlyContainer } from '../../components';
 import { defaultPosts } from '../data';
 import { PostCard } from '../profile-timeline/posts/post-card';
@@ -65,11 +67,13 @@ export const PostCardPreview = () => {
   };
 
   return (
-    <ClientOnlyContainer
-      contentContainerClassName="h-[550px] w-[350px]"
-      loadingContainerClassName="min-h-[570px]"
-    >
-      <PostCard {...props} />
-    </ClientOnlyContainer>
+    <LivePreview storybookUrl="#" sourceUrl="#">
+      <ClientOnlyContainer
+        contentContainerClassName="h-[550px] w-[350px]"
+        loadingContainerClassName="min-h-[570px]"
+      >
+        <PostCard {...props} />
+      </ClientOnlyContainer>
+    </LivePreview>
   );
 };
