@@ -1,5 +1,4 @@
-import { Chip, Spacer, User } from '@nextui-org/react';
-import { ProfilePagePreview } from '@upskill-app/tutorial-elements';
+import { Spacer, User } from '@nextui-org/react';
 import { Heading1 } from '@upskill-app/ui/web';
 
 type AuthorProps = {
@@ -11,19 +10,23 @@ type AuthorProps = {
 type HeadingSectionProps = {
   title: string;
   description: React.ReactNode;
-  thumbnailUrl: string;
   author: AuthorProps;
   targetAudience?: string;
   prerequisites?: string[];
+  previewComponent: React.ReactNode;
+  storybookUrl: string;
+  sourceUrl?: string;
 };
 
 export const HeadingSection = ({
   author,
   description,
-  thumbnailUrl,
   title,
   prerequisites,
   targetAudience,
+  previewComponent,
+  storybookUrl,
+  sourceUrl,
 }: HeadingSectionProps) => {
   return (
     <section className="w-full pt-12">
@@ -62,12 +65,7 @@ export const HeadingSection = ({
               </ul>
             </div>
           </div>
-          <div className="w-full lg:w-1/2">
-            <div className="flex flex-col items-center justify-center gap-4">
-              <ProfilePagePreview />
-              <Chip color="secondary">Live Preview</Chip>
-            </div>
-          </div>
+          <div className="w-full lg:w-1/2">{previewComponent}</div>
         </div>
       </div>
     </section>

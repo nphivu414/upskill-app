@@ -1,5 +1,7 @@
 'use client';
 
+import { LivePreview } from '@upskill-app/ui/web';
+
 import { ClientOnlyContainer, MockupBrowser } from '../../components';
 import {
   defaultCompany,
@@ -25,10 +27,12 @@ export const ProfilePagePreview = () => {
     },
   };
   return (
-    <ClientOnlyContainer loadingContainerClassName="min-h-[604px]">
-      <MockupBrowser>
-        <ProfilePage {...props} />
-      </MockupBrowser>
-    </ClientOnlyContainer>
+    <LivePreview storybookUrl="#" sourceUrl="#">
+      <ClientOnlyContainer loadingContainerClassName="min-h-[604px]">
+        <MockupBrowser>
+          <ProfilePage {...props} />
+        </MockupBrowser>
+      </ClientOnlyContainer>
+    </LivePreview>
   );
 };
