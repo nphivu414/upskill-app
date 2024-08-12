@@ -25,7 +25,14 @@ export const LivePreview = ({
         className
       )}
     >
-      <Chip variant="dot" color="success">
+      <Chip
+        variant="bordered"
+        startContent={
+          <div className="bg-success-500 relative mx-1 size-2 rounded-full">
+            <div className="bg-success-500 size-2 animate-ping rounded-full " />
+          </div>
+        }
+      >
         {title}
       </Chip>
       {children}

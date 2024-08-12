@@ -29,10 +29,10 @@ export const HeadingSection = ({
   sourceUrl,
 }: HeadingSectionProps) => {
   return (
-    <section className="w-full pt-12">
+    <section className="w-full">
       <div className="space-y-10 px-4 md:px-6 xl:space-y-16">
         <div className="flex flex-col items-start gap-4 lg:flex-row">
-          <div className="flex-1">
+          <div className="flex-1 pt-10">
             <Heading1>{title}</Heading1>
             <Spacer y={4} />
             <div className="flex items-center gap-4">

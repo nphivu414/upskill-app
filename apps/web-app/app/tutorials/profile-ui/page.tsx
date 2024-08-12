@@ -9,7 +9,7 @@ import {
 
 export default function ProfileUiPage() {
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div className="flex flex-col">
       <HeadingSection
         title="Crafting Profile Page UI with React, Tailwind and NextUI"
         author={{

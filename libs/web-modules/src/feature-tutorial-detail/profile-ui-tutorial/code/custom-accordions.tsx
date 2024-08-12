@@ -62,7 +62,7 @@ export const CustomAccordion = ({ data }: CustomAccordionProps) => {
   };
 
   const renderStepContent = (index: number) => {
-    return <StepContent steps={steps} currentIndex={index} />;
+    return <div className="not-prose">{steps[index].content}</div>;
   };
 
   return (
