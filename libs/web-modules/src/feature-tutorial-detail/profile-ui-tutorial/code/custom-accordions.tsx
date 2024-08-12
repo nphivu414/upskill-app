@@ -5,7 +5,6 @@ import { Accordion, AccordionItem, cn, Selection } from '@nextui-org/react';
 import { ComponentWithChildren } from '@upskill-app/types';
 import StickyBox from 'react-sticky-box';
 
-import { StepContent } from '../../step-content';
 import { useContentSectionQueryState } from '../../useContentSectionQueryState';
 import { steps } from '../step-config';
 import { ShowCodeModal } from './show-code-modal';
