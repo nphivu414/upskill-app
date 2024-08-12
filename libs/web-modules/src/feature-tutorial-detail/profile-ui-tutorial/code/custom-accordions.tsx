@@ -5,7 +5,6 @@ import { Accordion, AccordionItem, cn, Selection } from '@nextui-org/react';
 import { ComponentWithChildren } from '@upskill-app/types';
 import StickyBox from 'react-sticky-box';
 
-import { StepContent } from '../../step-content';
 import { useContentSectionQueryState } from '../../useContentSectionQueryState';
 import { steps } from '../step-config';
 import { ShowCodeModal } from './show-code-modal';
@@ -22,13 +21,16 @@ export const CustomAccordion = ({ data }: CustomAccordionProps) => {
   const { selectedSections, setSelectedSections } =
     useContentSectionQueryState();
   const [isClosedAll, setIsClosedAll] = React.useState(false);
+  const [, startCloseAll] = React.useTransition();
 
   React.useEffect(() => {
-    if (selectedSections[0] === 'empty') {
-      setIsClosedAll(true);
-    } else {
-      setIsClosedAll(false);
-    }
+    startCloseAll(() => {
+      if (selectedSections[0] === 'empty') {
+        setIsClosedAll(true);
+      } else {
+        setIsClosedAll(false);
+      }
+    });
   }, [selectedSections, setSelectedSections]);
 
   const selectedAccordionKeys = isClosedAll
@@ -59,7 +61,7 @@ export const CustomAccordion = ({ data }: CustomAccordionProps) => {
   };
 
   const renderStepContent = (index: number) => {
-    return <StepContent steps={steps} currentIndex={index} />;
+    return <div className="not-prose">{steps[index].content}</div>;
   };
 
   return (
@@ -69,7 +71,6 @@ export const CustomAccordion = ({ data }: CustomAccordionProps) => {
       selectionMode="multiple"
       selectedKeys={selectedAccordionKeys}
       onSelectionChange={onSelectionChange}
-      keepContentMounted
       itemClasses={{
         content: 'py-4',
       }}

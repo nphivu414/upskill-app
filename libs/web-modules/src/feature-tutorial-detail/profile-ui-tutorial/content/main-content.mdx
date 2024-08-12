@@ -154,9 +154,6 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
    - **`CarouselDotButton` component:**
      - This component is just a wrapper of the native html button element. It takes all the props that a button element can take, so we can style the button based on its active state and handle the click event from the `FeaturePhotos` component.
 
-**Live Demo:** <br/>
-We've created a Storybook story for the `FeaturePhotos` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-feature-photos--docs" target="_blank">FeaturePhotos Story</a>
-
 Now that we've built the `FeaturePhotos` component, we can move on to the next section of our profile page.
 
 ## !!accordions Section 3: Designing the Profile Information Section
@@ -192,9 +189,6 @@ In this section, we'll create the ProfileInfo component which is responsible for
       - We're using the `Icon` component from '@nextui-org/react' to render the icon and `Spacer` component for spacing between the icon and content.
       - The `Paragraph` and `Subtle` components are custom typography components for consistent text styling across the profile page.
 
-**Live Demo:** <br/>
-We've created a Storybook story for the `ProfileInfo` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-info--docs" target="_blank">ProfileInfo Story</a>
-
 So far, we've created the `FeaturePhotos` and `ProfileInfo` components. Next, we'll implement the Profile Stats section.
 
 ## !!accordions Section 4: Creating the Profile Stats Section
@@ -218,8 +212,6 @@ Since it's a pretty straightforward component, let's dive into the implementatio
      - The `StatsBlock` component takes a label and value as props and displays them in a column.
      - The numbers are formatted using the `formatNumber` utility function to include commas and a maximum of 3 decimal places.
 
-**Live Demo:** <br/>
-We've created a Storybook story for the `ProfileStats` component to showcase its functionality and appearance. You can check it out here: <a href="https://66a1ae67d3806ba8755e9ebe-rktxlyjzkm.chromatic.com/?path=/docs/tutorials-profile-ui-components-profile-stats--docs" target="_blank">ProfileStats Story</a>
 Now we'll move on to the next section to implement the Profile Post Timeline.
 
 ## !!accordions Section 5: Implementing the Profile Post Timeline
@@ -374,8 +366,6 @@ In this section, we'll create the `PostCard` component to display individual pos
       </div>
    </CollapsibleBlock>
 
-**Live Demo:** <br/>
-We've created a Storybook story for the `PostCard` component to showcase its functionality and appearance. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-components-post-card--docs" target="_blank">PostCard Story</a>
 Now we'll move on to the next section to implement the Profile Photo Timeline.
 
 ## !!accordions Section 6: Implementing the Profile Photo Timeline
@@ -407,8 +397,6 @@ In this section, we'll create the `PhotoCard` component to display individual ph
       - Grid Layout: The outer grid has 2 columns, and each column contains a sub-grid of photos.
       - Rendering: Each photo is rendered using the PhotoCard component.
 
-**Live Demo:** <br/>
-We've created a Storybook story for the `PhotoCard` component to showcase its functionality and appearance. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-components-photo-card--docs" target="_blank">PhotoCard Story</a>
 Now we'll move on to the next section to implement the Profile Timeline Tabs.
 
 ## !!accordions Section 7: Implementing the Profile Timeline Tabs
@@ -465,9 +453,6 @@ In this section, we'll create the `ProfileTimeline` component, which displays a 
       - It creates a tab object for each type of content with a unique ID, label, and content.
       - The `Posts`, and `Photos` components are used to render the content for each tab. We've already covered these components in previous sections.
       - The hook returns an array of tab objects that can be used to render the tabs in the `ProfileTimeline` component.
-
-**Live Demo:** <br/>
-We've created a Storybook story for the `ProfileTimeline` component to showcase its functionality and appearance. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-components-profile-timeline--docs" target="_blank">ProfileTimeline Story</a>
 
 ## !!accordions Section 8: Putting It All Together
 So far, we've built the individual components for the profile page, including `FeaturePhotos`, `ProfileInfo`, `ProfileStats`, `PostCard`, `PhotoCard`, and `ProfileTimeline`. Now, let's put them all together to create the complete profile page.
@@ -528,9 +513,5 @@ So far, we've built the individual components for the profile page, including `F
       - The component uses the `motion` library from Framer Motion to create a parallax effect on the header.
       - It applies a translateY transform to the header based on the scroll position to create a smooth parallax effect.
       - The `y` prop is passed from the `ProfilePage` component to control the parallax effect based on the scroll position.
-
-**Live Demo:** <br/>
-We've created a Storybook story for the `ProfilePage` component to showcase the complete profile page layout. You can check it out here: <a href="http://localhost:9009/?path=/docs/tutorials-profile-ui-page-screen--docs" target="_blank">ProfilePage Story</a>
-
 
 </CodeWithAccoridions>

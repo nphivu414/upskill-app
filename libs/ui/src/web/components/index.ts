@@ -11,3 +11,5 @@ export * from './code-block-tabs';
 export * from './embed-story';
 export * from './collapsible';
 export * from './alert';
+export * from './custom-icon';
+export * from './live-preview';
