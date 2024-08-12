@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Key } from 'react';
 import { cn, Tab, Tabs } from '@nextui-org/react';
 
 export function CodeBlockTabs(props: {
@@ -11,16 +11,17 @@ export function CodeBlockTabs(props: {
 }) {
   const { tabs } = props;
   const [selected, setSelected] = React.useState(tabs?.[0].title);
+  const onSelectionChange = (key: Key) => {
+    setSelected(key.toString());
+  };
 
   return (
     <Tabs
-      id="opencode"
       color="primary"
       selectedKey={selected}
       size="sm"
       items={tabs}
-      destroyInactiveTabPanel={false}
-      onSelectionChange={(key) => setSelected(key.toString())}
+      onSelectionChange={onSelectionChange}
       classNames={{
         base: 'overflow-x-auto max-w-full',
         panel:

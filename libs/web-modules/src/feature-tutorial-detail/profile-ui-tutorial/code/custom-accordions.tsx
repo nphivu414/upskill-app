@@ -8,6 +8,7 @@ import StickyBox from 'react-sticky-box';
 import { useContentSectionQueryState } from '../../useContentSectionQueryState';
 import { steps } from '../step-config';
 import { ShowCodeModal } from './show-code-modal';
+import { useAccordionMotionProps } from './use-accordion-motion-props';
 
 type CustomAccordionData = {
   title?: string;
@@ -22,6 +23,7 @@ export const CustomAccordion = ({ data }: CustomAccordionProps) => {
     useContentSectionQueryState();
   const [isClosedAll, setIsClosedAll] = React.useState(false);
   const [, startCloseAll] = React.useTransition();
+  const accordionItemMotionProps = useAccordionMotionProps();
 
   React.useEffect(() => {
     startCloseAll(() => {
@@ -45,7 +47,9 @@ export const CustomAccordion = ({ data }: CustomAccordionProps) => {
 
   const onAccordionItemPress = (index: number) => {
     return () => {
-      if (selectedSections?.indexOf((index + 1).toString()) === -1) {
+      const isClosedItem =
+        selectedSections?.indexOf((index + 1).toString()) === -1;
+      if (isClosedItem) {
         return;
       }
 
@@ -84,6 +88,7 @@ export const CustomAccordion = ({ data }: CustomAccordionProps) => {
           aria-label={accordionItem.title}
           title={<p className="text-lg font-semibold">{accordionItem.title}</p>}
           onPress={onAccordionItemPress(index)}
+          motionProps={accordionItemMotionProps}
         >
           <div className="prose prose-zinc dark:prose-invert max-w-full">
             <div className="block items-start lg:flex">

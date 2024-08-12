@@ -273,7 +273,7 @@ In this section, we'll create the `PostCard` component to display individual pos
    - **Action event handlers:**
       - `getPostActionsConfig(stats)`: This function takes in a `stats` object that contains information about a post's statistics (like the number of comments, reposts, and likes). It returns a configuration object for different actions you can perform on a post.
       - `postMenuActionsConfig`: This object contains the configuration for the actions available in the post's menu. It includes actions like addToHighlight, editViewPermission, delete, report and unlike.
-      <CollapsibleBlock triggerLabel="Why define action handlers at the Posts component level?">
+      <CollapsibleBlock triggerTitle="Heads up!" triggerDescription="Why define action handlers at the Posts component level?">
          - **Separation of Concerns**: By defining handlers at the Posts component level, you keep the PostCard component focused on rendering the UI. This separation makes the code easier to maintain and understand.
          - **Reusability**: Handlers defined at the Posts component level can be reused across multiple PostCard instances. This avoids code duplication and makes it easier to manage changes.
          - **State Management**: If the handlers need to interact with shared state or perform actions that affect multiple PostCard components, it's easier to manage this state at a higher level.
@@ -282,7 +282,7 @@ In this section, we'll create the `PostCard` component to display individual pos
       </CollapsibleBlock>
 
    In a real-world scenario, you can consider creating custom hooks for each handler, it's a good solution to improve the structure and maintainability of your code. Custom hooks allow you to encapsulate the logic for each handler, making your components cleaner and more focused on rendering. This approach also promotes reusability and easier testing of the handler logic.
-   <CollapsibleBlock triggerLabel="See example of how you can create custom hooks for post actions">
+   <CollapsibleBlock triggerDescription="See example of how you can create custom hooks for post actions">
       <div>
          ```tsx
          // usePostActions.ts

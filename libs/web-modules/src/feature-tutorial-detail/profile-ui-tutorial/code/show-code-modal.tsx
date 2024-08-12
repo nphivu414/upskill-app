@@ -38,7 +38,9 @@ export const ShowCodeModal = ({ children }: ComponentWithChildren) => {
               <ModalHeader>Preview & Code</ModalHeader>
               <ModalBody>{children}</ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>Close</Button>
+                <Button variant="flat" onPress={onClose}>
+                  Close
+                </Button>
               </ModalFooter>
             </>
           )}

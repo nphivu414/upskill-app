@@ -1,16 +1,39 @@
+'use client';
+
+import React from 'react';
 import {
   Link,
   Navbar,
   NavbarBrand,
   NavbarContent,
-  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
 } from '@nextui-org/react';
 
 import { ThemeToggle } from './theme-toggle';
 
+const menuItems = [
+  'Profile',
+  'Dashboard',
+  'Activity',
+  'Analytics',
+  'System',
+  'Deployments',
+  'My Settings',
+  'Team Settings',
+  'Help & Feedback',
+];
+
 export const NavigationBar = () => {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
   return (
-    <Navbar maxWidth="2xl">
+    <Navbar maxWidth="2xl" isBlurred onMenuOpenChange={setIsMenuOpen}>
+      <NavbarMenuToggle
+        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        className="sm:hidden"
+      />
       <NavbarBrand>
         <Link href="/" color="foreground">
           <p className="font-bold text-inherit">Home</p>
@@ -36,6 +59,26 @@ export const NavigationBar = () => {
       <NavbarContent justify="end">
         <ThemeToggle />
       </NavbarContent>
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              color={
+                index === 2
+                  ? 'primary'
+                  : index === menuItems.length - 1
+                  ? 'danger'
+                  : 'foreground'
+              }
+              className="w-full"
+              href="#"
+              size="lg"
+            >
+              {item}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
     </Navbar>
   );
 };

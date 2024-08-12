@@ -1,36 +1,35 @@
-import { Button, ButtonProps } from '@nextui-org/react';
 import { CollapsibleContentProps } from '@radix-ui/react-collapsible';
 import { ComponentWithChildren } from '@upskill-app/types';
 import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@upskill-app/ui/web';
-import { Info } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 type CollapsibleBlockProps = ComponentWithChildren & {
-  triggerProps?: ButtonProps;
-  triggerLabel: string;
+  triggerTitle?: string;
+  triggerDescription: string;
   contentProps?: CollapsibleContentProps;
 };
 
 export const CollapsibleBlock = ({
-  triggerLabel,
-  triggerProps,
+  triggerTitle,
+  triggerDescription,
   contentProps,
   children,
 }: CollapsibleBlockProps) => {
   return (
     <Collapsible>
       <CollapsibleTrigger asChild>
-        <Button
-          variant="bordered"
-          fullWidth
-          startContent={<Info size={16} />}
-          {...triggerProps}
-        >
-          {triggerLabel}
-        </Button>
+        <Alert variant="default" className="bg-content2 cursor-pointer">
+          <AlertCircle className="size-4" />
+          {triggerTitle ? <AlertTitle>{triggerTitle}</AlertTitle> : null}
+          <AlertDescription>{triggerDescription}</AlertDescription>
+        </Alert>
       </CollapsibleTrigger>
       <CollapsibleContent className="bg-content2 rounded-xl" {...contentProps}>
         <div className="mt-2 p-1">{children}</div>
