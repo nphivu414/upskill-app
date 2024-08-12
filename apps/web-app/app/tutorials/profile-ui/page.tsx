@@ -1,4 +1,5 @@
 import { Avatar, Divider } from '@nextui-org/react';
+import { ProfilePagePreview } from '@upskill-app/tutorial-elements';
 import { Paragraph } from '@upskill-app/ui/web';
 import {
   ContentSection,
@@ -8,7 +9,7 @@ import {
 
 export default function ProfileUiPage() {
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div className="flex flex-col">
       <HeadingSection
         title="Crafting Profile Page UI with React, Tailwind and NextUI"
         author={{
@@ -32,7 +33,9 @@ export default function ProfileUiPage() {
           'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
           "A little TypeScript, CSS, and Tailwind knowledge: Some familiarity with these will help, but you don't need to be an expert – we'll guide you through!",
         ]}
-        thumbnailUrl="https://images.unsplash.com/photo-1622838320000-4b3b3b3b3b3b"
+        previewComponent={<ProfilePagePreview />}
+        storybookUrl="#"
+        sourceUrl="#"
       />
       <Divider className="my-12" />
       <ContentSection
