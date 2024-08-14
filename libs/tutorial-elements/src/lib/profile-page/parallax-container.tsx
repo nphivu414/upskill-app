@@ -1,4 +1,4 @@
-import { ComponentWithChildren } from '@upskill-app/types';
+import { ComponentWithChildren } from '@upskill-app/shared';
 import { motion, MotionValue } from 'framer-motion';
 
 type ParallaxContainerProps = {

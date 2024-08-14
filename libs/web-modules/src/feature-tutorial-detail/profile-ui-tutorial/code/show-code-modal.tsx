@@ -7,7 +7,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from '@nextui-org/react';
-import { ComponentWithChildren } from '@upskill-app/types';
+import { ComponentWithChildren } from '@upskill-app/shared';
 import { Code } from 'lucide-react';
 
 export const ShowCodeModal = ({ children }: ComponentWithChildren) => {

@@ -6,56 +6,25 @@ import { CollapsibleBlock } from '../../collapsible-block.tsx'
 
 Before we dive into coding the profile page, let's set up our project:
 
-1.  **Prerequisites:** Ensure you have Node.js and yarn (or npm) installed on your machine.
-2.  **NextUI CLI:** Open your terminal and run the following command to install the NextUI CLI globally, execute the following command in your terminal:
+1.  **Prerequisites:** Ensure you have Node.js, yarn (or npm) and git installed on your machine.
+2.  **Clone our starter repo:** Open your terminal and run the following command to clone the starter repository:
 
 ```bash
-yarn add nextui-cli -g
+git clone https://github.com/upskillsdev/starter-app.git
 ```
 
-3.  **Init a new NextUI project :** Initialize a new NextUI project using the init command. This sets up your project with the necessary configurations:
+3.  **Start Development Server:** Install the dependencies to start the local server:
 
 ```bash
-nextui init my-nextui-app
-```
-
-You will be prompted to configure your project:
-
-```bash
-? Which components would you like to add? › - Space to select. Return to submit
-
-Instructions:
-    ↑/↓: Highlight option
-    ←/→/[space]: Toggle selection
-    [a,b,c]/delete: Filter choices
-    enter/return: Complete answer
-
-Filtered results for: Enter something to filter
-    ◯  accordion
-    ◯  autocomplete
-    ◯  avatar
-    ◯  badge
-    ◯  breadcrumbs◉  button
-    ◯  card
-    ◯  checkbox
-    ◯  chip
-    ◯  code
-```
-
-You can just use the default configuration and add all the components for now.
-
-4.  **Start Development Server:** Install the dependencies to start the local server:
-
-```bash
-cd my-nextui-app && yarn install
+cd starter-app && yarn install
 ```
 
 ```bash
 yarn dev
 ```
 
-You should have a NextUI startup screen at `http://localhost:3000/` in your browser.
-Now you can safely remove all the default code and start building the profile page components.
+You should have a startup screen at `http://localhost:5173/` in your browser.
+Now you can now head over to the `src/pages/index.tsx` file and start building the profile page.
 
 ## !!accordions Section 2: Building the FeaturePhotos component
 

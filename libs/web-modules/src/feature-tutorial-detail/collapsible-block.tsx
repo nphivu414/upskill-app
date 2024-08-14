@@ -1,5 +1,5 @@
 import { CollapsibleContentProps } from '@radix-ui/react-collapsible';
-import { ComponentWithChildren } from '@upskill-app/types';
+import { ComponentWithChildren } from '@upskill-app/shared';
 import {
   Alert,
   AlertDescription,

@@ -1,5 +1,5 @@
 import { cn } from '@nextui-org/react';
-import { ComponentWithChildren } from '@upskill-app/types';
+import { ComponentWithChildren } from '@upskill-app/shared';
 
 type MockupBrowserProps = {
   className?: string;

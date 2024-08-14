@@ -1,5 +1,11 @@
 'use client';
 
+import {
+  getGithubSourceUrl,
+  getStorybookUrl,
+  TUTORIAL_REPO,
+  TUTORIAL_STORIES,
+} from '@upskill-app/shared';
 import { LivePreview } from '@upskill-app/ui/web';
 
 import { ClientOnlyContainer, MockupBrowser } from '../../components';
@@ -27,7 +33,13 @@ export const ProfilePagePreview = () => {
     },
   };
   return (
-    <LivePreview storybookUrl="#" sourceUrl="#">
+    <LivePreview
+      storybookUrl={getStorybookUrl(TUTORIAL_STORIES.PROFILE_UI.PROFILE_PAGE)}
+      sourceUrl={getGithubSourceUrl(
+        TUTORIAL_REPO.PROFILE_UI,
+        'blob/main/src/components/profile/profile-page.tsx'
+      )}
+    >
       <ClientOnlyContainer loadingContainerClassName="min-h-[604px]">
         <MockupBrowser>
           <ProfilePage {...props} />
