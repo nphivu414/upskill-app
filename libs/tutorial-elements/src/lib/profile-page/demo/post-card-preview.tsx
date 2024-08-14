@@ -74,7 +74,7 @@ export const PostCardPreview = () => {
 
   return (
     <LivePreview
-      storybookUrl={getStorybookUrl(TUTORIAL_STORIES.PROFILE_UI.PHOTO_CARD)}
+      storybookUrl={getStorybookUrl(TUTORIAL_STORIES.PROFILE_UI.POST_CARD)}
       sourceUrl={getGithubSourceUrl(
         TUTORIAL_REPO.PROFILE_UI,
         'blob/main/src/components/profile/profile-timeline/posts/post-card.tsx'

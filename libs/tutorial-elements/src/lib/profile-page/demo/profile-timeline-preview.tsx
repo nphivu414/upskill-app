@@ -15,7 +15,9 @@ import { ProfileTimeline } from '../profile-timeline';
 export const ProfileTimelinePreview = () => {
   return (
     <LivePreview
-      storybookUrl={getStorybookUrl(TUTORIAL_STORIES.PROFILE_UI.PROFILE_STATS)}
+      storybookUrl={getStorybookUrl(
+        TUTORIAL_STORIES.PROFILE_UI.PROFILE_TIMELINE
+      )}
       sourceUrl={getGithubSourceUrl(
         TUTORIAL_REPO.PROFILE_UI,
         'blob/main/src/components/profile/profile-timeline/profile-timeline.tsx'
