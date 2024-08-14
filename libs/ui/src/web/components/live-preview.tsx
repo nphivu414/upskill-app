@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, Chip, Link } from '@nextui-org/react';
-import { ComponentWithChildren } from '@upskill-app/types';
+import { ComponentWithChildren } from '@upskill-app/shared';
 
 import { cn } from '../utils';
 import { CustomIcons } from './custom-icon';
@@ -40,6 +40,7 @@ export const LivePreview = ({
         <Button
           as={Link}
           href={storybookUrl}
+          target="_blank"
           startContent={<CustomIcons.storybook width={14} />}
         >
           Storybook
@@ -48,6 +49,7 @@ export const LivePreview = ({
           <Button
             as={Link}
             href={sourceUrl}
+            target="_blank"
             startContent={<CustomIcons.gitHub width={14} />}
           >
             Source

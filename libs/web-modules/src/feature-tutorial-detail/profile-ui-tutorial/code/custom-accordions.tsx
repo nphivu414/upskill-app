@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Accordion, AccordionItem, cn, Selection } from '@nextui-org/react';
-import { ComponentWithChildren } from '@upskill-app/types';
+import { ComponentWithChildren } from '@upskill-app/shared';
 import StickyBox from 'react-sticky-box';
 
 import { useContentSectionQueryState } from '../../useContentSectionQueryState';

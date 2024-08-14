@@ -1,5 +1,11 @@
 'use client';
 
+import {
+  getGithubSourceUrl,
+  getStorybookUrl,
+  TUTORIAL_REPO,
+  TUTORIAL_STORIES,
+} from '@upskill-app/shared';
 import { LivePreview } from '@upskill-app/ui/web';
 
 import { ClientOnlyContainer } from '../../components';
@@ -67,7 +73,13 @@ export const PostCardPreview = () => {
   };
 
   return (
-    <LivePreview storybookUrl="#" sourceUrl="#">
+    <LivePreview
+      storybookUrl={getStorybookUrl(TUTORIAL_STORIES.PROFILE_UI.PHOTO_CARD)}
+      sourceUrl={getGithubSourceUrl(
+        TUTORIAL_REPO.PROFILE_UI,
+        'blob/main/src/components/profile/profile-timeline/posts/post-card.tsx'
+      )}
+    >
       <ClientOnlyContainer
         contentContainerClassName="h-[180px] w-[350px]"
         loadingContainerClassName="min-h-[180px]"

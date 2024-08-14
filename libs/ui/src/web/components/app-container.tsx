@@ -1,4 +1,4 @@
-import { ComponentWithChildren } from '@upskill-app/types';
+import { ComponentWithChildren } from '@upskill-app/shared';
 
 export const AppContainer = ({ children }: ComponentWithChildren) => {
   return (
