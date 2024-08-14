@@ -7,15 +7,20 @@ import {
   TUTORIAL_STORIES,
 } from '@upskill-app/shared';
 import { LivePreview } from '@upskill-app/ui/web';
+import { useTheme } from 'next-themes';
 
 import { ClientOnlyContainer } from '../../components';
 import { defaultPhotos } from '../data';
 import { PhotoCard } from '../profile-timeline/photos/photo-card';
 
 export const PhotoCardPreview = () => {
+  const { theme } = useTheme();
   return (
     <LivePreview
-      storybookUrl={getStorybookUrl(TUTORIAL_STORIES.PROFILE_UI.PHOTO_CARD)}
+      storybookUrl={getStorybookUrl(
+        TUTORIAL_STORIES.PROFILE_UI.PHOTO_CARD,
+        theme
+      )}
       sourceUrl={getGithubSourceUrl(
         TUTORIAL_REPO.PROFILE_UI,
         'blob/main/src/components/profile/profile-timeline/photos/photo-card.tsx'

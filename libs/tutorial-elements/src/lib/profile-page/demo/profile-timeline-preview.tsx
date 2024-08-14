@@ -7,16 +7,19 @@ import {
   TUTORIAL_STORIES,
 } from '@upskill-app/shared';
 import { LivePreview } from '@upskill-app/ui/web';
+import { useTheme } from 'next-themes';
 
 import { ClientOnlyContainer } from '../../components';
 import { defaultLikedPosts, defaultPhotos, defaultPosts } from '../data';
 import { ProfileTimeline } from '../profile-timeline';
 
 export const ProfileTimelinePreview = () => {
+  const { theme } = useTheme();
   return (
     <LivePreview
       storybookUrl={getStorybookUrl(
-        TUTORIAL_STORIES.PROFILE_UI.PROFILE_TIMELINE
+        TUTORIAL_STORIES.PROFILE_UI.PROFILE_TIMELINE,
+        theme
       )}
       sourceUrl={getGithubSourceUrl(
         TUTORIAL_REPO.PROFILE_UI,

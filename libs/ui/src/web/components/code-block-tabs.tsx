@@ -3,6 +3,8 @@
 import React, { Key } from 'react';
 import { cn, Tab, Tabs } from '@nextui-org/react';
 
+import { CustomIcons } from './custom-icon';
+
 export function CodeBlockTabs(props: {
   tabs: {
     title?: string | undefined;
@@ -13,6 +15,16 @@ export function CodeBlockTabs(props: {
   const [selected, setSelected] = React.useState(tabs?.[0].title);
   const onSelectionChange = (key: Key) => {
     setSelected(key.toString());
+  };
+  const renderFileIcon = (fileExtension?: string) => {
+    switch (fileExtension) {
+      case 'tsx':
+        return <CustomIcons.react width={14} />;
+      case 'ts':
+        return <CustomIcons.typescript width={14} />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -29,8 +41,17 @@ export function CodeBlockTabs(props: {
       }}
     >
       {(tab) => {
+        const fileExtension = tab.title?.split('.').pop();
         return (
-          <Tab key={tab.title} title={tab.title}>
+          <Tab
+            key={tab.title}
+            title={
+              <div className="flex items-center gap-2">
+                {renderFileIcon(fileExtension)}
+                <span>{tab.title}</span>
+              </div>
+            }
+          >
             {
               <div
                 className={cn({
