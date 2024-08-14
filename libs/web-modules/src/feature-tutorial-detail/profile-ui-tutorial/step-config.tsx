@@ -1,7 +1,7 @@
 import { StepConfig } from '../types';
 import { CodeWithTabs } from './code/tutorial-code';
 import FeaturePhotosCodeContent from './content/feature-photos-content.mdx';
-import { IntroductionContent } from './content/introduction-content';
+import IntroContent from './content/intro-content.mdx';
 import ProfileInfoCodeContent from './content/profile-info-content.mdx';
 import ProfilePageContent from './content/profile-page-content.mdx';
 import ProfileStatsContent from './content/profile-stats-content.mdx';
@@ -17,7 +17,7 @@ const codeContentProps = {
 export const steps: StepConfig[] = [
   {
     index: 0,
-    content: <IntroductionContent />,
+    content: <IntroContent {...codeContentProps} />,
   },
   {
     index: 1,

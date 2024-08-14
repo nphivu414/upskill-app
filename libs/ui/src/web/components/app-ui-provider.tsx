@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { NextUIProvider } from '@nextui-org/react';
-import { ComponentWithChildren } from '@upskill-app/types';
+import { ComponentWithChildren } from '@upskill-app/shared';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
 export const AppUiProvider = ({ children }: ComponentWithChildren) => {

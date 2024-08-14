@@ -1,4 +1,4 @@
-import { CodeBlockProps } from '@upskill-app/types';
+import { CodeBlockProps } from '@upskill-app/shared';
 import { CodeBlock } from '@upskill-app/ui/web';
 import { AnnotationHandler, InnerLine } from 'codehike/code';
 

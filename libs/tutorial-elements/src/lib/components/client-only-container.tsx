@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn, Spinner } from '@nextui-org/react';
-import { ComponentWithChildren } from '@upskill-app/types';
+import { ComponentWithChildren } from '@upskill-app/shared';
 import { motion } from 'framer-motion';
 
 type ClientOnlyContainerProps = {

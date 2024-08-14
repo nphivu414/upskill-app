@@ -7,7 +7,7 @@ import {
 
 import './styles/global.css';
 
-import { ComponentWithChildren } from '@upskill-app/types';
+import { ComponentWithChildren } from '@upskill-app/shared';
 
 export const metadata = {
   title: 'Welcome to web-app',
