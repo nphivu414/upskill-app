@@ -5,10 +5,10 @@ import { FlightHeader } from './flight-header';
 
 export const FlightBookingPage = () => {
   return (
-    <ScrollShadow className="h-[550px]" size={15}>
+    <ScrollShadow className="h-[550px] py-2" size={15}>
       <FlightHeader
-        cabinClass="First class"
-        departureDate="2024/12/2"
+        cabinClass="Business Class"
+        departureDate="2021-10-02T00:00:00Z"
         destination="Saigon"
         origin="Singapore"
       />

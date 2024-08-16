@@ -2,8 +2,8 @@ import { Avatar, Button, Link, Spacer } from '@nextui-org/react';
 import { Paragraph, Subtle } from '@upskill-app/ui/web';
 import { Link as LinkIcon, MapPin } from 'lucide-react';
 
+import { getAvatarFallback } from '../../../utils';
 import { ProfileInfoProps } from '../types';
-import { getAvatarFallback } from '../utils';
 import { InfoLine } from './info-line';
 
 export const ProfileInfo = ({

@@ -1,5 +1,5 @@
+import { formatNumber } from '../../../utils';
 import { ProfileStatsProps } from '../types';
-import { formatNumber } from '../utils';
 import { StatsBlock } from './stats-block';
 
 export const ProfileStats = ({
