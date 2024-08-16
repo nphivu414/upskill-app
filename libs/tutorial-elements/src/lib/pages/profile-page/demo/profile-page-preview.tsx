@@ -9,7 +9,7 @@ import {
 import { LivePreview } from '@upskill-app/ui/web';
 import { useTheme } from 'next-themes';
 
-import { ClientOnlyContainer, MockupBrowser } from '../../components';
+import { ClientOnlyContainer, MockupBrowser } from '../../../components';
 import {
   defaultCompany,
   defaultFeaturePhotos,

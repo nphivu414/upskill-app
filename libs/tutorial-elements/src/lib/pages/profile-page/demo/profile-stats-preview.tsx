@@ -9,7 +9,7 @@ import {
 import { LivePreview } from '@upskill-app/ui/web';
 import { useTheme } from 'next-themes';
 
-import { ClientOnlyContainer } from '../../components';
+import { ClientOnlyContainer } from '../../../components';
 import { defaultProfileStats } from '../data';
 import { ProfileStats } from '../profile-stats';
 

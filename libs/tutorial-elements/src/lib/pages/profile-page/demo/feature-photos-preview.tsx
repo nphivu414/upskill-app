@@ -9,28 +9,28 @@ import {
 import { LivePreview } from '@upskill-app/ui/web';
 import { useTheme } from 'next-themes';
 
-import { ClientOnlyContainer } from '../../components';
-import { defaultCompany, defaultProfile } from '../data';
-import { ProfileInfo } from '../profile-info';
+import { ClientOnlyContainer } from '../../../components';
+import { defaultFeaturePhotos } from '../data';
+import { FeaturePhotos } from '../feature-photos';
 
-export const ProfileInfoPreview = () => {
+export const FeaturePhotosPreview = () => {
   const { theme } = useTheme();
   return (
     <LivePreview
       storybookUrl={getStorybookUrl(
-        TUTORIAL_STORIES.PROFILE_UI.PROFILE_INFO,
+        TUTORIAL_STORIES.PROFILE_UI.FEATURE_PHOTO,
         theme
       )}
       sourceUrl={getGithubSourceUrl(
         TUTORIAL_REPO.PROFILE_UI,
-        'blob/main/src/components/profile/profile-info/profile-info.tsx'
+        'blob/main/src/components/profile/feature-photos/feature-photos.tsx'
       )}
     >
       <ClientOnlyContainer
-        contentContainerClassName="h-[320px] w-[350px] pt-[40px]"
+        contentContainerClassName="h-[350px] w-[350px]"
         loadingContainerClassName="min-h-[350px]"
       >
-        <ProfileInfo profile={defaultProfile} company={defaultCompany} />
+        <FeaturePhotos photos={defaultFeaturePhotos} showDots />
       </ClientOnlyContainer>
     </LivePreview>
   );
