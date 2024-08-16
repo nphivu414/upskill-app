@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ScreenContainer } from '../../../components';
+import { ScreenContainer } from '../../../../components';
 import { defaultPhotos } from '../../data';
 import { PhotoCard } from './photo-card';
 

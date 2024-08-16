@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ScreenContainer } from '../../../components';
+import { ScreenContainer } from '../../../../components';
 import { defaultPosts } from '../../data';
 import { PostCard } from './post-card';
 

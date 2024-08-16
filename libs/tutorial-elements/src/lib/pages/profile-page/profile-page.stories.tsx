@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { MockupBrowser, ScreenContainer } from '../components';
+import { MockupBrowser, ScreenContainer } from '../../components';
 import {
   defaultCompany,
   defaultFeaturePhotos,

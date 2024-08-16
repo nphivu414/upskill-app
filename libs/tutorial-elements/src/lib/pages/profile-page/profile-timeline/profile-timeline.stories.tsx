@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ScreenContainer } from '../../components';
+import { ScreenContainer } from '../../../components';
 import { defaultLikedPosts, defaultPhotos, defaultPosts } from '../data';
 import { ProfileTimeline } from './profile-timeline';
 
