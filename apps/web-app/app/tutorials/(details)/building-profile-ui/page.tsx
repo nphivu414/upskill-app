@@ -7,7 +7,7 @@ import {
   ProfileContent,
 } from '@upskill-app/web-modules/tutorial-detail';
 
-export default function ProfileUiPage() {
+export default function ProfileUI() {
   return (
     <div className="flex flex-col">
       <HeadingSection
