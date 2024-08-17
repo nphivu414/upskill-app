@@ -15,8 +15,8 @@ import {
 import { MarkdownRenderer, Subtle } from '@upskill-app/ui/web';
 import { Ellipsis } from 'lucide-react';
 
+import { formatDate, getAvatarFallback } from '../../../../utils';
 import { PostActionType, PostCardProps, PostMenuActionType } from '../../types';
-import { formatDate, getAvatarFallback } from '../../utils';
 import {
   getPostActionCount,
   getPostActions,
