@@ -1,4 +1,4 @@
-import { Avatar, Card, CardHeader } from '@nextui-org/react';
+import { Avatar, Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
 
 import { FlightCardProps } from '../types';
@@ -35,6 +35,8 @@ export const FlightCard = ({
           <Avatar src={airlineLogo} alt="airline logo" size="sm" />
         </div>
       </CardHeader>
+      <Divider />
+      <CardBody>body</CardBody>
     </Card>
   );
 };
