@@ -13,6 +13,7 @@ interface Flight {
   departureAirport: string;
   arrivalAirport: string;
   benefits: string[];
+  stops: string[];
 }
 
 export type FlightHeaderProps = {
@@ -35,9 +36,16 @@ export type FlightCardProps = {
   | 'departureAirport'
   | 'arrivalAirport'
   | 'benefits'
+  | 'stops'
 >;
 
-export type FlightTimelineProps = Pick<
+export type FlightTimelineProps = {
+  totalStops: number;
+} & Pick<
   Flight,
-  'departureTime' | 'arrivalTime' | 'departureAirport' | 'arrivalAirport'
+  | 'departureTime'
+  | 'arrivalTime'
+  | 'departureAirport'
+  | 'arrivalAirport'
+  | 'duration'
 >;

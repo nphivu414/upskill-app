@@ -17,6 +17,7 @@ export const FlightCard = ({
   departureAirport,
   arrivalAirport,
   benefits,
+  stops,
 }: FlightCardProps) => {
   const handlePress = () => {
     onPress(id);
@@ -43,6 +44,8 @@ export const FlightCard = ({
           arrivalTime={arrivalTime}
           departureAirport={departureAirport}
           arrivalAirport={arrivalAirport}
+          duration={duration}
+          totalStops={stops.length}
         />
       </CardBody>
     </Card>
