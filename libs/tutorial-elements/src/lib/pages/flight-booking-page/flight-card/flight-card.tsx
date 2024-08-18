@@ -1,4 +1,12 @@
-import { Avatar, Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
+import {
+  Avatar,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Chip,
+  Divider,
+} from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
 
 import { FlightCardProps } from '../types';
@@ -18,6 +26,7 @@ export const FlightCard = ({
   arrivalAirport,
   benefits,
   stops,
+  isRoundTrip,
 }: FlightCardProps) => {
   const handlePress = () => {
     onPress(id);
@@ -39,15 +48,54 @@ export const FlightCard = ({
       </CardHeader>
       <Divider />
       <CardBody>
-        <FlightTimeline
-          departureTime={departureTime}
-          arrivalTime={arrivalTime}
-          departureAirport={departureAirport}
-          arrivalAirport={arrivalAirport}
-          duration={duration}
-          totalStops={stops.length}
-        />
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex w-3/5 shrink-0">
+            <FlightTimeline
+              departureTime={departureTime}
+              arrivalTime={arrivalTime}
+              departureAirport={departureAirport}
+              arrivalAirport={arrivalAirport}
+              duration={duration}
+              totalStops={stops.length}
+            />
+          </div>
+          <div className="flex flex-col items-center gap-1">
+            <p className="text-warning truncate break-words text-xs font-semibold">
+              $304.99 / pax
+            </p>
+            {isRoundTrip && (
+              <Chip
+                size="sm"
+                variant="flat"
+                color="primary"
+                className="text-xs"
+              >
+                Round trip
+              </Chip>
+            )}
+          </div>
+        </div>
       </CardBody>
+      <CardFooter>
+        <div className="flex items-center gap-2 overflow-x-auto">
+          {benefits.map((benefit) => (
+            <Chip
+              key={benefit.id}
+              size="sm"
+              variant="dot"
+              color="warning"
+              className="text-xs"
+              startContent={
+                benefit.icon ? (
+                  <div className="text-warning px-1">{benefit.icon}</div>
+                ) : undefined
+              }
+            >
+              {benefit.title}
+            </Chip>
+          ))}
+        </div>
+      </CardFooter>
     </Card>
   );
 };

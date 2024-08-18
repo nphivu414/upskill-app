@@ -13,8 +13,8 @@ export const FlightTimeline = ({
 }: FlightTimelineProps) => {
   const totalSteps = totalStops + 1;
   return (
-    <div className="flex flex-col items-center justify-center">
-      <Subtle className="text-xs">{duration}</Subtle>
+    <div className="flex w-full flex-col items-center justify-center">
+      <Subtle className="-mb-2 text-xs">{duration}</Subtle>
       <Slider
         size="sm"
         step={1}
@@ -44,7 +44,7 @@ export const FlightTimeline = ({
           step: 'bg-foreground w-[4px] h-[4px]',
         }}
       />
-      <Subtle className="text-xs">{totalStops} stops</Subtle>
+      <Subtle className="-mt-2 text-xs">{totalStops} stops</Subtle>
     </div>
   );
 };

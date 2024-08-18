@@ -1,3 +1,10 @@
+interface Benefit {
+  id: string;
+  title: string;
+  icon?: React.ReactNode;
+  description?: string;
+}
+
 interface Flight {
   id: string;
   origin: string;
@@ -12,11 +19,13 @@ interface Flight {
   duration: string;
   departureAirport: string;
   arrivalAirport: string;
-  benefits: string[];
+  benefits: Benefit[];
   stops: string[];
+  isRoundTrip: boolean;
 }
 
 export type FlightHeaderProps = {
+  sticky?: boolean;
   handleBack: () => void;
   handleShare: () => void;
 } & Pick<Flight, 'origin' | 'destination' | 'cabinClass' | 'departureDate'>;
@@ -37,6 +46,7 @@ export type FlightCardProps = {
   | 'arrivalAirport'
   | 'benefits'
   | 'stops'
+  | 'isRoundTrip'
 >;
 
 export type FlightTimelineProps = {

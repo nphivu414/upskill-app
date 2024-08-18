@@ -1,4 +1,4 @@
-import { Button, Divider, Spacer } from '@nextui-org/react';
+import { Button, cn, Divider, Spacer } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
 import { ChevronLeft, Share2 } from 'lucide-react';
 
@@ -12,9 +12,14 @@ export const FlightHeader = ({
   departureDate,
   handleBack,
   handleShare,
+  sticky,
 }: FlightHeaderProps) => {
   return (
-    <div className="bg-content1">
+    <div
+      className={cn('bg-content1', {
+        'sticky top-0 z-50': sticky,
+      })}
+    >
       <div className="flex flex-1 items-center px-2 pt-2">
         <div className="flex-none">
           <Button isIconOnly variant="light" onPress={handleBack}>

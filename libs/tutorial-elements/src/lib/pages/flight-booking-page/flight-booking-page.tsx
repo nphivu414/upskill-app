@@ -24,6 +24,7 @@ export const FlightBookingPage = () => {
         departureDate="2021-10-02T00:00:00Z"
         destination="Saigon"
         origin="Singapore"
+        sticky
         handleBack={handleBack}
         handleShare={handleShareFlight}
       />
