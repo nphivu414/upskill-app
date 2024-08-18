@@ -36,3 +36,8 @@ export type FlightCardProps = {
   | 'arrivalAirport'
   | 'benefits'
 >;
+
+export type FlightTimelineProps = Pick<
+  Flight,
+  'departureTime' | 'arrivalTime' | 'departureAirport' | 'arrivalAirport'
+>;

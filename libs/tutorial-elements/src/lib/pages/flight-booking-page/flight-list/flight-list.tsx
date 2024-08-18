@@ -17,11 +17,11 @@ export const FlightList = () => {
           airline="Singapore Airlines"
           airlineLogo="https://content.api.news/v3/images/bin/0a4b9d5f6f8d4c9b6d3b9f4e5e7b3e0a"
           arrivalAirport="JFK"
-          arrivalTime="10:00 AM"
+          arrivalTime="10:00"
           benefits={['Free Wi-Fi', 'In-flight entertainment']}
           cabinClass="Business Class"
           departureAirport="SIN"
-          departureTime="8:00 PM"
+          departureTime="8:00"
           duration="14h"
           id="1"
           onPress={(id) => {
@@ -33,11 +33,11 @@ export const FlightList = () => {
           airline="Singapore Airlines"
           airlineLogo="https://content.api.news/v3/images/bin/0a4b9d5f6f8d4c9b6d3b9f4e5e7b3e0a"
           arrivalAirport="JFK"
-          arrivalTime="10:00 AM"
+          arrivalTime="10:00"
           benefits={['Free Wi-Fi', 'In-flight entertainment']}
           cabinClass="Business Class"
           departureAirport="SIN"
-          departureTime="8:00 PM"
+          departureTime="8:00"
           duration="14h"
           id="2"
           onPress={(id) => {

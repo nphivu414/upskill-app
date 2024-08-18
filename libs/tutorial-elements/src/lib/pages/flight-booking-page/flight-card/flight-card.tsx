@@ -2,6 +2,7 @@ import { Avatar, Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
 
 import { FlightCardProps } from '../types';
+import { FlightTimeline } from './flight-timeline';
 
 export const FlightCard = ({
   onPress,
@@ -36,7 +37,14 @@ export const FlightCard = ({
         </div>
       </CardHeader>
       <Divider />
-      <CardBody>body</CardBody>
+      <CardBody>
+        <FlightTimeline
+          departureTime={departureTime}
+          arrivalTime={arrivalTime}
+          departureAirport={departureAirport}
+          arrivalAirport={arrivalAirport}
+        />
+      </CardBody>
     </Card>
   );
 };
