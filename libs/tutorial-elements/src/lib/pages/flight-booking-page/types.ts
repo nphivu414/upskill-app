@@ -8,6 +8,7 @@ interface Benefit {
 interface Flight {
   id: string;
   origin: string;
+  price: number;
   destination: string;
   cabinClass: string;
   departureDate: string;
@@ -35,6 +36,7 @@ export type FlightCardProps = {
 } & Pick<
   Flight,
   | 'id'
+  | 'price'
   | 'airline'
   | 'airlineLogo'
   | 'cabinClass'
@@ -58,4 +60,13 @@ export type FlightTimelineProps = {
   | 'departureAirport'
   | 'arrivalAirport'
   | 'duration'
+>;
+
+export type FlightBenefitsProps = Pick<Flight, 'benefits'>;
+
+export type FlightFareDetailsProps = Pick<Flight, 'price' | 'isRoundTrip'>;
+
+export type FlightOverviewProps = Pick<
+  Flight,
+  'airline' | 'airlineLogo' | 'cabinClass' | 'aircraftType'
 >;
