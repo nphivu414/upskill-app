@@ -14,6 +14,10 @@ export const useHideOnScrollHeader = (
     if (!shouldHideOnScroll) return;
 
     const unsubscribe = parentScrollY.on('change', (latest) => {
+      if (latest < 0 || latest > 1) {
+        return;
+      }
+
       if (latest > lastScrollYRef.current) {
         setShowHeader(false);
       } else {

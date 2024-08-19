@@ -45,7 +45,7 @@ export const FlightCard = ({
       </CardHeader>
       <Divider />
       <CardBody>
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between">
           <div className="flex w-3/5 shrink-0">
             <FlightTimeline
               departureTime={departureTime}

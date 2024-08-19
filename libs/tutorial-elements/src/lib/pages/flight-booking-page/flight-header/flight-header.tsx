@@ -24,7 +24,7 @@ export const FlightHeader = ({
   return (
     <motion.div
       {...motionsProps}
-      className={cn('bg-content2 shadow-md', {
+      className={cn('bg-content1 shadow-md', {
         'sticky top-0 z-50': sticky,
       })}
     >

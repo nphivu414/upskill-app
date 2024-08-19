@@ -15,7 +15,7 @@ interface Flight {
   cabinClass: string;
   departureDate: string;
   airline: string;
-  airlineLogo: string;
+  airlineLogo: React.ReactNode;
   aircraftType: string;
   departureTime: string;
   arrivalTime: string;

@@ -24,7 +24,7 @@ export const FlightBookingPage = () => {
   };
 
   return (
-    <ScrollShadow ref={ref} className="h-[550px] pb-2" size={15}>
+    <ScrollShadow ref={ref} className="h-[550px] pb-4" size={15}>
       <FlightHeader
         parentScrollY={scrollYProgress}
         cabinClass="Business Class"

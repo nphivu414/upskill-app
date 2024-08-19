@@ -9,7 +9,7 @@ export const formatDate = (date: string) => {
 };
 
 export const formatNumber = (num: number, currency?: string) => {
-  return Intl.NumberFormat(undefined, {
+  return Intl.NumberFormat('en-US', {
     maximumFractionDigits: 3,
     currency: currency,
     style: currency ? 'currency' : undefined,

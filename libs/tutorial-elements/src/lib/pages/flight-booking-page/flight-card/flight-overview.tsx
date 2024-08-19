@@ -1,4 +1,3 @@
-import { Avatar } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
 
 import { FlightOverviewProps } from '../types';
@@ -19,7 +18,9 @@ export const FlightOverview = ({
           <Subtle className="text-xs">{aircraftType}</Subtle>
         </div>
       </div>
-      <Avatar src={airlineLogo} alt="airline logo" size="sm" />
+      <div className="border-divider bg-content2 flex size-8 items-center justify-center rounded-full border">
+        {airlineLogo}
+      </div>
     </div>
   );
 };

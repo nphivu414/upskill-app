@@ -1,4 +1,5 @@
 import { Spacer } from '@nextui-org/react';
+import { CustomIcons } from '@upskill-app/ui/web';
 import { Briefcase, Utensils } from 'lucide-react';
 
 import { FlightCard } from '../flight-card';
@@ -18,7 +19,7 @@ export const FlightList = () => {
           price={304.99}
           aircraftType="Boeing 777-300ER"
           airline="Singapore Airlines"
-          airlineLogo="https://content.api.news/v3/images/bin/0a4b9d5f6f8d4c9b6d3b9f4e5e7b3e0a"
+          airlineLogo={<CustomIcons.SingaporeAirlines width={16} />}
           arrivalAirport="JFK"
           arrivalTime="10:00"
           benefits={[
@@ -49,7 +50,7 @@ export const FlightList = () => {
           price={304.99}
           aircraftType="Boeing 777-300ER"
           airline="Singapore Airlines"
-          airlineLogo="https://content.api.news/v3/images/bin/0a4b9d5f6f8d4c9b6d3b9f4e5e7b3e0a"
+          airlineLogo={<CustomIcons.SingaporeAirlines width={16} />}
           arrivalAirport="JFK"
           arrivalTime="10:00"
           benefits={[
@@ -80,7 +81,7 @@ export const FlightList = () => {
           price={304.99}
           aircraftType="Boeing 777-300ER"
           airline="Singapore Airlines"
-          airlineLogo="https://content.api.news/v3/images/bin/0a4b9d5f6f8d4c9b6d3b9f4e5e7b3e0a"
+          airlineLogo={<CustomIcons.AmericanAirlines width={16} />}
           arrivalAirport="JFK"
           arrivalTime="10:00"
           benefits={[
@@ -111,7 +112,7 @@ export const FlightList = () => {
           price={304.99}
           aircraftType="Boeing 777-300ER"
           airline="Singapore Airlines"
-          airlineLogo="https://content.api.news/v3/images/bin/0a4b9d5f6f8d4c9b6d3b9f4e5e7b3e0a"
+          airlineLogo={<CustomIcons.AmericanAirlines width={16} />}
           arrivalAirport="JFK"
           arrivalTime="10:00"
           benefits={[
