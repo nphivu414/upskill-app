@@ -25,13 +25,13 @@ export const FlightList = () => {
             {
               id: '1',
               title: '23kg',
-              icon: <Briefcase size={12} />,
+              icon: <Briefcase size={11} />,
               description: 'Bring up to 2 checked bags for free.',
             },
             {
               id: '2',
               title: 'Meal included',
-              icon: <Utensils size={12} />,
+              icon: <Utensils size={11} />,
             },
           ]}
           cabinClass="Business Class"
@@ -56,13 +56,13 @@ export const FlightList = () => {
             {
               id: '1',
               title: '23kg',
-              icon: <Briefcase size={12} />,
+              icon: <Briefcase size={11} />,
               description: 'Bring up to 2 checked bags for free.',
             },
             {
               id: '2',
               title: 'Meal included',
-              icon: <Utensils size={12} />,
+              icon: <Utensils size={11} />,
             },
           ]}
           cabinClass="Business Class"
@@ -87,13 +87,13 @@ export const FlightList = () => {
             {
               id: '1',
               title: '23kg',
-              icon: <Briefcase size={14} />,
+              icon: <Briefcase size={11} />,
               description: 'Bring up to 2 checked bags for free.',
             },
             {
               id: '2',
               title: 'Meal included',
-              icon: <Utensils size={14} />,
+              icon: <Utensils size={11} />,
             },
           ]}
           cabinClass="Business Class"
@@ -118,13 +118,13 @@ export const FlightList = () => {
             {
               id: '1',
               title: '23kg',
-              icon: <Briefcase size={14} />,
+              icon: <Briefcase size={11} />,
               description: 'Bring up to 2 checked bags for free.',
             },
             {
               id: '2',
               title: 'Meal included',
-              icon: <Utensils size={14} />,
+              icon: <Utensils size={11} />,
             },
           ]}
           cabinClass="Business Class"

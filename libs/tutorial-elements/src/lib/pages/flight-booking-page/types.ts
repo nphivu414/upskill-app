@@ -1,3 +1,5 @@
+import { MotionValue } from 'framer-motion';
+
 interface Benefit {
   id: string;
   title: string;
@@ -27,6 +29,8 @@ interface Flight {
 
 export type FlightHeaderProps = {
   sticky?: boolean;
+  shouldHideOnScroll?: boolean;
+  parentScrollY: MotionValue<number>;
   handleBack: () => void;
   handleShare: () => void;
 } & Pick<Flight, 'origin' | 'destination' | 'cabinClass' | 'departureDate'>;
