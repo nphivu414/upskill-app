@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollShadow } from '@nextui-org/react';
 import { useScroll } from 'framer-motion';
 
+import { FlightFooter } from './flight-footer/';
 import { FlightHeader } from './flight-header';
 import { FlightList } from './flight-list';
 
@@ -24,7 +25,7 @@ export const FlightBookingPage = () => {
   };
 
   return (
-    <ScrollShadow ref={ref} className="h-[550px] pb-4" size={15}>
+    <ScrollShadow ref={ref} className="relative h-[550px]" size={15}>
       <FlightHeader
         parentScrollY={scrollYProgress}
         cabinClass="Business Class"
@@ -37,6 +38,7 @@ export const FlightBookingPage = () => {
         shouldHideOnScroll
       />
       <FlightList />
+      <FlightFooter />
     </ScrollShadow>
   );
 };

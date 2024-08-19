@@ -12,6 +12,14 @@ export const FlightTimeline = ({
   totalStops,
 }: FlightTimelineProps) => {
   const totalSteps = totalStops + 1;
+
+  let stopText = 'Direct';
+  if (totalStops === 1) {
+    stopText = '1 stop';
+  } else if (totalStops > 1) {
+    stopText = `${totalStops} stops`;
+  }
+
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <Subtle className="-mb-2 text-xs">{duration}</Subtle>
@@ -44,7 +52,7 @@ export const FlightTimeline = ({
           step: 'bg-foreground w-[4px] h-[4px]',
         }}
       />
-      <Subtle className="-mt-2 text-xs">{totalStops} stops</Subtle>
+      <Subtle className="-mt-2 text-xs">{stopText}</Subtle>
     </div>
   );
 };

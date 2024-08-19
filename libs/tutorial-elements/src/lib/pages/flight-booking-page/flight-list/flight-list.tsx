@@ -13,7 +13,7 @@ export const FlightList = () => {
         <p className="text-primary text-xs">120 Flights</p>
       </div>
       <Spacer y={4} />
-      <div className="flex w-full flex-col gap-2 px-4">
+      <div className="flex w-full flex-col gap-2 px-4 pb-4">
         <FlightCard
           id="1"
           price={304.99}
@@ -39,7 +39,7 @@ export const FlightList = () => {
           departureAirport="SIN"
           departureTime="8:00"
           duration="14h 30m"
-          stops={['HKG', 'LAX']}
+          stops={[]}
           isRoundTrip
           onPress={(id) => {
             console.log('Flight card pressed', id);

@@ -3,6 +3,7 @@ export * from './app-container';
 export * from './app-footer';
 export * from './copy-button';
 export * from './code-block';
+export * from './drawer';
 export * from './theme-toggle';
 export * from './app-ui-provider';
 export * from './typography';
