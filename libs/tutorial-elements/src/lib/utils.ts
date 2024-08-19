@@ -8,8 +8,10 @@ export const formatDate = (date: string) => {
   });
 };
 
-export const formatNumber = (num: number) => {
+export const formatNumber = (num: number, currency?: string) => {
   return Intl.NumberFormat(undefined, {
     maximumFractionDigits: 3,
+    currency: currency,
+    style: currency ? 'currency' : undefined,
   }).format(num);
 };

@@ -1,9 +1,12 @@
-import { Button, cn, Divider, Spacer } from '@nextui-org/react';
+import React from 'react';
+import { Button, cn, Spacer } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
+import { motion } from 'framer-motion';
 import { ChevronLeft, Share2 } from 'lucide-react';
 
 import { formatDate } from '../../../utils';
 import { FlightHeaderProps } from '../types';
+import { useHideOnScrollHeader } from './use-hide-on-scroll-header';
 
 export const FlightHeader = ({
   origin,
@@ -13,17 +16,22 @@ export const FlightHeader = ({
   handleBack,
   handleShare,
   sticky,
+  shouldHideOnScroll,
+  parentScrollY,
 }: FlightHeaderProps) => {
+  const motionsProps = useHideOnScrollHeader(parentScrollY, shouldHideOnScroll);
+
   return (
-    <div
-      className={cn('bg-content1', {
+    <motion.div
+      {...motionsProps}
+      className={cn('bg-content2 shadow-md', {
         'sticky top-0 z-50': sticky,
       })}
     >
       <div className="flex flex-1 items-center px-2 pt-2">
         <div className="flex-none">
           <Button isIconOnly variant="light" onPress={handleBack}>
-            <ChevronLeft size={14} />
+            <ChevronLeft size={16} />
             <span className="sr-only">Back</span>
           </Button>
         </div>
@@ -46,13 +54,12 @@ export const FlightHeader = ({
         </div>
         <div className="flex-none">
           <Button isIconOnly variant="light" onPress={handleShare}>
-            <Share2 size={14} />
+            <Share2 size={16} />
             <span className="sr-only">Menu</span>
           </Button>
         </div>
       </div>
       <Spacer y={2} />
-      <Divider />
-    </div>
+    </motion.div>
   );
 };

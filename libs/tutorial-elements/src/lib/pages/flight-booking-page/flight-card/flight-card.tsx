@@ -1,20 +1,21 @@
 import {
-  Avatar,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Chip,
   Divider,
 } from '@nextui-org/react';
-import { Subtle } from '@upskill-app/ui/web';
 
 import { FlightCardProps } from '../types';
+import { FlightBenefits } from './flight-benefits';
+import { FlightFareDetails } from './flight-fare-details';
+import { FlightOverview } from './flight-overview';
 import { FlightTimeline } from './flight-timeline';
 
 export const FlightCard = ({
   onPress,
   id,
+  price,
   airline,
   airlineLogo,
   cabinClass,
@@ -31,20 +32,16 @@ export const FlightCard = ({
   const handlePress = () => {
     onPress(id);
   };
+
   return (
     <Card isPressable onPress={handlePress} fullWidth radius="sm">
       <CardHeader>
-        <div className="flex flex-1 justify-between">
-          <div className="flex flex-col items-start gap-1">
-            <p className="text-sm font-semibold">{airline}</p>
-            <div className="flex items-center justify-around gap-1">
-              <Subtle className="text-xs">{cabinClass}</Subtle>
-              <Subtle className="text-xs">•</Subtle>
-              <Subtle className="text-xs">{aircraftType}</Subtle>
-            </div>
-          </div>
-          <Avatar src={airlineLogo} alt="airline logo" size="sm" />
-        </div>
+        <FlightOverview
+          aircraftType={aircraftType}
+          airline={airline}
+          airlineLogo={airlineLogo}
+          cabinClass={cabinClass}
+        />
       </CardHeader>
       <Divider />
       <CardBody>
@@ -59,42 +56,11 @@ export const FlightCard = ({
               totalStops={stops.length}
             />
           </div>
-          <div className="flex flex-col items-center gap-1">
-            <p className="text-warning truncate break-words text-xs font-semibold">
-              $304.99 / pax
-            </p>
-            {isRoundTrip && (
-              <Chip
-                size="sm"
-                variant="flat"
-                color="primary"
-                className="text-xs"
-              >
-                Round trip
-              </Chip>
-            )}
-          </div>
+          <FlightFareDetails price={price} isRoundTrip={isRoundTrip} />
         </div>
       </CardBody>
       <CardFooter>
-        <div className="flex items-center gap-2 overflow-x-auto">
-          {benefits.map((benefit) => (
-            <Chip
-              key={benefit.id}
-              size="sm"
-              variant="dot"
-              color="warning"
-              className="text-xs"
-              startContent={
-                benefit.icon ? (
-                  <div className="text-warning px-1">{benefit.icon}</div>
-                ) : undefined
-              }
-            >
-              {benefit.title}
-            </Chip>
-          ))}
-        </div>
+        <FlightBenefits benefits={benefits} />
       </CardFooter>
     </Card>
   );
