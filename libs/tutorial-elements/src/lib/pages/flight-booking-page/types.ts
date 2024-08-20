@@ -74,3 +74,7 @@ export type FlightOverviewProps = Pick<
   Flight,
   'airline' | 'airlineLogo' | 'cabinClass' | 'aircraftType'
 >;
+
+export type FlightFooterProps = {
+  portalContainer: React.RefObject<HTMLElement> | undefined;
+};

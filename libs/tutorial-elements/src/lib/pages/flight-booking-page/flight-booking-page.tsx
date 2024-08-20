@@ -7,9 +7,9 @@ import { FlightHeader } from './flight-header';
 import { FlightList } from './flight-list';
 
 export const FlightBookingPage = () => {
-  const ref = React.useRef(null);
+  const scrollContainerRef = React.useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
-    container: ref,
+    container: scrollContainerRef,
   });
 
   const handleBack = () => {
@@ -25,7 +25,11 @@ export const FlightBookingPage = () => {
   };
 
   return (
-    <ScrollShadow ref={ref} className="relative h-[550px]" size={15}>
+    <ScrollShadow
+      ref={scrollContainerRef}
+      className="relative h-[550px]"
+      size={15}
+    >
       <FlightHeader
         parentScrollY={scrollYProgress}
         cabinClass="Business Class"
@@ -38,7 +42,7 @@ export const FlightBookingPage = () => {
         shouldHideOnScroll
       />
       <FlightList />
-      <FlightFooter />
+      <FlightFooter portalContainer={scrollContainerRef} />
     </ScrollShadow>
   );
 };
