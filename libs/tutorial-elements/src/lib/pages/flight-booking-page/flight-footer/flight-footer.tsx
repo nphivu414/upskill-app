@@ -1,33 +1,24 @@
+import { Button } from '@nextui-org/react';
 import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  useDisclosure,
-} from '@nextui-org/react';
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@upskill-app/ui/web';
 import { ArrowDownNarrowWide, SlidersHorizontal } from 'lucide-react';
 
 import { FlightFooterProps } from '../types';
 import { FlightFilterForm } from './flight-filter-form';
 
 export const FlightFooter = ({ portalContainer }: FlightFooterProps) => {
-  const { isOpen, onOpenChange } = useDisclosure();
-
   return (
     <div className="bg-content1 border-t-1 border-divider sticky bottom-0 z-10 flex flex-1 items-center justify-between gap-2 p-4">
-      <Popover
-        placement="top-start"
-        offset={-34}
-        crossOffset={-14}
-        backdrop="blur"
-        portalContainer={portalContainer?.current || undefined}
-      >
-        <PopoverTrigger>
+      <Drawer shouldScaleBackground>
+        <DrawerTrigger asChild>
           <Button
             fullWidth
             variant="bordered"
@@ -37,21 +28,21 @@ export const FlightFooter = ({ portalContainer }: FlightFooterProps) => {
           >
             Filter
           </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-full">
-          {(titleProps) => (
-            <div className="w-full px-1 py-2">
-              <p
-                className="text-small text-foreground font-bold"
-                {...titleProps}
-              >
-                Filters
-              </p>
-              <FlightFilterForm />
-            </div>
-          )}
-        </PopoverContent>
-      </Popover>
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+            <DrawerDescription>This action cannot be undone.</DrawerDescription>
+          </DrawerHeader>
+          <FlightFilterForm />
+          <DrawerFooter>
+            <Button>Submit</Button>
+            <DrawerClose>
+              <Button>Cancel</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
 
       <Button
         fullWidth
@@ -62,31 +53,6 @@ export const FlightFooter = ({ portalContainer }: FlightFooterProps) => {
       >
         Sort
       </Button>
-
-      {/* <Modal
-        isOpen={isOpen}
-        hideCloseButton
-        onOpenChange={onOpenChange}
-        placement="bottom-center"
-        shouldBlockScroll
-        portalContainer={portalContainer?.current || undefined}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader>Preview & Code</ModalHeader>
-              <ModalBody>
-                <FlightFilterForm />
-              </ModalBody>
-              <ModalFooter>
-                <Button variant="flat" onPress={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal> */}
     </div>
   );
 };
