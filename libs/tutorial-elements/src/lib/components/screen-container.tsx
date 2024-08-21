@@ -11,10 +11,7 @@ export const ScreenContainer = ({
   ...rest
 }: ScreenContainerProps) => {
   return (
-    <div
-      className={cn('container mx-auto max-w-xs sm:max-w-sm', className)}
-      {...rest}
-    >
+    <div className={cn('container mx-auto max-w-md', className)} {...rest}>
       {children}
     </div>
   );

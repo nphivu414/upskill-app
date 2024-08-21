@@ -1,5 +1,4 @@
 import React from 'react';
-import { ScrollShadow } from '@nextui-org/react';
 import { useScroll } from 'framer-motion';
 
 import { FlightFooter } from './flight-footer/';
@@ -8,9 +7,7 @@ import { FlightList } from './flight-list';
 
 export const FlightBookingPage = () => {
   const scrollContainerRef = React.useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    container: scrollContainerRef,
-  });
+  const { scrollYProgress } = useScroll();
 
   const handleBack = () => {
     alert('Back button clicked');
@@ -25,11 +22,7 @@ export const FlightBookingPage = () => {
   };
 
   return (
-    <ScrollShadow
-      ref={scrollContainerRef}
-      className="relative h-[550px]"
-      size={15}
-    >
+    <div>
       <FlightHeader
         parentScrollY={scrollYProgress}
         cabinClass="Business Class"
@@ -43,6 +36,6 @@ export const FlightBookingPage = () => {
       />
       <FlightList />
       <FlightFooter portalContainer={scrollContainerRef} />
-    </ScrollShadow>
+    </div>
   );
 };

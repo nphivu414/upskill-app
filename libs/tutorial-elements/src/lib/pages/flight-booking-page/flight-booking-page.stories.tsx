@@ -9,9 +9,7 @@ const meta: Meta<typeof FlightBookingPage> = {
   decorators: [
     (Story) => (
       <ScreenContainer>
-        <MockupBrowser>
-          <Story />
-        </MockupBrowser>
+        <Story />
       </ScreenContainer>
     ),
   ],
