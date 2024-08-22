@@ -7,15 +7,13 @@ import {
   TUTORIAL_REPO,
   TUTORIAL_STORIES,
 } from '@upskill-app/shared';
-import { EmbedStory, LivePreview, useResponsive } from '@upskill-app/ui/web';
+import { EmbedStory, LivePreview } from '@upskill-app/ui/web';
 import { useTheme } from 'next-themes';
 
 import { ClientOnlyContainer, MockupBrowser } from '../../../components';
 
 export const FlightBookingPagePreview = () => {
   const { theme } = useTheme();
-  const { isMobile } = useResponsive();
-  const previewHeight = isMobile ? 550 : 680;
   return (
     <LivePreview
       storybookUrl={getStorybookUrl(
@@ -28,13 +26,11 @@ export const FlightBookingPagePreview = () => {
       )}
     >
       <MockupBrowser>
-        <ClientOnlyContainer
-          loadingContainerClassName={`min-h-[${previewHeight}px]`}
-        >
+        <ClientOnlyContainer loadingContainerClassName="min-h-[550px]">
           <EmbedStory
             storyBaseURL={getStorybookBaseUrl()}
             storyId={TUTORIAL_STORIES.FLIGHT_BOOKING_UI.FLIGHT_BOOKING_PAGE}
-            height={previewHeight}
+            height={550}
             width="100%"
           />
         </ClientOnlyContainer>

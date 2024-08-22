@@ -2,20 +2,39 @@
 
 import {
   getGithubSourceUrl,
-  getStorybookBaseUrl,
   getStorybookUrl,
   TUTORIAL_REPO,
   TUTORIAL_STORIES,
 } from '@upskill-app/shared';
-import { EmbedStory, LivePreview, useResponsive } from '@upskill-app/ui/web';
+import { LivePreview } from '@upskill-app/ui/web';
 import { useTheme } from 'next-themes';
 
 import { ClientOnlyContainer, MockupBrowser } from '../../../components';
+import {
+  defaultCompany,
+  defaultFeaturePhotos,
+  defaultLikedPosts,
+  defaultPhotos,
+  defaultPosts,
+  defaultProfile,
+  defaultProfileStats,
+} from '../data';
+import { ProfilePage } from '../profile-page';
+
+const props = {
+  featurePhotos: defaultFeaturePhotos,
+  profile: defaultProfile,
+  company: defaultCompany,
+  profileStats: defaultProfileStats,
+  profileTimeline: {
+    posts: defaultPosts,
+    photos: defaultPhotos,
+    likedPosts: defaultLikedPosts,
+  },
+};
 
 export const ProfilePagePreview = () => {
   const { theme } = useTheme();
-  const { isMobile } = useResponsive();
-  const previewHeight = isMobile ? 550 : 680;
   return (
     <LivePreview
       storybookUrl={getStorybookUrl(
@@ -27,20 +46,9 @@ export const ProfilePagePreview = () => {
         'blob/main/src/components/profile/profile-page.tsx'
       )}
     >
-      <ClientOnlyContainer
-        loadingContainerClassName={`min-h-[${previewHeight}px]`}
-      >
+      <ClientOnlyContainer loadingContainerClassName="min-h-[604px]">
         <MockupBrowser>
-          <ClientOnlyContainer
-            loadingContainerClassName={`min-h-[${previewHeight}px]`}
-          >
-            <EmbedStory
-              storyBaseURL={getStorybookBaseUrl()}
-              storyId={TUTORIAL_STORIES.PROFILE_UI.PROFILE_PAGE}
-              height={previewHeight}
-              width="100%"
-            />
-          </ClientOnlyContainer>
+          <ProfilePage {...props} />
         </MockupBrowser>
       </ClientOnlyContainer>
     </LivePreview>
