@@ -1,10 +1,9 @@
+import React from 'react';
 import { Button } from '@nextui-org/react';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -17,7 +16,7 @@ import { FlightFilterForm } from './flight-filter-form';
 export const FlightFooter = ({ portalContainer }: FlightFooterProps) => {
   return (
     <div className="bg-content1 border-t-1 border-divider sticky bottom-0 z-10 flex flex-1 items-center justify-between gap-2 p-4">
-      <Drawer shouldScaleBackground>
+      <Drawer>
         <DrawerTrigger asChild>
           <Button
             fullWidth
@@ -35,12 +34,6 @@ export const FlightFooter = ({ portalContainer }: FlightFooterProps) => {
             <DrawerDescription>This action cannot be undone.</DrawerDescription>
           </DrawerHeader>
           <FlightFilterForm />
-          <DrawerFooter>
-            <Button>Submit</Button>
-            <DrawerClose>
-              <Button>Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
 
