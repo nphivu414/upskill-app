@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollShadow, Spacer } from '@nextui-org/react';
+import { Spacer } from '@nextui-org/react';
 import { useScroll } from 'framer-motion';
 
 import { FeaturePhotos } from './feature-photos';
@@ -17,14 +17,11 @@ export const ProfilePage = ({
   profileStats,
   profileTimeline: { posts, photos, likedPosts },
 }: ProfilePageProps) => {
-  const ref = React.useRef(null);
-  const { scrollYProgress } = useScroll({
-    container: ref,
-  });
+  const { scrollYProgress } = useScroll();
   const y = useParallaxHeader(scrollYProgress);
 
   return (
-    <ScrollShadow ref={ref} className="h-[550px]" size={15}>
+    <div>
       <ParallaxContainer y={y}>
         <FeaturePhotos photos={featurePhotos} showDots />
       </ParallaxContainer>
@@ -33,6 +30,6 @@ export const ProfilePage = ({
       <ProfileStats stats={profileStats} />
       <Spacer y={1} />
       <ProfileTimeline posts={posts} photos={photos} likedPosts={likedPosts} />
-    </ScrollShadow>
+    </div>
   );
 };

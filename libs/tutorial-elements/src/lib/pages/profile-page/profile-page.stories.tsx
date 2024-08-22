@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { MockupBrowser, ScreenContainer } from '../../components';
+import { ScreenContainer } from '../../components';
 import {
   defaultCompany,
   defaultFeaturePhotos,
@@ -18,9 +18,7 @@ const meta: Meta<typeof ProfilePage> = {
   decorators: [
     (Story) => (
       <ScreenContainer>
-        <MockupBrowser>
-          <Story />
-        </MockupBrowser>
+        <Story />
       </ScreenContainer>
     ),
   ],

@@ -22,7 +22,7 @@ export const EmbedStory = ({
     }
 
     setUrl(
-      `${storyBaseURL}iframe.html?args=&id=${storyId}&globals=theme:${theme}`
+      `${storyBaseURL}iframe.html?args=&id=${storyId}--default&globals=theme:${theme}&viewMode=story`
     );
   }, [storyId, theme]);
 
@@ -30,5 +30,7 @@ export const EmbedStory = ({
     return null;
   }
 
-  return <iframe src={url} {...rest} />;
+  return (
+    <iframe src={url} className="m-0 border-0 p-0 outline-none" {...rest} />
+  );
 };

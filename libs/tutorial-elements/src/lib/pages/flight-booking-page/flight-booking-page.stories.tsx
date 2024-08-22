@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { MockupBrowser, ScreenContainer } from '../../components';
+import { ScreenContainer } from '../../components';
 import { FlightBookingPage } from './flight-booking-page';
 
 const meta: Meta<typeof FlightBookingPage> = {

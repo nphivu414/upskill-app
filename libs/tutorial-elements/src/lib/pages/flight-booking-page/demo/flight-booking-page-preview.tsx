@@ -12,14 +12,14 @@ import { useTheme } from 'next-themes';
 
 import { ClientOnlyContainer, MockupBrowser } from '../../../components';
 
-export const ProfilePagePreview = () => {
+export const FlightBookingPagePreview = () => {
   const { theme } = useTheme();
   const { isMobile } = useResponsive();
   const previewHeight = isMobile ? 550 : 680;
   return (
     <LivePreview
       storybookUrl={getStorybookUrl(
-        TUTORIAL_STORIES.PROFILE_UI.PROFILE_PAGE,
+        TUTORIAL_STORIES.FLIGHT_BOOKING_UI.FLIGHT_BOOKING_PAGE,
         theme
       )}
       sourceUrl={getGithubSourceUrl(
@@ -27,22 +27,18 @@ export const ProfilePagePreview = () => {
         'blob/main/src/components/profile/profile-page.tsx'
       )}
     >
-      <ClientOnlyContainer
-        loadingContainerClassName={`min-h-[${previewHeight}px]`}
-      >
-        <MockupBrowser>
-          <ClientOnlyContainer
-            loadingContainerClassName={`min-h-[${previewHeight}px]`}
-          >
-            <EmbedStory
-              storyBaseURL={getStorybookBaseUrl()}
-              storyId={TUTORIAL_STORIES.PROFILE_UI.PROFILE_PAGE}
-              height={previewHeight}
-              width="100%"
-            />
-          </ClientOnlyContainer>
-        </MockupBrowser>
-      </ClientOnlyContainer>
+      <MockupBrowser>
+        <ClientOnlyContainer
+          loadingContainerClassName={`min-h-[${previewHeight}px]`}
+        >
+          <EmbedStory
+            storyBaseURL={getStorybookBaseUrl()}
+            storyId={TUTORIAL_STORIES.FLIGHT_BOOKING_UI.FLIGHT_BOOKING_PAGE}
+            height={previewHeight}
+            width="100%"
+          />
+        </ClientOnlyContainer>
+      </MockupBrowser>
     </LivePreview>
   );
 };

@@ -1,1 +1,1 @@
-export * from './flight-booking-page';
+export * from './demo';
