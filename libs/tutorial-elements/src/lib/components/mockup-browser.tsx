@@ -9,7 +9,7 @@ export const MockupBrowser = ({ className, children }: MockupBrowserProps) => {
   return (
     <div
       className={cn(
-        'mockup-browser bg-base-300 w-[320px] max-w-[320px] md:w-[375px] md:max-w-[375px] border-2 border-divider',
+        'mockup-browser bg-base-300 w-[320px] max-w-[320px] border-2 border-divider',
         className
       )}
     >
