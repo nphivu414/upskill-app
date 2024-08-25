@@ -22,7 +22,7 @@ export const FlightBookingPage = () => {
   };
 
   return (
-    <div>
+    <div vaul-drawer-wrapper="">
       <FlightHeader
         parentScrollY={scrollYProgress}
         cabinClass="Business Class"

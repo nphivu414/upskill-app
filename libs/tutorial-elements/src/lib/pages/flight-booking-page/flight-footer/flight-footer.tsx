@@ -16,7 +16,7 @@ import { FlightFilterForm } from './flight-filter-form';
 export const FlightFooter = ({ portalContainer }: FlightFooterProps) => {
   return (
     <div className="bg-content1 border-t-1 border-divider sticky bottom-0 z-10 flex flex-1 items-center justify-between gap-2 p-4">
-      <Drawer>
+      <Drawer shouldScaleBackground setBackgroundColorOnScale>
         <DrawerTrigger asChild>
           <Button
             fullWidth
