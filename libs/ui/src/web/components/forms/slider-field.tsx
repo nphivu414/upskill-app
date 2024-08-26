@@ -1,18 +1,17 @@
 import { Slider, SliderProps } from '@nextui-org/react';
 import get from 'lodash/get';
-import {
-  Controller,
-  ControllerRenderProps,
-  FieldValues,
-} from 'react-hook-form';
+import { Controller, FieldValues } from 'react-hook-form';
 
 import { ControlledFormFieldProps } from './types';
 
-type SliderFieldProps<T extends FieldValues> = ControlledFormFieldProps<T> &
-  Omit<SliderProps, 'name'>;
+export type SliderFieldProps<T extends FieldValues> =
+  ControlledFormFieldProps<T> &
+    Omit<SliderProps, 'name'> & {
+      renderCustomValue?: (value: SliderProps['value']) => React.ReactNode;
+    };
 
 export function SliderField<T extends FieldValues>(props: SliderFieldProps<T>) {
-  const { name, formState, control, ...rest } = props;
+  const { name, formState, control, renderCustomValue, ...rest } = props;
   const { errors } = formState;
   const error = get(errors, name);
   const errorText = error?.message;
@@ -23,10 +22,14 @@ export function SliderField<T extends FieldValues>(props: SliderFieldProps<T>) {
     }
   };
 
-  const handleOnChangeEnd = (onChange: ControllerRenderProps['onChange']) => {
-    return (value: number | number[]) => {
-      onChange(value);
-    };
+  const handleRenderCustomValue = (
+    value: SliderProps['value'],
+    children: React.ReactNode
+  ) => {
+    if (value && renderCustomValue) {
+      return renderCustomValue(value);
+    }
+    return children;
   };
 
   return (
@@ -34,10 +37,15 @@ export function SliderField<T extends FieldValues>(props: SliderFieldProps<T>) {
       name={name}
       control={control}
       render={({ field: { onChange, ...fields } }) => (
-        <div className="flex size-full max-w-md flex-col items-start justify-center gap-2">
+        <div className="flex flex-col items-start justify-center gap-2">
           <Slider
             color={error ? 'danger' : 'primary'}
-            onChangeEnd={handleOnChangeEnd(onChange)}
+            onChange={onChange}
+            renderValue={({ children, ...props }) => (
+              <output {...props}>
+                {handleRenderCustomValue(fields.value, children)}
+              </output>
+            )}
             {...rest}
             {...fields}
           />

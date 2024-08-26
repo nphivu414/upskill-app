@@ -6,11 +6,31 @@ import {
   Divider,
 } from '@nextui-org/react';
 
-import { FlightCardProps } from '../types';
+import { Flight } from '../types';
 import { FlightBenefits } from './flight-benefits';
 import { FlightFareDetails } from './flight-fare-details';
 import { FlightOverview } from './flight-overview';
 import { FlightTimeline } from './flight-timeline';
+
+type FlightCardProps = {
+  onPress: (id: Flight['id']) => void;
+} & Pick<
+  Flight,
+  | 'id'
+  | 'price'
+  | 'airline'
+  | 'airlineLogo'
+  | 'cabinClass'
+  | 'aircraftType'
+  | 'departureTime'
+  | 'arrivalTime'
+  | 'duration'
+  | 'departureAirport'
+  | 'arrivalAirport'
+  | 'benefits'
+  | 'stops'
+  | 'isRoundTrip'
+>;
 
 export const FlightCard = ({
   onPress,

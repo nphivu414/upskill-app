@@ -1,6 +1,11 @@
 import { Subtle } from '@upskill-app/ui/web';
 
-import { FlightOverviewProps } from '../types';
+import { Flight } from '../types';
+
+type FlightOverviewProps = Pick<
+  Flight,
+  'airline' | 'airlineLogo' | 'cabinClass' | 'aircraftType'
+>;
 
 export const FlightOverview = ({
   airline,

@@ -1,13 +1,15 @@
-import { MotionValue } from 'framer-motion';
+import { z } from 'zod';
 
-interface Benefit {
+import { flightFilterSchema } from './flight-filter-form/schema';
+
+export interface Benefit {
   id: string;
   title: string;
   icon?: React.ReactNode;
   description?: string;
 }
 
-interface Flight {
+export interface Flight {
   id: string;
   origin: string;
   price: number;
@@ -27,54 +29,4 @@ interface Flight {
   isRoundTrip: boolean;
 }
 
-export type FlightHeaderProps = {
-  sticky?: boolean;
-  shouldHideOnScroll?: boolean;
-  parentScrollY: MotionValue<number>;
-  handleBack: () => void;
-  handleShare: () => void;
-} & Pick<Flight, 'origin' | 'destination' | 'cabinClass' | 'departureDate'>;
-
-export type FlightCardProps = {
-  onPress: (id: Flight['id']) => void;
-} & Pick<
-  Flight,
-  | 'id'
-  | 'price'
-  | 'airline'
-  | 'airlineLogo'
-  | 'cabinClass'
-  | 'aircraftType'
-  | 'departureTime'
-  | 'arrivalTime'
-  | 'duration'
-  | 'departureAirport'
-  | 'arrivalAirport'
-  | 'benefits'
-  | 'stops'
-  | 'isRoundTrip'
->;
-
-export type FlightTimelineProps = {
-  totalStops: number;
-} & Pick<
-  Flight,
-  | 'departureTime'
-  | 'arrivalTime'
-  | 'departureAirport'
-  | 'arrivalAirport'
-  | 'duration'
->;
-
-export type FlightBenefitsProps = Pick<Flight, 'benefits'>;
-
-export type FlightFareDetailsProps = Pick<Flight, 'price' | 'isRoundTrip'>;
-
-export type FlightOverviewProps = Pick<
-  Flight,
-  'airline' | 'airlineLogo' | 'cabinClass' | 'aircraftType'
->;
-
-export type FlightFooterProps = {
-  portalContainer: React.RefObject<HTMLElement> | undefined;
-};
+export type FlightFilterFormData = z.infer<typeof flightFilterSchema>;

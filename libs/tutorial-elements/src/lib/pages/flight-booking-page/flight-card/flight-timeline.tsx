@@ -1,7 +1,18 @@
 import { Slider } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
 
-import { FlightTimelineProps } from '../types';
+import { Flight } from '../types';
+
+type FlightTimelineProps = {
+  totalStops: number;
+} & Pick<
+  Flight,
+  | 'departureTime'
+  | 'arrivalTime'
+  | 'departureAirport'
+  | 'arrivalAirport'
+  | 'duration'
+>;
 
 export const FlightTimeline = ({
   arrivalAirport,

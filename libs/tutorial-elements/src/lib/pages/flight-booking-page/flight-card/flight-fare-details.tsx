@@ -1,7 +1,9 @@
 import { Chip } from '@nextui-org/react';
 
 import { formatNumber } from '../../../utils';
-import { FlightFareDetailsProps } from '../types';
+import { Flight } from '../types';
+
+type FlightFareDetailsProps = Pick<Flight, 'price' | 'isRoundTrip'>;
 
 export const FlightFareDetails = ({
   price,

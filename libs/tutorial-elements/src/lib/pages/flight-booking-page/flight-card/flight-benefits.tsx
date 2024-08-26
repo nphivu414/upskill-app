@@ -1,7 +1,9 @@
 import { Chip } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
 
-import { FlightBenefitsProps } from '../types';
+import { Flight } from '../types';
+
+export type FlightBenefitsProps = Pick<Flight, 'benefits'>;
 
 export const FlightBenefits = ({ benefits }: FlightBenefitsProps) => {
   return (

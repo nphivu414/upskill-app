@@ -1,12 +1,20 @@
 import React from 'react';
 import { Button, cn, Spacer } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
-import { motion } from 'framer-motion';
+import { motion, MotionValue } from 'framer-motion';
 import { ChevronLeft, Share2 } from 'lucide-react';
 
 import { formatDate } from '../../../utils';
-import { FlightHeaderProps } from '../types';
+import { Flight } from '../types';
 import { useHideOnScrollHeader } from './use-hide-on-scroll-header';
+
+type FlightHeaderProps = {
+  sticky?: boolean;
+  shouldHideOnScroll?: boolean;
+  parentScrollY: MotionValue<number>;
+  handleBack: () => void;
+  handleShare: () => void;
+} & Pick<Flight, 'origin' | 'destination' | 'cabinClass' | 'departureDate'>;
 
 export const FlightHeader = ({
   origin,
