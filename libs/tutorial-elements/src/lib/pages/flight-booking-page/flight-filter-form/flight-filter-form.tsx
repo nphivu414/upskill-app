@@ -1,16 +1,18 @@
 import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/react';
-import { DrawerFooter, SliderField } from '@upskill-app/ui/web';
+import { DrawerFooter } from '@upskill-app/ui/web';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
-import { FlightFilterFormData } from '../types';
+import { Airline, FlightFilterFormData } from '../types';
+import { AirlineSelector } from './airline-selector';
 import { PriceRangeSlider } from './price-range-slider';
 import { flightFilterSchema } from './schema';
 import { TimeRangeSlider } from './time-range-slider';
 
 type FlightFilterFormProps = {
   initialData: FlightFilterFormData;
+  airlines: Airline[];
   onSubmit: (data: FlightFilterFormData) => void;
 };
 
@@ -25,6 +27,7 @@ export const defaultFlightFilterValues: FlightFilterFormData = {
 };
 
 export const FlightFilterForm = ({
+  airlines,
   initialData,
   onSubmit,
 }: FlightFilterFormProps) => {
@@ -53,24 +56,24 @@ export const FlightFilterForm = ({
 
   return (
     <FormProvider {...formReturns}>
-      <form
-        className="flex h-[400px] flex-col gap-6 px-4"
-        onSubmit={handleSubmit(handleOnSubmit)}
-      >
-        <PriceRangeSlider minValue={minPrice} maxValue={maxPrice} />
-        <TimeRangeSlider
-          name="departureTimeRange"
-          label="Departure Time"
-          minValue={minDepartureTime}
-          maxValue={maxDepartureTime}
-        />
-        <TimeRangeSlider
-          name="arrivalTimeRange"
-          label="Arrival Time"
-          minValue={minArrivalTime}
-          maxValue={maxArrivalTime}
-        />
-        <DrawerFooter>
+      <form onSubmit={handleSubmit(handleOnSubmit)}>
+        <div className="flex flex-col gap-6 px-4">
+          <PriceRangeSlider minValue={minPrice} maxValue={maxPrice} />
+          <TimeRangeSlider
+            name="departureTimeRange"
+            label="Departure Time"
+            minValue={minDepartureTime}
+            maxValue={maxDepartureTime}
+          />
+          <TimeRangeSlider
+            name="arrivalTimeRange"
+            label="Arrival Time"
+            minValue={minArrivalTime}
+            maxValue={maxArrivalTime}
+          />
+          <AirlineSelector data={airlines} />
+        </div>
+        <DrawerFooter className="bg-content1 sticky bottom-0 mt-2 px-4 py-2">
           <Button type="submit" color="primary" fullWidth>
             Save
           </Button>

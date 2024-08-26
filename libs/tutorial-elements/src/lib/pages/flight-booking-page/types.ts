@@ -9,6 +9,12 @@ export interface Benefit {
   description?: string;
 }
 
+export interface Airline {
+  id: string;
+  name: string;
+  logo: string;
+}
+
 export interface Flight {
   id: string;
   origin: string;
@@ -16,8 +22,7 @@ export interface Flight {
   destination: string;
   cabinClass: string;
   departureDate: string;
-  airline: string;
-  airlineLogo: React.ReactNode;
+  airline: Airline;
   aircraftType: string;
   departureTime: string;
   arrivalTime: string;

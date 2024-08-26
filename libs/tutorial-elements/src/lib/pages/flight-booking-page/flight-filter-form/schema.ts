@@ -19,7 +19,7 @@ export const flightFilterSchema = z.object({
       message: 'Minimum price must be less than or equal to maximum price',
     })
     .optional(),
-  airlines: z.array(z.string()).min(0).max(4).optional(),
+  airlines: z.array(z.string()).optional(),
   stops: z.enum(['any', 'nonstop', '1stop', '2+stops']).optional(),
   cabinClass: z.enum(['economy', 'premium', 'business', 'first']).optional(),
   isRoundTrip: z.boolean().optional(),

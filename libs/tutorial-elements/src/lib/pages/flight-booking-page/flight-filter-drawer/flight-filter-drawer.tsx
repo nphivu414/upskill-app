@@ -10,9 +10,13 @@ import {
 import { SlidersHorizontal } from 'lucide-react';
 
 import { FlightFilterForm } from '../flight-filter-form';
-import { FlightFilterFormData } from '../types';
+import { Airline, FlightFilterFormData } from '../types';
 
-export const FlightFilterDrawer = () => {
+type FlightFilterDrawerProps = {
+  airlines: Airline[];
+};
+
+export const FlightFilterDrawer = ({ airlines }: FlightFilterDrawerProps) => {
   const handleSubmit = (data: FlightFilterFormData) => {
     console.log('🚀 ~ handleSubmit ~ data:', data);
   };
@@ -30,26 +34,29 @@ export const FlightFilterDrawer = () => {
           Filter
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>Filter</DrawerTitle>
-          <DrawerDescription>
-            See flights that match your preferences.
-          </DrawerDescription>
-        </DrawerHeader>
-        <Spacer y={4} />
-        <FlightFilterForm
-          initialData={{
-            airlines: ['Singapore Airlines'],
-            arrivalTimeRange: [0, 23],
-            cabinClass: 'economy',
-            departureTimeRange: [0, 23],
-            isRoundTrip: false,
-            priceRange: [0, 1000],
-            stops: 'any',
-          }}
-          onSubmit={handleSubmit}
-        />
+      <DrawerContent className="max-h-[90%]">
+        <div className="overflow-auto">
+          <DrawerHeader>
+            <DrawerTitle>Filter</DrawerTitle>
+            <DrawerDescription>
+              See flights that match your preferences.
+            </DrawerDescription>
+          </DrawerHeader>
+          <Spacer y={4} />
+          <FlightFilterForm
+            airlines={airlines}
+            initialData={{
+              airlines: [],
+              arrivalTimeRange: [0, 23],
+              cabinClass: 'economy',
+              departureTimeRange: [0, 23],
+              isRoundTrip: false,
+              priceRange: [0, 1000],
+              stops: 'any',
+            }}
+            onSubmit={handleSubmit}
+          />
+        </div>
       </DrawerContent>
     </Drawer>
   );

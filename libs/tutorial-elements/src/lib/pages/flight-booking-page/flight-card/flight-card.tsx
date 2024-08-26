@@ -19,7 +19,6 @@ type FlightCardProps = {
   | 'id'
   | 'price'
   | 'airline'
-  | 'airlineLogo'
   | 'cabinClass'
   | 'aircraftType'
   | 'departureTime'
@@ -37,7 +36,6 @@ export const FlightCard = ({
   id,
   price,
   airline,
-  airlineLogo,
   cabinClass,
   aircraftType,
   departureTime,
@@ -59,7 +57,6 @@ export const FlightCard = ({
         <FlightOverview
           aircraftType={aircraftType}
           airline={airline}
-          airlineLogo={airlineLogo}
           cabinClass={cabinClass}
         />
       </CardHeader>

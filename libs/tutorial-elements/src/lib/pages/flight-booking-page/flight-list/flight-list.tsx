@@ -1,5 +1,4 @@
 import { Spacer } from '@nextui-org/react';
-import { CustomIcons } from '@upskill-app/ui/web';
 import { Briefcase, Utensils } from 'lucide-react';
 
 import { FlightCard } from '../flight-card';
@@ -18,8 +17,11 @@ export const FlightList = () => {
           id="1"
           price={304.99}
           aircraftType="Boeing 777-300ER"
-          airline="Singapore Airlines"
-          airlineLogo={<CustomIcons.SingaporeAirlines width={16} />}
+          airline={{
+            id: '1',
+            name: 'Singapore Airlines',
+            logo: 'https://avatar.vercel.sh/singapore-airlines',
+          }}
           arrivalAirport="JFK"
           arrivalTime="10:00"
           benefits={[
@@ -49,8 +51,11 @@ export const FlightList = () => {
           id="2"
           price={304.99}
           aircraftType="Boeing 777-300ER"
-          airline="Singapore Airlines"
-          airlineLogo={<CustomIcons.SingaporeAirlines width={16} />}
+          airline={{
+            id: '1',
+            name: 'Singapore Airlines',
+            logo: 'https://avatar.vercel.sh/singapore-airlines',
+          }}
           arrivalAirport="JFK"
           arrivalTime="10:00"
           benefits={[
@@ -80,8 +85,11 @@ export const FlightList = () => {
           id="2"
           price={304.99}
           aircraftType="Boeing 777-300ER"
-          airline="Singapore Airlines"
-          airlineLogo={<CustomIcons.AmericanAirlines width={16} />}
+          airline={{
+            id: '2',
+            name: 'American Airlines',
+            logo: 'https://avatar.vercel.sh/merican-airlines',
+          }}
           arrivalAirport="JFK"
           arrivalTime="10:00"
           benefits={[
@@ -111,8 +119,11 @@ export const FlightList = () => {
           id="2"
           price={304.99}
           aircraftType="Boeing 777-300ER"
-          airline="Singapore Airlines"
-          airlineLogo={<CustomIcons.AmericanAirlines width={16} />}
+          airline={{
+            id: '2',
+            name: 'American Airlines',
+            logo: 'https://avatar.vercel.sh/merican-airlines',
+          }}
           arrivalAirport="JFK"
           arrivalTime="10:00"
           benefits={[
