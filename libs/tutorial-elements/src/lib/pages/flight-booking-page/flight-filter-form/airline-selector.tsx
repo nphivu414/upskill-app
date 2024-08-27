@@ -1,6 +1,7 @@
 import { CheckboxGroupData, CheckboxGroupField } from '@upskill-app/ui/web';
 import { useFormContext } from 'react-hook-form';
 
+import { FlightLogo } from '../flight-card/flight-logo';
 import { Airline, FlightFilterFormData } from '../types';
 
 type AirlineSelectorProps = {
@@ -13,6 +14,7 @@ export const AirlineSelector = ({ data }: AirlineSelectorProps) => {
     (airline) => ({
       value: airline.id,
       label: airline.name,
+      endContent: <FlightLogo src={airline.logo} />,
     })
   );
 

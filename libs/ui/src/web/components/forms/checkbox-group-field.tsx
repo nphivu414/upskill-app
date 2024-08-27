@@ -12,6 +12,7 @@ import { ControlledFormFieldProps } from './types';
 export type CheckboxGroupData = {
   value: CheckboxProps['value'];
   label: string;
+  endContent?: React.ReactNode;
 };
 
 export type CheckboxGroupFieldProps<T extends FieldValues> =
@@ -47,9 +48,23 @@ export function CheckboxGroupField<T extends FieldValues>(
           {...rest}
           {...fields}
         >
-          {data?.map(({ value, label }) => (
-            <Checkbox key={value} value={value}>
-              {label}
+          {data?.map(({ value, label, endContent }) => (
+            <Checkbox
+              key={value}
+              value={value}
+              classNames={
+                endContent
+                  ? {
+                      label: 'w-full',
+                      base: 'inline-flex w-full max-w-full',
+                    }
+                  : undefined
+              }
+            >
+              <div className="flex w-full items-center justify-between gap-2">
+                {label}
+                {endContent}
+              </div>
             </Checkbox>
           ))}
         </CheckboxGroup>
