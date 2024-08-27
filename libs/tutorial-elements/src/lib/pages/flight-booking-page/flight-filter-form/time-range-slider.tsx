@@ -33,8 +33,8 @@ export const TimeRangeSlider = (props: TimeRangeSliderProps) => {
       formState={formState}
       size="sm"
       step={1}
-      startContent={<Subtle>{formatTime(minTime)}</Subtle>}
-      endContent={<Subtle>{formatTime(maxTime)}</Subtle>}
+      startContent={<Subtle className="text-xs">{formatTime(minTime)}</Subtle>}
+      endContent={<Subtle className="text-xs">{formatTime(maxTime)}</Subtle>}
       renderCustomValue={(value) => {
         if (!value) return;
         const timeRange = value as number[];
