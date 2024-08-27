@@ -19,12 +19,16 @@ export const TimeRangeSlider = (props: TimeRangeSliderProps) => {
       minute: '2-digit',
       hour12: false,
     });
-
     const time = new Time(value, 0);
     const date = new Date();
     date.setHours(time.hour, time.minute);
-
     return dateFormatter.format(new Date(date));
+  };
+
+  const renderCustomValue = (value: SliderProps['value']) => {
+    if (typeof value === 'object') {
+      return `${formatTime(value[0])} - ${formatTime(value[1])}`;
+    }
   };
 
   return (
@@ -35,16 +39,7 @@ export const TimeRangeSlider = (props: TimeRangeSliderProps) => {
       step={1}
       startContent={<Subtle className="text-xs">{formatTime(minTime)}</Subtle>}
       endContent={<Subtle className="text-xs">{formatTime(maxTime)}</Subtle>}
-      renderCustomValue={(value) => {
-        if (!value) return;
-        const timeRange = value as number[];
-
-        return (
-          <>
-            {formatTime(timeRange[0])} - {formatTime(timeRange[1])}
-          </>
-        );
-      }}
+      renderCustomValue={renderCustomValue}
       {...props}
     />
   );
