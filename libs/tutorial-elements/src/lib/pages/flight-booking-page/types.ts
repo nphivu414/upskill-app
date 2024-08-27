@@ -1,6 +1,10 @@
 import { z } from 'zod';
 
-import { flightFilterSchema } from './flight-filter-form/schema';
+import {
+  benefitSchema,
+  flightFilterSchema,
+  stopSchema,
+} from './flight-filter-form/schema';
 
 export interface Benefit {
   id: string;
@@ -35,3 +39,5 @@ export interface Flight {
 }
 
 export type FlightFilterFormData = z.infer<typeof flightFilterSchema>;
+export type StopEnum = z.infer<typeof stopSchema>;
+export type BenefitEnum = z.infer<typeof benefitSchema>;

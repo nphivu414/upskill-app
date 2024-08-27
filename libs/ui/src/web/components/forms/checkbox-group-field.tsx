@@ -1,11 +1,17 @@
+import React from 'react';
 import {
+  Button,
   Checkbox,
   CheckboxGroup,
   CheckboxGroupProps,
   CheckboxProps,
 } from '@nextui-org/react';
 import get from 'lodash/get';
-import { Controller, FieldValues } from 'react-hook-form';
+import {
+  Controller,
+  ControllerRenderProps,
+  FieldValues,
+} from 'react-hook-form';
 
 import { ControlledFormFieldProps } from './types';
 
@@ -18,13 +24,23 @@ export type CheckboxGroupData = {
 export type CheckboxGroupFieldProps<T extends FieldValues> =
   ControlledFormFieldProps<T> &
     Omit<CheckboxGroupProps, 'name'> & {
+      enableSelectAll?: boolean;
       data?: CheckboxGroupData[];
     };
 
 export function CheckboxGroupField<T extends FieldValues>(
   props: CheckboxGroupFieldProps<T>
 ) {
-  const { name, formState, control, data, ...rest } = props;
+  const {
+    name,
+    formState,
+    control,
+    data,
+    label,
+    enableSelectAll = true,
+    ...rest
+  } = props;
+  const [isSelectedAll, setIsSelectedAll] = React.useState(false);
   const { errors, isValid } = formState;
   const error = get(errors, name);
   const errorText = error?.message;
@@ -33,6 +49,41 @@ export function CheckboxGroupField<T extends FieldValues>(
     if (errorText && typeof errorText === 'string') {
       return errorText;
     }
+  };
+
+  const onSelectAll = (onChange: ControllerRenderProps<T>['onChange']) => {
+    return () => {
+      if (isSelectedAll) {
+        onChange?.([]);
+        setIsSelectedAll(false);
+        return;
+      }
+      const allValues = data?.map(({ value }) => value);
+      if (allValues?.length) {
+        onChange?.(allValues);
+      }
+      setIsSelectedAll(true);
+    };
+  };
+
+  const renderGroupLabel = (onChange: ControllerRenderProps<T>['onChange']) => {
+    if (!enableSelectAll) {
+      return label;
+    }
+
+    return (
+      <div className="flex w-full items-center justify-between">
+        {label}
+        <Button
+          size="sm"
+          color="primary"
+          variant="light"
+          onClick={onSelectAll(onChange)}
+        >
+          {isSelectedAll ? 'Deselect All' : 'Select All'}
+        </Button>
+      </div>
+    );
   };
 
   return (
@@ -45,6 +96,7 @@ export function CheckboxGroupField<T extends FieldValues>(
           onValueChange={onChange}
           isInvalid={!isValid}
           errorMessage={renderErrorText}
+          label={renderGroupLabel(onChange)}
           {...rest}
           {...fields}
         >

@@ -1,8 +1,5 @@
 import { Avatar, Divider } from '@nextui-org/react';
-import {
-  FlightBookingPagePreview,
-  ProfilePagePreview,
-} from '@upskill-app/tutorial-elements';
+import { FlightBookingPagePreview } from '@upskill-app/tutorial-elements';
 import { Paragraph } from '@upskill-app/ui/web';
 import {
   ContentSection,

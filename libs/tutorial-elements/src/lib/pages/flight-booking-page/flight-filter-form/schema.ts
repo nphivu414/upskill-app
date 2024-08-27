@@ -1,5 +1,19 @@
 import { z } from 'zod';
 
+export const cabinClassSchema = z.enum([
+  'economy',
+  'premium',
+  'business',
+  'first',
+]);
+export const stopSchema = z.enum(['any', 'nonstop', '1stop', '2+stops']);
+export const benefitSchema = z.enum([
+  'meal',
+  'baggage',
+  'entertainment',
+  'wifi',
+]);
+
 export const flightFilterSchema = z.object({
   departureTimeRange: z
     .tuple([z.number().min(0).max(23), z.number().min(0).max(23)])
@@ -20,7 +34,7 @@ export const flightFilterSchema = z.object({
     })
     .optional(),
   airlines: z.array(z.string()).optional(),
-  stops: z.enum(['any', 'nonstop', '1stop', '2+stops']).optional(),
-  cabinClass: z.enum(['economy', 'premium', 'business', 'first']).optional(),
-  isRoundTrip: z.boolean().optional(),
+  stops: z.array(stopSchema).optional(),
+  cabinClasses: z.array(cabinClassSchema).optional(),
+  benefits: z.array(benefitSchema).optional(),
 });

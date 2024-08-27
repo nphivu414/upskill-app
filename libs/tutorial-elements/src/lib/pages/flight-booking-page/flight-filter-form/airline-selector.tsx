@@ -14,7 +14,15 @@ export const AirlineSelector = ({ data }: AirlineSelectorProps) => {
     (airline) => ({
       value: airline.id,
       label: airline.name,
-      endContent: <FlightLogo src={airline.logo} />,
+      endContent: (
+        <FlightLogo
+          src={airline.logo}
+          classNames={{
+            base: 'h-6 w-6',
+            img: 'h-6 w-6',
+          }}
+        />
+      ),
     })
   );
 
@@ -22,6 +30,7 @@ export const AirlineSelector = ({ data }: AirlineSelectorProps) => {
     <CheckboxGroupField
       name="airlines"
       label="Airlines"
+      size="sm"
       control={control}
       formState={formState}
       data={checboxGroupData}

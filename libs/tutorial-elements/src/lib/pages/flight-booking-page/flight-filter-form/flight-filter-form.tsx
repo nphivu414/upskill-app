@@ -6,8 +6,11 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 import { Airline, FlightFilterFormData } from '../types';
 import { AirlineSelector } from './airline-selector';
+import { BenefitSelector } from './benefit-selector';
+import { CabinSelector } from './cabin-class-selector';
 import { PriceRangeSlider } from './price-range-slider';
 import { flightFilterSchema } from './schema';
+import { StopSelector } from './stop-selector';
 import { TimeRangeSlider } from './time-range-slider';
 
 type FlightFilterFormProps = {
@@ -21,9 +24,9 @@ export const defaultFlightFilterValues: FlightFilterFormData = {
   arrivalTimeRange: undefined,
   priceRange: undefined,
   airlines: undefined,
-  stops: 'any',
-  cabinClass: 'economy',
-  isRoundTrip: false,
+  stops: undefined,
+  cabinClasses: undefined,
+  benefits: undefined,
 };
 
 export const FlightFilterForm = ({
@@ -72,9 +75,12 @@ export const FlightFilterForm = ({
             maxValue={maxArrivalTime}
           />
           <AirlineSelector data={airlines} />
+          <CabinSelector />
+          <StopSelector />
+          <BenefitSelector />
         </div>
-        <DrawerFooter className="bg-content1 sticky bottom-0 mt-2 px-4 py-2">
-          <Button type="submit" color="primary" fullWidth>
+        <DrawerFooter className="bg-content1 sticky bottom-0 z-10 mt-2 px-4 py-2">
+          <Button type="submit" size="sm" color="primary" fullWidth>
             Save
           </Button>
         </DrawerFooter>

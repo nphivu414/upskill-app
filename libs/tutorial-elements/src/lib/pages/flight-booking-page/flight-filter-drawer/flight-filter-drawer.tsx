@@ -46,13 +46,13 @@ export const FlightFilterDrawer = ({ airlines }: FlightFilterDrawerProps) => {
           <FlightFilterForm
             airlines={airlines}
             initialData={{
-              airlines: [],
               arrivalTimeRange: [0, 23],
-              cabinClass: 'economy',
               departureTimeRange: [0, 23],
-              isRoundTrip: false,
+              airlines: [],
+              cabinClasses: [],
               priceRange: [0, 1000],
-              stops: 'any',
+              stops: [],
+              benefits: [],
             }}
             onSubmit={handleSubmit}
           />
