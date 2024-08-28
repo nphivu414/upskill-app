@@ -2,8 +2,13 @@ import { Spacer } from '@nextui-org/react';
 import { Briefcase, Utensils } from 'lucide-react';
 
 import { FlightCard } from '../flight-card';
+import { Flight } from '../types';
 
-export const FlightList = () => {
+type FlightListProps = {
+  data: Flight[];
+};
+
+export const FlightList = ({ data }: FlightListProps) => {
   return (
     <div>
       <Spacer y={4} />
@@ -13,142 +18,13 @@ export const FlightList = () => {
       </div>
       <Spacer y={4} />
       <div className="flex w-full flex-col gap-2 px-4 pb-4">
-        <FlightCard
-          id="1"
-          price={304.99}
-          aircraftType="Boeing 777-300ER"
-          airline={{
-            id: '1',
-            name: 'Singapore Airlines',
-            logo: 'https://avatar.vercel.sh/singapore-airlines',
-          }}
-          arrivalAirport="JFK"
-          arrivalTime="10:00"
-          benefits={[
-            {
-              id: '1',
-              title: '23kg',
-              icon: <Briefcase size={11} />,
-              description: 'Bring up to 2 checked bags for free.',
-            },
-            {
-              id: '2',
-              title: 'Meal included',
-              icon: <Utensils size={11} />,
-            },
-          ]}
-          cabinClass="Business Class"
-          departureAirport="SIN"
-          departureTime="8:00"
-          duration="14h 30m"
-          stops={[]}
-          isRoundTrip
-          onPress={(id) => {
-            console.log('Flight card pressed', id);
-          }}
-        />
-        <FlightCard
-          id="2"
-          price={304.99}
-          aircraftType="Boeing 777-300ER"
-          airline={{
-            id: '1',
-            name: 'Singapore Airlines',
-            logo: 'https://avatar.vercel.sh/singapore-airlines',
-          }}
-          arrivalAirport="JFK"
-          arrivalTime="10:00"
-          benefits={[
-            {
-              id: '1',
-              title: '23kg',
-              icon: <Briefcase size={11} />,
-              description: 'Bring up to 2 checked bags for free.',
-            },
-            {
-              id: '2',
-              title: 'Meal included',
-              icon: <Utensils size={11} />,
-            },
-          ]}
-          cabinClass="Business Class"
-          departureAirport="SIN"
-          departureTime="8:00"
-          duration="14h 30m"
-          stops={['HKG', 'LAX']}
-          isRoundTrip={false}
-          onPress={(id) => {
-            console.log('Flight card pressed', id);
-          }}
-        />
-        <FlightCard
-          id="2"
-          price={304.99}
-          aircraftType="Boeing 777-300ER"
-          airline={{
-            id: '2',
-            name: 'American Airlines',
-            logo: 'https://avatar.vercel.sh/merican-airlines',
-          }}
-          arrivalAirport="JFK"
-          arrivalTime="10:00"
-          benefits={[
-            {
-              id: '1',
-              title: '23kg',
-              icon: <Briefcase size={11} />,
-              description: 'Bring up to 2 checked bags for free.',
-            },
-            {
-              id: '2',
-              title: 'Meal included',
-              icon: <Utensils size={11} />,
-            },
-          ]}
-          cabinClass="Business Class"
-          departureAirport="SIN"
-          departureTime="8:00"
-          duration="14h 30m"
-          stops={['HKG', 'LAX']}
-          isRoundTrip={false}
-          onPress={(id) => {
-            console.log('Flight card pressed', id);
-          }}
-        />
-        <FlightCard
-          id="2"
-          price={304.99}
-          aircraftType="Boeing 777-300ER"
-          airline={{
-            id: '2',
-            name: 'American Airlines',
-            logo: 'https://avatar.vercel.sh/merican-airlines',
-          }}
-          arrivalAirport="JFK"
-          arrivalTime="10:00"
-          benefits={[
-            {
-              id: '1',
-              title: '23kg',
-              icon: <Briefcase size={11} />,
-              description: 'Bring up to 2 checked bags for free.',
-            },
-            {
-              id: '2',
-              title: 'Meal included',
-              icon: <Utensils size={11} />,
-            },
-          ]}
-          cabinClass="Business Class"
-          departureAirport="SIN"
-          departureTime="8:00"
-          duration="14h 30m"
-          stops={['HKG', 'LAX']}
-          isRoundTrip={false}
-          onPress={(id) => {
-            console.log('Flight card pressed', id);
-          }}
-        />
+        {data.map((flight) => (
+          <FlightCard
+            key={flight.id}
+            onPress={(id) => alert(`Flight ${id} clicked`)}
+            {...flight}
+          />
+        ))}
       </div>
     </div>
   );

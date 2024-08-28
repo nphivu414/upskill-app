@@ -8,9 +8,8 @@ import {
 
 export interface Benefit {
   id: string;
-  title: string;
-  icon?: React.ReactNode;
-  description?: string;
+  icon?: BenefitEnum;
+  title?: string;
 }
 
 export interface Airline {
