@@ -6,7 +6,6 @@ import { FlightHeader } from './flight-header';
 import { FlightList } from './flight-list';
 
 export const FlightBookingPage = () => {
-  const scrollContainerRef = React.useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll();
 
   const handleBack = () => {
@@ -35,7 +34,7 @@ export const FlightBookingPage = () => {
         shouldHideOnScroll
       />
       <FlightList />
-      <FlightFooter portalContainer={scrollContainerRef} />
+      <FlightFooter />
     </div>
   );
 };
