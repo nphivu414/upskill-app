@@ -29,13 +29,12 @@ export const defaultFlights: Flight[] = [
       {
         id: '1',
         title: '23kg',
-        icon: 'Briefcase',
-        description: 'Bring up to 2 checked bags for free.',
+        icon: 'baggage',
       },
       {
         id: '2',
         title: 'Meal included',
-        icon: 'Utensils',
+        icon: 'meal',
       },
     ],
     stops: [],
@@ -62,13 +61,12 @@ export const defaultFlights: Flight[] = [
       {
         id: '1',
         title: '23kg',
-        icon: 'Briefcase',
-        description: 'Bring up to 2 checked bags for free.',
+        icon: 'baggage',
       },
       {
         id: '2',
         title: 'Meal included',
-        icon: 'Utensils',
+        icon: 'meal',
       },
     ],
     stops: ['HKG', 'LAX'],
@@ -95,13 +93,12 @@ export const defaultFlights: Flight[] = [
       {
         id: '1',
         title: '23kg',
-        icon: 'Briefcase',
-        description: 'Bring up to 2 checked bags for free.',
+        icon: 'baggage',
       },
       {
         id: '2',
         title: 'Meal included',
-        icon: 'Utensils',
+        icon: 'meal',
       },
     ],
     stops: [],
@@ -128,13 +125,12 @@ export const defaultFlights: Flight[] = [
       {
         id: '1',
         title: '23kg',
-        icon: 'Briefcase',
-        description: 'Bring up to 2 checked bags for free.',
+        icon: 'baggage',
       },
       {
         id: '2',
         title: 'Meal included',
-        icon: 'Utensils',
+        icon: 'meal',
       },
     ],
     stops: [],

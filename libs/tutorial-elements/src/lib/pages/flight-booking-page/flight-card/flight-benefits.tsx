@@ -2,6 +2,7 @@ import { Chip } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
 
 import { Flight } from '../types';
+import { getBenefitIcon } from '../utils';
 
 export type FlightBenefitsProps = Pick<Flight, 'benefits'>;
 
@@ -16,8 +17,10 @@ export const FlightBenefits = ({ benefits }: FlightBenefitsProps) => {
           className="text-muted"
           startContent={
             benefit.icon ? (
-              <div className="text-muted px-1">{benefit.icon}</div>
-            ) : undefined
+              <div className="text-muted mx-1">
+                {getBenefitIcon(benefit.icon, 12)}
+              </div>
+            ) : null
           }
         >
           <Subtle className="text-xs">{benefit.title}</Subtle>
