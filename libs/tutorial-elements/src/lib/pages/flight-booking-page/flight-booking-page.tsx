@@ -1,11 +1,19 @@
-import React from 'react';
 import { useScroll } from 'framer-motion';
 
 import { FlightFooter } from './flight-footer/';
 import { FlightHeader } from './flight-header';
 import { FlightList } from './flight-list';
+import { Flight, SearchFlightParams } from './types';
 
-export const FlightBookingPage = () => {
+type FlightBookingPageProps = {
+  searchFlightParams: SearchFlightParams;
+  availableFlights: Flight[];
+};
+
+export const FlightBookingPage = ({
+  searchFlightParams: { from, to, departureDate, returnDate, cabinClass },
+  availableFlights,
+}: FlightBookingPageProps) => {
   const { scrollYProgress } = useScroll();
 
   const handleBack = () => {
@@ -24,16 +32,17 @@ export const FlightBookingPage = () => {
     <div vaul-drawer-wrapper="">
       <FlightHeader
         parentScrollY={scrollYProgress}
-        cabinClass="Business Class"
-        departureDate="2021-10-02T00:00:00Z"
-        destination="Saigon"
-        origin="Singapore"
+        from={from}
+        to={to}
+        departureDate={departureDate}
+        returnDate={returnDate}
+        cabinClass={cabinClass}
         handleBack={handleBack}
         handleShare={handleShareFlight}
         sticky
         shouldHideOnScroll
       />
-      <FlightList />
+      <FlightList data={availableFlights} />
       <FlightFooter />
     </div>
   );

@@ -1,11 +1,10 @@
-import React from 'react';
 import { Button, cn, Spacer } from '@nextui-org/react';
 import { Subtle } from '@upskill-app/ui/web';
 import { motion, MotionValue } from 'framer-motion';
 import { ChevronLeft, Share2 } from 'lucide-react';
 
 import { formatDate } from '../../../utils';
-import { Flight } from '../types';
+import { SearchFlightParams } from '../types';
 import { useHideOnScrollHeader } from './use-hide-on-scroll-header';
 
 type FlightHeaderProps = {
@@ -14,13 +13,14 @@ type FlightHeaderProps = {
   parentScrollY: MotionValue<number>;
   handleBack: () => void;
   handleShare: () => void;
-} & Pick<Flight, 'origin' | 'destination' | 'cabinClass' | 'departureDate'>;
+} & SearchFlightParams;
 
 export const FlightHeader = ({
-  origin,
-  destination,
-  cabinClass,
+  from,
+  to,
   departureDate,
+  returnDate,
+  cabinClass,
   handleBack,
   handleShare,
   sticky,
@@ -46,18 +46,24 @@ export const FlightHeader = ({
         <div className="flex flex-1 flex-col items-center justify-center">
           <div className="flex items-center justify-around gap-2 text-sm font-semibold">
             <span className="max-w-[100px] overflow-x-hidden truncate whitespace-nowrap text-wrap">
-              {origin}
+              {from}
             </span>
             <span className="text-muted">⟶</span>
             <span className="max-w-[100px] overflow-x-hidden truncate whitespace-nowrap text-wrap">
-              {destination}
+              {to}
             </span>
           </div>
           <Spacer y={0.5} />
           <div className="flex items-center justify-around gap-1">
-            <Subtle className="text-xs">{cabinClass}</Subtle>
-            <Subtle className="text-xs">•</Subtle>
             <Subtle className="text-xs">{formatDate(departureDate)}</Subtle>
+            {returnDate ? (
+              <>
+                <Subtle className="text-xs">•</Subtle>
+                <Subtle className="text-xs">{formatDate(returnDate)}</Subtle>
+              </>
+            ) : null}
+            <Subtle className="text-xs">•</Subtle>
+            <Subtle className="text-xs">{cabinClass}</Subtle>
           </div>
         </div>
         <div className="flex-none">

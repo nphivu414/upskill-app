@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ScreenContainer } from '../../components';
+import { defaultFlights, defaultSearchFlightParams } from './data';
 import { FlightBookingPage } from './flight-booking-page';
 
 const meta: Meta<typeof FlightBookingPage> = {
@@ -20,5 +21,8 @@ export default meta;
 type Story = StoryObj<typeof FlightBookingPage>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    searchFlightParams: defaultSearchFlightParams,
+    availableFlights: defaultFlights,
+  },
 };

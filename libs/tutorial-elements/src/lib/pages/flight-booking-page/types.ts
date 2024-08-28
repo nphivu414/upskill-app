@@ -25,7 +25,6 @@ export interface Flight {
   price: number;
   destination: string;
   cabinClass: string;
-  departureDate: string;
   airline: Airline;
   aircraftType: string;
   departureTime: string;
@@ -41,3 +40,11 @@ export interface Flight {
 export type FlightFilterFormData = z.infer<typeof flightFilterSchema>;
 export type StopEnum = z.infer<typeof stopSchema>;
 export type BenefitEnum = z.infer<typeof benefitSchema>;
+
+export type SearchFlightParams = {
+  from: string;
+  to: string;
+  departureDate: string;
+  returnDate?: string;
+  cabinClass: string;
+};
