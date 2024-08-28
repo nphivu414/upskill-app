@@ -1,8 +1,5 @@
-import React from 'react';
-import { Button } from '@nextui-org/react';
-import { ArrowDownNarrowWide } from 'lucide-react';
-
 import { FlightFilterDrawer } from '../flight-filter-drawer';
+import { FlightSortMenu } from '../flight-sort-menu';
 
 export const FlightFooter = () => {
   return (
@@ -31,15 +28,7 @@ export const FlightFooter = () => {
           },
         ]}
       />
-      <Button
-        fullWidth
-        variant="bordered"
-        size="sm"
-        color="primary"
-        startContent={<ArrowDownNarrowWide size={14} />}
-      >
-        Sort
-      </Button>
+      <FlightSortMenu />
     </div>
   );
 };
