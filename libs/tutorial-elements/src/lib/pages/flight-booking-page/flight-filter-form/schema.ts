@@ -6,7 +6,7 @@ export const cabinClassSchema = z.enum([
   'business',
   'first',
 ]);
-export const stopSchema = z.enum(['any', 'nonstop', '1stop', '2+stops']);
+export const stopSchema = z.enum(['any', 'direct', '1stop', '2+stops']);
 export const benefitSchema = z.enum([
   'meal',
   'baggage',

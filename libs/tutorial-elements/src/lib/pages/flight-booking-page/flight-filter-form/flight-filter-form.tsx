@@ -4,7 +4,12 @@ import { Button } from '@nextui-org/react';
 import { DrawerFooter } from '@upskill-app/ui/web';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
-import { Airline, FlightFilterFormData } from '../types';
+import {
+  Airline,
+  BenefitEnum,
+  CabinClassEnum,
+  FlightFilterFormData,
+} from '../types';
 import { AirlineSelector } from './airline-selector';
 import { BenefitSelector } from './benefit-selector';
 import { CabinSelector } from './cabin-class-selector';
@@ -16,6 +21,8 @@ import { TimeRangeSlider } from './time-range-slider';
 type FlightFilterFormProps = {
   initialData: FlightFilterFormData;
   airlines: Airline[];
+  benefits: BenefitEnum[];
+  cabinClasses: CabinClassEnum[];
   onSubmit: (data: FlightFilterFormData) => void;
 };
 
@@ -31,6 +38,8 @@ export const defaultFlightFilterValues: FlightFilterFormData = {
 
 export const FlightFilterForm = ({
   airlines,
+  benefits,
+  cabinClasses,
   initialData,
   onSubmit,
 }: FlightFilterFormProps) => {
@@ -75,9 +84,9 @@ export const FlightFilterForm = ({
             maxValue={maxArrivalTime}
           />
           <AirlineSelector data={airlines} />
-          <CabinSelector />
+          <CabinSelector cabinClasses={cabinClasses} />
           <StopSelector />
-          <BenefitSelector />
+          <BenefitSelector benefits={benefits} />
         </div>
         <DrawerFooter className="bg-content1 sticky bottom-0 z-10 mt-2 px-4 py-2">
           <Button type="submit" size="sm" color="primary" fullWidth>

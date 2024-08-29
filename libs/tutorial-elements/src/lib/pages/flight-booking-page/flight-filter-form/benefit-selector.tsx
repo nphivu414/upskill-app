@@ -5,15 +5,19 @@ import { BENEFIT_MAPPING } from '../constants';
 import { BenefitEnum, FlightFilterFormData } from '../types';
 import { getBenefitIcon } from '../utils';
 
-export const BenefitSelector = () => {
+type BenefitSelectorProps = {
+  benefits: BenefitEnum[];
+};
+
+export const BenefitSelector = ({ benefits }: BenefitSelectorProps) => {
   const { control, formState } = useFormContext<FlightFilterFormData>();
-  const checboxGroupData: CheckboxGroupData[] | undefined = Object.entries(
-    BENEFIT_MAPPING
-  ).map(([key, value]) => ({
-    value: key,
-    label: value,
-    endContent: getBenefitIcon(key as BenefitEnum),
-  }));
+  const checkboxGroupData: CheckboxGroupData[] | undefined = benefits.map(
+    (benefit) => ({
+      value: benefit,
+      label: BENEFIT_MAPPING[benefit],
+      endContent: getBenefitIcon(benefit),
+    })
+  );
 
   return (
     <CheckboxGroupField
@@ -22,7 +26,7 @@ export const BenefitSelector = () => {
       size="sm"
       control={control}
       formState={formState}
-      data={checboxGroupData}
+      data={checkboxGroupData}
     />
   );
 };

@@ -1,18 +1,18 @@
 import { useScroll } from 'framer-motion';
 
-import { FlightFooter } from './flight-footer/';
 import { FlightHeader } from './flight-header';
 import { FlightList } from './flight-list';
+import { FlightPreferences } from './flight-preferences';
 import { Flight, SearchFlightParams } from './types';
 
 type FlightBookingPageProps = {
   searchFlightParams: SearchFlightParams;
-  availableFlights: Flight[];
+  flights: Flight[];
 };
 
 export const FlightBookingPage = ({
   searchFlightParams: { from, to, departureDate, returnDate, cabinClass },
-  availableFlights,
+  flights,
 }: FlightBookingPageProps) => {
   const { scrollYProgress } = useScroll();
 
@@ -21,15 +21,11 @@ export const FlightBookingPage = ({
   };
 
   const handleShareFlight = () => {
-    navigator.share({
-      url: document.URL,
-      title: document.title,
-      text: 'Check out this flight booking! From Singapore to Saigon on 2021-10-02.',
-    });
+    alert('Share button clicked');
   };
 
   return (
-    <div vaul-drawer-wrapper="">
+    <div vaul-drawer-wrapper="" className="bg-background">
       <FlightHeader
         parentScrollY={scrollYProgress}
         from={from}
@@ -42,8 +38,8 @@ export const FlightBookingPage = ({
         sticky
         shouldHideOnScroll
       />
-      <FlightList data={availableFlights} />
-      <FlightFooter />
+      <FlightList data={flights} />
+      {flights.length > 0 ? <FlightPreferences flights={flights} /> : null}
     </div>
   );
 };

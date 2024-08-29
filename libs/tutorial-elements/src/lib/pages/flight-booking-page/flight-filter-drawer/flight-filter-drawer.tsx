@@ -10,13 +10,26 @@ import {
 import { SlidersHorizontal } from 'lucide-react';
 
 import { FlightFilterForm } from '../flight-filter-form';
-import { Airline, FlightFilterFormData } from '../types';
+import {
+  Airline,
+  BenefitEnum,
+  CabinClassEnum,
+  FlightFilterFormData,
+} from '../types';
 
 type FlightFilterDrawerProps = {
   airlines: Airline[];
+  cabinClasses: CabinClassEnum[];
+  benefits: BenefitEnum[];
+  initialFilterData: FlightFilterFormData;
 };
 
-export const FlightFilterDrawer = ({ airlines }: FlightFilterDrawerProps) => {
+export const FlightFilterDrawer = ({
+  airlines,
+  benefits,
+  cabinClasses,
+  initialFilterData,
+}: FlightFilterDrawerProps) => {
   const handleSubmit = (data: FlightFilterFormData) => {
     console.log('🚀 ~ handleSubmit ~ data:', data);
   };
@@ -45,15 +58,9 @@ export const FlightFilterDrawer = ({ airlines }: FlightFilterDrawerProps) => {
           <Spacer y={4} />
           <FlightFilterForm
             airlines={airlines}
-            initialData={{
-              arrivalTimeRange: [0, 23],
-              departureTimeRange: [0, 23],
-              airlines: [],
-              cabinClasses: [],
-              priceRange: [0, 1000],
-              stops: [],
-              benefits: [],
-            }}
+            benefits={benefits}
+            cabinClasses={cabinClasses}
+            initialData={initialFilterData}
             onSubmit={handleSubmit}
           />
         </div>

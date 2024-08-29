@@ -1,4 +1,3 @@
-import React from 'react';
 import { Briefcase, TvMinimal, Utensils, Wifi } from 'lucide-react';
 
 import { BenefitEnum } from './types';

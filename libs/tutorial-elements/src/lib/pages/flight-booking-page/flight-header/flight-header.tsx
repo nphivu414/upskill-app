@@ -7,10 +7,10 @@ import { formatDate } from '../../../utils';
 import { SearchFlightParams } from '../types';
 import { useHideOnScrollHeader } from './use-hide-on-scroll-header';
 
-type FlightHeaderProps = {
+export type FlightHeaderProps = {
   sticky?: boolean;
   shouldHideOnScroll?: boolean;
-  parentScrollY: MotionValue<number>;
+  parentScrollY?: MotionValue<number>;
   handleBack: () => void;
   handleShare: () => void;
 } & SearchFlightParams;

@@ -23,6 +23,6 @@ type Story = StoryObj<typeof FlightBookingPage>;
 export const Default: Story = {
   args: {
     searchFlightParams: defaultSearchFlightParams,
-    availableFlights: defaultFlights,
+    flights: defaultFlights,
   },
 };

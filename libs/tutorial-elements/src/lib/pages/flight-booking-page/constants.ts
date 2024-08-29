@@ -10,7 +10,7 @@ export const CABIN_CLASS_MAPPING = {
 };
 export const STOP_MAPPING: Record<StopEnum, string> = {
   any: 'Any',
-  nonstop: 'Nonstop',
+  direct: 'Direct',
   '1stop': '1 Stop',
   '2+stops': '2+ Stops',
 };

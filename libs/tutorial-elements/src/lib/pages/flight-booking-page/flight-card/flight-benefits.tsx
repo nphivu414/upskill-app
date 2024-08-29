@@ -16,14 +16,14 @@ export const FlightBenefits = ({ benefits }: FlightBenefitsProps) => {
           variant="dot"
           className="text-muted"
           startContent={
-            benefit.icon ? (
+            benefit.name ? (
               <div className="text-muted mx-1">
-                {getBenefitIcon(benefit.icon, 12)}
+                {getBenefitIcon(benefit.name, 12)}
               </div>
             ) : null
           }
         >
-          <Subtle className="text-xs">{benefit.title}</Subtle>
+          <Subtle className="text-xs">{benefit.description}</Subtle>
         </Chip>
       ))}
     </div>

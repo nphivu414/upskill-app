@@ -4,14 +4,14 @@ import { HTMLMotionProps, MotionValue } from 'framer-motion';
 import { HEADER_HEIGHT, HEADER_TRANSITION_DURATION } from '../constants';
 
 export const useHideOnScrollHeader = (
-  parentScrollY: MotionValue<number>,
+  parentScrollY?: MotionValue<number>,
   shouldHideOnScroll?: boolean
 ): HTMLMotionProps<'div'> => {
   const [showHeader, setShowHeader] = React.useState(true);
   const lastScrollYRef = React.useRef(0);
 
   React.useEffect(() => {
-    if (!shouldHideOnScroll) return;
+    if (!parentScrollY || !shouldHideOnScroll) return;
 
     const unsubscribe = parentScrollY.on('change', (latest) => {
       if (latest < 0 || latest > 1) {
@@ -29,7 +29,7 @@ export const useHideOnScrollHeader = (
     return () => unsubscribe();
   }, [parentScrollY, shouldHideOnScroll]);
 
-  if (!shouldHideOnScroll) {
+  if (!parentScrollY || !shouldHideOnScroll) {
     return {};
   }
 

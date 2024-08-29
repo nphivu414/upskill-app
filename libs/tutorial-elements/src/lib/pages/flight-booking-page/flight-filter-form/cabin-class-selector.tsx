@@ -2,16 +2,20 @@ import { CheckboxGroupData, CheckboxGroupField } from '@upskill-app/ui/web';
 import { useFormContext } from 'react-hook-form';
 
 import { CABIN_CLASS_MAPPING } from '../constants';
-import { FlightFilterFormData } from '../types';
+import { CabinClassEnum, FlightFilterFormData } from '../types';
 
-export const CabinSelector = () => {
+type CabinSelectorProps = {
+  cabinClasses: CabinClassEnum[];
+};
+
+export const CabinSelector = ({ cabinClasses }: CabinSelectorProps) => {
   const { control, formState } = useFormContext<FlightFilterFormData>();
-  const checboxGroupData: CheckboxGroupData[] | undefined = Object.entries(
-    CABIN_CLASS_MAPPING
-  ).map(([key, value]) => ({
-    value: key,
-    label: value,
-  }));
+  const checkboxGroupData: CheckboxGroupData[] | undefined = cabinClasses.map(
+    (cabinClass) => ({
+      value: cabinClass,
+      label: CABIN_CLASS_MAPPING[cabinClass],
+    })
+  );
 
   return (
     <CheckboxGroupField
@@ -20,7 +24,7 @@ export const CabinSelector = () => {
       size="sm"
       control={control}
       formState={formState}
-      data={checboxGroupData}
+      data={checkboxGroupData}
     />
   );
 };
