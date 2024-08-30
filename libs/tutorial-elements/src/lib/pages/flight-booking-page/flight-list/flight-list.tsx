@@ -9,6 +9,10 @@ type FlightListProps = {
 };
 
 export const FlightList = ({ data }: FlightListProps) => {
+  const handleFlightCardPress = (id: Flight['id']) => {
+    alert(`Flight ${id} clicked`);
+  };
+
   if (!data.length) {
     return (
       <div className="mt-8 flex flex-col items-center justify-center">
@@ -29,7 +33,7 @@ export const FlightList = ({ data }: FlightListProps) => {
         {data.map((flight) => (
           <FlightCard
             key={flight.id}
-            onPress={(id) => alert(`Flight ${id} clicked`)}
+            onPress={handleFlightCardPress}
             {...flight}
           />
         ))}

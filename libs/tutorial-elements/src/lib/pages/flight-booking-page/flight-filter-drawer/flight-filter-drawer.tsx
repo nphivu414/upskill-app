@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, Spacer } from '@nextui-org/react';
 import {
   Drawer,
@@ -22,6 +23,7 @@ type FlightFilterDrawerProps = {
   cabinClasses: CabinClassEnum[];
   benefits: BenefitEnum[];
   initialFilterData: FlightFilterFormData;
+  onFormSubmit: (data: FlightFilterFormData) => void;
 };
 
 export const FlightFilterDrawer = ({
@@ -29,13 +31,22 @@ export const FlightFilterDrawer = ({
   benefits,
   cabinClasses,
   initialFilterData,
+  onFormSubmit,
 }: FlightFilterDrawerProps) => {
+  const [open, setOpen] = React.useState(false);
+
   const handleSubmit = (data: FlightFilterFormData) => {
-    console.log('🚀 ~ handleSubmit ~ data:', data);
+    onFormSubmit(data);
+    setOpen(false);
   };
 
   return (
-    <Drawer shouldScaleBackground closeThreshold={200}>
+    <Drawer
+      shouldScaleBackground
+      closeThreshold={200}
+      open={open}
+      onOpenChange={setOpen}
+    >
       <DrawerTrigger asChild>
         <Button
           fullWidth

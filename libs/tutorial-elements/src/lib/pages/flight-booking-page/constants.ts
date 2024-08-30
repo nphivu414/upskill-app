@@ -1,4 +1,4 @@
-import { BenefitEnum, StopEnum } from './types';
+import { BenefitEnum, FlightSortKey, StopEnum } from './types';
 
 export const HEADER_HEIGHT = 60;
 export const HEADER_TRANSITION_DURATION = 0.3;
@@ -19,4 +19,12 @@ export const BENEFIT_MAPPING: Record<BenefitEnum, string> = {
   baggage: 'Baggage Included',
   entertainment: 'In-flight Entertainment',
   wifi: 'Wi-Fi',
+};
+export const SORT_OPTIONS: Record<FlightSortKey, string> = {
+  cheapest: 'Cheapest',
+  direct: 'Direct flights first',
+  'earliest-departure': 'Earliest departure',
+  'latest-departure': 'Latest departure',
+  'earliest-arrival': 'Earliest arrival',
+  'latest-arrival': 'Latest arrival',
 };

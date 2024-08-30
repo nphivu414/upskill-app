@@ -47,7 +47,7 @@ export const defaultFlights: Flight[] = [
     destination: 'Saigon',
     cabinClass: 'first',
     airline: {
-      id: '1',
+      id: '2',
       name: 'Draco Airlines',
       logo: 'https://avatar.vercel.sh/draco-airlines',
     },
@@ -79,7 +79,7 @@ export const defaultFlights: Flight[] = [
     destination: 'Saigon',
     cabinClass: 'business',
     airline: {
-      id: '1',
+      id: '3',
       name: 'Boeing Airlines',
       logo: 'https://avatar.vercel.sh/boeing-airlines',
     },
@@ -121,7 +121,7 @@ export const defaultFlights: Flight[] = [
     destination: 'Saigon',
     cabinClass: 'economy',
     airline: {
-      id: '1',
+      id: '4',
       name: 'Airbus Airlines',
       logo: 'https://avatar.vercel.sh/airbus-airlines',
     },

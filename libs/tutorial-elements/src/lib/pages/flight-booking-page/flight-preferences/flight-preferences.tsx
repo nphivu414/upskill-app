@@ -1,30 +1,22 @@
 import { FlightFilterDrawer } from '../flight-filter-drawer';
 import { FlightSortMenu } from '../flight-sort-menu';
-import { Flight, FlightFilterFormData } from '../types';
+import { Flight, FlightFilterFormData, FlightSortKey } from '../types';
+import { processFlightFilterData } from './utils';
 
 type FlightPreferencesProps = {
   flights: Flight[];
 };
 
 export const FlightPreferences = ({ flights }: FlightPreferencesProps) => {
-  const airlines = flights.map((flight) => flight.airline);
-  const cabinClasses = flights
-    .map((flight) => flight.cabinClass)
-    .filter((value, index, self) => self.indexOf(value) === index);
-  const benefits = flights
-    .flatMap((flight) => flight.benefits.map((benefit) => benefit.name))
-    .filter((value, index, self) => self.indexOf(value) === index);
-  const minFlightPrice = Math.min(...flights.map((flight) => flight.price));
-  const maxFlightPrice = Math.max(...flights.map((flight) => flight.price));
+  const { airlines, cabinClasses, benefits, initialFilterData } =
+    processFlightFilterData(flights);
 
-  const initialFilterData: FlightFilterFormData = {
-    airlines: [],
-    departureTimeRange: [0, 23],
-    arrivalTimeRange: [0, 23],
-    priceRange: [minFlightPrice, maxFlightPrice],
-    cabinClasses: [],
-    stops: [],
-    benefits: [],
+  const handleFilterFormSubmit = (data: FlightFilterFormData) => {
+    alert(`Filter form submitted \n \n ${JSON.stringify(data)}`);
+  };
+
+  const handleOnSortChange = (sortValue: FlightSortKey | null) => {
+    alert(`Sort by: ${sortValue}`);
   };
 
   return (
@@ -34,8 +26,9 @@ export const FlightPreferences = ({ flights }: FlightPreferencesProps) => {
         cabinClasses={cabinClasses}
         benefits={benefits}
         initialFilterData={initialFilterData}
+        onFormSubmit={handleFilterFormSubmit}
       />
-      <FlightSortMenu />
+      <FlightSortMenu onSortChange={handleOnSortChange} />
     </div>
   );
 };

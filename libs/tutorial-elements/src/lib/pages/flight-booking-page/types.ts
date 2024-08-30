@@ -49,3 +49,11 @@ export type SearchFlightParams = {
   returnDate?: string;
   cabinClass: string;
 };
+
+export type FlightSortKey =
+  | 'cheapest'
+  | 'direct'
+  | 'earliest-departure'
+  | 'latest-departure'
+  | 'earliest-arrival'
+  | 'latest-arrival';

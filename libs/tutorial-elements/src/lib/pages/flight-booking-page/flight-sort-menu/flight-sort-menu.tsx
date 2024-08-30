@@ -5,11 +5,36 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Selection,
+  SharedSelection,
 } from '@nextui-org/react';
 import { ArrowDownNarrowWide } from 'lucide-react';
 
-export const FlightSortMenu = () => {
+import { SORT_OPTIONS } from '../constants';
+import { FlightSortKey } from '../types';
+
+type FlightSortMenuProps = {
+  onSortChange: (sortValue: FlightSortKey | null) => void;
+};
+
+export const FlightSortMenu = ({ onSortChange }: FlightSortMenuProps) => {
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>();
+
+  const handleSelectionChange = (keys: SharedSelection) => {
+    setSelectedKeys(keys);
+
+    const values = Array.from(keys).map(
+      (key) => key.toString() as FlightSortKey
+    );
+
+    if (!values.length) {
+      onSortChange(null);
+      return;
+    }
+
+    const selectedSortKey = values[0];
+    onSortChange(selectedSortKey);
+  };
 
   return (
     <Dropdown backdrop="opaque">
@@ -28,14 +53,11 @@ export const FlightSortMenu = () => {
         aria-label="Sort flight"
         selectionMode="single"
         selectedKeys={selectedKeys}
-        onSelectionChange={setSelectedKeys}
+        onSelectionChange={handleSelectionChange}
       >
-        <DropdownItem key="cheapest">Cheapest</DropdownItem>
-        <DropdownItem key="direct">Direct flights first</DropdownItem>
-        <DropdownItem key="earliest-departure">Earliest departure</DropdownItem>
-        <DropdownItem key="latest-departure">Latest departure</DropdownItem>
-        <DropdownItem key="earliest-arrival">Earliest arrival</DropdownItem>
-        <DropdownItem key="latest-arrival">Latest arrival</DropdownItem>
+        {Object.entries(SORT_OPTIONS).map(([key, value]) => (
+          <DropdownItem key={key}>{value}</DropdownItem>
+        ))}
       </DropdownMenu>
     </Dropdown>
   );

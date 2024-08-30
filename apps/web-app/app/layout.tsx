@@ -3,6 +3,7 @@ import {
   AppFooter,
   AppUiProvider,
   NavigationBar,
+  Toaster,
 } from '@upskill-app/ui/web';
 
 import './styles/global.css';
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: ComponentWithChildren) {
           <AppFooter />
         </AppUiProvider>
       </body>
+      <Toaster />
     </html>
   );
 }

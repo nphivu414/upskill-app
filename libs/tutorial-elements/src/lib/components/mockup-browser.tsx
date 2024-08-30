@@ -1,5 +1,6 @@
 import { cn, Divider } from '@nextui-org/react';
 import { ComponentWithChildren } from '@upskill-app/shared';
+import { Toaster } from '@upskill-app/ui/web';
 
 type MockupBrowserProps = {
   className?: string;
@@ -18,6 +19,7 @@ export const MockupBrowser = ({ className, children }: MockupBrowserProps) => {
       <div className="bg-background">
         <div>{children}</div>
       </div>
+      <Toaster />
     </div>
   );
 };
