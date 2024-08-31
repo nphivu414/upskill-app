@@ -6,10 +6,10 @@ import {
   CheckboxGroupProps,
   CheckboxProps,
 } from '@nextui-org/react';
-import get from 'lodash/get';
 import {
   Controller,
   ControllerRenderProps,
+  FieldError,
   FieldValues,
 } from 'react-hook-form';
 
@@ -31,25 +31,8 @@ export type CheckboxGroupFieldProps<T extends FieldValues> =
 export function CheckboxGroupField<T extends FieldValues>(
   props: CheckboxGroupFieldProps<T>
 ) {
-  const {
-    name,
-    formState,
-    control,
-    data,
-    label,
-    enableSelectAll = true,
-    ...rest
-  } = props;
+  const { name, control, data, label, enableSelectAll = true, ...rest } = props;
   const [isSelectedAll, setIsSelectedAll] = React.useState(false);
-  const { errors, isValid } = formState;
-  const error = get(errors, name);
-  const errorText = error?.message;
-
-  const renderErrorText = () => {
-    if (errorText && typeof errorText === 'string') {
-      return errorText;
-    }
-  };
 
   const onSelectAll = (onChange: ControllerRenderProps<T>['onChange']) => {
     return () => {
@@ -90,37 +73,43 @@ export function CheckboxGroupField<T extends FieldValues>(
     <Controller
       name={name}
       control={control}
-      render={({ field: { onChange, ...fields } }) => (
-        <CheckboxGroup
-          color="primary"
-          onValueChange={onChange}
-          isInvalid={!isValid}
-          errorMessage={renderErrorText}
-          label={renderGroupLabel(onChange)}
-          {...rest}
-          {...fields}
-        >
-          {data?.map(({ value, label, endContent }) => (
-            <Checkbox
-              key={value}
-              value={value}
-              classNames={
-                endContent
-                  ? {
-                      label: 'w-full',
-                      base: 'inline-flex w-full max-w-full',
-                    }
-                  : undefined
-              }
-            >
-              <div className="flex w-full items-center justify-between gap-2">
-                {label}
-                {endContent}
-              </div>
-            </Checkbox>
-          ))}
-        </CheckboxGroup>
-      )}
+      render={({
+        field: { onChange, ...fields },
+        fieldState: { error, invalid },
+      }) => {
+        const fieldErrors = error as unknown as FieldError[] | undefined;
+        return (
+          <CheckboxGroup
+            color="primary"
+            isInvalid={invalid}
+            errorMessage={fieldErrors?.[0]?.message}
+            label={renderGroupLabel(onChange)}
+            {...rest}
+            {...fields}
+            onValueChange={onChange}
+          >
+            {data?.map(({ value, label, endContent }) => (
+              <Checkbox
+                key={value}
+                value={value}
+                classNames={
+                  endContent
+                    ? {
+                        label: 'w-full',
+                        base: 'inline-flex w-full max-w-full',
+                      }
+                    : undefined
+                }
+              >
+                <div className="flex w-full items-center justify-between gap-2">
+                  {label}
+                  {endContent}
+                </div>
+              </Checkbox>
+            ))}
+          </CheckboxGroup>
+        );
+      }}
     />
   );
 }

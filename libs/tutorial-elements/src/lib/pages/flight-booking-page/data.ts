@@ -1,4 +1,10 @@
-import { Flight, SearchFlightParams } from './types';
+import {
+  Airline,
+  BenefitEnum,
+  CabinClassEnum,
+  Flight,
+  SearchFlightParams,
+} from './types';
 
 export const defaultSearchFlightParams: SearchFlightParams = {
   cabinClass: 'Economy',
@@ -146,4 +152,41 @@ export const defaultFlights: Flight[] = [
     stops: ['HKG'],
     isRoundTrip: true,
   },
+];
+
+export const defaultAirlines: Airline[] = [
+  {
+    id: '1',
+    name: 'Singapore Airlines',
+    logo: 'https://avatar.vercel.sh/singapore-airlines',
+  },
+  {
+    id: '2',
+    name: 'Draco Airlines',
+    logo: 'https://avatar.vercel.sh/draco-airlines',
+  },
+  {
+    id: '3',
+    name: 'Boeing Airlines',
+    logo: 'https://avatar.vercel.sh/boeing-airlines',
+  },
+  {
+    id: '4',
+    name: 'Airbus Airlines',
+    logo: 'https://avatar.vercel.sh/airbus-airlines',
+  },
+];
+
+export const defaultCabinClasses: CabinClassEnum[] = [
+  'business',
+  'economy',
+  'first',
+  'premium',
+];
+
+export const defaultBenefits: BenefitEnum[] = [
+  'meal',
+  'baggage',
+  'wifi',
+  'entertainment',
 ];
