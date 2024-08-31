@@ -13,22 +13,31 @@ export const FlightList = ({ data }: FlightListProps) => {
     alert(`Flight ${id} clicked`);
   };
 
-  if (!data.length) {
-    return (
-      <div className="mt-8 flex flex-col items-center justify-center">
-        <Subtle>No flights found</Subtle>
-      </div>
-    );
-  }
-
-  return (
-    <div>
+  const renderHeader = () => (
+    <>
       <Spacer y={4} />
       <div className="flex items-center justify-between px-4">
         <p className="font-semibold">Search results</p>
         <p className="text-primary text-xs">{data.length} Flight(s)</p>
       </div>
       <Spacer y={4} />
+    </>
+  );
+
+  if (!data.length) {
+    return (
+      <div>
+        {renderHeader()}
+        <div className="mt-8 flex flex-col items-center justify-center">
+          <Subtle>No flights found</Subtle>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {renderHeader()}
       <div className="flex w-full flex-col gap-2 px-4 pb-4">
         {data.map((flight) => (
           <FlightCard

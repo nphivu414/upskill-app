@@ -31,6 +31,11 @@ export const EmbedStory = ({
   }
 
   return (
-    <iframe src={url} className="m-0 border-0 p-0 outline-none" {...rest} />
+    <iframe
+      src={url}
+      className="m-0 border-0 p-0 outline-none"
+      loading="lazy"
+      {...rest}
+    />
   );
 };

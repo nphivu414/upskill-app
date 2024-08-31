@@ -5,7 +5,8 @@ import { HEADER_HEIGHT, HEADER_TRANSITION_DURATION } from '../constants';
 
 export const useHideOnScrollHeader = (
   parentScrollY?: MotionValue<number>,
-  shouldHideOnScroll?: boolean
+  shouldHideOnScroll?: boolean,
+  thresshold = 0.01
 ): HTMLMotionProps<'div'> => {
   const [showHeader, setShowHeader] = React.useState(true);
   const lastScrollYRef = React.useRef(0);
@@ -18,24 +19,31 @@ export const useHideOnScrollHeader = (
         return;
       }
 
-      if (latest > lastScrollYRef.current) {
+      if (latest > lastScrollYRef.current + thresshold) {
         setShowHeader(false);
-      } else {
+      } else if (latest < lastScrollYRef.current - thresshold) {
         setShowHeader(true);
       }
+
+      if (latest <= 0) {
+        setShowHeader(true);
+      }
+
       lastScrollYRef.current = latest;
     });
 
     return () => unsubscribe();
-  }, [parentScrollY, shouldHideOnScroll]);
+  }, [parentScrollY, shouldHideOnScroll, thresshold]);
 
   if (!parentScrollY || !shouldHideOnScroll) {
     return {};
   }
 
   return {
-    initial: { y: -HEADER_HEIGHT },
+    initial: { y: 0 },
     animate: { y: showHeader ? 0 : -HEADER_HEIGHT },
-    transition: { duration: HEADER_TRANSITION_DURATION },
+    transition: {
+      duration: HEADER_TRANSITION_DURATION,
+    },
   };
 };
