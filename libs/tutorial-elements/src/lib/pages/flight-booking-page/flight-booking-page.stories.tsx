@@ -9,7 +9,7 @@ const meta: Meta<typeof FlightBookingPage> = {
   title: 'Tutorials/Flight Booking UI/Page/Screen',
   decorators: [
     (Story) => (
-      <ScreenContainer>
+      <ScreenContainer className="border-divider border py-0">
         <Story />
       </ScreenContainer>
     ),

@@ -31,7 +31,7 @@ export const Default: Story = {
 };
 
 const MockContent = () => (
-  <div className="bg-content2 flex h-[800px] flex-1 flex-col items-center pt-5">
+  <div className="bg-content2 flex h-[800px] flex-1 flex-col items-center">
     <p>content...</p>
     <p>content...</p>
     <p>content...</p>
@@ -50,7 +50,7 @@ export const StickyHeader: Story = {
   decorators: [
     (Story) => {
       return (
-        <ScreenContainer>
+        <ScreenContainer className="py-0">
           <div className="max-h-[500px] overflow-y-scroll">
             <Story
               args={{
@@ -75,7 +75,7 @@ export const HideOnScroll: Story = {
       });
 
       return (
-        <ScreenContainer>
+        <ScreenContainer className="py-0">
           <div ref={containerRef} className="max-h-[500px] overflow-y-scroll">
             <Story
               args={{

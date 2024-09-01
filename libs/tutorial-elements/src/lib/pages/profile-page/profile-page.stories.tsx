@@ -17,7 +17,7 @@ const meta: Meta<typeof ProfilePage> = {
   title: 'Tutorials/Profile UI/Page/Screen',
   decorators: [
     (Story) => (
-      <ScreenContainer>
+      <ScreenContainer className="border-divider w-[320px] border py-0">
         <Story />
       </ScreenContainer>
     ),

@@ -12,7 +12,6 @@ const meta: Meta<typeof FlightFilterForm> = {
   decorators: [
     (Story) => (
       <ScreenContainer>
-        <Spacer y={4} />
         <Story />
       </ScreenContainer>
     ),
