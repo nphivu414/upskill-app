@@ -1,4 +1,5 @@
 import { CodeWithTabs } from '../code-renderer';
+import { Code } from '../content-code-block';
 import { StepConfig } from '../types';
 import FeaturePhotosCodeContent from './content/feature-photos-content.mdx';
 import IntroContent from './content/intro-content.mdx';
@@ -8,7 +9,6 @@ import ProfileStatsContent from './content/profile-stats-content.mdx';
 import ProfileTimelinePhotosContent from './content/profile-timeline-photos.mdx';
 import ProfileTimelinePostsContent from './content/profile-timeline-posts.mdx';
 import ProfileTimelineTabsContent from './content/profile-timeline-tabs-content.mdx';
-import { Code } from './profile-content';
 
 const codeContentProps = {
   components: { CodeWithTabs, Code },
