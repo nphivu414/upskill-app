@@ -8,8 +8,12 @@ export const TUTORIAL_STORIES = {
     PROFILE_TIMELINE: 'tutorials-profile-ui-components-profile-timeline',
     PROFILE_PAGE: 'tutorials-profile-ui-page-screen',
   },
+  FLIGHT_BOOKING_UI: {
+    FLIGHT_BOOKING_PAGE: 'tutorials-flight-booking-ui-page-screen',
+  },
 };
 
 export const TUTORIAL_REPO = {
   PROFILE_UI: 'profile-ui',
+  FLIGHT_BOOKING_UI: 'flight-booking-ui',
 };

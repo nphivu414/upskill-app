@@ -3,6 +3,7 @@ import { Preview, ReactRenderer } from '@storybook/react';
 import { themes } from '@storybook/theming';
 
 import './tw-global.css';
+import './sb-override.css';
 
 const preview: Preview = {
   decorators: [

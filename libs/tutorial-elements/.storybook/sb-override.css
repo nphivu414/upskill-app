@@ -1,0 +1,7 @@
+html {
+  scrollbar-width: thin;
+}
+
+.sb-show-main.sb-main-padded {
+  padding: 0;
+}

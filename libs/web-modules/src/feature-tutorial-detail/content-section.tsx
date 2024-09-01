@@ -6,7 +6,7 @@ import { ComponentWithChildren } from '@upskill-app/shared';
 import { Heading2, Subtle } from '@upskill-app/ui/web';
 import { Minus, Plus } from 'lucide-react';
 
-import { useContentSectionQueryState } from './useContentSectionQueryState';
+import { useContentSectionQueryState } from './use-content-section-query-state';
 
 type ContentSectionProps = {
   introText: string;

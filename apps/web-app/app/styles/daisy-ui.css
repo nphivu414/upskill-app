@@ -32,8 +32,8 @@
   aspect-ratio: 1/1;
   height: .75rem;
   border-radius: 9999px;
-  opacity: .3;
-  box-shadow: 1.4em 0,2.8em 0,4.2em 0
+  opacity: .8;
+  box-shadow: 1.4em 0 #f31260,2.8em 0 #f5a524,4.2em 0 #17c964
 }
 
 .mockup-browser .mockup-browser-toolbar .input {

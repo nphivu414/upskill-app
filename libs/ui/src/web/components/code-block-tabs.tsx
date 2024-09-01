@@ -16,7 +16,8 @@ export function CodeBlockTabs(props: {
   const onSelectionChange = (key: Key) => {
     setSelected(key.toString());
   };
-  const renderFileIcon = (fileExtension?: string) => {
+  const renderFileIcon = (tabTitle?: string) => {
+    const fileExtension = tabTitle?.split('.').pop();
     switch (fileExtension) {
       case 'tsx':
         return <CustomIcons.react width={14} />;
@@ -29,9 +30,8 @@ export function CodeBlockTabs(props: {
 
   return (
     <Tabs
-      color="primary"
       selectedKey={selected}
-      size="sm"
+      variant="bordered"
       items={tabs}
       onSelectionChange={onSelectionChange}
       classNames={{
@@ -41,13 +41,12 @@ export function CodeBlockTabs(props: {
       }}
     >
       {(tab) => {
-        const fileExtension = tab.title?.split('.').pop();
         return (
           <Tab
             key={tab.title}
             title={
               <div className="flex items-center gap-2">
-                {renderFileIcon(fileExtension)}
+                {renderFileIcon(tab.title)}
                 <span>{tab.title}</span>
               </div>
             }
