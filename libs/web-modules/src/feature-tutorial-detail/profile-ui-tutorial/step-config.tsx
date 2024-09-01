@@ -1,5 +1,5 @@
+import { CodeWithTabs } from '../code-renderer';
 import { StepConfig } from '../types';
-import { CodeWithTabs } from './code/tutorial-code';
 import FeaturePhotosCodeContent from './content/feature-photos-content.mdx';
 import IntroContent from './content/intro-content.mdx';
 import ProfileInfoCodeContent from './content/profile-info-content.mdx';

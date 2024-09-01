@@ -5,20 +5,20 @@ import { Accordion, AccordionItem, cn, Selection } from '@nextui-org/react';
 import { ComponentWithChildren } from '@upskill-app/shared';
 import StickyBox from 'react-sticky-box';
 
-import { useContentSectionQueryState } from '../../use-content-section-query-state';
-import { steps } from '../step-config';
+import { steps } from '../profile-ui-tutorial/step-config';
+import { useContentSectionQueryState } from '../use-content-section-query-state';
 import { ShowCodeModal } from './show-code-modal';
 import { useAccordionMotionProps } from './use-accordion-motion-props';
 
-type CustomAccordionData = {
+type ContentAccordionData = {
   title?: string;
 } & ComponentWithChildren;
 
-type CustomAccordionProps = {
-  data: CustomAccordionData[];
+type ContentAccordionProps = {
+  data: ContentAccordionData[];
 };
 
-export const CustomAccordion = ({ data }: CustomAccordionProps) => {
+export const ContentAccordion = ({ data }: ContentAccordionProps) => {
   const { selectedSections, setSelectedSections } =
     useContentSectionQueryState();
   const [isClosedAll, setIsClosedAll] = React.useState(false);

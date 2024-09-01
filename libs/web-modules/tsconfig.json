@@ -20,11 +20,14 @@
     ],
     "types": [
       "jest",
-      "node"
+      "node",
+      "mdx"
     ]
   },
   "files": [],
-  "include": [],
+  "include": [
+    "**/*.mdx"
+  ],
   "references": [
     {
       "path": "./tsconfig.lib.json"
