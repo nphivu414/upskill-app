@@ -1,7 +1,11 @@
 import { Link } from '@nextui-org/react'
 import { CollapsibleBlock } from '../../collapsible-block.tsx'
 
-<CodeWithAccoridions>
+import {
+   steps
+} from '../step-config.tsx'
+
+<CodeWithAccoridions stepConfigs={steps}>
 ## !!accordions Section 1: Setup and initialize a new React project with NextUI
 
 Before we dive into coding the profile page, let's set up our project:
@@ -24,7 +28,20 @@ yarn dev
 ```
 
 You should have a startup screen at `http://localhost:5173/` in your browser.
-Now you can now head over to the `src/pages/index.tsx` file and start building the profile page.
+Now you can now head over to the `src/pages/index.tsx` file and start building the search flight page.
+
+## !!accordions Section 2: Building Flight Header Component
+
+In this section, we will build the flight header component that displays the flight details and allows users to perform actions like going back and sharing the flight details.
+The component will also support sticky behavior and hide on scroll so that it doesn't take up too much space on the screen.
+
+1. Files and Structure:
+   - `flight-header.tsx`: This file contains the flight header component.
+   - `use-hide-on-scroll-header.ts`: This file contains the custom hook for hiding the header on scroll.
+   - `typography.tsx`: This file contains the typography components for the flight header.
+   - `utils.ts`: This file contains utility functions for formatting dates.
+   - `constants.ts`: This file contains the constants for the flight header component like height and animation duration.
+   - `types.ts`: This file contains the types for the flight header component.
 
 
 </CodeWithAccoridions>

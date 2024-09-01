@@ -20,26 +20,21 @@ export default function FlightBookingUI() {
         description={
           <div>
             <Paragraph>
-              Let&apos;s build a beautiful flight booking UI with React,
-              Tailwind CSS, and NextUI. In this tutorial, you&apos;ll learn how
-              to create a modern and user-friendly interface for booking
-              flights. We&apos;ll cover everything from setting up the project
-              to creating reusable components and styling them with Tailwind
-              CSS. By the end of this tutorial, you&apos;ll have a fully
-              functional flight booking UI that you can use in your own
-              projects.
+              Let&apos;s build a beautiful search flight UI with the power of
+              React, NextUI and react-hook-form. This hands-on guide will walk
+              you through building a modern, interactive search flight UI with
+              filter and sort features. You will also learn how to use
+              react-hook-form to handle form state, validation and submission in
+              a simple and efficient way.
             </Paragraph>
           </div>
         }
-        targetAudience="Beginner to intermediate React developers familiar with basic component structure and styling concepts."
+        targetAudience="Intermediate React developers familiar with JavaScript, React, and Tailwind CSS."
         prerequisites={[
-          'Node.js and yarn: Make sure you have these installed on your system.',
+          'Node.js and yarn (or other package manager) installed on your system',
           'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
-          "A little TypeScript, CSS, and Tailwind knowledge: Some familiarity with these will help, but you don't need to be an expert – we'll guide you through!",
         ]}
         previewComponent={<FlightBookingPagePreview />}
-        storybookUrl="#"
-        sourceUrl="#"
       />
       <Divider className="my-12" />
       <ContentSection

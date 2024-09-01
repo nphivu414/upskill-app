@@ -1,4 +1,11 @@
-import { AnnotationHandler, InlineAnnotation, InnerLine } from 'codehike/code';
+import React from 'react';
+import {
+  AnnotationHandler,
+  getPreRef,
+  InlineAnnotation,
+  InnerLine,
+  InnerPre,
+} from 'codehike/code';
 
 export const codeLineMarkHander: AnnotationHandler = {
   name: 'mark',
@@ -66,3 +73,48 @@ export const calloutHandler: AnnotationHandler = {
     );
   },
 };
+
+export const focusHandler: AnnotationHandler = {
+  name: 'focus',
+  onlyIfAnnotated: true,
+  PreWithRef: (props) => {
+    const ref = getPreRef(props);
+    useScrollToFocus(ref);
+    return <InnerPre merge={props} />;
+  },
+  Line: (props) => <InnerLine merge={props} className="..." />,
+  AnnotatedLine: ({ annotation, ...props }) => (
+    <InnerLine merge={props} data-focus={true} className="..." />
+  ),
+};
+
+function useScrollToFocus(ref: React.RefObject<HTMLPreElement>) {
+  const firstRender = React.useRef(true);
+  React.useLayoutEffect(() => {
+    if (ref.current) {
+      // find all descendants whith data-focus="true"
+      const focusedElements = ref.current.querySelectorAll(
+        '[data-focus=true]'
+      ) as NodeListOf<HTMLElement>;
+
+      // find top and bottom of the focused elements
+      const containerRect = ref.current.getBoundingClientRect();
+      let top = Infinity;
+      let bottom = -Infinity;
+      focusedElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        top = Math.min(top, rect.top - containerRect.top);
+        bottom = Math.max(bottom, rect.bottom - containerRect.top);
+      });
+
+      // scroll to the focused elements if any part of them is not visible
+      if (bottom > containerRect.height || top < 0) {
+        ref.current.scrollTo({
+          top: ref.current.scrollTop + top - 10,
+          behavior: firstRender.current ? 'instant' : 'smooth',
+        });
+      }
+      firstRender.current = false;
+    }
+  });
+}

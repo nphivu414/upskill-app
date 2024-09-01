@@ -34,8 +34,6 @@ export default function ProfileUI() {
           "A little TypeScript, CSS, and Tailwind knowledge: Some familiarity with these will help, but you don't need to be an expert – we'll guide you through!",
         ]}
         previewComponent={<ProfilePagePreview />}
-        storybookUrl="#"
-        sourceUrl="#"
       />
       <Divider className="my-12" />
       <ContentSection

@@ -5,7 +5,7 @@ import { Accordion, AccordionItem, cn, Selection } from '@nextui-org/react';
 import { ComponentWithChildren } from '@upskill-app/shared';
 import StickyBox from 'react-sticky-box';
 
-import { steps } from '../profile-ui-tutorial/step-config';
+import { StepConfig } from '../types';
 import { useContentSectionQueryState } from '../use-content-section-query-state';
 import { ShowCodeModal } from './show-code-modal';
 import { useAccordionMotionProps } from './use-accordion-motion-props';
@@ -16,9 +16,13 @@ type ContentAccordionData = {
 
 type ContentAccordionProps = {
   data: ContentAccordionData[];
+  stepConfigs: StepConfig[];
 };
 
-export const ContentAccordion = ({ data }: ContentAccordionProps) => {
+export const ContentAccordion = ({
+  data,
+  stepConfigs,
+}: ContentAccordionProps) => {
   const { selectedSections, setSelectedSections } =
     useContentSectionQueryState();
   const [isClosedAll, setIsClosedAll] = React.useState(false);
@@ -65,7 +69,7 @@ export const ContentAccordion = ({ data }: ContentAccordionProps) => {
   };
 
   const renderStepContent = (index: number) => {
-    return <div className="not-prose">{steps[index].content}</div>;
+    return <div className="not-prose">{stepConfigs[index].content}</div>;
   };
 
   return (

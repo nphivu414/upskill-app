@@ -14,8 +14,6 @@ type HeadingSectionProps = {
   targetAudience?: string;
   prerequisites?: string[];
   previewComponent: React.ReactNode;
-  storybookUrl: string;
-  sourceUrl?: string;
 };
 
 export const HeadingSection = ({
@@ -25,8 +23,6 @@ export const HeadingSection = ({
   prerequisites,
   targetAudience,
   previewComponent,
-  storybookUrl,
-  sourceUrl,
 }: HeadingSectionProps) => {
   return (
     <section className="w-full">
