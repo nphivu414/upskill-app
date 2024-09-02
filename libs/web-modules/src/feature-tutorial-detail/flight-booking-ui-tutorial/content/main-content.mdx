@@ -1,5 +1,6 @@
 import { Link } from '@nextui-org/react'
 import { CollapsibleBlock } from '../../collapsible-block.tsx'
+import { CodeTabTrigger } from '../../code-tab-trigger.tsx'
 
 import {
    steps
@@ -36,12 +37,57 @@ In this section, we will build the flight header component that displays the fli
 The component will also support sticky behavior and hide on scroll so that it doesn't take up too much space on the screen.
 
 1. Files and Structure:
-   - `flight-header.tsx`: This file contains the flight header component.
-   - `use-hide-on-scroll-header.ts`: This file contains the custom hook for hiding the header on scroll.
-   - `typography.tsx`: This file contains the typography components for the flight header.
-   - `utils.ts`: This file contains utility functions for formatting dates.
-   - `constants.ts`: This file contains the constants for the flight header component like height and animation duration.
-   - `types.ts`: This file contains the types for the flight header component.
+   - <CodeTabTrigger section="flight-header" tab="flight-header.tsx"/>: This file contains the flight header component.
+   - <CodeTabTrigger section="flight-header" tab="use-hide-on-scroll-header.ts"/>: A custom hook for hiding the header on scroll.
+   - <CodeTabTrigger section="flight-header" tab="typography.tsx"/>: This file contains the typography components for the flight header.
+   - <CodeTabTrigger section="flight-header" tab="utils.ts"/>: Utility functions for formatting dates.
+   - <CodeTabTrigger section="flight-header" tab="constants.ts"/>: This file contains the constants for the flight header component like height and animation duration.
+   - <CodeTabTrigger section="flight-header" tab="types.ts"/>: This file contains the types for the flight header component. Types defined separetely here to be reused in other components later on.
 
+2. New dependencies:
+   - `lucide-react`: A library of simply beautiful open-source icons. Install it using `yarn add lucide-react`.
+
+3. Deep dive into <CodeTabTrigger section="flight-header" tab="flight-header.tsx">flight-header.tsx</CodeTabTrigger> file:
+   - **Props:** The component accepts the following props:
+     - `from`: The departure city.
+     - `to`: The arrival city.
+     - `departureDate`: The departure date.
+     - `returnDate`: The return date.
+     - `cabinClass`: The cabin class.
+     - `handleBack`: A function to handle the back action.
+     - `handleShare`: A function to handle the share action.
+     - `sticky`: A boolean to make the header sticky.
+     - `shouldHideOnScroll`: A boolean to hide the header on scroll.
+     - `parentScrollY`: A motion value to track the scroll position.
+   - **Custom Hook:** The component uses the `useHideOnScrollHeader` custom hook to hide the header on scroll. We will discuss this hook in detail later.
+   - **Rendering:** The component renders the flight details and action buttons. It also applies sticky and hide on scroll behavior based on the props.
+   - **Styling:** The component uses the `framer-motion` library for animations and `@nextui-org/react` for UI components.
+
+4. Deep dive into <CodeTabTrigger section="flight-header" tab="use-hide-on-scroll-header.ts">use-hide-on-scroll-header.ts</CodeTabTrigger> file:
+   - **Custom Hook:** This hook is responsible for hiding the header on scroll. It takes the parent scroll position and the hide on scroll flag as arguments.
+   - **State and Ref Initialization:**
+      - `showHeader`: State to track if the header is visible.
+      - `lastScrollYRef`: Ref to store the last scroll position.
+   - **Effect Hook:**
+      - We use `useEffect` to subscribes to changes in `parentScrollY` if `parentScrollY` and `shouldHideOnScroll` are provided.
+      - **Conditions to Hide Header**: If the current scroll position (latest) is **greater than** the last scroll position **plus the threshold** (thresshold), hide the header. We use a threshold to avoid flickering due to small scroll changes.
+      - **Conditions to Show Header**: If the current scroll position is **less than** the last scroll position **minus the threshold**, show the header. If the current scroll position is less than or equal to 0 (top of the page), show the header.
+
+Now that we have a good understanding of the setup and the flight header component, let's start building the next component: the `<FlightCard/>`.
+
+## !!accordions Section 3: Building Flight Card Component
+
+In this section, we will build the flight card component that displays the flight details like airline name, cabin class, aircraft type, and logo.
+
+1. Files and Structure:
+   - <CodeTabTrigger section="flight-card" tab="flight-card.tsx"/>: The main file that contains the flight card component.
+   - <CodeTabTrigger section="flight-card" tab="flight-overview.tsx"/>: A component that shows overview info as a header of the flight card.
+   - <CodeTabTrigger section="flight-card" tab="flight-timeline.tsx"/>: A component that shows the timeline of the flight including departure, arrival, stops, and duration.
+   - <CodeTabTrigger section="flight-card" tab="flight-fare-details.tsx"/>: A component that shows the fare details of the flight.
+   - <CodeTabTrigger section="flight-card" tab="flight-logo.tsx"/>: A component that displays the airline logo.
+   - <CodeTabTrigger section="flight-card" tab="flight-benefits.tsx"/>: A component that displays the benefits of the flight like meals, entertainment, etc.
+   - <CodeTabTrigger section="flight-card" tab="utils.ts"/>: Utility functions for getting the right benefit icons.
+   - <CodeTabTrigger section="flight-card" tab="constants.ts"/>: This file contains the constants for flight cabin class mapping.
+   - <CodeTabTrigger section="flight-card" tab="types.ts"/>: This file contains the types for the flight card component. Types defined separetely here to be reused in other components later on.
 
 </CodeWithAccoridions>

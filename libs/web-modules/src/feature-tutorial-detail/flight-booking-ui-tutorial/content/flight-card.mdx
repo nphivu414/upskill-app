@@ -1,0 +1,379 @@
+import { EmbedStory } from '@upskill-app/ui/web';
+import { FlightCardPreview } from '@upskill-app/tutorial-elements';
+
+<CodeWithTabs sectionName="flight-card">
+
+### !!tabs Preview
+
+<FlightCardPreview/>
+
+### !!tabs flight-card.tsx
+
+```tsx
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+} from '@nextui-org/react';
+
+import { Flight } from '../types';
+import { FlightBenefits } from './flight-benefits';
+import { FlightFareDetails } from './flight-fare-details';
+import { FlightOverview } from './flight-overview';
+import { FlightTimeline } from './flight-timeline';
+
+type FlightCardProps = {
+  onPress: (id: Flight['id']) => void;
+} & Pick<
+  Flight,
+  | 'id'
+  | 'price'
+  | 'airline'
+  | 'cabinClass'
+  | 'aircraftType'
+  | 'departureTime'
+  | 'arrivalTime'
+  | 'duration'
+  | 'departureAirport'
+  | 'arrivalAirport'
+  | 'benefits'
+  | 'stops'
+  | 'isRoundTrip'
+>;
+
+export const FlightCard = ({
+  onPress,
+  id,
+  price,
+  airline,
+  cabinClass,
+  aircraftType,
+  departureTime,
+  arrivalTime,
+  duration,
+  departureAirport,
+  arrivalAirport,
+  benefits,
+  stops,
+  isRoundTrip,
+}: FlightCardProps) => {
+  const handlePress = () => {
+    onPress(id);
+  };
+
+  return (
+    <Card isPressable onPress={handlePress} fullWidth radius="sm">
+      <CardHeader>
+        <FlightOverview
+          aircraftType={aircraftType}
+          airline={airline}
+          cabinClass={cabinClass}
+        />
+      </CardHeader>
+      <Divider />
+      <CardBody>
+        <div className="flex items-center justify-between">
+          <div className="flex w-3/5 shrink-0">
+            <FlightTimeline
+              departureTime={departureTime}
+              arrivalTime={arrivalTime}
+              departureAirport={departureAirport}
+              arrivalAirport={arrivalAirport}
+              duration={duration}
+              totalStops={stops.length}
+            />
+          </div>
+          <FlightFareDetails price={price} isRoundTrip={isRoundTrip} />
+        </div>
+      </CardBody>
+      <CardFooter>
+        <FlightBenefits benefits={benefits} />
+      </CardFooter>
+    </Card>
+  );
+};
+
+```
+
+### !!tabs flight-overview.tsx
+
+```tsx
+import { Subtle } from '../typography';
+
+import { CABIN_CLASS_MAPPING } from '../constants';
+import { Flight } from '../types';
+import { FlightLogo } from './flight-logo';
+
+type FlightOverviewProps = Pick<
+  Flight,
+  'airline' | 'cabinClass' | 'aircraftType'
+>;
+
+export const FlightOverview = ({
+  airline,
+  cabinClass,
+  aircraftType,
+}: FlightOverviewProps) => {
+  return (
+    <div className="flex flex-1 justify-between">
+      <div className="flex flex-col items-start gap-1">
+        <p className="text-sm font-semibold">{airline.name}</p>
+        <div className="flex items-center justify-around gap-1">
+          <Subtle className="text-xs">{CABIN_CLASS_MAPPING[cabinClass]}</Subtle>
+          <Subtle className="text-xs">•</Subtle>
+          <Subtle className="text-xs">{aircraftType}</Subtle>
+        </div>
+      </div>
+      <FlightLogo src={airline.logo} />
+    </div>
+  );
+};
+
+```
+
+### !!tabs flight-timeline.tsx
+
+```tsx
+import { Slider } from '@nextui-org/react';
+import { Subtle } from '../typography';
+
+import { Flight } from '../types';
+
+type FlightTimelineProps = {
+  totalStops: number;
+} & Pick<
+  Flight,
+  | 'departureTime'
+  | 'arrivalTime'
+  | 'departureAirport'
+  | 'arrivalAirport'
+  | 'duration'
+>;
+
+export const FlightTimeline = ({
+  arrivalAirport,
+  arrivalTime,
+  departureAirport,
+  departureTime,
+  duration,
+  totalStops,
+}: FlightTimelineProps) => {
+  const totalSteps = totalStops + 1;
+
+  let stopText = 'Direct';
+  if (totalStops === 1) {
+    stopText = '1 stop';
+  } else if (totalStops > 1) {
+    stopText = `${totalStops} stops`;
+  }
+
+  return (
+    <div className="flex w-full flex-col items-center justify-center">
+      <Subtle className="-mb-2 text-xs">{duration}</Subtle>
+      <Slider
+        size="sm"
+        step={1}
+        defaultValue={totalSteps}
+        maxValue={totalSteps}
+        minValue={0}
+        color="foreground"
+        showSteps={true}
+        className="max-w-md"
+        isDisabled
+        startContent={
+          <div className="flex flex-col items-center justify-center gap-1">
+            <p className="text-xs">{departureTime}</p>
+            <Subtle className="text-xs">{departureAirport}</Subtle>
+          </div>
+        }
+        endContent={
+          <div className="flex flex-col items-center justify-center gap-1">
+            <p className="text-xs">{arrivalTime}</p>
+            <Subtle className="text-xs">{arrivalAirport}</Subtle>
+          </div>
+        }
+        classNames={{
+          thumb: 'hidden',
+          value: 'hidden',
+          track: 'bg-foreground h-[1px]',
+          step: 'bg-foreground w-[4px] h-[4px]',
+        }}
+      />
+      <Subtle className="-mt-2 text-xs">{stopText}</Subtle>
+    </div>
+  );
+};
+
+```
+
+### !!tabs flight-fare-details.tsx
+
+```tsx
+import { Chip } from '@nextui-org/react';
+
+import { formatNumber } from '../utils';
+import { Flight } from '../types';
+
+type FlightFareDetailsProps = Pick<Flight, 'price' | 'isRoundTrip'>;
+
+export const FlightFareDetails = ({
+  price,
+  isRoundTrip,
+}: FlightFareDetailsProps) => {
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <p className="text-warning truncate break-words text-xs font-semibold">
+        {formatNumber(price, 'USD')} / pax
+      </p>
+      {isRoundTrip && (
+        <Chip size="sm" variant="flat" color="primary" className="text-xs">
+          Round trip
+        </Chip>
+      )}
+    </div>
+  );
+};
+
+```
+
+### !!tabs flight-logo.tsx
+
+```tsx
+import { Avatar, AvatarProps, Skeleton } from '@nextui-org/react';
+
+export const FlightLogo = (props: AvatarProps) => {
+  return (
+    <Avatar
+      size="sm"
+      fallback={<Skeleton className="flex size-8 rounded-full" />}
+      {...props}
+    />
+  );
+};
+
+```
+
+### !!tabs flight-benefits.tsx
+
+```tsx
+import { Chip } from '@nextui-org/react';
+import { Subtle } from '../typography';
+
+import { Flight } from '../types';
+import { getBenefitIcon } from '../utils';
+
+export type FlightBenefitsProps = Pick<Flight, 'benefits'>;
+
+export const FlightBenefits = ({ benefits }: FlightBenefitsProps) => {
+  return (
+    <div className="flex items-center gap-2 overflow-x-auto">
+      {benefits.map((benefit) => (
+        <Chip
+          key={benefit.id}
+          size="sm"
+          variant="dot"
+          className="text-muted"
+          startContent={
+            benefit.name ? (
+              <div className="text-muted mx-1">
+                {getBenefitIcon(benefit.name, 12)}
+              </div>
+            ) : null
+          }
+        >
+          <Subtle className="text-xs">{benefit.description}</Subtle>
+        </Chip>
+      ))}
+    </div>
+  );
+};
+
+```
+
+### !!tabs utils.ts
+
+```ts
+import { Briefcase, TvMinimal, Utensils, Wifi } from 'lucide-react';
+
+import { BenefitEnum } from './types';
+
+export const getBenefitIcon = (name: BenefitEnum, iconSize = 16) => {
+  switch (name) {
+    case 'wifi':
+      return <Wifi size={iconSize} />;
+    case 'meal':
+      return <Utensils size={iconSize} />;
+    case 'baggage':
+      return <Briefcase size={iconSize} />;
+    case 'entertainment':
+      return <TvMinimal size={iconSize} />;
+  }
+};
+
+export const formatNumber = (num: number, currency?: string) => {
+  return Intl.NumberFormat('en-US', {
+    maximumFractionDigits: 3,
+    currency: currency,
+    style: currency ? 'currency' : undefined,
+  }).format(num);
+};
+
+```
+
+### !!tabs constants.ts
+
+```ts
+import { CabinClassEnum } from './types';
+
+export const CABIN_CLASS_MAPPING: Record<CabinClassEnum, string> = {
+  economy: 'Economy',
+  premium: 'Premium Economy',
+  business: 'Business Class',
+  first: 'First Class',
+};
+
+```
+
+### !!tabs types.ts
+
+```ts
+export type BenefitEnum = 'meal' | 'baggage' | 'entertainment' | 'wifi';
+export type CabinClassEnum = 'economy' | 'premium' | 'business' | 'first';
+
+export interface Benefit {
+  id: string;
+  name: BenefitEnum;
+  description?: string;
+}
+
+export interface Airline {
+  id: string;
+  name: string;
+  logo: string;
+}
+
+export interface Flight {
+  id: string;
+  origin: string;
+  price: number;
+  destination: string;
+  cabinClass: CabinClassEnum;
+  airline: Airline;
+  aircraftType: string;
+  departureTime: string;
+  arrivalTime: string;
+  duration: string;
+  departureAirport: string;
+  arrivalAirport: string;
+  benefits: Benefit[];
+  stops: string[];
+  isRoundTrip: boolean;
+}
+
+```
+
+
+</CodeWithTabs>
+

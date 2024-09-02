@@ -11,11 +11,14 @@ const AccordionCodeSchema = Block.extend({
   stepConfigs: z.custom<StepConfig[]>(),
 });
 
-const TabCodeSchema = Block.extend({ tabs: z.array(Block) });
+const TabCodeSchema = Block.extend({
+  tabs: z.array(Block),
+  sectionName: z.string().optional(),
+});
 
 export function CodeWithTabs(props: unknown) {
-  const { tabs } = parseProps(props, TabCodeSchema);
-  return <CodeBlockTabs tabs={tabs} />;
+  const { tabs, sectionName } = parseProps(props, TabCodeSchema);
+  return <CodeBlockTabs tabs={tabs} sectionName={sectionName} />;
 }
 
 export function CodeWithAccoridions(props: unknown) {

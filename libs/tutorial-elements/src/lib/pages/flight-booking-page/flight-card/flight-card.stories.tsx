@@ -23,6 +23,9 @@ type Story = StoryObj<typeof FlightCard>;
 
 const baseArgs: Story['args'] = {
   ...defaultFlights[1],
+  onPress: (id) => {
+    alert(`Flight with id ${id} clicked`);
+  },
 };
 
 export const Default: Story = {
