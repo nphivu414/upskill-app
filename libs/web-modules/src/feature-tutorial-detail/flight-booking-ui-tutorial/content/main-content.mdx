@@ -94,39 +94,44 @@ In this section, we will build the flight card component that displays the fligh
 The card will also show the flight timeline, fare details, and benefits like meals, entertainment, etc. The component will be reusable and flexible to accommodate different flight details.
 
 1. Files and Structure:
-   - <CodeTabTrigger section="flight-card" tab="flight-card.tsx"/>: The main file that contains the flight card component.
    - <CodeTabTrigger section="flight-card" tab="flight-overview.tsx"/>: A component that shows overview info as a header of the flight card.
    - <CodeTabTrigger section="flight-card" tab="flight-timeline.tsx"/>: A component that shows the timeline of the flight including departure, arrival, stops, and duration.
    - <CodeTabTrigger section="flight-card" tab="flight-fare-details.tsx"/>: A component that shows the fare details of the flight.
    - <CodeTabTrigger section="flight-card" tab="flight-logo.tsx"/>: A component that displays the airline logo.
    - <CodeTabTrigger section="flight-card" tab="flight-benefits.tsx"/>: A component that displays the benefits of the flight like meals, entertainment, etc.
+   - <CodeTabTrigger section="flight-card" tab="flight-card.tsx"/>: The main component that put all the above components together to render the flight card.
    - <CodeTabTrigger section="flight-card" tab="utils.ts"/>: Utility functions for getting the right benefit icons.
    - <CodeTabTrigger section="flight-card" tab="constants.ts"/>: This file contains the constants for flight cabin class mapping.
    - <CodeTabTrigger section="flight-card" tab="types.ts"/>: This file contains the types for the flight card component. Types defined separetely here to be reused in other components later on.
 
-2. Deep dive into <CodeTabTrigger section="flight-card" tab="flight-card.tsx">flight-card.tsx</CodeTabTrigger> file:
+2. Deep dive into <CodeTabTrigger section="flight-card" tab="flight-overview.tsx">flight-overview.tsx</CodeTabTrigger> file:
    - **Props:** The component accepts the following props:
      - `airline`: The airline details.
      - `cabinClass`: The cabin class.
      - `aircraftType`: The aircraft type.
-     - `departure`: The departure details.
-     - `arrival`: The arrival details.
-     - `stops`: The stops in the flight.
-     - `duration`: The duration of the flight.
-     - `price`: The price of the flight.
-     - `benefits`: The benefits of the flight.
-     - `isRoundTrip`: A boolean to indicate if the flight is round trip.
-   - **Structure:** The component is divided into three main sections:
-     - **Header:** The header section displays the airline name, cabin class, aircraft type, and logo.
-     - **Body:** The body section displays the flight timeline and fare details.
-     - **Footer:** The footer section displays the benefits of the flight.
-   - **Rendering:** We're usong the `Card` component from `@nextui-org/react` to render the flight card. `CardHeader`, `CardBody`, and `CardFooter` are used to structure the card content.
+   - **Rendering:** The component play a role as a header of the flight card. We use flexbox to build the layout, the `<Subtle>` component style the text to be subtle, and `<FlightLogo>` component to display the airline logo.
 
-3. Deep dive into <CodeTabTrigger section="flight-card" tab="flight-overview.tsx">flight-overview.tsx</CodeTabTrigger> file:
+3. Deep dive into <CodeTabTrigger section="flight-card" tab="flight-timeline.tsx">flight-timeline.tsx</CodeTabTrigger> file:
    - **Props:** The component accepts the following props:
-     - `airline`: The airline details.
-     - `cabinClass`: The cabin class.
-     - `aircraftType`: The aircraft type.
-   - **Rendering:** The component renders the airline logo, name, cabin class, and aircraft type. 
+      - `departureTime`: The departure time.
+      - `arrivalTime`: The arrival time.
+      - `duration`: The flight duration.
+      - `departureAirport`: The departure airport.
+      - `arrivalAirport`: The arrival airport.
+      - `totalStops`: The total stops.
+   - **Rendering:** The component displays the timeline of the flight including departure, arrival, stops, and duration. We use the `<Subtle>` component to style the text to be subtle.
+      - We use the `Slider` component from `@nextui-org/react` with a custom style to display the timeline. It shows departure time and airport on the start and arrival time and airport on the end.
+      - Flight duration will be displayed above the timeline.
+      - Total stops will be displayed below the timeline.
+
+4. Deep dive into <CodeTabTrigger section="flight-card" tab="flight-fare-details.tsx">flight-fare-details.tsx</CodeTabTrigger> file:
+   - **Props:** The component accepts the following props:
+      - `price`: The price of the flight.
+      - `isRoundTrip`: A boolean to indicate if the flight is round trip.
+   - **Rendering:**
+      - The price will be formatted to display the currency symbol and the price using the `formatPrice` utility function.
+      - If the flight is round trip, we use `Chip` component from `@nextui-org/react` to display a round trip badge.
+
+
 
 </CodeWithAccoridions>
