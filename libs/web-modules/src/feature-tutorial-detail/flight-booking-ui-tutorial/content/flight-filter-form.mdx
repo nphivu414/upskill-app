@@ -13,7 +13,6 @@ import { FlightFilterFormPreview } from '@upskill-app/tutorial-elements';
 import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/react';
-import { DrawerFooter } from '@upskill-app/ui/web';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 import {
@@ -80,8 +79,8 @@ export const FlightFilterForm = ({
 
   return (
     <FormProvider {...formReturns}>
-      <form onSubmit={handleSubmit(handleOnSubmit)}>
-        <div className="flex flex-col gap-6 px-4">
+      <form onSubmit={handleSubmit(handleOnSubmit)} className="bg-content1">
+        <div className="flex flex-col gap-6 px-4 pt-4">
           <PriceRangeSlider minValue={minPrice} maxValue={maxPrice} />
           <TimeRangeSlider
             name="departureTimeRange"
@@ -100,15 +99,502 @@ export const FlightFilterForm = ({
           <StopSelector />
           <BenefitSelector benefits={benefits} />
         </div>
-        <DrawerFooter className="bg-content1 sticky bottom-0 z-10 mt-2 px-4 py-2">
+        <div className="bg-content1 sticky bottom-0 z-10 mt-2 px-4 py-2">
           <Button type="submit" size="sm" color="primary" fullWidth>
             Save
           </Button>
-        </DrawerFooter>
+        </div>
       </form>
     </FormProvider>
   );
 };
+
+```
+
+### !!tabs schema.ts
+
+```ts
+import { z } from 'zod';
+
+const cabinClassSchema = z.enum(['economy', 'premium', 'business', 'first']);
+const stopSchema = z.enum(['any', 'direct', '1stop', '2+stops']);
+const benefitSchema = z.enum(['meal', 'baggage', 'entertainment', 'wifi']);
+
+export const flightFilterSchema = z.object({
+  departureTimeRange: z
+    .tuple([z.number().min(0).max(23), z.number().min(0).max(23)])
+    .refine(([start, end]) => start <= end, {
+      message: 'Departure start time must be before or equal to end time',
+    })
+    .optional(),
+  arrivalTimeRange: z
+    .tuple([z.number().min(0).max(23), z.number().min(0).max(23)])
+    .refine(([start, end]) => start <= end, {
+      message: 'Arrival start time must be before or equal to end time',
+    })
+    .optional(),
+  priceRange: z
+    .tuple([z.number().min(0).max(2000), z.number().min(0).max(2000)])
+    .refine(([min, max]) => min <= max, {
+      message: 'Minimum price must be less than or equal to maximum price',
+    })
+    .optional(),
+  airlines: z.array(z.string()).optional(),
+  stops: z.array(stopSchema).optional(),
+  cabinClasses: z.array(cabinClassSchema).optional(),
+  benefits: z.array(benefitSchema).optional(),
+});
+
+```
+
+### !!tabs slider-field.tsx
+
+```tsx
+import { Slider, SliderProps } from '@nextui-org/react';
+import { Controller, FieldError, FieldValues } from 'react-hook-form';
+
+import { ControlledFormFieldProps } from './types';
+
+export type SliderFieldProps<T extends FieldValues> =
+  ControlledFormFieldProps<T> &
+    Omit<SliderProps, 'name'> & {
+      renderCustomValue?: (value: SliderProps['value']) => React.ReactNode;
+    };
+
+export function SliderField<T extends FieldValues>(props: SliderFieldProps<T>) {
+  const { name, control, renderCustomValue, ...rest } = props;
+
+  const handleRenderCustomValue = (
+    value: SliderProps['value'],
+    children: React.ReactNode
+  ) => {
+    if (value && renderCustomValue) {
+      return renderCustomValue(value);
+    }
+    return children;
+  };
+
+  return (
+    <Controller
+      name={name}
+      control={control}
+      render={({
+        field: { onChange, ...fields },
+        fieldState: { error, invalid },
+      }) => {
+        const fieldErrors = error as unknown as FieldError[] | undefined;
+        return (
+          <div className="flex flex-col items-start justify-center gap-2">
+            <Slider
+              color={invalid ? 'danger' : 'primary'}
+              renderValue={({ children, ...props }) => (
+                <output {...props}>
+                  {handleRenderCustomValue(fields.value, children)}
+                </output>
+              )}
+              {...rest}
+              {...fields}
+              onChange={onChange}
+            />
+            {fieldErrors?.length
+              ? fieldErrors.map((error, i) => (
+                  <p key={i} className="text-danger text-small font-medium">
+                    {error.message}
+                  </p>
+                ))
+              : null}
+          </div>
+        );
+      }}
+    />
+  );
+}
+
+```
+
+### !!tabs checkbox-group-field.tsx
+
+```tsx
+import React from 'react';
+import {
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  CheckboxGroupProps,
+  CheckboxProps,
+} from '@nextui-org/react';
+import {
+  Controller,
+  ControllerRenderProps,
+  FieldError,
+  FieldValues,
+} from 'react-hook-form';
+
+import { ControlledFormFieldProps } from './types';
+
+export type CheckboxGroupData = {
+  value: CheckboxProps['value'];
+  label: string;
+  endContent?: React.ReactNode;
+};
+
+export type CheckboxGroupFieldProps<T extends FieldValues> =
+  ControlledFormFieldProps<T> &
+    Omit<CheckboxGroupProps, 'name'> & {
+      enableSelectAll?: boolean;
+      data?: CheckboxGroupData[];
+    };
+
+export function CheckboxGroupField<T extends FieldValues>(
+  props: CheckboxGroupFieldProps<T>
+) {
+  const { name, control, data, label, enableSelectAll = true, ...rest } = props;
+  const [isSelectedAll, setIsSelectedAll] = React.useState(false);
+
+  const onSelectAll = (onChange: ControllerRenderProps<T>['onChange']) => {
+    return () => {
+      if (isSelectedAll) {
+        onChange?.([]);
+        setIsSelectedAll(false);
+        return;
+      }
+      const allValues = data?.map(({ value }) => value);
+      if (allValues?.length) {
+        onChange?.(allValues);
+      }
+      setIsSelectedAll(true);
+    };
+  };
+
+  const renderGroupLabel = (onChange: ControllerRenderProps<T>['onChange']) => {
+    if (!enableSelectAll) {
+      return label;
+    }
+
+    return (
+      <div className="flex w-full items-center justify-between">
+        {label}
+        <Button
+          size="sm"
+          color="primary"
+          variant="light"
+          onClick={onSelectAll(onChange)}
+        >
+          {isSelectedAll ? 'Deselect All' : 'Select All'}
+        </Button>
+      </div>
+    );
+  };
+
+  return (
+    <Controller
+      name={name}
+      control={control}
+      render={({
+        field: { onChange, ...fields },
+        fieldState: { error, invalid },
+      }) => {
+        const fieldErrors = error as unknown as FieldError[] | undefined;
+        return (
+          <CheckboxGroup
+            color="primary"
+            isInvalid={invalid}
+            errorMessage={fieldErrors?.[0]?.message}
+            label={renderGroupLabel(onChange)}
+            {...rest}
+            {...fields}
+            onValueChange={onChange}
+          >
+            {data?.map(({ value, label, endContent }) => (
+              <Checkbox
+                key={value}
+                value={value}
+                classNames={
+                  endContent
+                    ? {
+                        label: 'w-full',
+                        base: 'inline-flex w-full max-w-full',
+                      }
+                    : undefined
+                }
+              >
+                <div className="flex w-full items-center justify-between gap-2">
+                  {label}
+                  {endContent}
+                </div>
+              </Checkbox>
+            ))}
+          </CheckboxGroup>
+        );
+      }}
+    />
+  );
+}
+
+```
+
+### !!tabs price-range-slider.tsx
+
+```tsx
+import { SliderProps } from '@nextui-org/react';
+import { SliderField, Subtle } from '@upskill-app/ui/web';
+import { useFormContext } from 'react-hook-form';
+
+import { formatNumber } from '../../../utils';
+import { FlightFilterFormData } from '../types';
+
+export const PriceRangeSlider = (props: Omit<SliderProps, 'name'>) => {
+  const { control, formState } = useFormContext<FlightFilterFormData>();
+  const minPrice = props.minValue || 0;
+  const maxPrice = props.maxValue || 0;
+
+  return (
+    <SliderField
+      name="priceRange"
+      label="Price Range"
+      control={control}
+      formState={formState}
+      size="sm"
+      step={10}
+      formatOptions={{ style: 'currency', currency: 'USD' }}
+      startContent={
+        <Subtle className="text-xs">{formatNumber(minPrice, 'USD')}</Subtle>
+      }
+      endContent={
+        <Subtle className="text-xs">{formatNumber(maxPrice, 'USD')}</Subtle>
+      }
+      {...props}
+    />
+  );
+};
+
+```
+
+### !!tabs time-range-slider.tsx
+
+```tsx
+import { DateFormatter, Time } from '@internationalized/date';
+import { SliderProps } from '@nextui-org/react';
+import { SliderField, SliderFieldProps, Subtle } from '@upskill-app/ui/web';
+import { useFormContext } from 'react-hook-form';
+
+import { FlightFilterFormData } from '../types';
+
+type TimeRangeSliderProps = SliderProps &
+  Pick<SliderFieldProps<FlightFilterFormData>, 'name'>;
+
+export const TimeRangeSlider = (props: TimeRangeSliderProps) => {
+  const { control, formState } = useFormContext<FlightFilterFormData>();
+  const minTime = props.minValue || 0;
+  const maxTime = props.maxValue || 0;
+
+  const formatTime = (value: number) => {
+    const dateFormatter = new DateFormatter('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+    const time = new Time(value, 0);
+    const date = new Date();
+    date.setHours(time.hour, time.minute);
+    return dateFormatter.format(new Date(date));
+  };
+
+  const renderCustomValue = (value: SliderProps['value']) => {
+    if (typeof value === 'object') {
+      return `${formatTime(value[0])} - ${formatTime(value[1])}`;
+    }
+  };
+
+  return (
+    <SliderField
+      control={control}
+      formState={formState}
+      size="sm"
+      step={1}
+      startContent={<Subtle className="text-xs">{formatTime(minTime)}</Subtle>}
+      endContent={<Subtle className="text-xs">{formatTime(maxTime)}</Subtle>}
+      renderCustomValue={renderCustomValue}
+      {...props}
+    />
+  );
+};
+
+```
+
+### !!tabs airline-selector.tsx
+
+```tsx
+import { CheckboxGroupData, CheckboxGroupField } from '@upskill-app/ui/web';
+import { useFormContext } from 'react-hook-form';
+
+import { AirlineLogo } from '../flight-card/airline-logo';
+import { Airline, FlightFilterFormData } from '../types';
+
+type AirlineSelectorProps = {
+  data: Airline[];
+};
+
+export const AirlineSelector = ({ data }: AirlineSelectorProps) => {
+  const { control, formState } = useFormContext<FlightFilterFormData>();
+  const checboxGroupData: CheckboxGroupData[] | undefined = data.map(
+    (airline) => ({
+      value: airline.id,
+      label: airline.name,
+      endContent: (
+        <AirlineLogo
+          src={airline.logo}
+          classNames={{
+            base: 'h-6 w-6',
+            img: 'h-6 w-6',
+          }}
+        />
+      ),
+    })
+  );
+
+  return (
+    <CheckboxGroupField
+      name="airlines"
+      label="Airlines"
+      size="sm"
+      control={control}
+      formState={formState}
+      data={checboxGroupData}
+    />
+  );
+};
+
+```
+
+### !!tabs cabin-class-selector.tsx
+
+```tsx
+import { CheckboxGroupData, CheckboxGroupField } from '@upskill-app/ui/web';
+import { useFormContext } from 'react-hook-form';
+
+import { CABIN_CLASS_MAPPING } from '../constants';
+import { CabinClassEnum, FlightFilterFormData } from '../types';
+
+type CabinSelectorProps = {
+  cabinClasses: CabinClassEnum[];
+};
+
+export const CabinSelector = ({ cabinClasses }: CabinSelectorProps) => {
+  const { control, formState } = useFormContext<FlightFilterFormData>();
+  const checkboxGroupData: CheckboxGroupData[] | undefined = cabinClasses.map(
+    (cabinClass) => ({
+      value: cabinClass,
+      label: CABIN_CLASS_MAPPING[cabinClass],
+    })
+  );
+
+  return (
+    <CheckboxGroupField
+      name="cabinClasses"
+      label="Cabin Class"
+      size="sm"
+      control={control}
+      formState={formState}
+      data={checkboxGroupData}
+    />
+  );
+};
+
+```
+
+### !!tabs stop-selector.tsx
+
+```tsx
+import { CheckboxGroupData, CheckboxGroupField } from '@upskill-app/ui/web';
+import { useFormContext } from 'react-hook-form';
+
+import { STOP_MAPPING } from '../constants';
+import { FlightFilterFormData } from '../types';
+
+export const StopSelector = () => {
+  const { control, formState } = useFormContext<FlightFilterFormData>();
+  const checboxGroupData: CheckboxGroupData[] | undefined = Object.entries(
+    STOP_MAPPING
+  ).map(([key, value]) => ({
+    value: key,
+    label: value,
+  }));
+
+  return (
+    <CheckboxGroupField
+      name="stops"
+      label="Number of Stops"
+      size="sm"
+      control={control}
+      formState={formState}
+      data={checboxGroupData}
+    />
+  );
+};
+
+```
+
+### !!tabs benefit-selector.tsx
+
+```tsx
+import { CheckboxGroupData, CheckboxGroupField } from '@upskill-app/ui/web';
+import { useFormContext } from 'react-hook-form';
+
+import { BENEFIT_MAPPING } from '../constants';
+import { BenefitEnum, FlightFilterFormData } from '../types';
+import { getBenefitIcon } from '../utils';
+
+type BenefitSelectorProps = {
+  benefits: BenefitEnum[];
+};
+
+export const BenefitSelector = ({ benefits }: BenefitSelectorProps) => {
+  const { control, formState } = useFormContext<FlightFilterFormData>();
+  const checkboxGroupData: CheckboxGroupData[] | undefined = benefits.map(
+    (benefit) => ({
+      value: benefit,
+      label: BENEFIT_MAPPING[benefit],
+      endContent: getBenefitIcon(benefit),
+    })
+  );
+
+  return (
+    <CheckboxGroupField
+      name="benefits"
+      label="Facilities"
+      size="sm"
+      control={control}
+      formState={formState}
+      data={checkboxGroupData}
+    />
+  );
+};
+
+```
+
+### !!tabs types.ts
+
+```ts
+import { flightFilterSchema } from './schema';
+
+export type FormFieldProps<T extends FieldValues = FieldValues> = {
+  register: UseFormRegister<T>;
+  formState: FormState<T>;
+  name: FieldPath<T>;
+};
+
+export type ControlledFormFieldProps<T extends FieldValues = FieldValues> = {
+  formState: FormState<T>;
+  name: FieldPath<T>;
+  control: Control<FieldValues>;
+};
+
+export type StopEnum = 'any' | 'direct' | '1stop' | '2+stops';
+export type BenefitEnum = 'meal' | 'baggage' | 'entertainment' | 'wifi';
+export type CabinClassEnum = 'economy' | 'premium' | 'business' | 'first';
+
+export type FlightFilterFormData = z.infer<typeof flightFilterSchema>;
 
 ```
 

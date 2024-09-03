@@ -26,7 +26,7 @@ export const FlightFilterFormPreview = () => {
         'blob/main/src/components/'
       )}
     >
-      <div className="max-h-[400px] w-[350px] overflow-y-auto">
+      <div className="max-h-[500px] w-[350px] overflow-y-auto">
         <FlightFilterForm
           airlines={defaultAirlines}
           benefits={defaultBenefits}

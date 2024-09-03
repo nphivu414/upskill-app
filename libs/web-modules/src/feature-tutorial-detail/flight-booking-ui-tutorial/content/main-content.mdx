@@ -6,8 +6,6 @@ import {
    steps
 } from '../step-config.tsx'
 
-export const section = 'flight-header'
-
 <CodeWithAccoridions stepConfigs={steps}>
 ## !!accordions Section 1: Setup and initialize a new React project with NextUI
 
@@ -39,17 +37,17 @@ In this section, we will build the flight header component that displays the fli
 The component will also support sticky behavior and hide on scroll so that it doesn't take up too much space on the screen.
 
 1. Files and Structure:
-   - <CodeTabTrigger section={section} tab="flight-header.tsx"/>: This file contains the flight header component.
-   - <CodeTabTrigger section={section} tab="use-hide-on-scroll-header.ts"/>: A custom hook for hiding the header on scroll.
-   - <CodeTabTrigger section={section} tab="typography.tsx"/>: This file contains the typography components for the flight header.
-   - <CodeTabTrigger section={section} tab="utils.ts"/>: Utility functions for formatting dates.
-   - <CodeTabTrigger section={section} tab="constants.ts"/>: This file contains the constants for the flight header component like height and animation duration.
-   - <CodeTabTrigger section={section} tab="types.ts"/>: This file contains the types for the flight header component. Types defined separetely here to be reused in other components later on.
+   - <CodeTabTrigger section="flight-header" tab="flight-header.tsx"/>: This file contains the flight header component.
+   - <CodeTabTrigger section="flight-header" tab="use-hide-on-scroll-header.ts"/>: A custom hook for hiding the header on scroll.
+   - <CodeTabTrigger section="flight-header" tab="typography.tsx"/>: This file contains the typography components for the flight header.
+   - <CodeTabTrigger section="flight-header" tab="utils.ts"/>: Utility functions for formatting dates.
+   - <CodeTabTrigger section="flight-header" tab="constants.ts"/>: This file contains the constants for the flight header component like height and animation duration.
+   - <CodeTabTrigger section="flight-header" tab="types.ts"/>: This file contains the types for the flight header component. Types defined separetely here to be reused in other components later on.
 
 2. New dependencies:
    - `lucide-react`: A library of simply beautiful open-source icons. Install it using `yarn add lucide-react`.
 
-3. Deep dive into <CodeTabTrigger section={section} tab="flight-header.tsx">flight-header.tsx</CodeTabTrigger> file:
+3. Deep dive into <CodeTabTrigger section="flight-header" tab="flight-header.tsx">flight-header.tsx</CodeTabTrigger> file:
    - **Props:** The component accepts the following props:
      - `from`: The departure city.
      - `to`: The arrival city.
@@ -78,7 +76,7 @@ The component will also support sticky behavior and hide on scroll so that it do
          </motion.div>
    ```
 
-4. Deep dive into <CodeTabTrigger section={section} tab="use-hide-on-scroll-header.ts">use-hide-on-scroll-header.ts</CodeTabTrigger> file:
+4. Deep dive into <CodeTabTrigger section="flight-header" tab="use-hide-on-scroll-header.ts">use-hide-on-scroll-header.ts</CodeTabTrigger> file:
    - **Custom Hook:** This hook is responsible for hiding the header on scroll. It takes the parent scroll position and the hide on scroll flag as arguments.
    - **State and Ref Initialization:**
       - `showHeader`: State to track if the header is visible.
@@ -192,5 +190,18 @@ Now that we've completed building the flight list component, we can move on to t
 
 ## !!accordions Section 5: Building Flight Filter Form Component
 In this section, we will build the flight filter form component that allows users to filter the flight list based on their preferences.
+1. Files and Structure:
+   - <CodeTabTrigger section="flight-filter-form" tab="flight-filter-form.tsx"/>: The main component file for the flight filter form, where different filter options are included, and the form is set up with React Hook Form and Zod validation schema.
+   - <CodeTabTrigger section="flight-filter-form" tab="schema.ts"/>: Defines the Zod validation schema for the flight filter form, including validation rules for fields like departure time, arrival time, price range, airlines, stops, cabin classes, and benefits.
+   - <CodeTabTrigger section="flight-filter-form" tab="slider-field.tsx"/>: A reusable slider component using React Hook Form's Controller to manage form state, rendering a custom slider with optional value display.
+   - <CodeTabTrigger section="flight-filter-form" tab="checkbox-group-field.tsx"/>: A reusable checkbox group component using React Hook Form's Controller to manage form state, allowing selection of multiple checkbox options with support for "Select All" functionality.
+   - <CodeTabTrigger section="flight-filter-form" tab="price-range-slider.tsx"/>: A component specifically for the price range slider in the flight filter form, utilizing the SliderField component and formatting price values for display.
+   - <CodeTabTrigger section="flight-filter-form" tab="time-range-slider.tsx"/>: A component specifically for the time range slider in the flight filter form, utilizing the SliderField component to display and format time ranges.
+   - <CodeTabTrigger section="flight-filter-form" tab="airline-selector.tsx"/>: A component for selecting airlines in the flight filter form, using a checkbox group to display available airline options along with their logos.
+   - <CodeTabTrigger section="flight-filter-form" tab="cabin-class-selector.tsx"/>: A component for selecting cabin classes in the flight filter form, using a checkbox group to display available cabin class options.
+   - <CodeTabTrigger section="flight-filter-form" tab="stop-selector.tsx"/>: A component for selecting the number of stops in the flight filter form, using a checkbox group to display available stop options.
+   - <CodeTabTrigger section="flight-filter-form" tab="benefit-selector.tsx"/>: A component for selecting flight benefits in the flight filter form, using a checkbox group to display available benefits with icons.
+   - <CodeTabTrigger section="flight-filter-form" tab="types.ts"/>: Defines the TypeScript types used throughout the flight filter form components, including enums for stop, benefit, and cabin class, as well as type definitions for form fields and the form data structure.
+
 
 </CodeWithAccoridions>
