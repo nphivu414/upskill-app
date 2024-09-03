@@ -14,7 +14,7 @@ import { Subtle } from '../typography';
 
 import { CABIN_CLASS_MAPPING } from '../constants';
 import { Flight } from '../types';
-import { FlightLogo } from './flight-logo';
+import { AirlineLogo } from './airline-logo';
 
 type FlightOverviewProps = Pick<
   Flight,
@@ -36,7 +36,7 @@ export const FlightOverview = ({
           <Subtle className="text-xs">{aircraftType}</Subtle>
         </div>
       </div>
-      <FlightLogo src={airline.logo} />
+      <AirlineLogo src={airline.logo} />
     </div>
   );
 };
@@ -148,12 +148,12 @@ export const FlightFareDetails = ({
 
 ```
 
-### !!tabs flight-logo.tsx
+### !!tabs airline-logo.tsx
 
 ```tsx
 import { Avatar, AvatarProps, Skeleton } from '@nextui-org/react';
 
-export const FlightLogo = (props: AvatarProps) => {
+export const AirlineLogo = (props: AvatarProps) => {
   return (
     <Avatar
       size="sm"

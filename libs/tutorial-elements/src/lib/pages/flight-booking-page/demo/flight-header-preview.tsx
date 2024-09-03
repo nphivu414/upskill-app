@@ -47,7 +47,7 @@ export const FlightHeaderPreview = () => {
             console.log('Share clicked');
           }}
         />
-        <div className="flex h-[500px] flex-1 flex-col px-4 pt-4">
+        <div className="flex h-[500px] flex-1 flex-col px-4 pt-4 text-sm">
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industrys standard dummy text
@@ -61,6 +61,12 @@ export const FlightHeaderPreview = () => {
             industry. Lorem Ipsum has been the industrys standard dummy text
             ever since the 1500s
           </p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industrys standard dummy text
+            ever since the 1500s
+          </p>
+          <br />
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industrys standard dummy text
