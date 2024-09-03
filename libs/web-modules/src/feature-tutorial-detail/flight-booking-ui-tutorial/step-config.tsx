@@ -2,6 +2,7 @@ import { CodeWithTabs } from '../code-renderer';
 import { Code } from '../content-code-block';
 import { StepConfig } from '../types';
 import FlightCardCodeContent from './content/flight-card.mdx';
+import FlightFilterFormCodeContent from './content/flight-filter-form.mdx';
 import FlightHeaderCodeContent from './content/flight-header.mdx';
 import FlightListCodeContent from './content/flight-list.mdx';
 import IntroContent from './content/intro-content.mdx';
@@ -26,5 +27,9 @@ export const steps: StepConfig[] = [
   {
     index: 3,
     content: <FlightListCodeContent {...codeContentProps} />,
+  },
+  {
+    index: 4,
+    content: <FlightFilterFormCodeContent {...codeContentProps} />,
   },
 ];
