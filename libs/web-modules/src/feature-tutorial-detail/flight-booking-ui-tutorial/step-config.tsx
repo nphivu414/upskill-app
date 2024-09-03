@@ -3,6 +3,7 @@ import { Code } from '../content-code-block';
 import { StepConfig } from '../types';
 import FlightCardCodeContent from './content/flight-card.mdx';
 import FlightHeaderCodeContent from './content/flight-header.mdx';
+import FlightListCodeContent from './content/flight-list.mdx';
 import IntroContent from './content/intro-content.mdx';
 
 const codeContentProps = {
@@ -21,5 +22,9 @@ export const steps: StepConfig[] = [
   {
     index: 2,
     content: <FlightCardCodeContent {...codeContentProps} />,
+  },
+  {
+    index: 3,
+    content: <FlightListCodeContent {...codeContentProps} />,
   },
 ];

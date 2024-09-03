@@ -131,7 +131,7 @@ The card will also show the flight timeline, fare details, and benefits like mea
       - `price`: The price of the flight.
       - `isRoundTrip`: A boolean to indicate if the flight is round trip.
    - **Rendering:**
-      - The price will be formatted to display the currency symbol and the price using the `formatPrice` utility function.
+      - The price will be formatted to display the currency symbol and the price using the <CodeTabTrigger section="flight-card" tab="utils.ts">`formatNumber`</CodeTabTrigger> utility function.
       - If the flight is round trip, we use `Chip` component from `@nextui-org/react` to display a round trip badge.
 
 5. Deep dive into <CodeTabTrigger section="flight-card" tab="airline-logo.tsx"/> file:
@@ -142,8 +142,50 @@ The card will also show the flight timeline, fare details, and benefits like mea
    - **Props:** The component accepts the following props:
       - `benefits`: An array of benefits like meals, entertainment, etc.
    - **Rendering:** The component displays the benefits of the flight like meals, entertainment, etc. We use the `Chip` component from `@nextui-org/react` with a custom `startContent` to display the benefit icon before the benefit name.
-      - We create the `getBenefitIcon` utility function to get the right icon for each benefit based on the name.
+      - We create the <CodeTabTrigger section="flight-card" tab="utils.ts">`getBenefitIcon`</CodeTabTrigger> utility function to get the right icon for each benefit based on the name.
 
+7. Deep dive into <CodeTabTrigger section="flight-card" tab="flight-card.tsx"/> file:
+   - Now that we've covered all the sub-components, let's put them all together in the main `FlightCard` component.
+   - **Props:** The component literally accepts all the data needed to render other sub-components.
+   - **Rendering:** We use the `<Card>` component from `@nextui-org/react` to wrap the flight card. Inside the card, `FlightOverview` will be rendered as the Card Header, `FlightTimeline` and `FlightFareDetails` will be rendered as the Card Body, and `FlightBenefits` will be rendered as the Card Footer.
 
+Now that we've completed building the flight card component, we can move on to the next section: building the `<FlightList/>` component.
+
+## !!accordions Section 4: Building Flight List Component
+In this section, we will build the flight list component that displays a list of flight card that we've built in the previous section.
+
+1. Files and Structure:
+   - <CodeTabTrigger section="flight-list" tab="flight-list.tsx"/>: The main component that renders the list of flight cards.
+
+2. Deep dive into <CodeTabTrigger section="flight-list" tab="flight-list.tsx"/> file:
+   - **Props:** The component accepts the following props:
+      - `data`: An array of flight data.
+   - **Rendering:** The component will render the header with the search results and the number of flights. Below the header, we map through the flight data and render a `FlightCard` for each flight.
+   ```tsx
+      //!mark(4:9)
+      return (
+         <div>
+            <div className="flex w-full flex-col gap-2 px-4 pb-4">
+               {data.map((flight) => (
+                  <FlightCard
+                     key={flight.id}
+                     onPress={handleFlightCardPress}
+                     {...flight}
+                  />
+               ))}
+            </div>
+         </div>
+      );
+   ```
+   - **Handle Card onPress:** We have a `handleFlightCardPress` function that you can use to handle the card press event. In realword scenario, you can use this function to navigate to the flight details page or show a modal with more details.
+   ```tsx
+      const handleFlightCardPress = (id: Flight['id']) => {
+         // You can navigate to the flight details page
+         router.push(`/flight-details/${id}`);
+         // or show a selected flight modal with more details
+         setSelectedFlight(id);
+         showModal();
+      };
+   ```
 
 </CodeWithAccoridions>
