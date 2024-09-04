@@ -21,7 +21,7 @@ export const LivePreview = ({
   return (
     <div
       className={cn(
-        'flex flex-col items-center justify-center gap-4',
+        'flex flex-col items-center justify-center gap-4 w-full',
         className
       )}
     >

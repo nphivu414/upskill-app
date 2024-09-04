@@ -96,7 +96,7 @@ export const ContentAccordion = ({
         >
           <div className="prose prose-zinc dark:prose-invert max-w-full">
             <div className="block items-start lg:flex">
-              <div className="w-full flex-none text-sm lg:w-1/2 [&>p:first-child]:mt-0">
+              <div className="w-full flex-none text-sm lg:w-1/2 lg:text-base [&>p:first-child]:mt-0">
                 {accordionItem.children}
               </div>
               <StickyBox

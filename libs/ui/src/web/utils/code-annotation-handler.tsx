@@ -1,4 +1,5 @@
 import React from 'react';
+import { Tooltip } from '@nextui-org/react';
 import {
   AnnotationHandler,
   getPreRef,
@@ -59,17 +60,35 @@ export const calloutHandler: AnnotationHandler = {
         {children}
         <div
           style={{ minWidth: `${column + 4}ch` }}
-          className="bg-content2 relative mt-1 w-fit whitespace-break-spaces rounded border border-current px-2 py-1"
+          className="bg-content2 border-divider relative mt-1 w-fit whitespace-break-spaces rounded border px-2 py-1"
         >
           <div
             style={{ left: `${column}ch` }}
-            className="bg-content2 absolute -top-px size-2 -translate-y-1/2 rotate-45 border-l border-t border-current"
+            className="bg-content2 border-divider absolute -top-px size-2 -translate-y-1/2 rotate-45 border-l border-t"
           />
-          <span className="text-xs text-zinc-500 dark:text-zinc-400">
-            {annotation.query}
-          </span>
+          <span className="text-muted text-xs">{annotation.query}</span>
         </div>
       </>
+    );
+  },
+};
+
+export const tooltipHandler: AnnotationHandler = {
+  name: 'tooltip',
+  Inline: ({ children, annotation }) => {
+    const { query, data } = annotation;
+    return (
+      <Tooltip
+        showArrow={true}
+        classNames={{
+          content: 'bg-content2 shadow-lg p-4',
+        }}
+        content={<>{data?.children || query}</>}
+      >
+        <span className="text-warning underline decoration-dashed">
+          {children}
+        </span>
+      </Tooltip>
     );
   },
 };
