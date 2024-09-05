@@ -1,8 +1,8 @@
-import { BenefitEnum, FlightSortKey, StopEnum } from './types';
+import { BenefitEnum, CabinClassEnum, FlightSortKey, StopEnum } from './types';
 
 export const HEADER_HEIGHT = 60;
 export const HEADER_TRANSITION_DURATION = 0.3;
-export const CABIN_CLASS_MAPPING = {
+export const CABIN_CLASS_MAPPING: Record<CabinClassEnum, string> = {
   economy: 'Economy',
   premium: 'Premium Economy',
   business: 'Business Class',

@@ -2,7 +2,7 @@ import { Subtle } from '@upskill-app/ui/web';
 
 import { CABIN_CLASS_MAPPING } from '../constants';
 import { Flight } from '../types';
-import { FlightLogo } from './flight-logo';
+import { AirlineLogo } from './airline-logo';
 
 type FlightOverviewProps = Pick<
   Flight,
@@ -24,7 +24,7 @@ export const FlightOverview = ({
           <Subtle className="text-xs">{aircraftType}</Subtle>
         </div>
       </div>
-      <FlightLogo src={airline.logo} />
+      <AirlineLogo src={airline.logo} />
     </div>
   );
 };

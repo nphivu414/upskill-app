@@ -1,18 +1,8 @@
 import { z } from 'zod';
 
-export const cabinClassSchema = z.enum([
-  'economy',
-  'premium',
-  'business',
-  'first',
-]);
-export const stopSchema = z.enum(['any', 'direct', '1stop', '2+stops']);
-export const benefitSchema = z.enum([
-  'meal',
-  'baggage',
-  'entertainment',
-  'wifi',
-]);
+const cabinClassSchema = z.enum(['economy', 'premium', 'business', 'first']);
+const stopSchema = z.enum(['any', 'direct', '1stop', '2+stops']);
+const benefitSchema = z.enum(['meal', 'baggage', 'entertainment', 'wifi']);
 
 export const flightFilterSchema = z.object({
   departureTimeRange: z

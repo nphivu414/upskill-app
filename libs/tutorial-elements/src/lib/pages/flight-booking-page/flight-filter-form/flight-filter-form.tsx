@@ -1,7 +1,6 @@
 import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/react';
-import { DrawerFooter } from '@upskill-app/ui/web';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 import {
@@ -68,8 +67,8 @@ export const FlightFilterForm = ({
 
   return (
     <FormProvider {...formReturns}>
-      <form onSubmit={handleSubmit(handleOnSubmit)}>
-        <div className="flex flex-col gap-6 px-4">
+      <form onSubmit={handleSubmit(handleOnSubmit)} className="bg-content1">
+        <div className="flex flex-col gap-6 px-4 pt-4">
           <PriceRangeSlider minValue={minPrice} maxValue={maxPrice} />
           <TimeRangeSlider
             name="departureTimeRange"
@@ -88,11 +87,11 @@ export const FlightFilterForm = ({
           <StopSelector />
           <BenefitSelector benefits={benefits} />
         </div>
-        <DrawerFooter className="bg-content1 sticky bottom-0 z-10 mt-2 px-4 py-2">
+        <div className="bg-content1 sticky bottom-0 z-10 mt-2 px-4 py-2">
           <Button type="submit" size="sm" color="primary" fullWidth>
             Save
           </Button>
-        </DrawerFooter>
+        </div>
       </form>
     </FormProvider>
   );

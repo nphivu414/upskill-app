@@ -66,7 +66,6 @@ export const FlightFilterDrawer = ({
               See flights that match your preferences.
             </DrawerDescription>
           </DrawerHeader>
-          <Spacer y={4} />
           <FlightFilterForm
             airlines={airlines}
             benefits={benefits}

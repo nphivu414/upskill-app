@@ -1,0 +1,214 @@
+import { EmbedStory } from '@upskill-app/ui/web';
+import { FlightHeaderPreview } from '@upskill-app/tutorial-elements';
+
+<CodeWithTabs sectionName="flight-header">
+
+### !!tabs Preview
+
+<FlightHeaderPreview/>
+
+### !!tabs flight-header.tsx
+
+```tsx
+import { Button, cn, Spacer } from '@nextui-org/react';
+import { Subtle } from '../typography';
+import { motion, MotionValue } from 'framer-motion';
+import { ChevronLeft, Share2 } from 'lucide-react';
+
+import { formatDate } from './utils';
+import { SearchFlightParams } from './types';
+import { useHideOnScrollHeader } from './use-hide-on-scroll-header';
+
+export type FlightHeaderProps = {
+  sticky?: boolean;
+  shouldHideOnScroll?: boolean;
+  parentScrollY?: MotionValue<number>;
+  handleBack: () => void;
+  handleShare: () => void;
+} & SearchFlightParams;
+
+export const FlightHeader = ({
+  from,
+  to,
+  departureDate,
+  returnDate,
+  cabinClass,
+  handleBack,
+  handleShare,
+  sticky,
+  shouldHideOnScroll,
+  parentScrollY,
+}: FlightHeaderProps) => {
+  const motionsProps = useHideOnScrollHeader(parentScrollY, shouldHideOnScroll);
+
+  return (
+    <motion.div
+      {...motionsProps}
+      className={cn('bg-content1 shadow-md', {
+        'sticky top-0 z-50': sticky,
+      })}
+    >
+      <div className="flex flex-1 items-center px-2 pt-2">
+        <div className="flex-none">
+          <Button isIconOnly variant="light" onPress={handleBack}>
+            <ChevronLeft size={16} />
+            <span className="sr-only">Back</span>
+          </Button>
+        </div>
+        <div className="flex flex-1 flex-col items-center justify-center">
+          <div className="flex items-center justify-around gap-2 text-sm font-semibold">
+            <span className="max-w-[100px] overflow-x-hidden truncate whitespace-nowrap text-wrap">
+              {from}
+            </span>
+            <span className="text-muted">⟶</span>
+            <span className="max-w-[100px] overflow-x-hidden truncate whitespace-nowrap text-wrap">
+              {to}
+            </span>
+          </div>
+          <Spacer y={0.5} />
+          <div className="flex items-center justify-around gap-1">
+            <Subtle className="text-xs">{formatDate(departureDate)}</Subtle>
+            {returnDate ? (
+              <>
+                <Subtle className="text-xs">•</Subtle>
+                <Subtle className="text-xs">{formatDate(returnDate)}</Subtle>
+              </>
+            ) : null}
+            <Subtle className="text-xs">•</Subtle>
+            <Subtle className="text-xs">{cabinClass}</Subtle>
+          </div>
+        </div>
+        <div className="flex-none">
+          <Button isIconOnly variant="light" onPress={handleShare}>
+            <Share2 size={16} />
+            <span className="sr-only">Menu</span>
+          </Button>
+        </div>
+      </div>
+      <Spacer y={2} />
+    </motion.div>
+  );
+};
+
+```
+
+### !!tabs use-hide-on-scroll-header.ts
+
+```ts
+import React from 'react';
+import { HTMLMotionProps, MotionValue } from 'framer-motion';
+
+import { HEADER_HEIGHT, HEADER_TRANSITION_DURATION } from './constants';
+
+export const useHideOnScrollHeader = (
+  parentScrollY?: MotionValue<number>,
+  shouldHideOnScroll?: boolean,
+  thresshold = 0.01
+): HTMLMotionProps<'div'> => {
+  const [showHeader, setShowHeader] = React.useState(true);
+  const lastScrollYRef = React.useRef(0);
+
+  React.useEffect(() => {
+    if (!parentScrollY || !shouldHideOnScroll) return;
+
+    const unsubscribe = parentScrollY.on('change', (latest) => {
+      if (latest < 0 || latest > 1) {
+        return;
+      }
+
+      if (latest > lastScrollYRef.current + thresshold) {
+        setShowHeader(false);
+      } else if (latest < lastScrollYRef.current - thresshold) {
+        setShowHeader(true);
+      }
+
+      if (latest <= 0) {
+        setShowHeader(true);
+      }
+
+      lastScrollYRef.current = latest;
+    });
+
+    return () => unsubscribe();
+  }, [parentScrollY, shouldHideOnScroll, thresshold]);
+
+  if (!parentScrollY || !shouldHideOnScroll) {
+    return {};
+  }
+
+  return {
+    initial: { y: 0 },
+    animate: { y: showHeader ? 0 : -HEADER_HEIGHT },
+    transition: {
+      duration: HEADER_TRANSITION_DURATION,
+    },
+  };
+};
+
+```
+
+### !!tabs typography.tsx
+
+```tsx
+import { cn } from '@nextui-org/react'
+
+type TypographyProps = {
+  text?: string
+  className?: string
+  children?: React.ReactNode
+}
+
+export function Subtle({
+  text,
+  className,
+  children,
+}: TypographyProps) {
+  return (
+    <p
+      className={cn(
+        'text-sm text-zinc-500 dark:text-zinc-400',
+        className
+      )}
+    >
+      {children || text}
+    </p>
+  )
+}
+```
+
+### !!tabs utils.ts
+
+```ts
+export const formatDate = (date: string) => {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  });
+};
+
+```
+### !!tabs constants.ts
+
+```ts
+export const HEADER_HEIGHT = 60;
+export const HEADER_TRANSITION_DURATION = 0.3;
+
+```
+
+### !!tabs types.ts
+
+```ts
+export type SearchFlightParams = {
+  from: string;
+  to: string;
+  departureDate: string;
+  returnDate?: string;
+  cabinClass: string;
+};
+
+```
+
+
+</CodeWithTabs>
+

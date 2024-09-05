@@ -1,12 +1,10 @@
 import { z } from 'zod';
 
-import {
-  benefitSchema,
-  cabinClassSchema,
-  flightFilterSchema,
-  stopSchema,
-} from './flight-filter-form/schema';
+import { flightFilterSchema } from './flight-filter-form/schema';
 
+export type StopEnum = 'any' | 'direct' | '1stop' | '2+stops';
+export type BenefitEnum = 'meal' | 'baggage' | 'entertainment' | 'wifi';
+export type CabinClassEnum = 'economy' | 'premium' | 'business' | 'first';
 export interface Benefit {
   id: string;
   name: BenefitEnum;
@@ -38,9 +36,6 @@ export interface Flight {
 }
 
 export type FlightFilterFormData = z.infer<typeof flightFilterSchema>;
-export type StopEnum = z.infer<typeof stopSchema>;
-export type BenefitEnum = z.infer<typeof benefitSchema>;
-export type CabinClassEnum = z.infer<typeof cabinClassSchema>;
 
 export type SearchFlightParams = {
   from: string;

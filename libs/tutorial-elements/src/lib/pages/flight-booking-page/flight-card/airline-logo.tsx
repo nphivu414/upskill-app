@@ -1,6 +1,6 @@
 import { Avatar, AvatarProps, Skeleton } from '@nextui-org/react';
 
-export const FlightLogo = (props: AvatarProps) => {
+export const AirlineLogo = (props: AvatarProps) => {
   return (
     <Avatar
       size="sm"

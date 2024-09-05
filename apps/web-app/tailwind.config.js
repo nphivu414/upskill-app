@@ -19,6 +19,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('tailwind-scrollbar'),
+    require('tailwindcss-animated'),
     nextui({
       themes: {
         light: {

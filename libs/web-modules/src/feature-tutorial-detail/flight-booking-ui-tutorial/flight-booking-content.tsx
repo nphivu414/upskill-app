@@ -2,7 +2,7 @@ import React from 'react';
 import { CodeBlockProps } from '@upskill-app/shared';
 import { CodeBlock } from '@upskill-app/ui/web';
 
-import { CodeWithAccoridions } from '../code-renderer';
+import { CodeWithAccoridions, CodeWithTooltips } from '../code-renderer';
 import FlightBookingMdx from './content/main-content.mdx';
 
 function Code({ codeblock }: CodeBlockProps) {
@@ -10,5 +10,9 @@ function Code({ codeblock }: CodeBlockProps) {
 }
 
 export const FlightBookingContent = () => {
-  return <FlightBookingMdx components={{ CodeWithAccoridions, Code }} />;
+  return (
+    <FlightBookingMdx
+      components={{ CodeWithAccoridions, CodeWithTooltips, Code }}
+    />
+  );
 };

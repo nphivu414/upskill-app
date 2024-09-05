@@ -5,27 +5,34 @@ import { cn, Tab, Tabs } from '@nextui-org/react';
 
 import { CustomIcons } from './custom-icon';
 
-export function CodeBlockTabs(props: {
+type FileIconProps = {
+  fileName?: string;
+  size?: number;
+};
+export const FileIcon = ({ fileName, size = 14 }: FileIconProps) => {
+  const fileExtension = fileName?.split('.').pop();
+  switch (fileExtension) {
+    case 'tsx':
+      return <CustomIcons.react width={size} />;
+    case 'ts':
+      return <CustomIcons.typescript width={size} />;
+    default:
+      return null;
+  }
+};
+
+type CodeBlockTabsProps = {
   tabs: {
-    title?: string | undefined;
+    title?: string;
     children?: React.ReactNode;
   }[];
-}) {
-  const { tabs } = props;
+  sectionName?: string;
+};
+export function CodeBlockTabs(props: CodeBlockTabsProps) {
+  const { tabs, sectionName = '' } = props;
   const [selected, setSelected] = React.useState(tabs?.[0].title);
   const onSelectionChange = (key: Key) => {
     setSelected(key.toString());
-  };
-  const renderFileIcon = (tabTitle?: string) => {
-    const fileExtension = tabTitle?.split('.').pop();
-    switch (fileExtension) {
-      case 'tsx':
-        return <CustomIcons.react width={14} />;
-      case 'ts':
-        return <CustomIcons.typescript width={14} />;
-      default:
-        return null;
-    }
   };
 
   return (
@@ -43,10 +50,11 @@ export function CodeBlockTabs(props: {
       {(tab) => {
         return (
           <Tab
+            id={`${sectionName}-${tab.title}`}
             key={tab.title}
             title={
               <div className="flex items-center gap-2">
-                {renderFileIcon(tab.title)}
+                <FileIcon fileName={tab.title} />
                 <span>{tab.title}</span>
               </div>
             }

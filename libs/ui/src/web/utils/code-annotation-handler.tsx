@@ -1,4 +1,12 @@
-import { AnnotationHandler, InlineAnnotation, InnerLine } from 'codehike/code';
+import React from 'react';
+import { Tooltip } from '@nextui-org/react';
+import {
+  AnnotationHandler,
+  getPreRef,
+  InlineAnnotation,
+  InnerLine,
+  InnerPre,
+} from 'codehike/code';
 
 export const codeLineMarkHander: AnnotationHandler = {
   name: 'mark',
@@ -52,17 +60,80 @@ export const calloutHandler: AnnotationHandler = {
         {children}
         <div
           style={{ minWidth: `${column + 4}ch` }}
-          className="bg-content2 relative mt-1 w-fit whitespace-break-spaces rounded border border-current px-2 py-1"
+          className="bg-content2 border-divider relative mt-1 w-fit whitespace-break-spaces rounded border px-2 py-1"
         >
           <div
             style={{ left: `${column}ch` }}
-            className="bg-content2 absolute -top-px size-2 -translate-y-1/2 rotate-45 border-l border-t border-current"
+            className="bg-content2 border-divider absolute -top-px size-2 -translate-y-1/2 rotate-45 border-l border-t"
           />
-          <span className="text-xs text-zinc-500 dark:text-zinc-400">
-            {annotation.query}
-          </span>
+          <span className="text-muted text-xs">{annotation.query}</span>
         </div>
       </>
     );
   },
 };
+
+export const tooltipHandler: AnnotationHandler = {
+  name: 'tooltip',
+  Inline: ({ children, annotation }) => {
+    const { query, data } = annotation;
+    return (
+      <Tooltip
+        showArrow={true}
+        classNames={{
+          content: 'bg-content2 shadow-lg p-4',
+        }}
+        content={<>{data?.children || query}</>}
+      >
+        <span className="text-warning underline decoration-dashed">
+          {children}
+        </span>
+      </Tooltip>
+    );
+  },
+};
+
+export const focusHandler: AnnotationHandler = {
+  name: 'focus',
+  onlyIfAnnotated: true,
+  PreWithRef: (props) => {
+    const ref = getPreRef(props);
+    useScrollToFocus(ref);
+    return <InnerPre merge={props} />;
+  },
+  Line: (props) => <InnerLine merge={props} className="..." />,
+  AnnotatedLine: ({ annotation, ...props }) => (
+    <InnerLine merge={props} data-focus={true} className="..." />
+  ),
+};
+
+function useScrollToFocus(ref: React.RefObject<HTMLPreElement>) {
+  const firstRender = React.useRef(true);
+  React.useLayoutEffect(() => {
+    if (ref.current) {
+      // find all descendants whith data-focus="true"
+      const focusedElements = ref.current.querySelectorAll(
+        '[data-focus=true]'
+      ) as NodeListOf<HTMLElement>;
+
+      // find top and bottom of the focused elements
+      const containerRect = ref.current.getBoundingClientRect();
+      let top = Infinity;
+      let bottom = -Infinity;
+      focusedElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        top = Math.min(top, rect.top - containerRect.top);
+        bottom = Math.max(bottom, rect.bottom - containerRect.top);
+      });
+
+      // scroll to the focused elements if any part of them is not visible
+      if (bottom > containerRect.height || top < 0) {
+        ref.current.scrollTo({
+          top: ref.current.scrollTop + top - 10,
+          behavior: firstRender.current ? 'instant' : 'smooth',
+        });
+      }
+      firstRender.current = false;
+    }
+  });
+}

@@ -9,6 +9,7 @@ export const TUTORIAL_STORIES = {
     PROFILE_PAGE: 'tutorials-profile-ui-page-screen',
   },
   FLIGHT_BOOKING_UI: {
+    FLIGHT_HEADER: 'tutorials-flight-booking-ui-components-flight-header',
     FLIGHT_BOOKING_PAGE: 'tutorials-flight-booking-ui-page-screen',
   },
 };
