@@ -31,8 +31,11 @@ export const CollapsibleBlock = ({
           <AlertDescription>{triggerDescription}</AlertDescription>
         </Alert>
       </CollapsibleTrigger>
-      <CollapsibleContent className="bg-content2 rounded-xl" {...contentProps}>
-        <div className="mt-2 p-1">{children}</div>
+      <CollapsibleContent
+        className="bg-content2 collapsible-content mt-2 rounded-xl"
+        {...contentProps}
+      >
+        <div className="p-1">{children}</div>
       </CollapsibleContent>
     </Collapsible>
   );
