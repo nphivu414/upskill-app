@@ -28,7 +28,6 @@ export function CodeWithTabs(props: unknown) {
 }
 
 export function CodeWithAccoridions(props: unknown) {
-  console.log('🚀 ~ CodeWithAccoridions ~ props:', props);
   const { accordions, stepConfigs } = parseProps(props, AccordionCodeSchema);
   return <ContentAccordion data={accordions} stepConfigs={stepConfigs} />;
 }

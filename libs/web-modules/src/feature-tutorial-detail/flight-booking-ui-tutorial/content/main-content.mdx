@@ -210,16 +210,20 @@ In this section, we will build the flight filter form component that allows user
    - `@internationalized/date`: A library for formatting dates. Install it using `yarn add @internationalized/date`.
    - **Important notes:** 
       - Since flight filter form component is built using React Hook Form and Zod validation schema, if you're not familiar with these libraries, we recommend checking out their documentation to understand how they work.
-      - Some of the key concepts used in the flight filter form component include:
-         - **<a href="https://react-hook-form.com/get-started#Designandphilosophy" target="_blank">Why React Hook Form?</a>:** React Hook Form is a lightweight library for managing form state and validation in React applications. It provides a simple and efficient way to handle form data without the need for complex state management.
-         - **<a href="https://react-hook-form.com/docs/useform" target="_blank">useForm</a>:** A hook from React Hook Form that initializes the form state and provides methods for form validation and submission.
-         - **<a href="https://react-hook-form.com/docs/usecontroller/controller" target='_black'>Controller:</a>** A component from React Hook Form that connects form fields to the form state.
-         - **<a href="https://react-hook-form.com/docs/useform#resolver" target="_blank">Validation Resolver</a>:** A validation resolver from @hookform/resolvers that integrates Zod validation schema with React Hook Form.
-         - **<a href="https://react-hook-form.com/docs/formprovider" target="_blank">FormProvider</a>:** A component from React Hook Form that provides form context to nested components.
-         - **<a href="https://react-hook-form.com/docs/useformcontext" target="_blank">useFormContext</a>:** A hook from React Hook Form that provides access to the form context within nested components.
-      - Some of the key concepts of Zod validation schema include:
-         - **<a href="https://zod.dev/?id=introduction" target="_blank">Why Zod?</a>**: Zod is a TypeScript-first schema declaration and validation library that provides a simple and type-safe way to define data schemas and validate data against those schemas.
-         - **<a href="https://zod.dev/?id=basic-usage" target="_blank">Basic usage</a>**: A guide from Zod that explains how to create and use schema declarations for form validation.
+      
+      <CollapsibleBlock triggerTitle="Some useful links to get started with React Hook Form and Zod">
+         - React Hook Form:
+            - **<a href="https://react-hook-form.com/get-started#Designandphilosophy" target="_blank">Why React Hook Form?</a>:** React Hook Form is a lightweight library for managing form state and validation in React applications. It provides a simple and efficient way to handle form data without the need for complex state management.
+            - **<a href="https://react-hook-form.com/docs/useform" target="_blank">useForm</a>:** A hook from React Hook Form that initializes the form state and provides methods for form validation and submission.
+            - **<a href="https://react-hook-form.com/docs/usecontroller/controller" target='_black'>Controller:</a>** A component from React Hook Form that connects form fields to the form state.
+            - **<a href="https://react-hook-form.com/docs/useform#resolver" target="_blank">Validation Resolver</a>:** A validation resolver from @hookform/resolvers that integrates Zod validation schema with React Hook Form.
+            - **<a href="https://react-hook-form.com/docs/formprovider" target="_blank">FormProvider</a>:** A component from React Hook Form that provides form context to nested components.
+            - **<a href="https://react-hook-form.com/docs/useformcontext" target="_blank">useFormContext</a>:** A hook from React Hook Form that provides access to the form context within nested components.
+
+         - Zod:
+            - **<a href="https://zod.dev/?id=introduction" target="_blank">Why Zod?</a>**: Zod is a TypeScript-first schema declaration and validation library that provides a simple and type-safe way to define data schemas and validate data against those schemas.
+            - **<a href="https://zod.dev/?id=basic-usage" target="_blank">Basic usage</a>**: A guide from Zod that explains how to create and use schema declarations for form validation.
+      </CollapsibleBlock>
 
 3. Deep dive into <CodeTabTrigger section="flight-filter-form" tab="flight-filter-form.tsx"/> file:
    - **Props:** This component accepts the following props:
@@ -317,41 +321,10 @@ In this section, we will build the flight filter form component that allows user
          - `error` and `invalid` are used to display error messages and slider color.
          - `onChange` function from `field` is passed to the `Slider` component to sync the slider value with the form state.
 
-So far, we've covered the base slider field component. Let's move on to the `PriceRangeSlider` and `TimeRangeSlider` components.
+   
+   - <CodeTabTrigger section="flight-filter-form" tab="price-range-slider.tsx"/> and <CodeTabTrigger section="flight-filter-form" tab="time-range-slider.tsx"/> components are just built on top of this `SliderField` to create specific sliders for price range and time range.
+   You can check the code in the respective files for more details.
 
-5. Deep dive into <CodeTabTrigger section="flight-filter-form" tab="price-range-slider.tsx"/> file: This component is specifically for the price range slider in the flight filter form. It utilizes the `SliderField` component and formats price values for display.
-   - **Props:** This component accepts the similar props as the `SliderField` component.
-   - **Rendering:** 
-      - As this component was wrappeed inside `FormProvider`, we can access the form state and control object directly using `useFormContext` hook and pass them to the `SliderField` component.
-      - The `name` prop is used to connect the slider value to the form state. So we need to make sure the `name` prop matches the field name in the form data. Since we've built the form field with Typescript, you should always see the suggestions for the field name.
-      ```tsx
-         // !border[/priceRange/gm]
-         <SliderField
-            name="priceRange"
-            ...
-         />
-         
-         // schema.ts
-         export const flightFilterSchema = z.object({
-            ...
-            priceRange: z
-               .tuple([z.number().min(0).max(2000), z.number().min(0).max(2000)])
-               .refine(([min, max]) => min <= max, {
-                  message: 'Minimum price must be less than or equal to maximum price',
-               })
-               .optional(),
-            ...
-         });
-      ```
-      - The `maxPrice` and `minPrice` were get from the initial from values and passed to the `SliderField` component to set the slider range.
-      - We also add the `startContent` and `endContent` to display the currency symbol and the price value on the slider.
-
-   6. Deep dive into <CodeTabTrigger section="flight-filter-form" tab="time-range-slider.tsx"/> file: This component is specifically for the time range slider in the flight filter form. It utilizes the `SliderField` component to display and format time ranges.
-   - **Props:** This component accepts the similar props as the `SliderField` component.
-   - **Rendering:** This component is similar to the `PriceRangeSlider` component, but we need to use `renderCustomValue` props to format the time value before displaying it.
-      - `DateFormatter` and `Time` class from `@internationalized/date` were used to format the time value, make it show the time in 24-hour format.
-      - `renderCustomValue` function is used to make the slider display the time value as we formatted.
-
-   7. Deep dive into <CodeTabTrigger section="flight-filter-form" tab="checkbox-group-field.tsx"/> file: This component is a reusable checkbox group component using React Hook Form's `Controller` to manage form state. It allows selection of multiple checkbox options with support for "Select All" functionality.
+   7. Deep dive into <CodeTabTrigger section="flight-filter-form" tab="checkbox-group-field.tsx"/> file: This component is the base for the `AirlineSelector`, `CabinClassSelector`, `StopSelector`, and `BenefitSelector` components. It uses React Hook Form's `Controller` component to manage form state and render a group of checkboxes with support for "Select All" functionality.
 
 </CodeWithAccoridions>

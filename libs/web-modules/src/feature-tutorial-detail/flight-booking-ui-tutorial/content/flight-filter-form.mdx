@@ -1,4 +1,3 @@
-import { EmbedStory } from '@upskill-app/ui/web';
 import { FlightFilterFormPreview } from '@upskill-app/tutorial-elements';
 
 <CodeWithTabs sectionName="flight-filter-form">
@@ -216,7 +215,8 @@ export function SliderField<T extends FieldValues>(props: SliderFieldProps<T>) {
 
 ```tsx
 import { SliderProps } from '@nextui-org/react';
-import { SliderField, Subtle } from '@upskill-app/ui/web';
+import { SliderField } from './slider-field';
+import { Subtle } from './typography';
 import { useFormContext } from 'react-hook-form';
 
 import { formatNumber } from '../../../utils';
@@ -254,7 +254,8 @@ export const PriceRangeSlider = (props: Omit<SliderProps, 'name'>) => {
 ```tsx
 import { DateFormatter, Time } from '@internationalized/date';
 import { SliderProps } from '@nextui-org/react';
-import { SliderField, SliderFieldProps, Subtle } from '@upskill-app/ui/web';
+import { SliderField, SliderFieldProps } from './slider-field';
+import { Subtle } from './typography';
 import { useFormContext } from 'react-hook-form';
 
 import { FlightFilterFormData } from '../types';
@@ -425,7 +426,7 @@ export function CheckboxGroupField<T extends FieldValues>(
 ### !!tabs airline-selector.tsx
 
 ```tsx
-import { CheckboxGroupData, CheckboxGroupField } from '@upskill-app/ui/web';
+import { CheckboxGroupData, CheckboxGroupField } from './checkbox-group-field';
 import { useFormContext } from 'react-hook-form';
 
 import { AirlineLogo } from '../flight-card/airline-logo';
@@ -470,7 +471,7 @@ export const AirlineSelector = ({ data }: AirlineSelectorProps) => {
 ### !!tabs cabin-class-selector.tsx
 
 ```tsx
-import { CheckboxGroupData, CheckboxGroupField } from '@upskill-app/ui/web';
+import { CheckboxGroupData, CheckboxGroupField } from './checkbox-group-field';
 import { useFormContext } from 'react-hook-form';
 
 import { CABIN_CLASS_MAPPING } from '../constants';
@@ -506,7 +507,7 @@ export const CabinSelector = ({ cabinClasses }: CabinSelectorProps) => {
 ### !!tabs stop-selector.tsx
 
 ```tsx
-import { CheckboxGroupData, CheckboxGroupField } from '@upskill-app/ui/web';
+import { CheckboxGroupData, CheckboxGroupField } from './checkbox-group-field';
 import { useFormContext } from 'react-hook-form';
 
 import { STOP_MAPPING } from '../constants';
@@ -538,7 +539,7 @@ export const StopSelector = () => {
 ### !!tabs benefit-selector.tsx
 
 ```tsx
-import { CheckboxGroupData, CheckboxGroupField } from '@upskill-app/ui/web';
+import { CheckboxGroupData, CheckboxGroupField } from './checkbox-group-field';
 import { useFormContext } from 'react-hook-form';
 
 import { BENEFIT_MAPPING } from '../constants';

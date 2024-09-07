@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { Spinner } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
 
 type EmbedStoryProps = {
@@ -14,7 +15,21 @@ export const EmbedStory = ({
   ...rest
 }: EmbedStoryProps) => {
   const [url, setUrl] = React.useState('');
+  const [loading, setLoading] = React.useState(true);
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const { theme } = useTheme();
+
+  React.useEffect(() => {
+    iframeRef.current?.addEventListener('load', () => {
+      setLoading(false);
+    });
+
+    return () => {
+      iframeRef.current?.removeEventListener('load', () => {
+        setLoading(false);
+      });
+    };
+  });
 
   React.useEffect(() => {
     if (!storyBaseURL) {
@@ -31,11 +46,20 @@ export const EmbedStory = ({
   }
 
   return (
-    <iframe
-      src={url}
-      className="m-0 border-0 p-0 outline-none"
-      loading="lazy"
-      {...rest}
-    />
+    <div className="relative">
+      {loading && (
+        <Spinner
+          color="default"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
+      )}
+      <iframe
+        ref={iframeRef}
+        src={url}
+        className="m-0 border-0 p-0 outline-none"
+        loading="lazy"
+        {...rest}
+      />
+    </div>
   );
 };
