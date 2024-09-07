@@ -3,7 +3,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
-  stories: ['../src/lib/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  stories: ['../src/lib/**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
   addons: ['@storybook/addon-essentials', '@storybook/addon-themes'],
   framework: {
     name: '@storybook/react-vite',
@@ -16,9 +16,7 @@ const config: StorybookConfig = {
     check: false,
   },
   docs: {
-    //👇 See the table below for the list of supported options
-    autodocs: true,
-    defaultName: 'Docs',
+    defaultName: 'Docs'
   },
   staticDirs: ['../static'],
   viteFinal: async (config) =>
