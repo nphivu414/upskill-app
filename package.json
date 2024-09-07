@@ -8,7 +8,7 @@
     "build:web": "nx run web-app:build",
     "lint:web": "nx lint web-app --fix",
     "storybook:start": "nx storybook tutorial-elements -p 9009",
-    "storybook:build": "nx storybook build tutorial-elements"
+    "storybook:build": "nx build-storybook tutorial-elements"
   },
   "private": true,
   "dependencies": {
