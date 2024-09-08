@@ -326,5 +326,10 @@ In this section, we will build the flight filter form component that allows user
    You can check the code in the respective files for more details.
 
    7. Deep dive into <CodeTabTrigger section="flight-filter-form" tab="checkbox-group-field.tsx"/> file: This component is the base for the `AirlineSelector`, `CabinClassSelector`, `StopSelector`, and `BenefitSelector` components. It uses React Hook Form's `Controller` component to manage form state and render a group of checkboxes with support for "Select All" functionality.
+   - **Props:**
+      - All props from the `CheckboxGroup` component from `@nextui-org/react`.
+      - `data`: An array of checkbox options.
+      - `enableSelectAll`: A boolean to enable the "Select All" checkbox.
+   - **Rendering:** The `CheckboxGroup` component also uses the `Controller` component to connect the checkbox values to the form state. But since it's a group of checkboxes, we need to map through the `data` array to render each checkbox.
 
 </CodeWithAccoridions>
