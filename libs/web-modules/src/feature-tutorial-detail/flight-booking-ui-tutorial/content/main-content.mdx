@@ -330,6 +330,50 @@ In this section, we will build the flight filter form component that allows user
       - All props from the `CheckboxGroup` component from `@nextui-org/react`.
       - `data`: An array of checkbox options.
       - `enableSelectAll`: A boolean to enable the "Select All" checkbox.
-   - **Rendering:** The `CheckboxGroup` component also uses the `Controller` component to connect the checkbox values to the form state. But since it's a group of checkboxes, we need to map through the `data` array to render each checkbox.
+   - **Rendering:** The `CheckboxGroup` component also uses the `Controller` component to connect the checkbox group to the form state. The checkbox group will render a list of checkboxes based on the `data` prop.
+      - If `enableSelectAll` is `true`, a "Select All" button will be rendered as the checkbox group label.
+      - The `Select All / Deselect All` button logic is handled by the `onSelectAll ` function which uses `isSelectedAll` state to toggle the selection of all checkboxes. Besides, we also need to sync the checkbox values with the form state using the `onChange` whene the "Select All" button is clicked.
+      ```tsx
+         // !border[/isSelectedAll/gm]
+         // !border[/setIsSelectedAll/gm]
+         const [isSelectedAll, setIsSelectedAll] = React.useState(false);
+
+         // !callout[/onChange/] This function is provided from the `Controller` component
+         const onSelectAll = (onChange: ControllerRenderProps<T>['onChange']) => {
+            return () => {
+               if (isSelectedAll) {
+                  onChange?.([]);
+                  setIsSelectedAll(false);
+                  return;
+               }
+               const allValues = data?.map(({ value }) => value);
+               if (allValues?.length) {
+                  onChange?.(allValues);
+               }
+               setIsSelectedAll(true);
+            };
+         };
+
+         const renderGroupLabel = (onChange: ControllerRenderProps<T>['onChange']) => {
+            if (!enableSelectAll) {
+               return label;
+            }
+
+            return (
+               <div className="flex w-full items-center justify-between">
+               {label}
+               <Button
+                  size="sm"
+                  color="primary"
+                  variant="light"
+                  // !mark(1:1)
+                  onClick={onSelectAll(onChange)}
+               >
+                  {isSelectedAll ? 'Deselect All' : 'Select All'}
+               </Button>
+               </div>
+            );
+         };
+      ```
 
 </CodeWithAccoridions>
