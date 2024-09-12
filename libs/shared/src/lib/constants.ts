@@ -11,6 +11,8 @@ export const TUTORIAL_STORIES = {
   FLIGHT_BOOKING_UI: {
     FLIGHT_HEADER: 'tutorials-flight-booking-ui-components-flight-header',
     FLIGHT_BOOKING_PAGE: 'tutorials-flight-booking-ui-page-screen',
+    FLIGHT_FILTER_DRAWER:
+      'tutorials-flight-booking-ui-components-flight-filter-drawer',
   },
 };
 
