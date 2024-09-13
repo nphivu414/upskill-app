@@ -33,11 +33,6 @@ export const CodeTabTrigger = ({
     }
 
     element.click();
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest',
-    });
   };
 
   return (
