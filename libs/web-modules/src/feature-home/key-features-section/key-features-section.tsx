@@ -26,8 +26,8 @@ export const KeyFeaturesSection = () => {
                 <div className="grid gap-1">
                   <h3 className="text-xl font-bold">Interactive Courses</h3>
                   <p>
-                    Engage with multimedia-rich courses that combine video
-                    lectures, interactive quizzes, and hands-on projects.
+                    See the code in action with live, interactive previews
+                    giving you more context and understanding.
                   </p>
                 </div>
               </li>
