@@ -56,7 +56,7 @@ export const EmbedStory = ({
       <iframe
         ref={iframeRef}
         src={url}
-        className="m-0 border-0 p-0 outline-none"
+        className="m-0 rounded-lg border-0 p-0 outline-none"
         loading="lazy"
         {...rest}
       />
