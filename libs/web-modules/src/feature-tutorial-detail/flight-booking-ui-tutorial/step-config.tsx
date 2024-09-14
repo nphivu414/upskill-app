@@ -1,6 +1,7 @@
 import { CodeWithTabs } from '../code-renderer';
 import { Code } from '../content-code-block';
 import { StepConfig } from '../types';
+import FlightBookingPageCodeContent from './content/flight-booking-page.mdx';
 import FlightCardCodeContent from './content/flight-card.mdx';
 import FlightFilterDrawerCodeContent from './content/flight-filter-drawer.mdx';
 import FlightFilterFormCodeContent from './content/flight-filter-form.mdx';
@@ -46,5 +47,9 @@ export const steps: StepConfig[] = [
   {
     index: 7,
     content: <FlightPreferencesCodeContent {...codeContentProps} />,
+  },
+  {
+    index: 8,
+    content: <FlightBookingPageCodeContent {...codeContentProps} />,
   },
 ];

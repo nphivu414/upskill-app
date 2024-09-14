@@ -415,5 +415,79 @@ Now that we've completed building the flight sort menu component, we can move on
 In this section, we will build the flight preferences component that displays the flight filter drawer and sort menu components.
 1. Files and Structure:
    - <CodeTabTrigger section="flight-preferences" tab="flight-preferences.tsx"/>: The main component file for the flight preferences.
+   - <CodeTabTrigger section="flight-preferences" tab="utils.ts"/>: Utility functions for processing flight filter form's initial data.
+2. Deep dive into <CodeTabTrigger section="flight-preferences" tab="flight-preferences.tsx"/> file:
+   - **Props:** This component accepts the following props:
+      - `flights`: An array of flight data.
+   - **Rendering:** The component renders the `FlightFilterDrawer` and `FlightSortMenu` components. The `processFlightFilterData` function is used to process the flight data and extract the necessary data for the filter form.
+   We'll deep dive into it later.
+   - **Handle Filter Form Submit:** The `handleFilterFormSubmit` function is called when the filter form is submitted. In real-world scenarios, you can call an API to refetch the flight data based on the filter data, or call a function to filter the data locally.
+   ```tsx
+      const handleFilterFormSubmit = (data: FlightFilterFormData) => {
+         filterFlightData(data);
+      };
+   ```
+   - **Handle Sort Change:** The `handleOnSortChange` function is called when the sort value changes. In real-world scenarios, you can call an API to fetch flight data based 
+   ```tsx
+      const handleOnSortChange = (sortValue: FlightSortKey | null) => {
+         sortFlightData(sortValue);
+      };
+   ```
+3. Deep dive into <CodeTabTrigger section="flight-preferences" tab="utils.ts"/> file:
+   - The `processFlightFilterData` function processes the flight data and extracts the necessary data for the filter form. It returns the airlines, cabin classes, benefits, and initial filter data.
+      - **Airlines:** Extracts the airlines from the flight data so we can show them in the airline selector.
+      - **Cabin Classes:** Extracts the unique cabin classes from the flight data.
+      - **Benefits:** Extracts the unique benefits from the flight data.
+      - **Min and Max Price:** Extracts the minimum and maximum price from the flight data.
+      - Finally, it returns the initial filter data with all the extracted data.
+
+Now that we've completed the last building block, we'll move to the last section to put everything together and build the completed `FlightBookingPage` component.
+
+## !!accordions Section 9: Building Flight Booking Page Component
+In this section, we will build the completed `FlightBookingPage` component that puts all the components together to render the flight booking page.
+1. Files and Structure:
+   - <CodeTabTrigger section="flight-booking-page" tab="flight-booking-page.tsx"/>: The main component file for the flight booking page.
+2. Deep dive into <CodeTabTrigger section="flight-booking-page" tab="flight-booking-page.tsx"/> file:
+   - **Props:** This component accepts the following props:
+      - `searchFlightParams`: The search flight parameters including the data that the user has entered to search for flights. This data will be used to show the search details in the header.
+      - `flights`: An array of flight data that matches the search parameters. This data will be used to render the flight list and flight preferences.
+   - **Rendering:** The component simply put all the components we've built so far together: `FlightHeader`, `FlightList` and `FlightPreferences`
+   - **useScroll():** We use a hook called `useScroll` from `framer-motion` to track the scroll position and pass it to the `FlightHeader` component to enable sticky behavior.
+   - **Back and Share Actions:** We pass the `handleBack` and `handleShareFlight` functions to the `FlightHeader` component to handle the back and share actions.
+   In real-world scenarios, you can navigate back to the previous page or show a share modal.
+   ```tsx
+      // !mark(1:4)
+      const handleBack = () => {
+         // You can navigate back to the previous page
+         router.back();
+      };
+
+      // !mark(1:4)
+      const handleShareFlight = () => {
+         // You can show a share modal
+         setShowShareModal(true);
+      };
+
+       return (
+         <div vaul-drawer-wrapper="" className="bg-background">
+            <FlightHeader
+               parentScrollY={scrollYProgress}
+               from={from}
+               to={to}
+               departureDate={departureDate}
+               returnDate={returnDate}
+               cabinClass={cabinClass}
+               // !mark(1:2)
+               handleBack={handleBack}
+               handleShare={handleShareFlight}
+               sticky
+               shouldHideOnScroll
+            />
+            ...
+         </div>
+      );
+   ```
+
+ 🎉 And that's it! We've just completed building the flight booking page component. Hope you've enjoyed the tutorial and learned something new. If you have any questions or feedback, feel free to reach out to us. Happy coding!
 
 </CodeWithAccoridions>

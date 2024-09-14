@@ -25,7 +25,7 @@ export const FlightCardPreview = () => {
         'blob/main/src/components/'
       )}
     >
-      <div className="w-[350px]">
+      <div className="w-[300px] xl:w-[350px]">
         <FlightCard
           {...defaultFlights[3]}
           onPress={(id) => {

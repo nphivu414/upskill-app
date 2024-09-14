@@ -25,7 +25,7 @@ export const FlightListPreview = () => {
         'blob/main/src/components/'
       )}
     >
-      <div className="max-h-[400px] w-[350px] overflow-y-auto">
+      <div className="max-h-[380px] w-[300px] overflow-y-auto xl:max-h-[400px] xl:w-[350px]">
         <FlightList data={defaultFlights} />
       </div>
     </LivePreview>

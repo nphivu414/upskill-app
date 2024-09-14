@@ -7,13 +7,14 @@ import {
   TUTORIAL_REPO,
   TUTORIAL_STORIES,
 } from '@upskill-app/shared';
-import { EmbedStory, LivePreview } from '@upskill-app/ui/web';
+import { EmbedStory, LivePreview, useResponsive } from '@upskill-app/ui/web';
 import { useTheme } from 'next-themes';
 
 import { ClientOnlyContainer } from '../../../components';
 
 export const FlightFilterDrawerPreview = () => {
   const { theme } = useTheme();
+  const { isMobile } = useResponsive();
   return (
     <LivePreview
       storybookUrl={getStorybookUrl(
@@ -25,12 +26,12 @@ export const FlightFilterDrawerPreview = () => {
         'blob/main/src/components/'
       )}
     >
-      <ClientOnlyContainer loadingContainerClassName="min-h-[400px] w-[400px]">
+      <ClientOnlyContainer loadingContainerClassName="min-h-[300px] w-[300px] xl:min-h-[400px] xl:w-[400px]">
         <EmbedStory
           storyBaseURL={getStorybookBaseUrl()}
           storyId={TUTORIAL_STORIES.FLIGHT_BOOKING_UI.FLIGHT_FILTER_DRAWER}
-          height={400}
-          width={400}
+          height={isMobile ? 300 : 400}
+          width={isMobile ? 300 : 400}
         />
       </ClientOnlyContainer>
     </LivePreview>

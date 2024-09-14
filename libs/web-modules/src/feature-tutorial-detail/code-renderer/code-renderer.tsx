@@ -15,6 +15,7 @@ const AccordionCodeSchema = Block.extend({
 const TabCodeSchema = Block.extend({
   tabs: z.array(Block),
   sectionName: z.string().optional(),
+  destroyInactiveTabPanel: z.boolean().optional(),
 });
 
 const TooltipCodeSchema = Block.extend({
@@ -23,8 +24,17 @@ const TooltipCodeSchema = Block.extend({
 });
 
 export function CodeWithTabs(props: unknown) {
-  const { tabs, sectionName } = parseProps(props, TabCodeSchema);
-  return <CodeBlockTabs tabs={tabs} sectionName={sectionName} />;
+  const { tabs, sectionName, destroyInactiveTabPanel } = parseProps(
+    props,
+    TabCodeSchema
+  );
+  return (
+    <CodeBlockTabs
+      tabs={tabs}
+      sectionName={sectionName}
+      destroyInactiveTabPanel={destroyInactiveTabPanel}
+    />
+  );
 }
 
 export function CodeWithAccoridions(props: unknown) {

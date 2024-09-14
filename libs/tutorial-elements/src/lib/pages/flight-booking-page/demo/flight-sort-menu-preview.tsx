@@ -24,7 +24,7 @@ export const FlightSortMenuPreview = () => {
         'blob/main/src/components/'
       )}
     >
-      <div className="max-h-[200px] w-[350px] overflow-y-auto">
+      <div className="max-h-[200px] w-[300px] overflow-y-auto xl:max-h-[200px] xl:w-[350px]">
         <FlightSortMenu onSortChange={(data) => alert(data)} />
       </div>
     </LivePreview>
