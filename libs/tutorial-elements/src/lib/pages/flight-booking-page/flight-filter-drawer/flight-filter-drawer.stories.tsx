@@ -10,7 +10,7 @@ const meta: Meta<typeof FlightFilterDrawer> = {
   title: 'Tutorials/Flight Booking UI/Components/Flight Filter Drawer',
   decorators: [
     (Story) => (
-      <ScreenContainer>
+      <ScreenContainer className="px-4">
         <Story />
       </ScreenContainer>
     ),

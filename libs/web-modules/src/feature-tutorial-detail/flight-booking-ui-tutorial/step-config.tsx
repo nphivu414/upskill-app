@@ -6,6 +6,7 @@ import FlightFilterDrawerCodeContent from './content/flight-filter-drawer.mdx';
 import FlightFilterFormCodeContent from './content/flight-filter-form.mdx';
 import FlightHeaderCodeContent from './content/flight-header.mdx';
 import FlightListCodeContent from './content/flight-list.mdx';
+import FlightPreferencesCodeContent from './content/flight-preferences.mdx';
 import FlightSortMenuCodeContent from './content/flight-sort-menu.mdx';
 import IntroContent from './content/intro-content.mdx';
 
@@ -41,5 +42,9 @@ export const steps: StepConfig[] = [
   {
     index: 6,
     content: <FlightSortMenuCodeContent {...codeContentProps} />,
+  },
+  {
+    index: 7,
+    content: <FlightPreferencesCodeContent {...codeContentProps} />,
   },
 ];

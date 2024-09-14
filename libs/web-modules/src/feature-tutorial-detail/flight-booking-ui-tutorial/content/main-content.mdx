@@ -381,7 +381,7 @@ In this section, we will build the flight filter form component that allows user
 Now that we've completed building the flight filter form component, we can move on to the next section: building the `<FlightFilterDrawer/>` component.
 
 ## !!accordions Section 6: Building Flight Filter Drawer Component
- In this section, we will build the flight filter drawer component that allows users to filter the flight list based on their preferences.
+In this section, we will build the flight filter drawer component that allows users to filter the flight list based on their preferences.
 1. Files and Structure:
    - <CodeTabTrigger section="flight-filter-drawer" tab="flight-filter-drawer.tsx"/>: The main component file for the flight filter drawer.
    - <CodeTabTrigger section="flight-filter-drawer" tab="drawer.tsx"/>: A Drawer component from <a href="https://ui.shadcn.com/" target='_blank'>shadcn/ui</a> that provides a bottom sheet-like interface for the flight filter form.
@@ -399,5 +399,21 @@ Now that we've completed building the flight filter form component, we can move 
    - **Handle Form Submit:** The `handleSubmit` function is called when the form is submitted. It calls the `onFormSubmit` callback with the form data and closes the drawer.
 
 ## !!accordions Section 7: Building Flight Sort Menu Component
+In this section, we will build the flight sort menu component that allows users to sort the flight list based on their preferences.
+1. Files and Structure:
+   - <CodeTabTrigger section="flight-sort-menu" tab="flight-sort-menu.tsx"/>: The main component file for the flight sort menu.
+   - <CodeTabTrigger section="flight-sort-menu" tab="constants.ts"/>: This file contains the constants for the flight sort menu component like sort options.
+   - <CodeTabTrigger section="flight-sort-menu" tab="types.ts"/>: This file contains the types for the flight sort menu component.
+2. Deep dive into <CodeTabTrigger section="flight-sort-menu" tab="flight-sort-menu.tsx"/> file:
+   - **Props:** This component accepts the following props:
+      - `onSortChange`: A callback function to handle sort changes.
+   - **Rendering:** The component renders a `Dropdown` component from `@nextui-org/react` with a `Button` as the trigger. The dropdown menu contains a list of sort options that are mapped from the `SORT_OPTIONS` constant.
+   - **Handle Selection Change:** The `handleSelectionChange` function is called when the selection changes. It calls the `onSortChange` callback with the selected sort key.
+Now that we've completed building the flight sort menu component, we can move on to the next section: building the `<FlightPreferences/>` component.
+
+## !!accordions Section 8: Building Flight Preferences Component
+In this section, we will build the flight preferences component that displays the flight filter drawer and sort menu components.
+1. Files and Structure:
+   - <CodeTabTrigger section="flight-preferences" tab="flight-preferences.tsx"/>: The main component file for the flight preferences.
 
 </CodeWithAccoridions>

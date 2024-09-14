@@ -1,13 +1,12 @@
 import { FlightSortMenuPreview } from '@upskill-app/tutorial-elements';
 
-<CodeWithTabs sectionName="flight-list">
+<CodeWithTabs sectionName="flight-sort-menu">
 
 ### !!tabs Preview
 
 <FlightSortMenuPreview/>
 
 ### !!tabs flight-sort-menu.tsx
-
 ```tsx
 import React from 'react';
 import {
@@ -74,6 +73,29 @@ export const FlightSortMenu = ({ onSortChange }: FlightSortMenuProps) => {
   );
 };
 
+```
+
+### !!tabs constants.ts
+```ts
+export const SORT_OPTIONS: Record<FlightSortKey, string> = {
+  cheapest: 'Cheapest',
+  direct: 'Direct flights first',
+  'earliest-departure': 'Earliest departure',
+  'latest-departure': 'Latest departure',
+  'earliest-arrival': 'Earliest arrival',
+  'latest-arrival': 'Latest arrival',
+};
+```
+
+### !!tabs types.ts
+```ts
+export type FlightSortKey =
+  | 'cheapest'
+  | 'direct'
+  | 'earliest-departure'
+  | 'latest-departure'
+  | 'earliest-arrival'
+  | 'latest-arrival';
 ```
 
 </CodeWithTabs>

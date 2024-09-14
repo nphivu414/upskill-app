@@ -12,12 +12,12 @@ import { useTheme } from 'next-themes';
 
 import { ClientOnlyContainer } from '../../../components';
 
-export const FlightFilterDrawerPreview = () => {
+export const FlightPreferencesPreview = () => {
   const { theme } = useTheme();
   return (
     <LivePreview
       storybookUrl={getStorybookUrl(
-        TUTORIAL_STORIES.FLIGHT_BOOKING_UI.FLIGHT_FILTER_DRAWER,
+        TUTORIAL_STORIES.FLIGHT_BOOKING_UI.FLIGHT_HEADER,
         theme
       )}
       sourceUrl={getGithubSourceUrl(
@@ -25,12 +25,12 @@ export const FlightFilterDrawerPreview = () => {
         'blob/main/src/components/'
       )}
     >
-      <ClientOnlyContainer loadingContainerClassName="min-h-[400px] w-[400px]">
+      <ClientOnlyContainer loadingContainerClassName="min-h-[400px] w-[500px]">
         <EmbedStory
           storyBaseURL={getStorybookBaseUrl()}
-          storyId={TUTORIAL_STORIES.FLIGHT_BOOKING_UI.FLIGHT_FILTER_DRAWER}
+          storyId={TUTORIAL_STORIES.FLIGHT_BOOKING_UI.FLIGHT_PREFERENCES}
           height={400}
-          width={400}
+          width={500}
         />
       </ClientOnlyContainer>
     </LivePreview>

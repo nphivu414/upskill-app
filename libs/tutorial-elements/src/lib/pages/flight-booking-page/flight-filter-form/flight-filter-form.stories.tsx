@@ -1,5 +1,4 @@
 import React from 'react';
-import { Spacer } from '@nextui-org/react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ScreenContainer } from '../../../components';

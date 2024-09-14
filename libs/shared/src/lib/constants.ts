@@ -9,10 +9,17 @@ export const TUTORIAL_STORIES = {
     PROFILE_PAGE: 'tutorials-profile-ui-page-screen',
   },
   FLIGHT_BOOKING_UI: {
-    FLIGHT_HEADER: 'tutorials-flight-booking-ui-components-flight-header',
     FLIGHT_BOOKING_PAGE: 'tutorials-flight-booking-ui-page-screen',
+    FLIGHT_HEADER: 'tutorials-flight-booking-ui-components-flight-header',
+    FLIGHT_CARD: 'tutorials-flight-booking-ui-components-flight-card',
+    FLIGHT_FILTER_FORM:
+      'tutorials-flight-booking-ui-components-flight-filter-form',
+    FLIGHT_LIST: 'tutorials-flight-booking-ui-components-flight-list',
     FLIGHT_FILTER_DRAWER:
       'tutorials-flight-booking-ui-components-flight-filter-drawer',
+    FLIGHT_SORT_MENU: 'tutorials-flight-booking-ui-components-flight-sort-menu',
+    FLIGHT_PREFERENCES:
+      'tutorials-flight-booking-ui-components-flight-preferences',
   },
 };
 
