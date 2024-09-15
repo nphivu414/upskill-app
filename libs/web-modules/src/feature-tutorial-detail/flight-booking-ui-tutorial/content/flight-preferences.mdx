@@ -1,0 +1,79 @@
+import { FlightPreferencesPreview } from '@upskill-app/tutorial-elements';
+
+<CodeWithTabs sectionName="flight-preferences">
+
+### !!tabs Preview
+
+<FlightPreferencesPreview/>
+
+### !!tabs flight-preferences.tsx
+```tsx
+import { FlightFilterDrawer } from '../flight-filter-drawer';
+import { FlightSortMenu } from '../flight-sort-menu';
+import { Flight, FlightFilterFormData, FlightSortKey } from '../types';
+import { processFlightFilterData } from './utils';
+
+type FlightPreferencesProps = {
+  flights: Flight[];
+};
+
+export const FlightPreferences = ({ flights }: FlightPreferencesProps) => {
+  const { airlines, cabinClasses, benefits, initialFilterData } =
+    processFlightFilterData(flights);
+
+  const handleFilterFormSubmit = (data: FlightFilterFormData) => {
+    alert(`Filter form submitted \n \n ${JSON.stringify(data)}`);
+  };
+
+  const handleOnSortChange = (sortValue: FlightSortKey | null) => {
+    alert(`Sort by: ${sortValue}`);
+  };
+
+  return (
+    <div className="bg-content1 border-t-1 border-divider sticky bottom-0 z-10 flex flex-1 items-center justify-between gap-2 p-4">
+      <FlightFilterDrawer
+        airlines={airlines}
+        cabinClasses={cabinClasses}
+        benefits={benefits}
+        initialFilterData={initialFilterData}
+        onFormSubmit={handleFilterFormSubmit}
+      />
+      <FlightSortMenu onSortChange={handleOnSortChange} />
+    </div>
+  );
+};
+
+```
+
+### !!tabs utils.ts
+```ts
+// We've defined these types in the previous steps
+import { Flight, FlightFilterFormData } from '../types';
+
+export const processFlightFilterData = (flights: Flight[]) => {
+  const airlines = flights.map((flight) => flight.airline);
+  const cabinClasses = flights
+    .map((flight) => flight.cabinClass)
+    .filter((value, index, self) => self.indexOf(value) === index);
+  const benefits = flights
+    .flatMap((flight) => flight.benefits.map((benefit) => benefit.name))
+    .filter((value, index, self) => self.indexOf(value) === index);
+  const minFlightPrice = Math.min(...flights.map((flight) => flight.price));
+  const maxFlightPrice = Math.max(...flights.map((flight) => flight.price));
+
+  const initialFilterData: FlightFilterFormData = {
+    airlines: [],
+    departureTimeRange: [0, 23],
+    arrivalTimeRange: [0, 23],
+    priceRange: [minFlightPrice, maxFlightPrice],
+    cabinClasses: [],
+    stops: [],
+    benefits: [],
+  };
+
+  return { airlines, cabinClasses, benefits, initialFilterData };
+};
+
+```
+
+</CodeWithTabs>

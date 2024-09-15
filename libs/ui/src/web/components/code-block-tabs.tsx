@@ -27,9 +27,10 @@ type CodeBlockTabsProps = {
     children?: React.ReactNode;
   }[];
   sectionName?: string;
+  destroyInactiveTabPanel?: boolean;
 };
 export function CodeBlockTabs(props: CodeBlockTabsProps) {
-  const { tabs, sectionName = '' } = props;
+  const { tabs, sectionName = '', destroyInactiveTabPanel = true } = props;
   const [selected, setSelected] = React.useState(tabs?.[0].title);
   const onSelectionChange = (key: Key) => {
     setSelected(key.toString());
@@ -41,6 +42,7 @@ export function CodeBlockTabs(props: CodeBlockTabsProps) {
       variant="bordered"
       items={tabs}
       onSelectionChange={onSelectionChange}
+      destroyInactiveTabPanel={destroyInactiveTabPanel}
       classNames={{
         base: 'overflow-x-auto max-w-full',
         panel:

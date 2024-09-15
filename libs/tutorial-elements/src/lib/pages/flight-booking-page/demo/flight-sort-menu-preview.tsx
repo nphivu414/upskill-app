@@ -9,10 +9,9 @@ import {
 import { LivePreview } from '@upskill-app/ui/web';
 import { useTheme } from 'next-themes';
 
-import { defaultFlights } from '../data';
-import { FlightList } from '../flight-list';
+import { FlightSortMenu } from '../flight-sort-menu';
 
-export const FlightListPreview = () => {
+export const FlightSortMenuPreview = () => {
   const { theme } = useTheme();
   return (
     <LivePreview
@@ -25,8 +24,8 @@ export const FlightListPreview = () => {
         'blob/main/src/components/'
       )}
     >
-      <div className="max-h-[380px] w-[300px] overflow-y-auto xl:max-h-[400px] xl:w-[350px]">
-        <FlightList data={defaultFlights} />
+      <div className="max-h-[200px] w-[300px] overflow-y-auto xl:max-h-[200px] xl:w-[350px]">
+        <FlightSortMenu onSortChange={(data) => alert(data)} />
       </div>
     </LivePreview>
   );

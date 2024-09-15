@@ -3,14 +3,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ScreenContainer } from '../../../components';
 import { defaultAirlines, defaultBenefits, defaultCabinClasses } from '../data';
-import { FlightFilterForm } from './flight-filter-form';
+import { FlightFilterDrawer } from './flight-filter-drawer';
 
-const meta: Meta<typeof FlightFilterForm> = {
-  component: FlightFilterForm,
-  title: 'Tutorials/Flight Booking UI/Components/Flight Filter Form',
+const meta: Meta<typeof FlightFilterDrawer> = {
+  component: FlightFilterDrawer,
+  title: 'Tutorials/Flight Booking UI/Components/Flight Filter Drawer',
   decorators: [
     (Story) => (
-      <ScreenContainer>
+      <ScreenContainer className="px-4">
         <Story />
       </ScreenContainer>
     ),
@@ -19,22 +19,20 @@ const meta: Meta<typeof FlightFilterForm> = {
 
 export default meta;
 
-type Story = StoryObj<typeof FlightFilterForm>;
+type Story = StoryObj<typeof FlightFilterDrawer>;
 
 const baseArgs: Story['args'] = {
   airlines: defaultAirlines,
-  cabinClasses: defaultCabinClasses,
   benefits: defaultBenefits,
-  initialData: {
+  cabinClasses: defaultCabinClasses,
+  initialFilterData: {
     airlines: [],
-    cabinClasses: [],
     benefits: [],
-    arrivalTimeRange: [0, 23],
-    departureTimeRange: [0, 23],
-    priceRange: [0, 1000],
-    stops: [],
+    cabinClasses: [],
   },
-  onSubmit: (data) => alert(JSON.stringify(data, null, 2)),
+  onFormSubmit: (data) => {
+    alert(JSON.stringify(data, null, 2));
+  },
 };
 
 export const Default: Story = {
