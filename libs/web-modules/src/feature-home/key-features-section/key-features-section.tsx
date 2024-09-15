@@ -1,60 +1,74 @@
-import KeyFeatureCodeContent from '../content/key-feature-code.mdx';
-import { CodeWithTabs } from './feature-code';
+import { Divider } from '@nextui-org/react';
+import {
+  FlightBookingPagePreview,
+  ProfilePagePreview,
+} from '@upskill-app/tutorial-elements';
+import { Paragraph } from '@upskill-app/ui/web';
+
+import { HeadingSection } from '../../feature-tutorial-detail/heading-section';
+
+// import KeyFeatureCodeContent from '../content/key-feature-code.mdx';
+// import { CodeWithTabs } from './feature-code';
 
 export const KeyFeaturesSection = () => {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-2">
-            <div className="inline-block rounded-lg px-3 py-1 text-sm">
-              Key Features
+    <section className="w-full py-12">
+      <div className="container px-4 md:px-12">
+        <HeadingSection
+          title="Build a profile page UI with React, Tailwind and NextUI"
+          author={{
+            avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
+            name: 'Vu Nguyen',
+            description: 'Software Engineer, NAB',
+          }}
+          description={
+            <div>
+              <Paragraph>
+                Let&apos;s build a profile page with the power of React,
+                Tailwind and NextUI. This hands-on guide will walk you through
+                building a modern, interactive profile UI that is not only
+                beautiful but also designed for easy integration with your
+                existing projects.
+              </Paragraph>
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-              Elevate Your Learning Experience
-            </h2>
-            <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Our online learning platform offers a comprehensive suite of
-              features to help you succeed in your educational journey.
-            </p>
-          </div>
-        </div>
-        <div className="mx-auto grid max-w-7xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-          <div className="flex flex-col justify-center space-y-4">
-            <ul className="grid gap-6">
-              <li>
-                <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Interactive Courses</h3>
-                  <p>
-                    See the code in action with live, interactive previews
-                    giving you more context and understanding.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Personalized Learning</h3>
-                  <p>
-                    Customize your learning experience with personalized
-                    recommendations, progress tracking, and adaptive content.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Expert Instructors</h3>
-                  <p>
-                    Learn from industry-leading experts who are passionate about
-                    sharing their knowledge and guiding you to success.
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div className="w-full">
-            <KeyFeatureCodeContent components={{ CodeWithTabs }} />
-          </div>
-        </div>
+          }
+          targetAudience="Beginner to intermediate React developers familiar with basic component structure and styling concepts."
+          prerequisites={[
+            'Node.js and yarn: Make sure you have these installed on your system.',
+            'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
+            "A little TypeScript, CSS, and Tailwind knowledge: Some familiarity with these will help, but you don't need to be an expert – we'll guide you through!",
+          ]}
+          previewComponent={<ProfilePagePreview showStorySourceLink={false} />}
+        />
+        <Divider className="my-12" />
+        <HeadingSection
+          title="Crafting Flight Booking UI with React, Tailwind and NextUI"
+          author={{
+            avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
+            name: 'Vu Nguyen',
+            description: 'Software Engineer, NAB',
+          }}
+          description={
+            <div>
+              <Paragraph>
+                Let&apos;s build a beautiful search flight UI with the power of
+                React, NextUI and react-hook-form. This hands-on guide will walk
+                you through building a modern, interactive search flight UI with
+                filter and sort features. You will also learn how to use
+                react-hook-form to handle form state, validation and submission
+                in a simple and efficient way.
+              </Paragraph>
+            </div>
+          }
+          targetAudience="Intermediate React developers familiar with JavaScript, React, and Tailwind CSS."
+          prerequisites={[
+            'Node.js and yarn (or other package manager) installed on your system',
+            'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
+          ]}
+          previewComponent={
+            <FlightBookingPagePreview showStorySourceLink={false} />
+          }
+        />
       </div>
     </section>
   );

@@ -9,6 +9,7 @@ type LivePreviewProps = {
   storybookUrl: string;
   sourceUrl?: string;
   className?: string;
+  showStorySourceLink?: boolean;
 } & ComponentWithChildren;
 
 export const LivePreview = ({
@@ -17,6 +18,7 @@ export const LivePreview = ({
   sourceUrl,
   children,
   className,
+  showStorySourceLink = true,
 }: LivePreviewProps) => {
   return (
     <div
@@ -36,26 +38,28 @@ export const LivePreview = ({
         {title}
       </Chip>
       {children}
-      <ButtonGroup variant="ghost" size="sm">
-        <Button
-          as={Link}
-          href={storybookUrl}
-          target="_blank"
-          startContent={<CustomIcons.storybook width={14} />}
-        >
-          Storybook
-        </Button>
-        {sourceUrl ? (
+      {showStorySourceLink && (
+        <ButtonGroup variant="ghost" size="sm">
           <Button
             as={Link}
-            href={sourceUrl}
+            href={storybookUrl}
             target="_blank"
-            startContent={<CustomIcons.gitHub width={14} />}
+            startContent={<CustomIcons.storybook width={14} />}
           >
-            Source
+            Storybook
           </Button>
-        ) : null}
-      </ButtonGroup>
+          {sourceUrl ? (
+            <Button
+              as={Link}
+              href={sourceUrl}
+              target="_blank"
+              startContent={<CustomIcons.gitHub width={14} />}
+            >
+              Source
+            </Button>
+          ) : null}
+        </ButtonGroup>
+      )}
     </div>
   );
 };

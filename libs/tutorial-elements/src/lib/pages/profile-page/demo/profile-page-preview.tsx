@@ -33,7 +33,13 @@ const props = {
   },
 };
 
-export const ProfilePagePreview = () => {
+type ProfilePagePreviewProps = {
+  showStorySourceLink?: boolean;
+};
+
+export const ProfilePagePreview = ({
+  showStorySourceLink,
+}: ProfilePagePreviewProps) => {
   const { theme } = useTheme();
   return (
     <LivePreview
@@ -45,6 +51,7 @@ export const ProfilePagePreview = () => {
         TUTORIAL_REPO.PROFILE_UI,
         'blob/main/src/components/profile/profile-page.tsx'
       )}
+      showStorySourceLink={showStorySourceLink}
     >
       <ClientOnlyContainer loadingContainerClassName="min-h-[604px]">
         <MockupBrowser>

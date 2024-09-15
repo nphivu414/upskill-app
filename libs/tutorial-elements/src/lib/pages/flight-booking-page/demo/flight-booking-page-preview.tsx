@@ -12,7 +12,13 @@ import { useTheme } from 'next-themes';
 
 import { ClientOnlyContainer, MockupBrowser } from '../../../components';
 
-export const FlightBookingPagePreview = () => {
+type FlightBookingPagePreviewProps = {
+  showStorySourceLink?: boolean;
+};
+
+export const FlightBookingPagePreview = ({
+  showStorySourceLink,
+}: FlightBookingPagePreviewProps) => {
   const { theme } = useTheme();
   return (
     <LivePreview
@@ -24,6 +30,7 @@ export const FlightBookingPagePreview = () => {
         TUTORIAL_REPO.PROFILE_UI,
         'blob/main/src/components/profile/profile-page.tsx'
       )}
+      showStorySourceLink={showStorySourceLink}
     >
       <MockupBrowser>
         <ClientOnlyContainer loadingContainerClassName="min-h-[550px]">

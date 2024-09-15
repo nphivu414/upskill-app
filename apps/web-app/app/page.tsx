@@ -1,8 +1,4 @@
-import {
-  CourseOfferingsSection,
-  HeroSection,
-  KeyFeaturesSection,
-} from '@upskill-app/web-modules/home';
+import { HeroSection, KeyFeaturesSection } from '@upskill-app/web-modules/home';
 
 export default function Index() {
   return (
@@ -10,7 +6,6 @@ export default function Index() {
       <main className="flex-1">
         <HeroSection />
         <KeyFeaturesSection />
-        <CourseOfferingsSection />
       </main>
     </div>
   );

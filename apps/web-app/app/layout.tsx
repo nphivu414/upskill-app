@@ -5,6 +5,8 @@ import {
   NavigationBar,
   Toaster,
 } from '@upskill-app/ui/web';
+import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from 'geist/font/sans';
 
 import './styles/global.css';
 
@@ -17,7 +19,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: ComponentWithChildren) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
         <AppUiProvider>
           <NavigationBar />
