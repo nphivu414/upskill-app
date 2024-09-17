@@ -21,11 +21,7 @@ export default function RootLayout({ children }: ComponentWithChildren) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
-        <AppUiProvider>
-          <NavigationBar />
-          <AppContainer>{children}</AppContainer>
-          <AppFooter />
-        </AppUiProvider>
+        <AppUiProvider>{children}</AppUiProvider>
       </body>
       <Toaster />
     </html>

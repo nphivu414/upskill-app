@@ -1,4 +1,5 @@
 import { ComponentWithChildren } from '@upskill-app/shared';
+import { AppContainer, AppFooter, NavigationBar } from '@upskill-app/ui/web';
 import {
   AuthorSection,
   RelatedTutorialsSection,
@@ -7,9 +8,13 @@ import {
 export default function RootLayout({ children }: ComponentWithChildren) {
   return (
     <>
-      {children}
-      <AuthorSection />
-      <RelatedTutorialsSection />
+      <NavigationBar />
+      <AppContainer>
+        {children}
+        <AuthorSection />
+        <RelatedTutorialsSection />
+      </AppContainer>
+      <AppFooter />
     </>
   );
 }
