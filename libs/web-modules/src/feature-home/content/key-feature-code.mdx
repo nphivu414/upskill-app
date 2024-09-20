@@ -13,6 +13,97 @@ import { FlightCardPreview } from '@upskill-app/tutorial-elements';
 
 <FlightCardPreview/>
 
+### !!tabs flight-card.tsx
+
+```tsx
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+} from '@nextui-org/react';
+
+import { Flight } from '../types';
+import { FlightBenefits } from './flight-benefits';
+import { FlightFareDetails } from './flight-fare-details';
+import { FlightOverview } from './flight-overview';
+import { FlightTimeline } from './flight-timeline';
+
+type FlightCardProps = {
+  onPress: (id: Flight['id']) => void;
+} & Pick<
+  Flight,
+  | 'id'
+  | 'price'
+  | 'airline'
+  | 'cabinClass'
+  | 'aircraftType'
+  | 'departureTime'
+  | 'arrivalTime'
+  | 'duration'
+  | 'departureAirport'
+  | 'arrivalAirport'
+  | 'benefits'
+  | 'stops'
+  | 'isRoundTrip'
+>;
+
+export const FlightCard = ({
+  onPress,
+  id,
+  price,
+  airline,
+  cabinClass,
+  aircraftType,
+  departureTime,
+  arrivalTime,
+  duration,
+  departureAirport,
+  arrivalAirport,
+  benefits,
+  stops,
+  isRoundTrip,
+}: FlightCardProps) => {
+  const handlePress = () => {
+    onPress(id);
+  };
+
+  return (
+    <Card isPressable onPress={handlePress} fullWidth radius="sm">
+      <CardHeader>
+        <FlightOverview
+          aircraftType={aircraftType}
+          airline={airline}
+          cabinClass={cabinClass}
+        />
+      </CardHeader>
+      <Divider />
+      <CardBody>
+        <div className="flex items-center justify-between">
+          <div className="flex w-3/5 shrink-0">
+            <FlightTimeline
+              departureTime={departureTime}
+              arrivalTime={arrivalTime}
+              departureAirport={departureAirport}
+              arrivalAirport={arrivalAirport}
+              duration={duration}
+              totalStops={stops.length}
+            />
+          </div>
+          <FlightFareDetails price={price} isRoundTrip={isRoundTrip} />
+        </div>
+      </CardBody>
+      <CardFooter>
+        <FlightBenefits benefits={benefits} />
+      </CardFooter>
+    </Card>
+  );
+};
+
+```
+
+
 ### !!tabs flight-overview.tsx
 
 ```tsx
@@ -208,95 +299,86 @@ export const FlightBenefits = ({ benefits }: FlightBenefitsProps) => {
 
 ```
 
-### !!tabs flight-card.tsx
+### !!tabs utils.ts
 
-```tsx
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider,
-} from '@nextui-org/react';
+```ts
+import { Briefcase, TvMinimal, Utensils, Wifi } from 'lucide-react';
 
-import { Flight } from '../types';
-import { FlightBenefits } from './flight-benefits';
-import { FlightFareDetails } from './flight-fare-details';
-import { FlightOverview } from './flight-overview';
-import { FlightTimeline } from './flight-timeline';
+import { BenefitEnum } from './types';
 
-type FlightCardProps = {
-  onPress: (id: Flight['id']) => void;
-} & Pick<
-  Flight,
-  | 'id'
-  | 'price'
-  | 'airline'
-  | 'cabinClass'
-  | 'aircraftType'
-  | 'departureTime'
-  | 'arrivalTime'
-  | 'duration'
-  | 'departureAirport'
-  | 'arrivalAirport'
-  | 'benefits'
-  | 'stops'
-  | 'isRoundTrip'
->;
+export const getBenefitIcon = (name: BenefitEnum, iconSize = 16) => {
+  switch (name) {
+    case 'wifi':
+      return <Wifi size={iconSize} />;
+    case 'meal':
+      return <Utensils size={iconSize} />;
+    case 'baggage':
+      return <Briefcase size={iconSize} />;
+    case 'entertainment':
+      return <TvMinimal size={iconSize} />;
+  }
+};
 
-export const FlightCard = ({
-  onPress,
-  id,
-  price,
-  airline,
-  cabinClass,
-  aircraftType,
-  departureTime,
-  arrivalTime,
-  duration,
-  departureAirport,
-  arrivalAirport,
-  benefits,
-  stops,
-  isRoundTrip,
-}: FlightCardProps) => {
-  const handlePress = () => {
-    onPress(id);
-  };
-
-  return (
-    <Card isPressable onPress={handlePress} fullWidth radius="sm">
-      <CardHeader>
-        <FlightOverview
-          aircraftType={aircraftType}
-          airline={airline}
-          cabinClass={cabinClass}
-        />
-      </CardHeader>
-      <Divider />
-      <CardBody>
-        <div className="flex items-center justify-between">
-          <div className="flex w-3/5 shrink-0">
-            <FlightTimeline
-              departureTime={departureTime}
-              arrivalTime={arrivalTime}
-              departureAirport={departureAirport}
-              arrivalAirport={arrivalAirport}
-              duration={duration}
-              totalStops={stops.length}
-            />
-          </div>
-          <FlightFareDetails price={price} isRoundTrip={isRoundTrip} />
-        </div>
-      </CardBody>
-      <CardFooter>
-        <FlightBenefits benefits={benefits} />
-      </CardFooter>
-    </Card>
-  );
+export const formatNumber = (num: number, currency?: string) => {
+  return Intl.NumberFormat('en-US', {
+    maximumFractionDigits: 3,
+    currency: currency,
+    style: currency ? 'currency' : undefined,
+  }).format(num);
 };
 
 ```
 
+### !!tabs constants.ts
+
+```ts
+import { CabinClassEnum } from './types';
+
+export const CABIN_CLASS_MAPPING: Record<CabinClassEnum, string> = {
+  economy: 'Economy',
+  premium: 'Premium Economy',
+  business: 'Business Class',
+  first: 'First Class',
+};
+
+```
+
+### !!tabs types.ts
+
+```ts
+export type BenefitEnum = 'meal' | 'baggage' | 'entertainment' | 'wifi';
+export type CabinClassEnum = 'economy' | 'premium' | 'business' | 'first';
+
+export interface Benefit {
+  id: string;
+  name: BenefitEnum;
+  description?: string;
+}
+
+export interface Airline {
+  id: string;
+  name: string;
+  logo: string;
+}
+
+export interface Flight {
+  id: string;
+  origin: string;
+  price: number;
+  destination: string;
+  cabinClass: CabinClassEnum;
+  airline: Airline;
+  aircraftType: string;
+  departureTime: string;
+  arrivalTime: string;
+  duration: string;
+  departureAirport: string;
+  arrivalAirport: string;
+  benefits: Benefit[];
+  stops: string[];
+  isRoundTrip: boolean;
+}
+
+```
 </CodeWithTabs>
 

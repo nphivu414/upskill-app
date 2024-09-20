@@ -1,4 +1,4 @@
-import { Divider } from '@nextui-org/react';
+import { Spacer } from '@nextui-org/react';
 import {
   FlightBookingPagePreview,
   ProfilePagePreview,
@@ -9,7 +9,7 @@ import { HeadingSection } from '../feature-tutorial-detail/heading-section';
 
 export const CourseOfferingSection = () => {
   return (
-    <section className="w-full py-12">
+    <section className="w-full py-24">
       <div className="container mx-auto">
         <HeadingSection
           title="Build a profile page UI with React, Tailwind and NextUI"
@@ -38,7 +38,7 @@ export const CourseOfferingSection = () => {
           previewComponent={<ProfilePagePreview showStorySourceLink={false} />}
         />
       </div>
-      <Divider className="my-12" />
+      <Spacer y={24} />
       <div className="container mx-auto">
         <HeadingSection
           title="Crafting Flight Booking UI with React, Tailwind and NextUI"

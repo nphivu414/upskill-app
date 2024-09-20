@@ -41,7 +41,6 @@ export const KeyFeaturesSection = () => {
               <li key={index}>
                 <Card
                   shadow="sm"
-                  isPressable
                   isBlurred
                   className="bg-background/60 dark:bg-default-100/50 border-none p-2"
                 >
