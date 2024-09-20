@@ -1,10 +1,4 @@
-import {
-  AppContainer,
-  AppFooter,
-  AppUiProvider,
-  NavigationBar,
-  Toaster,
-} from '@upskill-app/ui/web';
+import { AppUiProvider, Toaster } from '@upskill-app/ui/web';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 

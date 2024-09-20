@@ -108,7 +108,7 @@ export const ContentAccordion = ({
                 {renderStepContent(index)}
               </StickyBox>
               {index !== 0 && (
-                <ShowCodeModal>
+                <ShowCodeModal className="lg:hidden">
                   <>{renderStepContent(index)}</>
                 </ShowCodeModal>
               )}

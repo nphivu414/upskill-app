@@ -1,63 +1,302 @@
-<CodeWithTabs>
+import { FlightCardPreview } from '@upskill-app/tutorial-elements';
 
-```jsx !!tabs Usage
-import React from 'react'
-import { PlaylistCard } from './PlaylistCard'
+<CodeWithTabs
+  sectionName="flight-card"
+  classNames={{
+    base: 'overflow-x-auto max-w-full',
+    panel:
+      'w-full bg-content2 rounded-lg overflow-auto mt-4 h-[350px]',
+  }}
+>
 
-export default function App() {
+### !!tabs Preview
+
+<FlightCardPreview/>
+
+### !!tabs flight-overview.tsx
+
+```tsx
+import { Subtle } from '../typography';
+
+import { CABIN_CLASS_MAPPING } from '../constants';
+import { Flight } from '../types';
+import { AirlineLogo } from './airline-logo';
+
+type FlightOverviewProps = Pick<
+  Flight,
+  'airline' | 'cabinClass' | 'aircraftType'
+>;
+
+export const FlightOverview = ({
+  airline,
+  cabinClass,
+  aircraftType,
+}: FlightOverviewProps) => {
   return (
-    <PlaylistCard
-      title="Daily Mix"
-      subTitle="12 Tracks"
-      caption="Frontend Radio"
-      coverPhotoUrl="/images/hero-card-complete.jpeg"
-    />
-  )
-}
+    <div className="flex flex-1 justify-between">
+      <div className="flex flex-col items-start gap-1">
+        <p className="text-sm font-semibold">{airline.name}</p>
+        <div className="flex items-center justify-around gap-1">
+          <Subtle className="text-xs">{CABIN_CLASS_MAPPING[cabinClass]}</Subtle>
+          <Subtle className="text-xs">•</Subtle>
+          <Subtle className="text-xs">{aircraftType}</Subtle>
+        </div>
+      </div>
+      <AirlineLogo src={airline.logo} />
+    </div>
+  );
+};
+
 ```
 
-```jsx !!tabs Code
-import React from 'react'
+### !!tabs flight-timeline.tsx
+
+```tsx
+import { Slider } from '@nextui-org/react';
+import { Subtle } from '../typography';
+
+import { Flight } from '../types';
+
+type FlightTimelineProps = {
+  totalStops: number;
+} & Pick<
+  Flight,
+  | 'departureTime'
+  | 'arrivalTime'
+  | 'departureAirport'
+  | 'arrivalAirport'
+  | 'duration'
+>;
+
+export const FlightTimeline = ({
+  arrivalAirport,
+  arrivalTime,
+  departureAirport,
+  departureTime,
+  duration,
+  totalStops,
+}: FlightTimelineProps) => {
+  const totalSteps = totalStops + 1;
+
+  let stopText = 'Direct';
+  if (totalStops === 1) {
+    stopText = '1 stop';
+  } else if (totalStops > 1) {
+    stopText = `${totalStops} stops`;
+  }
+
+  return (
+    <div className="flex w-full flex-col items-center justify-center">
+      <Subtle className="-mb-2 text-xs">{duration}</Subtle>
+      <Slider
+        size="sm"
+        step={1}
+        defaultValue={totalSteps}
+        maxValue={totalSteps}
+        minValue={0}
+        color="foreground"
+        showSteps={true}
+        className="max-w-md"
+        isDisabled
+        startContent={
+          <div className="flex flex-col items-center justify-center gap-1">
+            <p className="text-xs">{departureTime}</p>
+            <Subtle className="text-xs">{departureAirport}</Subtle>
+          </div>
+        }
+        endContent={
+          <div className="flex flex-col items-center justify-center gap-1">
+            <p className="text-xs">{arrivalTime}</p>
+            <Subtle className="text-xs">{arrivalAirport}</Subtle>
+          </div>
+        }
+        classNames={{
+          thumb: 'hidden',
+          value: 'hidden',
+          track: 'bg-foreground h-[1px]',
+          step: 'bg-foreground w-[4px] h-[4px]',
+        }}
+      />
+      <Subtle className="-mt-2 text-xs">{stopText}</Subtle>
+    </div>
+  );
+};
+
+```
+
+### !!tabs flight-fare-details.tsx
+
+```tsx
+import { Chip } from '@nextui-org/react';
+
+import { formatNumber } from '../utils';
+import { Flight } from '../types';
+
+type FlightFareDetailsProps = Pick<Flight, 'price' | 'isRoundTrip'>;
+
+export const FlightFareDetails = ({
+  price,
+  isRoundTrip,
+}: FlightFareDetailsProps) => {
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <p className="text-warning truncate break-words text-xs font-semibold">
+        {formatNumber(price, 'USD')} / pax
+      </p>
+      {isRoundTrip && (
+        <Chip size="sm" variant="flat" color="primary" className="text-xs">
+          Round trip
+        </Chip>
+      )}
+    </div>
+  );
+};
+
+```
+
+### !!tabs airline-logo.tsx
+
+```tsx
+import { Avatar, AvatarProps, Skeleton } from '@nextui-org/react';
+
+export const AirlineLogo = (props: AvatarProps) => {
+  return (
+    <Avatar
+      size="sm"
+      fallback={<Skeleton className="flex size-8 rounded-full" />}
+      {...props}
+    />
+  );
+};
+
+```
+
+### !!tabs flight-benefits.tsx
+
+```tsx
+import { Chip } from '@nextui-org/react';
+import { Subtle } from '../typography';
+
+import { Flight } from '../types';
+import { getBenefitIcon } from '../utils';
+
+export type FlightBenefitsProps = Pick<Flight, 'benefits'>;
+
+export const FlightBenefits = ({ benefits }: FlightBenefitsProps) => {
+  return (
+    <div className="flex items-center gap-2 overflow-x-auto">
+      {benefits.map((benefit) => (
+        <Chip
+          key={benefit.id}
+          size="sm"
+          variant="dot"
+          className="text-muted"
+          startContent={
+            benefit.name ? (
+              <div className="text-muted mx-1">
+                {getBenefitIcon(benefit.name, 12)}
+              </div>
+            ) : null
+          }
+        >
+          <Subtle className="text-xs">{benefit.description}</Subtle>
+        </Chip>
+      ))}
+    </div>
+  );
+};
+
+```
+
+### !!tabs flight-card.tsx
+
+```tsx
 import {
   Card,
   CardBody,
+  CardFooter,
   CardHeader,
-  Image,
-} from '@nextui-org/react'
+  Divider,
+} from '@nextui-org/react';
 
-type PlayListCardProps = {
-  title: string,
-  subTitle: string,
-  caption: string,
-  coverPhotoUrl: string,
-}
+import { Flight } from '../types';
+import { FlightBenefits } from './flight-benefits';
+import { FlightFareDetails } from './flight-fare-details';
+import { FlightOverview } from './flight-overview';
+import { FlightTimeline } from './flight-timeline';
 
-export const PlayListCard = ({
-  caption,
-  coverPhotoUrl,
-  subTitle,
-  title,
-}: PlayListCardProps) => {
+type FlightCardProps = {
+  onPress: (id: Flight['id']) => void;
+} & Pick<
+  Flight,
+  | 'id'
+  | 'price'
+  | 'airline'
+  | 'cabinClass'
+  | 'aircraftType'
+  | 'departureTime'
+  | 'arrivalTime'
+  | 'duration'
+  | 'departureAirport'
+  | 'arrivalAirport'
+  | 'benefits'
+  | 'stops'
+  | 'isRoundTrip'
+>;
+
+export const FlightCard = ({
+  onPress,
+  id,
+  price,
+  airline,
+  cabinClass,
+  aircraftType,
+  departureTime,
+  arrivalTime,
+  duration,
+  departureAirport,
+  arrivalAirport,
+  benefits,
+  stops,
+  isRoundTrip,
+}: FlightCardProps) => {
+  const handlePress = () => {
+    onPress(id);
+  };
+
   return (
-    <Card className="py-4" isBlurred isPressable>
-      <CardHeader className="flex-col items-start px-4 pb-0 pt-2 md:mt-1">
-        <p className="text-tiny font-bold uppercase">
-          {title}
-        </p>
-        <small className="text-default-500">{subTitle}</small>
-        <h4 className="text-large font-bold">{caption}</h4>
-      </CardHeader>
-      <CardBody className="overflow-visible py-2">
-        <Image
-          alt="Card background"
-          className="rounded-xl object-cover"
-          src={coverPhotoUrl}
-          width={270}
+    <Card isPressable onPress={handlePress} fullWidth radius="sm">
+      <CardHeader>
+        <FlightOverview
+          aircraftType={aircraftType}
+          airline={airline}
+          cabinClass={cabinClass}
         />
+      </CardHeader>
+      <Divider />
+      <CardBody>
+        <div className="flex items-center justify-between">
+          <div className="flex w-3/5 shrink-0">
+            <FlightTimeline
+              departureTime={departureTime}
+              arrivalTime={arrivalTime}
+              departureAirport={departureAirport}
+              arrivalAirport={arrivalAirport}
+              duration={duration}
+              totalStops={stops.length}
+            />
+          </div>
+          <FlightFareDetails price={price} isRoundTrip={isRoundTrip} />
+        </div>
       </CardBody>
+      <CardFooter>
+        <FlightBenefits benefits={benefits} />
+      </CardFooter>
     </Card>
-  )
-}
+  );
+};
+
 ```
 
 </CodeWithTabs>
+

@@ -1,72 +1,69 @@
-import { Divider } from '@nextui-org/react';
-import {
-  FlightBookingPagePreview,
-  ProfilePagePreview,
-} from '@upskill-app/tutorial-elements';
-import { Paragraph } from '@upskill-app/ui/web';
+import { Card, CardBody, CardHeader } from '@nextui-org/react';
 
-import { HeadingSection } from '../../feature-tutorial-detail/heading-section';
+import { CodeWithTabs } from '../../feature-tutorial-detail/code-renderer';
+import { Code } from '../../feature-tutorial-detail/content-code-block';
+import KeyFeatureCodeContent from '../content/key-feature-code.mdx';
 
-// import KeyFeatureCodeContent from '../content/key-feature-code.mdx';
-// import { CodeWithTabs } from './feature-code';
+type CardData = {
+  title: string;
+  description: string;
+  colorClass: string;
+};
+
+const cardData: CardData[] = [
+  {
+    title: 'Interactive Previews',
+    description:
+      'Learn Visually. Our live previews offer a clear and intuitive way to understand coding concepts. See how your code affects the output, making learning more engaging and effective.',
+    colorClass: 'text-primary',
+  },
+  {
+    title: 'Clear Code Walkthrough',
+    description:
+      'Follow along with our step-by-step guides and clear explanations. We break down complex concepts into simple steps, making it easy for you to understand and apply them.',
+    colorClass: 'text-success',
+  },
+  {
+    title: 'Storybook and source code included',
+    description:
+      'Dive deeper into the code with Storybook and access the full source code of each tutorial. Understand how components are built and interact with each other, and use the source code as a reference for your own projects.',
+    colorClass: 'text-warning',
+  },
+];
 
 export const KeyFeaturesSection = () => {
   return (
-    <section className="w-full py-12">
-      <HeadingSection
-        title="Build a profile page UI with React, Tailwind and NextUI"
-        author={{
-          avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
-          name: 'Vu Nguyen',
-          description: 'Software Engineer, NAB',
-        }}
-        description={
-          <div>
-            <Paragraph>
-              Let&apos;s build a profile page with the power of React, Tailwind
-              and NextUI. This hands-on guide will walk you through building a
-              modern, interactive profile UI that is not only beautiful but also
-              designed for easy integration with your existing projects.
-            </Paragraph>
-          </div>
-        }
-        targetAudience="Beginner to intermediate React developers familiar with basic component structure and styling concepts."
-        prerequisites={[
-          'Node.js and yarn: Make sure you have these installed on your system.',
-          'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
-          "A little TypeScript, CSS, and Tailwind knowledge: Some familiarity with these will help, but you don't need to be an expert – we'll guide you through!",
-        ]}
-        previewComponent={<ProfilePagePreview showStorySourceLink={false} />}
-      />
-      <Divider className="my-12" />
-      <HeadingSection
-        title="Crafting Flight Booking UI with React, Tailwind and NextUI"
-        author={{
-          avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
-          name: 'Vu Nguyen',
-          description: 'Software Engineer, NAB',
-        }}
-        description={
-          <div>
-            <Paragraph>
-              Let&apos;s build a beautiful search flight UI with the power of
-              React, NextUI and react-hook-form. This hands-on guide will walk
-              you through building a modern, interactive search flight UI with
-              filter and sort features. You will also learn how to use
-              react-hook-form to handle form state, validation and submission in
-              a simple and efficient way.
-            </Paragraph>
-          </div>
-        }
-        targetAudience="Intermediate React developers familiar with JavaScript, React, and Tailwind CSS."
-        prerequisites={[
-          'Node.js and yarn (or other package manager) installed on your system',
-          'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
-        ]}
-        previewComponent={
-          <FlightBookingPagePreview showStorySourceLink={false} />
-        }
-      />
+    <section className="container mx-auto px-4 md:px-6">
+      <div className="mx-auto grid max-w-7xl items-center gap-6 lg:grid-cols-2 lg:gap-12">
+        <div className="flex flex-col justify-center space-y-4">
+          <ul className="grid gap-2">
+            {cardData.map((card, index) => (
+              <li key={index}>
+                <Card
+                  shadow="sm"
+                  isPressable
+                  isBlurred
+                  className="bg-background/60 dark:bg-default-100/50 border-none p-2"
+                >
+                  <CardHeader>
+                    <h3 className={`${card.colorClass} text-xl font-bold`}>
+                      {card.title}
+                    </h3>
+                  </CardHeader>
+                  <CardBody>
+                    <p>{card.description}</p>
+                  </CardBody>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="w-full">
+          {/* Temporary fix for mdx tailwind class issue */}
+          <div className="hidden h-[350px]" />
+          <KeyFeatureCodeContent components={{ CodeWithTabs, Code }} />
+        </div>
+      </div>
     </section>
   );
 };
