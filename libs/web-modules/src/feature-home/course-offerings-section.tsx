@@ -51,7 +51,7 @@ export const CourseOfferingSection = () => {
             </div>
           }
           previewComponent={
-            <div className="flex flex-col items-center justify-center gap-4">
+            <div className="mt-4 flex flex-col items-center justify-center gap-4 md:mt-0">
               <ProfilePagePreview showStorySourceLink={false} />
               <Button
                 as={Link}
@@ -109,7 +109,7 @@ export const CourseOfferingSection = () => {
             </div>
           }
           previewComponent={
-            <div className="flex flex-col items-center justify-center gap-4">
+            <div className="mt-4 flex flex-col items-center justify-center gap-4 md:mt-0">
               <FlightBookingPagePreview showStorySourceLink={false} />
               <Button
                 as={Link}
