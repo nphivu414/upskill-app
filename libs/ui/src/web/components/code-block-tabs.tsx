@@ -1,7 +1,7 @@
 'use client';
 
 import React, { Key } from 'react';
-import { cn, Tab, Tabs } from '@nextui-org/react';
+import { cn, Tab, Tabs, TabsProps } from '@nextui-org/react';
 
 import { CustomIcons } from './custom-icon';
 
@@ -28,9 +28,15 @@ type CodeBlockTabsProps = {
   }[];
   sectionName?: string;
   destroyInactiveTabPanel?: boolean;
+  classNames: TabsProps['classNames'];
 };
 export function CodeBlockTabs(props: CodeBlockTabsProps) {
-  const { tabs, sectionName = '', destroyInactiveTabPanel = true } = props;
+  const {
+    tabs,
+    sectionName = '',
+    classNames,
+    destroyInactiveTabPanel = true,
+  } = props;
   const [selected, setSelected] = React.useState(tabs?.[0].title);
   const onSelectionChange = (key: Key) => {
     setSelected(key.toString());
@@ -47,6 +53,7 @@ export function CodeBlockTabs(props: CodeBlockTabsProps) {
         base: 'overflow-x-auto max-w-full',
         panel:
           'w-full bg-content2 rounded-lg overflow-auto mt-4 min-h-[60vh] max-h-[60vh] lg:min-h-[50px] py-0 lg:max-h-[75vh]',
+        ...classNames,
       }}
     >
       {(tab) => {

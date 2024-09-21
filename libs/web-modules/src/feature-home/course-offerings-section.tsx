@@ -1,192 +1,127 @@
+import { Button, Link, Spacer } from '@nextui-org/react';
 import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Image,
-  Link,
-} from '@nextui-org/react';
+  FlightBookingPagePreview,
+  ProfilePagePreview,
+} from '@upskill-app/tutorial-elements';
+import { Paragraph } from '@upskill-app/ui/web';
 
-export const CourseOfferingsSection = () => {
+import { HeadingSection } from '../feature-tutorial-detail/heading-section';
+
+export const CourseOfferingSection = () => {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
-      <div className="container px-4 md:px-6">
-        <div className="space-y-4 text-center">
-          <div className="inline-block rounded-lg px-3 py-1 text-sm">
-            Popular Courses
-          </div>
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-            Explore Our Course Offerings
-          </h2>
-          <p className="md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Browse through our diverse selection of online courses and find the
-            perfect one to suit your learning needs.
-          </p>
-        </div>
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Card isPressable as={Link} href="/tutorials/name">
-            <CardHeader>
-              <Image
-                src="https://nextui.org/images/card-example-2.jpeg"
-                height="200"
-                className="aspect-video w-full rounded-t-md object-cover"
-                alt="Course"
-              />
-            </CardHeader>
-            <CardBody>
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold">
-                  Introduction to Web Development
-                </h3>
-                <p>
-                  Learn the fundamentals of HTML, CSS, and JavaScript to build
-                  responsive and interactive websites.
-                </p>
-              </div>
-            </CardBody>
-            <CardFooter className="flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="size-4"
+    <section id="highlighted-tutorials" className="w-full py-24">
+      <div className="container mx-auto">
+        <HeadingSection
+          title="Build a profile page UI with React, Tailwind and NextUI"
+          author={{
+            avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
+            name: 'Vu Nguyen',
+            description: 'Software Engineer, NAB',
+          }}
+          description={
+            <div>
+              <Paragraph>
+                Let&apos;s build a profile page with the power of React,
+                Tailwind and NextUI. This hands-on guide will walk you through
+                building a modern, interactive profile UI that is not only
+                beautiful but also designed for easy integration with your
+                existing projects.
+              </Paragraph>
+            </div>
+          }
+          extraContent={
+            <div className="space-y-4">
+              {[
+                'Setup and initialize a new React project with NextUI',
+                'Building the FeaturePhotos component',
+                'Designing the Profile Information Section',
+                'Creating the Profile Stats Section',
+                'Implementing the Profile Post Timeline',
+                'Implementing the Profile Photo Timeline',
+                'Implementing the Profile Timeline Tabs',
+                'Putting it All Together',
+              ].map((section, index) => (
+                <div key={index} className="flex items-center space-x-4">
+                  <span className="bg-divider flex size-6 shrink-0 items-center justify-center rounded-full text-sm text-white">
+                    {index + 1}
+                  </span>
+                  <p>{section}</p>
+                </div>
+              ))}
+            </div>
+          }
+          previewComponent={
+            <div className="mt-4 flex flex-col items-center justify-center gap-4 md:mt-0">
+              <ProfilePagePreview showStorySourceLink={false} />
+              <Button
+                as={Link}
+                color="primary"
+                variant="shadow"
+                href="/tutorials/building-profile-ui"
               >
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <span className="text-sm">12 hours</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="size-4"
+                View Tutorial
+              </Button>
+            </div>
+          }
+        />
+      </div>
+      <Spacer y={24} />
+      <div className="container mx-auto">
+        <HeadingSection
+          title="Crafting Flight Booking UI with React, Tailwind and NextUI"
+          author={{
+            avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
+            name: 'Vu Nguyen',
+            description: 'Software Engineer, NAB',
+          }}
+          description={
+            <div>
+              <Paragraph>
+                Let&apos;s build a beautiful search flight UI with the power of
+                React, NextUI and react-hook-form. This hands-on guide will walk
+                you through building a modern, interactive search flight UI with
+                filter and sort features. You will also learn how to use
+                react-hook-form to handle form state, validation and submission
+                in a simple and efficient way.
+              </Paragraph>
+            </div>
+          }
+          extraContent={
+            <div className="space-y-4">
+              {[
+                'Setup and initialize a new React project with NextUI',
+                'Building Flight Header Component',
+                'Building Flight Card Component',
+                'Building Flight List Component',
+                'Building Flight Filter Form Component',
+                'Building Flight Filter Drawer Component',
+                'Building Flight Sort Menu Component',
+                'Building Flight Preferences Component',
+                'Building Flight Booking Page Component',
+              ].map((section, index) => (
+                <div key={index} className="flex items-center space-x-4">
+                  <span className="bg-divider flex size-6 shrink-0 items-center justify-center rounded-full text-sm text-white">
+                    {index + 1}
+                  </span>
+                  <p>{section}</p>
+                </div>
+              ))}
+            </div>
+          }
+          previewComponent={
+            <div className="mt-4 flex flex-col items-center justify-center gap-4 md:mt-0">
+              <FlightBookingPagePreview showStorySourceLink={false} />
+              <Button
+                as={Link}
+                variant="shadow"
+                color="primary"
+                href="/tutorials/building-flight-booking-ui"
               >
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-              </svg>
-              <span className="text-sm">4.8 (1,234 reviews)</span>
-            </CardFooter>
-          </Card>
-          <Card isPressable>
-            <CardHeader>
-              <Image
-                src="https://nextui.org/images/card-example-2.jpeg"
-                height="200"
-                className="aspect-video w-full rounded-t-md object-cover"
-                alt="Course"
-              />
-            </CardHeader>
-            <CardBody>
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold">
-                  Introduction to Web Development
-                </h3>
-                <p>
-                  Learn the fundamentals of HTML, CSS, and JavaScript to build
-                  responsive and interactive websites.
-                </p>
-              </div>
-            </CardBody>
-            <CardFooter className="flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="size-4"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <span className="text-sm">12 hours</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="size-4"
-              >
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-              </svg>
-              <span className="text-sm">4.8 (1,234 reviews)</span>
-            </CardFooter>
-          </Card>
-          <Card isPressable>
-            <CardHeader>
-              <Image
-                src="https://nextui.org/images/card-example-2.jpeg"
-                height="200"
-                className="aspect-video w-full rounded-t-md object-cover"
-                alt="Course"
-              />
-            </CardHeader>
-            <CardBody>
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold">
-                  Introduction to Web Development
-                </h3>
-                <p>
-                  Learn the fundamentals of HTML, CSS, and JavaScript to build
-                  responsive and interactive websites.
-                </p>
-              </div>
-            </CardBody>
-            <CardFooter className="flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="size-4"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <span className="text-sm">12 hours</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="size-4"
-              >
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-              </svg>
-              <span className="text-sm">4.8 (1,234 reviews)</span>
-            </CardFooter>
-          </Card>
-        </div>
+                View Tutorial
+              </Button>
+            </div>
+          }
+        />
       </div>
     </section>
   );
