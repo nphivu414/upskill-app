@@ -10,19 +10,20 @@ export default function Index() {
     <>
       <div className={`min-h-screen w-full transition-colors duration-300`}>
         <NavigationBar />
-        <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-300 dark:from-black dark:to-gray-950">
-          {/* Deep black overlay */}
-          <div className="absolute inset-0 bg-black opacity-0 dark:opacity-90"></div>
+        <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-200 dark:from-black dark:to-gray-950">
+          {/* Light/Dark mode overlay */}
+          <div className="absolute inset-0 bg-white opacity-70 dark:bg-black dark:opacity-80"></div>
 
-          {/* Multi-color neon light spreading effect with slower transition */}
+          {/* More colorful gradient-based neon light effect */}
           <div className="absolute inset-0">
-            <div className="animate-slowColorChange1 absolute left-1/4 top-0 aspect-[2/1] w-[150%] rounded-[100%] bg-[#FF00FF] opacity-0 blur-[100px] transition-colors duration-[180s] ease-in-out dark:opacity-10"></div>
-            <div className="animate-slowColorChange2 absolute right-0 top-1/4 aspect-[1/1] w-full rounded-[100%] bg-[#00FFFF] opacity-0 blur-[100px] transition-colors duration-[180s] ease-in-out dark:opacity-10"></div>
-            <div className="animate-slowColorChange3 absolute bottom-0 left-1/2 aspect-[2/1] w-[150%] rounded-[100%] bg-[#FFA500] opacity-0 blur-[100px] transition-colors duration-[180s] ease-in-out dark:opacity-10"></div>
+            <div className="animate-pulse-slow absolute inset-0 bg-gradient-to-b from-blue-500/30 via-blue-500/5 to-transparent"></div>
+            <div className="animate-pulse-slow animate-delay-[-2s] absolute inset-0 bg-gradient-to-b from-purple-500/30 via-purple-500/5 to-transparent"></div>
+            <div className="animate-pulse-slow absolute inset-0 bg-gradient-to-b from-pink-500/30 via-pink-500/5 to-transparent"></div>
+            <div className="animate-pulse-slow absolute inset-0 bg-gradient-to-b from-green-500/30 via-green-500/5 to-transparent"></div>
           </div>
 
-          {/* Cyberpunk-inspired grid overlay with dimmer border color */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,255,255,0.1)_1px,transparent_1px)] bg-[length:20px_20px] opacity-0 dark:opacity-10"></div>
+          {/* Grid overlay with dimmer border color for both modes */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[length:20px_20px] opacity-20 dark:bg-[linear-gradient(to_right,rgba(0,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,255,255,0.05)_1px,transparent_1px)] dark:opacity-10"></div>
 
           {/* Content */}
           <main className="relative flex-1">
