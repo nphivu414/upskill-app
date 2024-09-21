@@ -34,9 +34,9 @@ const cardData: CardData[] = [
 export const KeyFeaturesSection = () => {
   return (
     <section className="container mx-auto px-4 md:px-6">
-      <div className="mx-auto grid max-w-7xl items-center gap-6 lg:grid-cols-2 lg:gap-12">
+      <div className="mx-auto grid max-w-full items-center gap-6 lg:max-w-7xl lg:grid-cols-2 lg:gap-8">
         <div className="flex flex-col justify-center space-y-4">
-          <ul className="grid gap-2">
+          <ul className="grid gap-4">
             {cardData.map((card, index) => (
               <li key={index}>
                 <Card
@@ -59,7 +59,7 @@ export const KeyFeaturesSection = () => {
         </div>
         <div className="w-full">
           {/* Temporary fix for mdx tailwind class issue */}
-          <div className="hidden h-[350px]" />
+          <div className="hidden h-[350px] w-[85vw] md:w-[75vw] lg:w-full" />
           <KeyFeatureCodeContent components={{ CodeWithTabs, Code }} />
         </div>
       </div>

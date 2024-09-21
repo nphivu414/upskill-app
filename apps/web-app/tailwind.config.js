@@ -25,8 +25,8 @@ module.exports = {
         },
       },
       animation: {
-        'pulse-slow': 'pulse-slow 10s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      },
+        'pulse-slow': 'pulse-slow 15s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      }
     },
   },
   darkMode: 'selector',
