@@ -1,4 +1,4 @@
-import { Spacer } from '@nextui-org/react';
+import { Button, Link, Spacer } from '@nextui-org/react';
 import {
   FlightBookingPagePreview,
   ProfilePagePreview,
@@ -9,7 +9,7 @@ import { HeadingSection } from '../feature-tutorial-detail/heading-section';
 
 export const CourseOfferingSection = () => {
   return (
-    <section className="w-full py-24">
+    <section id="highlighted-tutorials" className="w-full py-24">
       <div className="container mx-auto">
         <HeadingSection
           title="Build a profile page UI with React, Tailwind and NextUI"
@@ -29,13 +29,40 @@ export const CourseOfferingSection = () => {
               </Paragraph>
             </div>
           }
-          targetAudience="Beginner to intermediate React developers familiar with basic component structure and styling concepts."
-          prerequisites={[
-            'Node.js and yarn: Make sure you have these installed on your system.',
-            'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
-            "A little TypeScript, CSS, and Tailwind knowledge: Some familiarity with these will help, but you don't need to be an expert – we'll guide you through!",
-          ]}
-          previewComponent={<ProfilePagePreview showStorySourceLink={false} />}
+          extraContent={
+            <div className="space-y-4">
+              {[
+                'Setup and initialize a new React project with NextUI',
+                'Building the FeaturePhotos component',
+                'Designing the Profile Information Section',
+                'Creating the Profile Stats Section',
+                'Implementing the Profile Post Timeline',
+                'Implementing the Profile Photo Timeline',
+                'Implementing the Profile Timeline Tabs',
+                'Putting it All Together',
+              ].map((section, index) => (
+                <div key={index} className="flex items-center space-x-4">
+                  <span className="bg-divider flex size-6 shrink-0 items-center justify-center rounded-full text-sm text-white">
+                    {index + 1}
+                  </span>
+                  <p>{section}</p>
+                </div>
+              ))}
+            </div>
+          }
+          previewComponent={
+            <div className="flex flex-col items-center justify-center gap-4">
+              <ProfilePagePreview showStorySourceLink={false} />
+              <Button
+                as={Link}
+                color="primary"
+                variant="shadow"
+                href="/tutorials/building-profile-ui"
+              >
+                View Tutorial
+              </Button>
+            </div>
+          }
         />
       </div>
       <Spacer y={24} />
@@ -59,13 +86,40 @@ export const CourseOfferingSection = () => {
               </Paragraph>
             </div>
           }
-          targetAudience="Intermediate React developers familiar with JavaScript, React, and Tailwind CSS."
-          prerequisites={[
-            'Node.js and yarn (or other package manager) installed on your system',
-            'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
-          ]}
+          extraContent={
+            <div className="space-y-4">
+              {[
+                'Setup and initialize a new React project with NextUI',
+                'Building Flight Header Component',
+                'Building Flight Card Component',
+                'Building Flight List Component',
+                'Building Flight Filter Form Component',
+                'Building Flight Filter Drawer Component',
+                'Building Flight Sort Menu Component',
+                'Building Flight Preferences Component',
+                'Building Flight Booking Page Component',
+              ].map((section, index) => (
+                <div key={index} className="flex items-center space-x-4">
+                  <span className="bg-divider flex size-6 shrink-0 items-center justify-center rounded-full text-sm text-white">
+                    {index + 1}
+                  </span>
+                  <p>{section}</p>
+                </div>
+              ))}
+            </div>
+          }
           previewComponent={
-            <FlightBookingPagePreview showStorySourceLink={false} />
+            <div className="flex flex-col items-center justify-center gap-4">
+              <FlightBookingPagePreview showStorySourceLink={false} />
+              <Button
+                as={Link}
+                variant="shadow"
+                color="primary"
+                href="/tutorials/building-flight-booking-ui"
+              >
+                View Tutorial
+              </Button>
+            </div>
           }
         />
       </div>

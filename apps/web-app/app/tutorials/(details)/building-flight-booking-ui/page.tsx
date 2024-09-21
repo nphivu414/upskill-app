@@ -34,7 +34,9 @@ export default function FlightBookingUI() {
           'Node.js and yarn (or other package manager) installed on your system',
           'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
         ]}
-        previewComponent={<FlightBookingPagePreview />}
+        previewComponent={
+          <FlightBookingPagePreview showStorySourceLink={false} />
+        }
       />
       <Divider className="my-12" />
       <ContentSection
