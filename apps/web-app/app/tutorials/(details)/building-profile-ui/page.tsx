@@ -33,7 +33,7 @@ export default function ProfileUI() {
           'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
           "A little TypeScript, CSS, and Tailwind knowledge: Some familiarity with these will help, but you don't need to be an expert – we'll guide you through!",
         ]}
-        previewComponent={<ProfilePagePreview />}
+        previewComponent={<ProfilePagePreview showStorySourceLink={false} />}
       />
       <Divider className="my-12" />
       <ContentSection
