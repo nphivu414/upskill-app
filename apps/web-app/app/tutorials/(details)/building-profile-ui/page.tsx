@@ -7,11 +7,15 @@ import {
   ProfileContent,
 } from '@upskill-app/web-modules/tutorial-detail';
 
+export const metadata = {
+  title: 'Building Profile Page UI with React, Tailwind and NextUI',
+};
+
 export default function ProfileUI() {
   return (
     <div className="flex flex-col">
       <HeadingSection
-        title="Crafting Profile Page UI with React, Tailwind and NextUI"
+        title="Building Profile Page UI with React, Tailwind and NextUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',

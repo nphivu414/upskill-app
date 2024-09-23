@@ -11,7 +11,7 @@ import { CustomIcons, Paragraph } from '@upskill-app/ui/web';
 export const AuthorSection = () => {
   return (
     <section className="w-full">
-      <Card isBlurred>
+      <Card shadow="none" className="bg-transparent">
         <CardHeader className="pb-4">
           <p className="text-3xl font-bold">About the Technical Writer</p>
         </CardHeader>
