@@ -2,7 +2,7 @@ import { Card, CardBody, Link } from '@nextui-org/react';
 
 export const RelatedTutorialsSection = () => {
   return (
-    <section className="w-full py-12">
+    <section className="w-full">
       <div className="container px-4 md:px-6">
         <div className="space-y-6">
           <div>

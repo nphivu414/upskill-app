@@ -59,7 +59,7 @@ export const KeyFeaturesSection = () => {
         </div>
         <div className="flex w-full flex-col items-center justify-center">
           {/* Temporary fix for mdx tailwind class issue */}
-          <div className="hidden h-[350px] w-[85vw] md:w-[75vw] lg:w-full" />
+          <div className="hidden h-[340px] w-[85vw] md:w-[75vw] lg:w-full" />
           <KeyFeatureCodeContent components={{ CodeWithTabs, Code }} />
         </div>
       </div>

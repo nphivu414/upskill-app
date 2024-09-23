@@ -21,11 +21,11 @@ module.exports = {
       keyframes: {
         'pulse-slow': {
           '0%, 100%': { opacity: 0.2 },
-          '50%': { opacity: 0.5 },
+          '50%': { opacity: 0.8 },
         },
       },
       animation: {
-        'pulse-slow': 'pulse-slow 15s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-slow': 'pulse-slow 10s infinite',
       }
     },
   },
