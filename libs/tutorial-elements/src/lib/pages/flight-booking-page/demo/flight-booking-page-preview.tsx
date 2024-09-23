@@ -2,17 +2,22 @@
 
 import {
   getGithubSourceUrl,
-  getStorybookBaseUrl,
   getStorybookUrl,
   TUTORIAL_REPO,
   TUTORIAL_STORIES,
 } from '@upskill-app/shared';
-import { EmbedStory, LivePreview } from '@upskill-app/ui/web';
+import { EmbedPreview, LivePreview } from '@upskill-app/ui/web';
 import { useTheme } from 'next-themes';
 
 import { ClientOnlyContainer, MockupBrowser } from '../../../components';
 
-export const FlightBookingPagePreview = () => {
+type FlightBookingPagePreviewProps = {
+  showStorySourceLink?: boolean;
+};
+
+export const FlightBookingPagePreview = ({
+  showStorySourceLink,
+}: FlightBookingPagePreviewProps) => {
   const { theme } = useTheme();
   return (
     <LivePreview
@@ -24,12 +29,12 @@ export const FlightBookingPagePreview = () => {
         TUTORIAL_REPO.PROFILE_UI,
         'blob/main/src/components/profile/profile-page.tsx'
       )}
+      showStorySourceLink={showStorySourceLink}
     >
       <MockupBrowser>
         <ClientOnlyContainer loadingContainerClassName="min-h-[550px]">
-          <EmbedStory
-            storyBaseURL={getStorybookBaseUrl()}
-            storyId={TUTORIAL_STORIES.FLIGHT_BOOKING_UI.FLIGHT_BOOKING_PAGE}
+          <EmbedPreview
+            previewUrl="/tutorials/preview/flight-booking-ui"
             height={550}
             width="100%"
           />

@@ -29,7 +29,7 @@ export const FlightCardPreview = () => {
         <FlightCard
           {...defaultFlights[3]}
           onPress={(id) => {
-            alert(`Flight with id ${id} clicked`);
+            console.log(`Flight with id ${id} clicked`);
           }}
         />
       </div>

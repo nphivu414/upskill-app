@@ -13,7 +13,21 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-geist-mono)'],
+      },
+      keyframes: {
+        'pulse-slow': {
+          '0%, 100%': { opacity: 0.2 },
+          '50%': { opacity: 0.8 },
+        },
+      },
+      animation: {
+        'pulse-slow': 'pulse-slow 10s infinite',
+      }
+    },
   },
   darkMode: 'selector',
   plugins: [

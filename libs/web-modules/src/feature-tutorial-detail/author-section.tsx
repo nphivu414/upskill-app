@@ -1,42 +1,82 @@
-import { Avatar } from '@nextui-org/react';
+import {
+  Avatar,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Link,
+} from '@nextui-org/react';
+import { CustomIcons, Paragraph } from '@upskill-app/ui/web';
 
 export const AuthorSection = () => {
   return (
-    <section className="w-full py-12">
-      <div className="container px-4 md:px-6">
-        <div className="grid gap-6 md:grid-cols-2 md:gap-12">
-          <div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-              About the Technical Writer
-            </h2>
-            <div className="mt-4 flex items-center gap-4">
+    <section className="w-full">
+      <Card isBlurred>
+        <CardHeader className="pb-4">
+          <p className="text-3xl font-bold">About the Technical Writer</p>
+        </CardHeader>
+        <CardBody>
+          <div className="flex max-w-screen-lg flex-col items-start gap-6 md:flex-row">
+            <div className="shrink-0">
               <Avatar
+                className="!size-24 md:!size-32"
                 isBordered
                 src="https://avatars.githubusercontent.com/u/22409039?v=4"
+                fallback="Vu Nguyen"
               />
+            </div>
+            <div className="grow space-y-4">
               <div>
-                <h3 className="text-lg font-semibold">Vu Nguyen</h3>
-                <p className="text-sm">NAB, Software Engineer</p>
+                <h2 className="text-2xl font-semibold">Vu Nguyen</h2>
+                <p className="text-muted-foreground">NAB, Software Engineer</p>
+              </div>
+              <Paragraph className="text-lg leading-relaxed">
+                Hi, I’m Vu, a Software Engineer at NAB with a love for creating
+                web and mobile apps that don’t just look great but feel great to
+                use. I’ve had the chance to work with some awesome companies
+                over the years, picking up new tricks and tackling many kinds of
+                challenges along the way.
+              </Paragraph>
+              <Paragraph className="text-lg leading-relaxed">
+                Now, I’m thrilled to share what I’ve learned and help others
+                through fun, interactive coding tutorials!
+              </Paragraph>
+              <div className="flex gap-4">
+                <Button
+                  as={Link}
+                  href="https://github.com/nphivu414"
+                  variant="flat"
+                  isIconOnly
+                  target="_blank"
+                >
+                  <CustomIcons.gitHub className="size-4" />
+                  <span className="sr-only">GitHub</span>
+                </Button>
+                <Button
+                  as={Link}
+                  href="https://x.com/nphivu414"
+                  variant="flat"
+                  isIconOnly
+                  target="_blank"
+                >
+                  <CustomIcons.x className="size-4" />
+                  <span className="sr-only">X</span>
+                </Button>
+                <Button
+                  as={Link}
+                  href="https://www.linkedin.com/in/nphivu414/"
+                  variant="flat"
+                  isIconOnly
+                  target="_blank"
+                >
+                  <CustomIcons.linkedin className="size-4" />
+                  <span className="sr-only">X=Linkedin</span>
+                </Button>
               </div>
             </div>
-            <p className="mt-4 md:text-xl">
-              A tech enthusiast with a dream to create amazing products.
-              Experienced in software engineering, specializing in creating
-              websites and mobile apps with beautiful UI and UX. Always up for a
-              challenge and ready to learn something new.
-            </p>
           </div>
-          <div className="flex flex-col justify-center">
-            <img
-              src="https://generated.vusercontent.net/placeholder.svg"
-              width="600"
-              height="400"
-              alt="Instructor Photo"
-              className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full"
-            />
-          </div>
-        </div>
-      </div>
+        </CardBody>
+      </Card>
     </section>
   );
 };

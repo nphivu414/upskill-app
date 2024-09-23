@@ -1,17 +1,22 @@
+import { AppFooter, NavigationBar } from '@upskill-app/ui/web';
 import {
-  CourseOfferingsSection,
+  CourseOfferingSection,
   HeroSection,
   KeyFeaturesSection,
 } from '@upskill-app/web-modules/home';
 
 export default function Index() {
   return (
-    <div className="flex min-h-dvh flex-col">
-      <main className="flex-1">
-        <HeroSection />
-        <KeyFeaturesSection />
-        <CourseOfferingsSection />
-      </main>
-    </div>
+    <>
+      <div className={`min-h-screen w-full transition-colors duration-300`}>
+        <NavigationBar shouldHideOnScroll className="fixed" />
+        <main className="relative flex-1">
+          <HeroSection />
+          <KeyFeaturesSection />
+          <CourseOfferingSection />
+        </main>
+        <AppFooter className="bg-background/50 relative z-10 border-none" />
+      </div>
+    </>
   );
 }
