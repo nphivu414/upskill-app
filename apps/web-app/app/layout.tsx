@@ -4,9 +4,11 @@ import { GeistSans } from 'geist/font/sans';
 
 import './styles/global.css';
 
+import type { Metadata } from 'next';
 import { ComponentWithChildren } from '@upskill-app/shared';
 
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL('https://upskills.dev/'),
   title: 'Upskills - Learn to code with fun, interactive tutorials',
   description:
     'Upskills is a platform where you can learn to code with fun, interactive tutorials. Get started with our free coding tutorials today!',
