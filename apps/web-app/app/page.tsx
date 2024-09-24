@@ -9,7 +9,7 @@ export default function Index() {
   return (
     <>
       <div className={`min-h-screen w-full transition-colors duration-300`}>
-        <NavigationBar shouldHideOnScroll className="fixed" />
+        <NavigationBar className="fixed" />
         <main className="relative flex-1">
           <HeroSection />
           <KeyFeaturesSection />

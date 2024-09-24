@@ -8,14 +8,14 @@ import {
 } from '@upskill-app/web-modules/tutorial-detail';
 
 export const metadata = {
-  title: 'Building Flight Booking UI with React, Tailwind and NextUI',
+  title: 'Build a Flight Booking UI with React, Tailwind and NextUI',
 };
 
 export default function FlightBookingUI() {
   return (
     <div className="flex flex-col">
       <HeadingSection
-        title="Building Flight Booking UI with React, Tailwind and NextUI"
+        title="Build a Flight Booking UI with React, Tailwind and NextUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',

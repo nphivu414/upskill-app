@@ -2,7 +2,7 @@ import { Spacer } from '@nextui-org/react';
 
 export const HeroSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 pb-12 pt-24 md:py-28 dark:from-indigo-950 dark:to-black">
+    <section className="relative w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 pb-12 pt-24 md:pb-24 md:pt-32 dark:from-indigo-950 dark:to-black">
       {/* Light/Dark mode overlay */}
       <div className="bg-background absolute inset-0 opacity-60 dark:opacity-70"></div>
 
@@ -26,19 +26,17 @@ export const HeroSection = () => {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[length:20px_20px] opacity-30 dark:bg-[linear-gradient(to_right,rgba(0,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,255,255,0.1)_1px,transparent_1px)] dark:opacity-20"></div>
       <div className="relative z-10 mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center space-y-6 text-center">
-          <h1 className="mb-4 text-3xl font-bold md:text-6xl md:leading-tight">
+          <h1 className="text-2xl font-bold leading-6 md:text-6xl md:leading-tight">
             Not another boring tutorial
             <Spacer y={1} />
-            Get ready for something{' '}
-            <span className="relative text-cyan-400">
+            <span className="mb-3 mr-2 inline-block md:inline">
+              Get ready for something
+            </span>
+            <span className="relative mt-2 text-cyan-400">
               different
               <span className="absolute -inset-1 rounded-lg bg-cyan-400/20 dark:blur-sm"></span>
             </span>
           </h1>
-          <p className="max-w-3xl text-lg text-gray-400 md:text-xl">
-            Elevate your skills with interactive learning and copy-paste ready
-            code snippets
-          </p>
         </div>
       </div>
     </section>

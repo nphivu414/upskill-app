@@ -3,6 +3,7 @@
 import React from 'react';
 import {
   Avatar,
+  Button,
   Link,
   Navbar,
   NavbarBrand,
@@ -16,6 +17,7 @@ import {
 } from '@nextui-org/react';
 
 import { cn } from '../utils';
+import { CustomIcons } from './custom-icon';
 import { ThemeToggle } from './theme-toggle';
 
 const menuItems = [
@@ -39,6 +41,7 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
     <Navbar
       maxWidth="xl"
       isBlurred
+      isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       className={cn('bg-background/50 shadow', className)}
       {...rest}
@@ -67,16 +70,48 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
+        <div className="flex gap-2">
+          <Button
+            as={Link}
+            size="sm"
+            href="https://github.com/nphivu414"
+            variant="flat"
+            isIconOnly
+            target="_blank"
+          >
+            <CustomIcons.gitHub className="size-4" />
+            <span className="sr-only">GitHub</span>
+          </Button>
+          <Button
+            as={Link}
+            size="sm"
+            href="https://x.com/nphivu414"
+            variant="flat"
+            isIconOnly
+            target="_blank"
+          >
+            <CustomIcons.x className="size-4" />
+            <span className="sr-only">X</span>
+          </Button>
+        </div>
         <ThemeToggle />
       </NavbarContent>
       <NavbarMenu>
         <NavbarMenuItem>
-          <Link color="foreground" href="/">
+          <Link
+            color="foreground"
+            href="/"
+            onClick={() => setIsMenuOpen(false)}
+          >
             Home
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link color="foreground" href="/#highlighted-tutorials">
+          <Link
+            color="foreground"
+            href="/#highlighted-tutorials"
+            onClick={() => setIsMenuOpen(false)}
+          >
             Tutorials
           </Link>
         </NavbarMenuItem>

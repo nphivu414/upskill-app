@@ -9,10 +9,10 @@ import { HeadingSection } from '../feature-tutorial-detail/heading-section';
 
 export const CourseOfferingSection = () => {
   return (
-    <section id="highlighted-tutorials" className="w-full py-24">
+    <section id="highlighted-tutorials" className="w-full py-12 md:py-24">
       <div className="container mx-auto">
         <HeadingSection
-          title="Build a profile page UI with React, Tailwind and NextUI"
+          title="Build a Profile Page UI with React, Tailwind and NextUI"
           author={{
             avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
             name: 'Vu Nguyen',
@@ -42,7 +42,7 @@ export const CourseOfferingSection = () => {
                 'Putting it All Together',
               ].map((section, index) => (
                 <div key={index} className="flex items-center space-x-4">
-                  <span className="bg-divider flex size-6 shrink-0 items-center justify-center rounded-full text-sm text-white">
+                  <span className="bg-divider text-muted flex size-6 shrink-0 items-center justify-center rounded-full text-sm">
                     {index + 1}
                   </span>
                   <p>{section}</p>
@@ -65,10 +65,10 @@ export const CourseOfferingSection = () => {
           }
         />
       </div>
-      <Spacer y={24} />
+      <Spacer className="my-8 md:my-24" />
       <div className="container mx-auto">
         <HeadingSection
-          title="Crafting Flight Booking UI with React, Tailwind and NextUI"
+          title="Build a Flight Booking UI with React, Tailwind and NextUI"
           author={{
             avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
             name: 'Vu Nguyen',
@@ -78,11 +78,11 @@ export const CourseOfferingSection = () => {
             <div>
               <Paragraph>
                 Let&apos;s build a beautiful search flight UI with the power of
-                React, NextUI and react-hook-form. This hands-on guide will walk
-                you through building a modern, interactive search flight UI with
-                filter and sort features. You will also learn how to use
-                react-hook-form to handle form state, validation and submission
-                in a simple and efficient way.
+                React, Tailwind, NextUI and React Hook Form. This hands-on guide
+                will walk you through building a modern, interactive search
+                flight UI with filter and sort features. You will also learn how
+                to use react-hook-form to handle form state, validation and
+                submission in a simple and efficient way.
               </Paragraph>
             </div>
           }
@@ -100,7 +100,7 @@ export const CourseOfferingSection = () => {
                 'Building Flight Booking Page Component',
               ].map((section, index) => (
                 <div key={index} className="flex items-center space-x-4">
-                  <span className="bg-divider flex size-6 shrink-0 items-center justify-center rounded-full text-sm text-white">
+                  <span className="bg-divider text-muted flex size-6 shrink-0 items-center justify-center rounded-full text-sm">
                     {index + 1}
                   </span>
                   <p>{section}</p>
