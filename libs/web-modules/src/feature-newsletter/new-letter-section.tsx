@@ -9,7 +9,6 @@ export const NewsLetterSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle newsletter subscription logic here
     console.log('Subscribed with email:', email);
     setEmail('');
   };
@@ -39,7 +38,7 @@ export const NewsLetterSection = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <Button type="submit" color="primary" className="w-full md:w-[70%]">
+          <Button type="submit" color="primary" className="w-full md:w-1/2">
             Subscribe
           </Button>
         </div>
