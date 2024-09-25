@@ -19,6 +19,13 @@ export async function subscribeToNewsletter(
              <p>Best regards,<br>The Upskills Team</p>`,
     });
 
+    await resend.contacts.create({
+      email,
+      firstName: preferredName,
+      unsubscribed: false,
+      audienceId: '5a279168-7bb8-4e20-8150-bc979f991ac1',
+    });
+
     return {
       success: true,
       message: 'Subscription successful! Check your email for confirmation.',
