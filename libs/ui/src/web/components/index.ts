@@ -1,6 +1,7 @@
 export * from './navigation-bar';
 export * from './app-container';
 export * from './app-footer';
+export * from './app-logo';
 export * from './copy-button';
 export * from './code-block';
 export * from './theme-toggle';
@@ -17,3 +18,4 @@ export * from './live-preview';
 export * from './drawer';
 export * from './form-fields';
 export * from './toaster';
+export * from './grid-overlay';

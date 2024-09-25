@@ -17,20 +17,9 @@ import {
 } from '@nextui-org/react';
 
 import { cn } from '../utils';
+import { AppLogo } from './app-logo';
 import { CustomIcons } from './custom-icon';
 import { ThemeToggle } from './theme-toggle';
-
-const menuItems = [
-  'Profile',
-  'Dashboard',
-  'Activity',
-  'Analytics',
-  'System',
-  'Deployments',
-  'My Settings',
-  'Team Settings',
-  'Help & Feedback',
-];
 
 type NavigationBarProps = NavbarProps;
 
@@ -51,7 +40,7 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
         className="sm:hidden"
       />
       <NavbarBrand>
-        <Avatar src="/app-logo.png" className="!size-6" />
+        <AppLogo className="!size-6" />
         <Spacer x={1} />
         <Link href="/" color="foreground">
           <p className="font-bold text-inherit">Upskills</p>
@@ -66,6 +55,11 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
         <NavbarItem>
           <Link color="foreground" href="/#highlighted-tutorials">
             Tutorials
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="/#newsletter">
+            Follow us
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -113,6 +107,15 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
             onClick={() => setIsMenuOpen(false)}
           >
             Tutorials
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link
+            color="foreground"
+            href="/#newsletter"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Follow us
           </Link>
         </NavbarMenuItem>
       </NavbarMenu>

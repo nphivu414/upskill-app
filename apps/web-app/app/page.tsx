@@ -1,4 +1,3 @@
-import { Divider } from '@nextui-org/react';
 import { AppFooter, NavigationBar } from '@upskill-app/ui/web';
 import {
   CourseOfferingSection,
@@ -16,8 +15,7 @@ export default function Index() {
           <HeroSection />
           <KeyFeaturesSection />
           <CourseOfferingSection />
-          <Divider />
-          <div className="bg-content1">
+          <div className="bg-content1 dark:bg-content1/50">
             <NewsLetterSection />
           </div>
         </main>

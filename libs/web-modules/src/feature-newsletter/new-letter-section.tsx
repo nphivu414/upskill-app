@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Button, Input } from '@nextui-org/react';
+import { AppLogo, GridOverlay } from '@upskill-app/ui/web';
 import { toast } from 'sonner';
 
 import { subscribeToNewsletter } from './action';
@@ -39,43 +40,53 @@ export const NewsLetterSection = () => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-screen-md space-y-8 px-4 py-12 md:px-0">
-      <div className="flex flex-col justify-center gap-1">
-        <p className="text-3xl font-semibold">Follow Upskills.dev</p>
-        <p className="text-muted text-sm">
-          Stay updated with our latest tutorials and coding tips.
+    <div id="newsletter" className="relative">
+      <GridOverlay />
+      <div className=" mx-auto w-full max-w-screen-md space-y-8 px-4 py-12 md:px-0">
+        <div className="flex items-center gap-4">
+          <div className="shrink-0">
+            <AppLogo isBordered size="lg" />
+          </div>
+          <div className="flex flex-col justify-center">
+            <p className="text-lg font-semibold lg:text-2xl">
+              Follow Upskills.dev
+            </p>
+            <p className="text-muted text-sm">
+              Stay updated with our latest tutorials and coding tips.
+            </p>
+          </div>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex flex-col items-center gap-4 sm:flex-row">
+            <Input
+              type="text"
+              size="sm"
+              label="Preferred name"
+              value={preferredName}
+              onChange={(e) => setPreferredName(e.target.value)}
+            />
+            <Input
+              type="email"
+              size="sm"
+              label="Your email*"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <Button
+              type="submit"
+              isLoading={isLoading}
+              color="primary"
+              className="w-full md:w-1/2"
+            >
+              Subscribe
+            </Button>
+          </div>
+        </form>
+        <p className="text-muted text-center text-sm lg:text-left">
+          We respect your privacy. Unsubscribe at any time.
         </p>
       </div>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
-          <Input
-            type="text"
-            size="sm"
-            label="Preferred name"
-            value={preferredName}
-            onChange={(e) => setPreferredName(e.target.value)}
-          />
-          <Input
-            type="email"
-            size="sm"
-            label="Your email*"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <Button
-            type="submit"
-            isLoading={isLoading}
-            color="primary"
-            className="w-full md:w-1/2"
-          >
-            Subscribe
-          </Button>
-        </div>
-      </form>
-      <p className="text-muted text-sm">
-        We respect your privacy. Unsubscribe at any time.
-      </p>
     </div>
   );
 };

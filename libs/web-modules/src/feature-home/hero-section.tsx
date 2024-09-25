@@ -1,4 +1,5 @@
 import { Spacer } from '@nextui-org/react';
+import { GridOverlay } from '@upskill-app/ui/web';
 
 export const HeroSection = () => {
   return (
@@ -22,8 +23,7 @@ export const HeroSection = () => {
         ></div>
       </div>
 
-      {/* Grid overlay with clearer border color for both modes */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[length:20px_20px] opacity-30 dark:bg-[linear-gradient(to_right,rgba(0,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,255,255,0.1)_1px,transparent_1px)] dark:opacity-20"></div>
+      <GridOverlay />
       <div className="relative z-10 mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center space-y-6 text-center">
           <h1 className="text-2xl font-bold leading-6 md:text-6xl md:leading-tight">
