@@ -1,16 +1,41 @@
 'use client';
 
-import { useState } from 'react';
+import React from 'react';
 import { Button, Input } from '@nextui-org/react';
+import { toast } from 'sonner';
+
+import { subscribeToNewsletter } from './action';
 
 export const NewsLetterSection = () => {
-  const [email, setEmail] = useState('');
-  const [preferredName, setPreferredName] = useState('');
+  const [email, setEmail] = React.useState('');
+  const [preferredName, setPreferredName] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Subscribed with email:', email);
-    setEmail('');
+    setIsLoading(true);
+
+    try {
+      const result = await subscribeToNewsletter(email, preferredName);
+      if (result.success) {
+        toast('Subscription Successful', {
+          description: result.message,
+        });
+        setEmail('');
+        setPreferredName('');
+      } else {
+        throw new Error(result.message);
+      }
+    } catch (error) {
+      toast('Subscription Failed', {
+        description:
+          error instanceof Error
+            ? error.message
+            : 'An unexpected error occurred',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -38,7 +63,12 @@ export const NewsLetterSection = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <Button type="submit" color="primary" className="w-full md:w-1/2">
+          <Button
+            type="submit"
+            isLoading={isLoading}
+            color="primary"
+            className="w-full md:w-1/2"
+          >
             Subscribe
           </Button>
         </div>
