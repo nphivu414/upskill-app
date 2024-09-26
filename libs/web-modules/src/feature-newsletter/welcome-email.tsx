@@ -10,14 +10,11 @@ import {
   Section,
   Text,
 } from '@react-email/components';
-import { env } from '@upskill-app/web-env';
 
 interface WelcomeEmailProps {
   preferredName?: string;
   email: string;
 }
-
-const baseUrl = env.NEXT_PUBLIC_APP_URL;
 
 const main = {
   backgroundColor: '#ffffff',
@@ -55,16 +52,6 @@ const button = {
   padding: '12px',
 };
 
-const hr = {
-  borderColor: '#cccccc',
-  margin: '20px 0',
-};
-
-const footer = {
-  color: '#8898aa',
-  fontSize: '12px',
-};
-
 export const WelcomeEmail = ({ preferredName, email }: WelcomeEmailProps) => {
   const name = preferredName || email;
   return (
@@ -76,7 +63,7 @@ export const WelcomeEmail = ({ preferredName, email }: WelcomeEmailProps) => {
       <Body style={main}>
         <Container style={container}>
           <Img
-            src={`${baseUrl}app-logo.png`}
+            src="https://upskills.dev/app-logo.png"
             width="75"
             height="75"
             alt="Upskills"
