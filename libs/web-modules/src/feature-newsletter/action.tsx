@@ -33,29 +33,6 @@ export async function subscribeToNewsletter(
   }
 
   try {
-    // const existingSubscriber = await findSubscriberByEmail(email)
-
-    // await resend.contacts.create({
-    //   email,
-    //   firstName: preferredName,
-    //   unsubscribed: true,
-    //   audienceId: '5a279168-7bb8-4e20-8150-bc979f991ac1',
-    // });
-
-    // await resend.emails.send({
-    //   from: 'Upskills <news@upskills.dev>',
-    //   to: [email],
-    //   subject: 'Welcome to Upskills Newsletter!',
-    //   html: `<p>Hello ${preferredName || 'there'},</p>
-    //          <p>Thank you for subscribing to our newsletter. We're excited to share our latest tutorials and coding tips with you!</p>
-    //          <p>Best regards,<br>The Upskills Team</p>`,
-    // });
-
-    // return {
-    //   success: true,
-    //   message: 'Subscription successful! Check your email for confirmation.',
-    // };
-
     // Check if the subscriber already exists
     const existingSubscriber = await findSubscriberByEmail(email);
 
@@ -65,7 +42,6 @@ export async function subscribeToNewsletter(
         audienceId: DEFAULT_AUDIENCE_ID,
         id: existingSubscriber.resendId,
       });
-      console.log('🚀 ~ resendData:', resendData);
 
       if (!resendData?.unsubscribed) {
         return {
@@ -74,7 +50,6 @@ export async function subscribeToNewsletter(
         };
       } else {
         // Re-subscribe the user
-        // await resend.contacts.update(existingSubscriber.resendId, { unsubscribed: false })
         await resend.contacts.update({
           audienceId: DEFAULT_AUDIENCE_ID,
           id: existingSubscriber.resendId,
@@ -105,7 +80,7 @@ export async function subscribeToNewsletter(
     }
 
     // Send welcome email
-    const { data: emailData, error: emailError } = await resend.emails.send({
+    const { error: emailError } = await resend.emails.send({
       from: 'Upskills <news@upskills.dev>',
       to: [email],
       subject: 'Welcome to Upskills Newsletter!',

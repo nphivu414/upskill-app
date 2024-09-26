@@ -69,10 +69,11 @@ export const NewsLetterSection = () => {
             <Input
               type="email"
               size="sm"
-              label="Your email*"
+              label="Your email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              validationBehavior="native"
               required
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Button
               type="submit"
