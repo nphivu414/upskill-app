@@ -16,9 +16,9 @@ export const HeroSection = () => {
             <span className="mb-3 mr-2 inline-block md:inline">
               Get ready for something
             </span>
-            <span className="relative mt-2 text-cyan-400">
+            <span className="text-primary-400 relative mt-2">
               different
-              <span className="absolute -inset-1 rounded-lg bg-cyan-400/20 dark:blur-sm"></span>
+              <span className="bg-primary-400/20 absolute -inset-1 rounded-lg dark:blur-sm"></span>
             </span>
           </h1>
         </div>

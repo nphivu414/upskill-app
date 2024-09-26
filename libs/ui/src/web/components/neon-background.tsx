@@ -20,7 +20,7 @@ export const NeonBackground = ({
               'bg-gradient-to-b': gradientDirection === 'to-b',
             }
           )}
-          style={{ backgroundPosition: '50% 20%' }}
+          style={{ backgroundPosition: '50% 20%', animationDelay: '-4s' }}
         ></div>
         <div
           className={cn(
@@ -40,7 +40,7 @@ export const NeonBackground = ({
               'bg-gradient-to-b': gradientDirection === 'to-b',
             }
           )}
-          style={{ backgroundPosition: '80% 15%', animationDelay: '-4s' }}
+          style={{ backgroundPosition: '80% 15%' }}
         ></div>
       </div>
     </>

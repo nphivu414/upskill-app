@@ -57,8 +57,8 @@ export const NewsLetterSection = () => {
             </p>
           </div>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col items-center gap-4 sm:flex-row">
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col items-center gap-4 sm:min-h-[72px] sm:flex-row sm:items-start">
             <Input
               type="text"
               size="sm"
@@ -79,15 +79,15 @@ export const NewsLetterSection = () => {
               type="submit"
               isLoading={isLoading}
               color="primary"
-              className="w-full md:w-1/2"
+              className="w-full sm:mt-1 md:w-1/2"
             >
               Subscribe
             </Button>
           </div>
+          <p className="text-muted mt-4 text-center text-sm sm:mt-0 lg:text-left">
+            We respect your privacy. Unsubscribe at any time.
+          </p>
         </form>
-        <p className="text-muted text-center text-sm lg:text-left">
-          We respect your privacy. Unsubscribe at any time.
-        </p>
       </div>
     </div>
   );
