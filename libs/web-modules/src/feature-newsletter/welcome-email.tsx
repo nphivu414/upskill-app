@@ -32,6 +32,7 @@ const container = {
 
 const logo = {
   margin: '0 auto',
+  borderRadius: '100%',
 };
 
 const paragraph = {
@@ -75,9 +76,9 @@ export const WelcomeEmail = ({ preferredName, email }: WelcomeEmailProps) => {
       <Body style={main}>
         <Container style={container}>
           <Img
-            src={`${baseUrl}/app-logo.png`}
-            width="170"
-            height="50"
+            src={`${baseUrl}app-logo.png`}
+            width="75"
+            height="75"
             alt="Upskills"
             style={logo}
           />
@@ -87,8 +88,9 @@ export const WelcomeEmail = ({ preferredName, email }: WelcomeEmailProps) => {
             are excited to have you on board!
           </Text>
           <Text style={paragraph}>
-            A wide range of tutorials and coding tips to help you get started on
-            your coding journey is comming soon to your inbox. Stay tuned!
+            Your coding journey is about to get even more exciting! We are
+            packing your inbox with amazing tutorials and practical tips. Stay
+            tuned!
           </Text>
           <Section style={btnContainer}>
             <Button style={button} href="https://upskills.dev">
