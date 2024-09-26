@@ -19,7 +19,7 @@ export const NewsLetterSection = () => {
     try {
       const result = await subscribeToNewsletter(email, preferredName);
       if (result.success) {
-        toast('Subscription Successful', {
+        toast.success('Subscription Successful', {
           description: result.message,
         });
         setEmail('');
@@ -28,7 +28,7 @@ export const NewsLetterSection = () => {
         throw new Error(result.message);
       }
     } catch (error) {
-      toast('Subscription Failed', {
+      toast.error('Subscription Failed', {
         description:
           error instanceof Error
             ? error.message

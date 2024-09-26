@@ -101,7 +101,8 @@ export async function subscribeToNewsletter(
 
     return {
       success: true,
-      message: 'Subscription successful! Check your email for confirmation.',
+      message:
+        'Subscription successful! Check your email for a welcome message.',
     };
   } catch (error) {
     console.error('Failed to send email:', error);
