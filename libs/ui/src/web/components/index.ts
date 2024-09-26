@@ -19,3 +19,4 @@ export * from './drawer';
 export * from './form-fields';
 export * from './toaster';
 export * from './grid-overlay';
+export * from './neon-background';

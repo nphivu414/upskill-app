@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Button, Input } from '@nextui-org/react';
-import { AppLogo, GridOverlay } from '@upskill-app/ui/web';
+import { AppLogo, GridOverlay, NeonBackground } from '@upskill-app/ui/web';
 import { toast } from 'sonner';
 
 import { subscribeToNewsletter } from './action';
@@ -40,9 +40,10 @@ export const NewsLetterSection = () => {
   };
 
   return (
-    <div id="newsletter" className="relative">
+    <div id="newsletter" className="relative pb-12">
+      <NeonBackground gradientDirection="to-t" />
       <GridOverlay />
-      <div className=" mx-auto w-full max-w-screen-md space-y-8 px-4 py-12 md:px-0">
+      <div className="relative z-10 mx-auto w-full max-w-screen-md space-y-8 px-4 py-12 md:px-0">
         <div className="flex items-center gap-4">
           <div className="shrink-0">
             <AppLogo isBordered size="lg" />
