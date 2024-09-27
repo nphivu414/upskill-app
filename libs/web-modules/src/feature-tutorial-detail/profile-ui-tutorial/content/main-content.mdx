@@ -3,6 +3,7 @@ import { CollapsibleBlock } from '../../collapsible-block.tsx'
 import {
    steps
 } from '../step-config.tsx'
+import { CodeTabTrigger } from '../../code-tab-trigger.tsx'
 
 <CodeWithAccoridions stepConfigs={steps}>
 ## !!accordions Section 1: Setup and initialize a new React project with NextUI
@@ -35,16 +36,16 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
 
 1. Files and Structure:
 
-   - `feature-photos.tsx`: The main component file for the FeaturePhotos component.
-   - `carousel-dot-buttons.tsx`: A component for rendering navigation dots in the carousel.
-   - `constants.ts`: A file containing constants for styling.
-   - `types.ts`: TypeScript file for defining the component's prop types.
+   - <CodeTabTrigger section="feature-photo" tab="feature-photo.tsx"/>: The main component file for the FeaturePhotos component.
+   - <CodeTabTrigger section="feature-photo" tab="carousel-dot-buttons.tsx"/>: A component for rendering navigation dots in the carousel.
+   - <CodeTabTrigger section="feature-photo" tab="constants.ts"/>: A file containing constants for styling.
+   - <CodeTabTrigger section="feature-photo" tab="types.ts"/>: TypeScript file for defining the component's prop types.
 
 2. New dependencies:
 
    - `embla-carousel-react`: A lightweight carousel library for React. Install it using `yarn add embla-carousel-react`.
 
-3. Deep dive into `feature-photo.tsx` file:
+3. Deep dive into <CodeTabTrigger section="feature-photo" tab="feature-photo.tsx"/> file:
 
    - **Props:**
 
@@ -102,7 +103,7 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
      />
      ```
 
-4. Deep dive into `carousel-dot-buttons.tsx` file: <br/>
+4. Deep dive into <CodeTabTrigger section="feature-photo" tab="carousel-dot-buttons.tsx"/> file: <br/>
 
    - **`useDotButton` hook:**
 
@@ -134,16 +135,16 @@ In this section, we'll create the ProfileInfo component which is responsible for
 
 1. Files and Structure:
 
-   - `profile-info.tsx`: The main component file for the ProfileInfo component.
-   - `info-line.tsx`: A reusable component for displaying an icon and text in a row.
-   - `typography.tsx`: Custom typography components for consistent text styling.
-   - `utils.ts`: Utility functions for generating avatar fallback text and formatting the user's location.
-   - `types.ts`: TypeScript file for defining the component's prop types.
+   - <CodeTabTrigger section="profile-info" tab="profile-info.tsx"/>: The main component file for the ProfileInfo component.
+   - <CodeTabTrigger section="profile-info" tab="info-line.tsx"/>: A reusable component for displaying an icon and text in a row.
+   - <CodeTabTrigger section="profile-info" tab="typography.tsx"/>: Custom typography components for consistent text styling.
+   - <CodeTabTrigger section="profile-info" tab="utils.ts"/>: Utility functions for generating avatar fallback text and formatting the user's location.
+   - <CodeTabTrigger section="profile-info" tab="types.ts"/>: TypeScript file for defining the component's prop types.
 
 2. New dependencies:
    - `lucide-react`: A library of simply beautiful open-source icons. Install it using `yarn add lucide-react`.
 
-3. Deep dive into `profile-info.tsx` file:
+3. Deep dive into <CodeTabTrigger section="profile-info" tab="profile-info.tsx"/> file:
    - **Props:**
 
      - `profile`: An object containing the user's information like name, username, title, bio, location, website, and avatar URL.
@@ -156,7 +157,7 @@ In this section, we'll create the ProfileInfo component which is responsible for
      - The user's company name is displayed as a clickable link to their website using the `Link` component from '@nextui-org/react'.
      - The user's location and website are displayed using the `InfoLine` component, which shows an icon and text in a row.
 
-4. Deep dive into `info-line.tsx` and `typography.tsx` files:
+4. Deep dive into <CodeTabTrigger section="profile-info" tab="info-line.tsx"/> and `typography.tsx` files:
       - This component takes an icon, classname, and children as props to display an icon and content in a row.
       - We're using the `Icon` component from '@nextui-org/react' to render the icon and `Spacer` component for spacing between the icon and content.
       - The `Paragraph` and `Subtle` components are custom typography components for consistent text styling across the profile page.
@@ -170,10 +171,10 @@ Since it's a pretty straightforward component, let's dive into the implementatio
 
 1. Files and Structure:
 
-   - `profile-stats.tsx`: The main component file for the ProfileStats component.
-   - `stats-block.tsx`: A reusable component for displaying a label and value in a column.
-   - `utils.ts`: Utility functions for formatting numbers.
-   - `types.ts`: TypeScript file for defining the component's prop types.
+   - <CodeTabTrigger section="profile-stats" tab="profile-stats.tsx"/>: The main component file for the ProfileStats component.
+   - <CodeTabTrigger section="profile-stats" tab="stat-block.tsx"/>: A reusable component for displaying a label and value in a column.
+   - <CodeTabTrigger section="profile-stats" tab="utils.ts"/>: Utility functions for formatting numbers.
+   - <CodeTabTrigger section="profile-stats" tab="types.ts"/>: TypeScript file for defining the component's prop types.
 
 2. Deep dive into `profile-stats.tsx` file:
    - **Props:**
@@ -191,15 +192,15 @@ Now we'll move on to the next section to implement the Profile Post Timeline.
 In this section, we'll create the `PostCard` component to display individual posts and the `Posts` component to render a list of posts.
 
 1. **Files and Structure:**
-   - `post-card.tsx`: A component to display a post card.
-   - `post-card.utils.tsx`: Utility functions for rendering post's actions such as like, comment, share buttons...
-   - `posts.tsx`: The main component file for rendering a list of posts.
-   - `markdown-renderer.tsx`: A component for rendering markdown content.
-   - `use-profile.ts`: A sample hook for fetching current user profile data.
-   - `utils.ts`: Utility functions for formatting dates.
-   - `types.ts`: TypeScript file for defining the component's prop types and related interfaces.
+   - <CodeTabTrigger section="profile-timeline-posts" tab="post-card.tsx"/>: A component to display a post card.
+   - <CodeTabTrigger section="profile-timeline-posts" tab="post-card.utils.tsx"/>: Utility functions for rendering post's actions such as like, comment, share buttons...
+   - <CodeTabTrigger section="profile-timeline-posts" tab="posts.tsx"/>: The main component file for rendering a list of posts.
+   - <CodeTabTrigger section="profile-timeline-posts" tab="markdown-renderer.tsx"/>: A component for rendering markdown content.
+   - <CodeTabTrigger section="profile-timeline-posts" tab="use-profile.ts"/>: A sample hook for fetching current user profile data.
+   - <CodeTabTrigger section="profile-timeline-posts" tab="utils.ts"/>: Utility functions for formatting dates.
+   - <CodeTabTrigger section="profile-timeline-posts" tab="types.ts"/>: TypeScript file for defining the component's prop types and related interfaces.
 
-2. **Deep dive into `post-card.tsx` file:**
+2. **Deep dive into <CodeTabTrigger section="profile-timeline-posts" tab="post-card.tsx"/> file:**
    - **Props:**
       - `createdAt`: The date and time when the post was created.
       - `content`: The content of the post.
@@ -232,13 +233,13 @@ In this section, we'll create the `PostCard` component to display individual pos
       - If `postActionConfig` is provided, a `CardFooter` component is rendered:
          - The `CardFooter` contains `Button` components for each action in `postActions`.
    
-3. **Deep dive into `post-card.utils.tsx` file:** <br/> <br/>
+3. **Deep dive into <CodeTabTrigger section="profile-timeline-posts" tab="post-card.utils.tsx"/> file:** <br/> <br/>
    In this file, we define utility functions for rendering post actions and post menu actions. We have 3 main functions:
    - `getPostActions()`: This function returns an array of post actions based on the `postActionConfig` provided to the `PostCard` component.
    - `getPostMenuActions({ isSelfPost })`: This function returns an array of post menu actions based on the `postMenuActionConfig` provided to the `PostCard` component. The `isSelfPost` parameter is used to determine if the post is created by the current user.
    - `getPostActionCount(type, config)`: This function returns the content for a specific post action such as like counts, comment counts, and repost counts. The `type` parameter specifies the action type, and the `config` parameter contains the action configuration.
    
-4. **Deep dive into `posts.tsx` file:** <br/> <br/>
+4. **Deep dive into <CodeTabTrigger section="profile-timeline-posts" tab="posts.tsx"/> file:** <br/> <br/>
    In this file, we define the `Posts` component that renders a list of posts. The component takes an array of post objects as a prop and maps over them to render individual `PostCard` components.
    - **Props:**
       - `posts`: An array of post objects containing the post data.
@@ -345,11 +346,11 @@ Now we'll move on to the next section to implement the Profile Photo Timeline.
 In this section, we'll create the `PhotoCard` component to display individual photos and the `Photos` component to render a list of photos.
 
 1. **Files and Structure:**
-   - `photo-card.tsx`: A component to display a photo card.
-   - `photos.tsx`: The main component file for rendering a list of photos.
-   - `types.ts`: TypeScript file for defining the component's prop types.
+   - <CodeTabTrigger section="profile-timeline-photos" tab="photo-card.tsx"/>: A component to display a photo card.
+   - <CodeTabTrigger section="profile-timeline-photos" tab="photos.tsx"/>: The main component file for rendering a list of photos.
+   - <CodeTabTrigger section="profile-timeline-photos" tab="types.ts"/>: TypeScript file for defining the component's prop types.
 
-2. **Deep dive into `photo-card.tsx` file:**
+2. **Deep dive into <CodeTabTrigger section="profile-timeline-photos" tab="photo-card.tsx"/> file:**
    - **Props:**
       - `photoId`: The unique identifier of the photo.
       - `photoSrc`: The URL of the photo.
@@ -360,7 +361,7 @@ In this section, we'll create the `PhotoCard` component to display individual ph
       - Inside the `Card`, there is a `CardBody` that contains an `Image` component displaying the photo.
       - The `Image` component is from '@nextui-org/react' and displays the photo with the provided URL.
    
-3. **Deep dive into `photos.tsx` file:** <br/> <br/>
+3. **Deep dive into <CodeTabTrigger section="profile-timeline-photos" tab="photos.tsx"/> file:** <br/> <br/>
    In this file, we define the `Photos` component that renders a list of photos. We're using an <a href="https://flowbite.com/docs/components/gallery/#masonry-grid" target="_blank">example from flowbite</a> to create a masonry grid layout for the photos.
    - **Props:**
       - `photos`: An array of photo objects containing the photo data.
@@ -375,11 +376,11 @@ Now we'll move on to the next section to implement the Profile Timeline Tabs.
 In this section, we'll create the `ProfileTimeline` component, which displays a timeline of posts, photos, and liked posts in a tabbed interface.
 
 1. **Files and Structure:**
-   - `profile-timeline.tsx`: The main component file for the ProfileTimeline component.
-   - `use-timeline-tabs.tsx`: A custom hook for generating tab data based on the provided posts, photos, and liked posts.
-   - `types.ts`: TypeScript file for defining the component's prop types.
+   - <CodeTabTrigger section="profile-timeline-tabs-content" tab="profile-timeline.tsx"/>: The main component file for the ProfileTimeline component.
+   - <CodeTabTrigger section="profile-timeline-tabs-content" tab="use-timeline-tabs.tsx"/>: A custom hook for generating tab data based on the provided posts, photos, and liked posts.
+   - <CodeTabTrigger section="profile-timeline-tabs-content" tab="types.ts"/>: TypeScript file for defining the component's prop types.
 
-2. **Deep dive into `profile-timeline.tsx` file:**
+2. **Deep dive into <CodeTabTrigger section="profile-timeline-tabs-content" tab="profile-timeline.tsx"/> file:**
    - **Props:**
       - `posts`: An array of post objects containing the post content, date, and likes.
       - `photos`: An array of photo objects containing the photo URL and date.
@@ -414,7 +415,7 @@ In this section, we'll create the `ProfileTimeline` component, which displays a 
          )}
       </Tabs>
       ```
-3. **Deep dive into `use-timeline-tabs.tsx` file:**
+3. **Deep dive into <CodeTabTrigger section="profile-timeline-tabs-content" tab="use-timeline-tabs.tsx"/> file:**
    - **Params:**
       - `likedPosts`: An array of liked post objects.
       - `photos`: An array of photo objects.
@@ -430,16 +431,16 @@ In this section, we'll create the `ProfileTimeline` component, which displays a 
 So far, we've built the individual components for the profile page, including `FeaturePhotos`, `ProfileInfo`, `ProfileStats`, `PostCard`, `PhotoCard`, and `ProfileTimeline`. Now, let's put them all together to create the complete profile page.
 
 1. **Files and Structure:**
-   - `profile-page.tsx`: The main component file for the ProfilePage component.
-   - `parallax-container.tsx`: A component for creating a parallax effect on the header.
-   - `data.ts`: Sample data that you can use to populate the profile page.
-   - `types.ts`: TypeScript file for defining the component's prop types.
+   - <CodeTabTrigger section="profile-page-content" tab="profile-page.tsx"/>: The main component file for the ProfilePage component.
+   - <CodeTabTrigger section="profile-page-content" tab="parallax-container.tsx"/>: A component for creating a parallax effect on the header.
+   - <CodeTabTrigger section="profile-page-content" tab="data.ts"/>: Sample data that you can use to populate the profile page.
+   - <CodeTabTrigger section="profile-page-content" tab="types.ts"/>: TypeScript file for defining the component's prop types.
 
 2. New dependencies:
 
    - `framer-motion`: A library for creating animations and interactions in React. Install it using `yarn add framer-motion`.
 
-3. **Deep dive into `profile-page.tsx` file:**
+3. **Deep dive into <CodeTabTrigger section="profile-page-content" tab="profile-page.tsx"/> file:**
    - **Props:**
       - `featurePhotos`: An array of photo URLs for the feature photos carousel.
       - `profile`: An object containing the user's profile information.
@@ -476,7 +477,7 @@ So far, we've built the individual components for the profile page, including `F
       - The `ParallaxContainer` component use the `y` value to create a parallax effect on the header. We will explore this component later.
       - The `FeaturePhotos`, `ProfileInfo`, `ProfileStats`, and `ProfileTimeline` are all the components we've built so far. They are combined to create the complete profile page layout.
 
-4. **Deep dive into `parallax-container.tsx` file:**
+4. **Deep dive into <CodeTabTrigger section="profile-page-content" tab="parallax-container.tsx"/> file:**
    - **Props:**
       - `y`: A motion value representing the vertical scroll position.
    

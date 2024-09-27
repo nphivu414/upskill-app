@@ -25,7 +25,7 @@ module.exports = {
         },
       },
       animation: {
-        'pulse-slow': 'pulse-slow 10s infinite',
+        'pulse-slow': 'pulse-slow 15s infinite',
       }
     },
   },

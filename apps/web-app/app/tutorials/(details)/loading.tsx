@@ -6,7 +6,7 @@ export default function Loading() {
       <section className="w-full pt-12">
         <div className="space-y-10 px-4 md:px-6 xl:space-y-16">
           <div className="flex flex-col items-start gap-4 lg:flex-row">
-            <div className="flex-1 lg:px-14">
+            <div className="flex-1">
               <Skeleton className="bg-default-200 h-6 w-full rounded-lg" />
               <Spacer y={3} />
               <Skeleton className="bg-default-200 h-6 w-3/4 rounded-lg" />

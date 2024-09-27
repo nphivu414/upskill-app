@@ -20,7 +20,7 @@ export default function RootLayout({ children }: ComponentWithChildren) {
       <body>
         <AppUiProvider>{children}</AppUiProvider>
       </body>
-      <Toaster />
+      <Toaster richColors closeButton />
     </html>
   );
 }

@@ -1,7 +1,8 @@
-import { Divider } from '@nextui-org/react';
+import { Divider, Spacer } from '@nextui-org/react';
 import { FlightBookingPagePreview } from '@upskill-app/tutorial-elements';
 import { Paragraph } from '@upskill-app/ui/web';
 import {
+  AuthorSection,
   ContentSection,
   FlightBookingContent,
   HeadingSection,
@@ -49,6 +50,9 @@ export default function FlightBookingUI() {
       >
         <FlightBookingContent />
       </ContentSection>
+      <Divider className="my-12" />
+      <AuthorSection />
+      <Spacer y={12} />
     </div>
   );
 }
