@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 
-const WINDOW_SIZE = 1 * 60 * 1000; // 15 minutes in milliseconds
+const WINDOW_SIZE = 1 * 60 * 1000; // 1 minutes in milliseconds
 const MAX_REQUESTS = 5;
 
 interface RateLimitData {
