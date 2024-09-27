@@ -16,7 +16,7 @@ export default function ProfileUI() {
   return (
     <div className="flex flex-col">
       <HeadingSection
-        title="Build a Profile Page UI with React, Tailwind and NextUI"
+        title="Building a Dynamic User Profile Page with React and NextUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',
@@ -25,24 +25,31 @@ export default function ProfileUI() {
         description={
           <div>
             <Paragraph>
-              Let&apos;s build a profile page with the power of React, Tailwind
-              and NextUI. This hands-on guide will walk you through building a
-              modern, interactive profile UI that is not only beautiful but also
-              designed for easy integration with your existing projects.
+              This in-depth tutorial guides you through the process of creating
+              a modern, interactive user profile page using React and NextUI.
+              You&apos;ll learn how to construct reusable components for
+              showcasing user information, implementing a feature photo
+              carousel, and displaying user posts and photos. By the end of this
+              tutorial, you&apos;ll have a fully functional profile page that
+              demonstrates best practices in React development and UI design.
             </Paragraph>
           </div>
         }
-        targetAudience="Beginner to intermediate React developers familiar with basic component structure and styling concepts."
+        targetAudience="React developers, from junior to intermediate levels, seeking to improve their skills in creating complex, interactive web applications with modern UI components."
         prerequisites={[
-          'Node.js and yarn: Make sure you have these installed on your system.',
-          'JavaScript and React basics: You should be comfortable with JavaScript fundamentals and understand the core concepts of React.',
-          "A little TypeScript, CSS, and Tailwind knowledge: Some familiarity with these will help, but you don't need to be an expert – we'll guide you through!",
+          'Basic to intermediate knowledge of React and TypeScript',
+          'Familiarity with modern JavaScript (ES6+) concepts',
+          'Understanding of component-based architecture in React',
+          'Basic knowledge of CSS and responsive design principles',
+          'Familiarity with package managers (npm or yarn) and command-line interfaces',
+          'Basic understanding of state management in React',
+          '(Optional) Experience with NextUI or similar component libraries is helpful but not required',
         ]}
         previewComponent={<ProfilePagePreview showStorySourceLink={false} />}
       />
       <Divider className="my-12" />
       <ContentSection
-        introText="5 sections • 2 hours 30 minutes"
+        introText="8 sections • 3 hours and 30 minutes"
         totalSections={8}
       >
         <ProfileContent />

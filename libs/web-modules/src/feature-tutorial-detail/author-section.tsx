@@ -13,7 +13,7 @@ export const AuthorSection = () => {
     <section className="w-full">
       <Card shadow="none" className="bg-transparent">
         <CardHeader className="pb-4">
-          <p className="text-3xl font-bold">About the Technical Writer</p>
+          <p className="text-3xl font-bold">About the author</p>
         </CardHeader>
         <CardBody>
           <div className="flex max-w-screen-lg flex-col items-start gap-6 md:flex-row">
@@ -41,7 +41,7 @@ export const AuthorSection = () => {
                 Now, I’m thrilled to share what I’ve learned and help others
                 through fun, interactive coding tutorials!
               </Paragraph>
-              <div className="flex gap-4">
+              <div className="flex gap-2">
                 <Button
                   as={Link}
                   href="https://github.com/nphivu414"

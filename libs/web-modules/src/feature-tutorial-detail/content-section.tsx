@@ -44,7 +44,7 @@ export const ContentSection = ({
       <div className="space-y-6">
         <div className="flex justify-between">
           <div className="flex shrink-0 flex-col">
-            <Heading2>Tutorial Content</Heading2>
+            <p className="text-xl font-bold lg:text-2xl">Tutorial Content</p>
             <Subtle className="md:text-lg">{introText}</Subtle>
           </div>
           <div>

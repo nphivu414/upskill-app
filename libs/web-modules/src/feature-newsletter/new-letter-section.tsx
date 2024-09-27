@@ -78,7 +78,8 @@ export const NewsLetterSection = () => {
             <Button
               type="submit"
               isLoading={isLoading}
-              color="primary"
+              color="secondary"
+              variant="flat"
               className="w-full sm:mt-1 md:w-1/2"
             >
               Subscribe

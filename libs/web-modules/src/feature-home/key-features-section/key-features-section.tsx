@@ -33,8 +33,8 @@ const cardData: CardData[] = [
 
 export const KeyFeaturesSection = () => {
   return (
-    <section className="container mx-auto px-4 md:px-6">
-      <div className="mx-auto grid max-w-full items-center gap-6 lg:max-w-7xl lg:grid-cols-2 lg:gap-8">
+    <section className="mx-auto max-w-screen-xl px-4 lg:px-0">
+      <div className="mx-auto grid max-w-full items-center gap-6 lg:grid-cols-2 lg:gap-8">
         <div className="flex flex-col justify-center space-y-4">
           <ul className="grid gap-4">
             {cardData.map((card, index) => (
