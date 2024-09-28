@@ -37,7 +37,7 @@ export const FlightFilterFormPreview = () => {
       )}
       sourceUrl={getGithubSourceUrl(
         TUTORIAL_REPO.FLIGHT_BOOKING_UI,
-        'blob/main/src/components/flight-booking/flight-filter-form/index.ts'
+        'blob/main/src/components/flight-booking/flight-filter-form/flight-filter-form.tsx'
       )}
     >
       <div className="flex w-full flex-col justify-center gap-8 px-4 xl:flex-row">

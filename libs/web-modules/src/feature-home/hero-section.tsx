@@ -8,7 +8,7 @@ export const HeroSection = () => {
       <NeonBackground />
 
       <GridOverlay />
-      <div className="relative z-10 mx-auto px-4 md:px-6">
+      <div className="relative z-10 mx-auto px-1 md:px-6">
         <div className="flex flex-col items-center space-y-6 text-center">
           <h1 className="text-4xl font-bold leading-9 md:text-6xl md:leading-tight">
             Not another boring tutorial
