@@ -20,8 +20,8 @@ export const FlightSortMenuPreview = () => {
         theme
       )}
       sourceUrl={getGithubSourceUrl(
-        TUTORIAL_REPO.PROFILE_UI,
-        'blob/main/src/components/'
+        TUTORIAL_REPO.FLIGHT_BOOKING_UI,
+        'blob/main/src/components/flight-booking/flight-sort-menu/flight-sort-menu.tsx'
       )}
     >
       <div className="max-h-[200px] w-[300px] overflow-y-auto xl:max-h-[200px] xl:w-[350px]">

@@ -21,8 +21,8 @@ export const FlightCardPreview = () => {
         theme
       )}
       sourceUrl={getGithubSourceUrl(
-        TUTORIAL_REPO.PROFILE_UI,
-        'blob/main/src/components/'
+        TUTORIAL_REPO.FLIGHT_BOOKING_UI,
+        'blob/main/src/components/flight-booking/flight-card'
       )}
     >
       <div className="w-[300px] xl:w-[350px]">

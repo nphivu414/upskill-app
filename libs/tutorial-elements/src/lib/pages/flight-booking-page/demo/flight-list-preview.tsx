@@ -21,8 +21,8 @@ export const FlightListPreview = () => {
         theme
       )}
       sourceUrl={getGithubSourceUrl(
-        TUTORIAL_REPO.PROFILE_UI,
-        'blob/main/src/components/'
+        TUTORIAL_REPO.FLIGHT_BOOKING_UI,
+        'blob/main/src/components/flight-booking/flight-list/flight-list.tsx'
       )}
     >
       <div className="max-h-[380px] w-[300px] overflow-y-auto xl:max-h-[400px] xl:w-[350px]">

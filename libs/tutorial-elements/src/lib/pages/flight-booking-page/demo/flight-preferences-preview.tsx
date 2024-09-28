@@ -21,8 +21,8 @@ export const FlightPreferencesPreview = () => {
         theme
       )}
       sourceUrl={getGithubSourceUrl(
-        TUTORIAL_REPO.PROFILE_UI,
-        'blob/main/src/components/'
+        TUTORIAL_REPO.FLIGHT_BOOKING_UI,
+        'blob/main/src/components/flight-booking/flight-preferences/flight-preferences.tsx'
       )}
     >
       <ClientOnlyContainer loadingContainerClassName="min-h-[380px] w-[300px] xl:min-h-[400px] xl:w-[500px]">

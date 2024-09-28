@@ -26,8 +26,8 @@ export const FlightBookingPagePreview = ({
         theme
       )}
       sourceUrl={getGithubSourceUrl(
-        TUTORIAL_REPO.PROFILE_UI,
-        'blob/main/src/components/profile/profile-page.tsx'
+        TUTORIAL_REPO.FLIGHT_BOOKING_UI,
+        'blob/main/src/components/flight-booking/flight-booking-page.tsx'
       )}
       showStorySourceLink={showStorySourceLink}
     >
