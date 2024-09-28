@@ -1,8 +1,8 @@
 import { Card, CardBody, CardHeader } from '@nextui-org/react';
 
-import { CodeWithTabs } from '../../feature-tutorial-detail/code-renderer';
-import { Code } from '../../feature-tutorial-detail/content-code-block';
-import KeyFeatureCodeContent from '../content/key-feature-code.mdx';
+import { CodeWithTabs } from '../feature-tutorial-detail/code-renderer';
+import { Code } from '../feature-tutorial-detail/content-code-block';
+import KeyFeatureCodeContent from './content/key-feature-code.mdx';
 
 type CardData = {
   title: string;
@@ -33,7 +33,7 @@ const cardData: CardData[] = [
 
 export const KeyFeaturesSection = () => {
   return (
-    <section className="mx-auto max-w-screen-xl px-4 lg:px-0">
+    <section className="mx-auto max-w-screen-xl px-4 lg:px-12">
       <div className="mx-auto grid max-w-full items-center gap-6 lg:grid-cols-2 lg:gap-8">
         <div className="flex flex-col justify-center space-y-4">
           <ul className="grid gap-4">

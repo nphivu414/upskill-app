@@ -10,6 +10,8 @@ import {
 
 export const metadata = {
   title: 'Build a Flight Booking UI with React, Tailwind and NextUI',
+  description:
+    'This comprehensive tutorial guides you through creating a modern, interactive flight booking page using React and NextUI.',
 };
 
 export default function FlightBookingUI() {

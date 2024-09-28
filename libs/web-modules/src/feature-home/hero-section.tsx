@@ -10,11 +10,11 @@ export const HeroSection = () => {
       <GridOverlay />
       <div className="relative z-10 mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center space-y-6 text-center">
-          <h1 className="text-2xl font-bold leading-6 md:text-6xl md:leading-tight">
+          <h1 className="text-4xl font-bold leading-9 md:text-6xl md:leading-tight">
             Not another boring tutorial
             <Spacer y={1} />
-            <span className="mb-3 mr-2 inline-block md:inline">
-              Get ready for something
+            <span className="mb-3 mr-2 mt-2 inline-block md:mt-0 md:inline">
+              Ready for something
             </span>
             <span className="text-primary-400 relative mt-2">
               different

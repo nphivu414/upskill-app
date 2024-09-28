@@ -44,6 +44,7 @@ export const FlightTimeline = ({
         showSteps={true}
         className="max-w-md"
         isDisabled
+        aria-label={`Flight timeline from ${departureAirport} to ${arrivalAirport}`}
         startContent={
           <div className="flex flex-col items-center justify-center gap-1">
             <p className="text-xs">{departureTime}</p>

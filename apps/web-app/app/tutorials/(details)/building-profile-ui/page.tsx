@@ -9,14 +9,16 @@ import {
 } from '@upskill-app/web-modules/tutorial-detail';
 
 export const metadata = {
-  title: 'Build a Profile Page UI with React, Tailwind and NextUI',
+  title: 'Build a User Profile Page with React and NextUI',
+  description:
+    'This in-depth tutorial guides you through the process of creating a modern, interactive user profile page using React and NextUI.',
 };
 
 export default function ProfileUI() {
   return (
     <div className="flex flex-col">
       <HeadingSection
-        title="Building a Dynamic User Profile Page with React and NextUI"
+        title="Build a User Profile Page with React and NextUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',

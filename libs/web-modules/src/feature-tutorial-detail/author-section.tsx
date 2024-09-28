@@ -31,11 +31,14 @@ export const AuthorSection = () => {
                 <p className="text-muted-foreground">NAB, Software Engineer</p>
               </div>
               <Paragraph className="text-lg leading-relaxed">
-                Hi, I’m Vu, a Software Engineer at NAB with a love for creating
-                web and mobile apps that don’t just look great but feel great to
-                use. I’ve had the chance to work with some awesome companies
-                over the years, picking up new tricks and tackling many kinds of
-                challenges along the way.
+                Hi, I’m Vu, a Software Engineer at{' '}
+                <Link href="https://www.nab.com.au/" target="_blank">
+                  NAB (National Australia Bank)
+                </Link>{' '}
+                with a love for creating web and mobile apps that don’t just
+                look cool but feel great to use. I’ve had the chance to work
+                with some awesome companies over the years, picking up new
+                tricks and tackling many kinds of challenges along the way.
               </Paragraph>
               <Paragraph className="text-lg leading-relaxed">
                 Now, I’m thrilled to share what I’ve learned and help others

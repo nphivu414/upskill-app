@@ -67,6 +67,7 @@ export function CodeBlockTabs(props: CodeBlockTabsProps) {
                 <span>{tab.title}</span>
               </div>
             }
+            titleValue={tab.title}
           >
             {
               <div

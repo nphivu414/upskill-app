@@ -11,10 +11,10 @@ export const CourseOfferingSection = () => {
   return (
     <section
       id="highlighted-tutorials"
-      className="mx-auto max-w-screen-xl py-12 md:py-24"
+      className="mx-auto max-w-screen-xl py-12 md:py-24 lg:px-12"
     >
       <HeadingSection
-        title="Build a Profile Page UI with React, Tailwind and NextUI"
+        title="Build a User Profile Page with React and NextUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',
@@ -23,10 +23,13 @@ export const CourseOfferingSection = () => {
         description={
           <div>
             <Paragraph>
-              Let&apos;s build a profile page with the power of React, Tailwind
-              and NextUI. This hands-on guide will walk you through building a
-              modern, interactive profile UI that is not only beautiful but also
-              designed for easy integration with your existing projects.
+              This in-depth tutorial guides you through the process of creating
+              a modern, interactive user profile page using React and NextUI.
+              You&apos;ll learn how to construct reusable components for
+              showcasing user information, implementing a feature photo
+              carousel, and displaying user posts and photos. By the end of this
+              tutorial, you&apos;ll have a fully functional profile page that
+              demonstrates best practices in React development and UI design.
             </Paragraph>
           </div>
         }
@@ -76,12 +79,14 @@ export const CourseOfferingSection = () => {
         description={
           <div>
             <Paragraph>
-              Let&apos;s build a beautiful search flight UI with the power of
-              React, Tailwind, NextUI and React Hook Form. This hands-on guide
-              will walk you through building a modern, interactive search flight
-              UI with filter and sort features. You will also learn how to use
-              react-hook-form to handle form state, validation and submission in
-              a simple and efficient way.
+              This comprehensive tutorial guides you through creating a modern,
+              interactive flight booking page using React and NextUI.
+              You&apos;ll learn how to build reusable components for displaying
+              flight information, implementing advanced filtering and sorting
+              functionalities, and creating a responsive user interface. By the
+              end of this tutorial, you&apos;ll have a fully functional flight
+              booking page that showcases best practices in React development
+              and UI/UX design.
             </Paragraph>
           </div>
         }
@@ -96,7 +101,7 @@ export const CourseOfferingSection = () => {
               'Building Flight Filter Drawer Component',
               'Building Flight Sort Menu Component',
               'Building Flight Preferences Component',
-              'Building Flight Booking Page Component',
+              'Putting It All together',
             ].map((section, index) => (
               <div key={index} className="flex items-center space-x-2">
                 <span className="bg-divider text-muted flex size-6 shrink-0 items-center justify-center rounded-full text-sm">

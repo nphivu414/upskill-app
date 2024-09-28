@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, ButtonGroup, Chip, Link } from '@nextui-org/react';
 import { ComponentWithChildren } from '@upskill-app/shared';
 
@@ -20,6 +21,12 @@ export const LivePreview = ({
   className,
   showStorySourceLink = true,
 }: LivePreviewProps) => {
+  const [isClient, setIsClient] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <div
       className={cn(
@@ -42,7 +49,7 @@ export const LivePreview = ({
         <ButtonGroup variant="ghost" size="sm">
           <Button
             as={Link}
-            href={storybookUrl}
+            href={isClient ? storybookUrl : undefined}
             target="_blank"
             startContent={<CustomIcons.storybook width={14} />}
           >
