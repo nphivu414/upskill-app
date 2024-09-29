@@ -4,9 +4,9 @@ export default function Loading() {
   return (
     <div className="flex min-h-screen flex-col">
       <section className="w-full pt-12">
-        <div className="space-y-10 px-4 md:px-0 xl:space-y-16">
+        <div className="space-y-10 px-4 xl:space-y-16">
           <div className="flex flex-col items-start gap-4 lg:flex-row">
-            <div className="flex-1">
+            <div className="w-full flex-1 lg:w-auto">
               <Skeleton className="bg-default-200 h-6 w-full rounded-lg" />
               <Spacer y={3} />
               <Skeleton className="bg-default-200 h-6 w-3/4 rounded-lg" />
