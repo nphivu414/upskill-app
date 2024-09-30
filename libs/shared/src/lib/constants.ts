@@ -27,3 +27,5 @@ export const TUTORIAL_REPO = {
   PROFILE_UI: 'user-profile-ui',
   FLIGHT_BOOKING_UI: 'flight-booking-ui',
 };
+
+export const GA_ID = 'G-682J0RXNML';
