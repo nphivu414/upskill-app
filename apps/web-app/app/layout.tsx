@@ -6,6 +6,10 @@ import './styles/global.css';
 
 import type { Metadata } from 'next';
 import { ComponentWithChildren } from '@upskill-app/shared';
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoScript,
+} from '@upskill-app/web-modules/analytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://upskills.dev/'),
@@ -14,10 +18,16 @@ export const metadata: Metadata = {
     'Upskills is a platform where you can learn to code with fun, interactive tutorials. Get started with our free coding tutorials today!',
 };
 
+const gtmId = 'GTM-M7VVG5R4';
+
 export default function RootLayout({ children }: ComponentWithChildren) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <head>
+        <GoogleTagManager gtmId={gtmId} />
+      </head>
       <body>
+        <GoogleTagManagerNoScript gtmId={gtmId} />
         <AppUiProvider>{children}</AppUiProvider>
       </body>
       <Toaster richColors closeButton />
