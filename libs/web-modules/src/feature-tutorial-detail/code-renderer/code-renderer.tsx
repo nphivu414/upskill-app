@@ -1,10 +1,11 @@
 import React from 'react';
 import { TabsProps } from '@nextui-org/react';
-import { CodeBlock, CodeBlockTabs } from '@upskill-app/ui/web';
+import { CodeBlockTabs } from '@upskill-app/ui/web';
 import { Block, parseProps } from 'codehike/blocks';
 import { HighlightedCode } from 'codehike/code';
 import { z } from 'zod';
 
+import { Code } from '../content-code-block';
 import { StepConfig } from '../types';
 import { ContentAccordion } from './content-accordions';
 
@@ -50,5 +51,5 @@ export function CodeWithAccoridions(
 export function CodeWithTooltips(props: z.infer<typeof TooltipCodeSchema>) {
   const { code, tooltips = [] } = parseProps(props, TooltipCodeSchema);
 
-  return <CodeBlock className="bg-content2" code={code} tooltips={tooltips} />;
+  return <Code codeblock={code} tooltips={tooltips} />;
 }

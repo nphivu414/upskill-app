@@ -31,7 +31,10 @@
       ],
       "@upskill-app/web-modules/analytics": [
         "libs/web-modules/src/feature-analytics/index.ts"
-      ]
+      ],
+      "@upskill-app/web-modules/community": [
+        "libs/web-modules/src/feature-community/index.ts"
+      ],
     }
   },
   "exclude": ["node_modules", "tmp"]

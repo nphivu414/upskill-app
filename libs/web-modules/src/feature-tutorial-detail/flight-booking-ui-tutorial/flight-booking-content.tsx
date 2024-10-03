@@ -1,13 +1,8 @@
 import React from 'react';
-import { CodeBlockProps } from '@upskill-app/shared';
-import { CodeBlock } from '@upskill-app/ui/web';
 
 import { CodeWithAccoridions, CodeWithTooltips } from '../code-renderer';
+import { Code } from '../content-code-block';
 import FlightBookingMdx from './content/main-content.mdx';
-
-function Code({ codeblock }: CodeBlockProps) {
-  return <CodeBlock code={codeblock} className="bg-content2" showCopyButton />;
-}
 
 export const FlightBookingContent = () => {
   return (

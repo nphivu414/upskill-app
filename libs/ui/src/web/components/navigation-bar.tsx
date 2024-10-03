@@ -63,7 +63,18 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
           <Button
             as={Link}
             size="sm"
-            href="https://github.com/nphivu414"
+            href="https://discord.gg/MvKZvDZ36T"
+            variant="flat"
+            isIconOnly
+            target="_blank"
+          >
+            <CustomIcons.discord className="size-4" />
+            <span className="sr-only">Discord</span>
+          </Button>
+          <Button
+            as={Link}
+            size="sm"
+            href="https://github.com/upskillsdev"
             variant="flat"
             isIconOnly
             target="_blank"
