@@ -4,9 +4,9 @@ import { CustomIcons, Paragraph } from '@upskill-app/ui/web';
 export const AuthorSection = () => {
   return (
     <section className="w-full px-4">
-      <p className="text-3xl font-bold">About the author</p>
+      <p className="text-2xl font-bold">About the author</p>
       <Spacer y={6} />
-      <div className="flex max-w-screen-lg flex-col items-start gap-6 md:flex-row">
+      <div className="flex flex-col items-start gap-6 md:flex-row">
         <div className="shrink-0">
           <Avatar
             className="!size-24 md:!size-32"
@@ -17,8 +17,8 @@ export const AuthorSection = () => {
         </div>
         <div className="grow space-y-4">
           <div>
-            <h2 className="text-2xl font-semibold">Vu Nguyen</h2>
-            <p className="text-muted-foreground">NAB, Software Engineer</p>
+            <h2 className="text-xl font-semibold">Vu Nguyen</h2>
+            <p className="text-muted">NAB, Software Engineer</p>
           </div>
           <Paragraph className="text-lg leading-relaxed">
             Hi, I’m Vu, a Software Engineer at{' '}

@@ -1,4 +1,4 @@
-import { Divider, Spacer } from '@nextui-org/react';
+import { Divider } from '@nextui-org/react';
 import { ProfilePagePreview } from '@upskill-app/tutorial-elements';
 import { Paragraph } from '@upskill-app/ui/web';
 import {
@@ -16,7 +16,7 @@ export const metadata = {
 
 export default function ProfileUI() {
   return (
-    <div className="flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <HeadingSection
         title="Build a User Profile Page with React and NextUI"
         author={{
@@ -58,7 +58,6 @@ export default function ProfileUI() {
       </ContentSection>
       <Divider className="my-12" />
       <AuthorSection />
-      <Spacer y={12} />
     </div>
   );
 }

@@ -25,23 +25,10 @@ export const ContentAccordion = ({
 }: ContentAccordionProps) => {
   const { selectedSections, setSelectedSections } =
     useContentSectionQueryState();
-  const [isClosedAll, setIsClosedAll] = React.useState(false);
-  const [, startCloseAll] = React.useTransition();
   const accordionItemMotionProps = useAccordionMotionProps();
-
-  React.useEffect(() => {
-    startCloseAll(() => {
-      if (selectedSections[0] === 'empty') {
-        setIsClosedAll(true);
-      } else {
-        setIsClosedAll(false);
-      }
-    });
-  }, [selectedSections, setSelectedSections]);
-
-  const selectedAccordionKeys = isClosedAll
-    ? []
-    : new Set(selectedSections.map((key) => `${parseInt(key) - 1}`));
+  const selectedAccordionKeys = new Set(
+    selectedSections.map((key) => `${parseInt(key) - 1}`)
+  );
 
   const onSelectionChange = (keys: Selection) => {
     setSelectedSections(
