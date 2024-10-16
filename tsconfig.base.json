@@ -20,6 +20,12 @@
       "@upskill-app/ui/web": ["libs/ui/src/web/index.ts"],
       "@upskill-app/web-env": ["libs/web-env/src/index.ts"],
       "@upskill-app/web-env/server": ["libs/web-env/src/server.ts"],
+      "@upskill-app/web-modules/analytics": [
+        "libs/web-modules/src/feature-analytics/index.ts"
+      ],
+      "@upskill-app/web-modules/community": [
+        "libs/web-modules/src/feature-community/index.ts"
+      ],
       "@upskill-app/web-modules/home": [
         "libs/web-modules/src/feature-home/index.ts"
       ],
@@ -28,13 +34,7 @@
       ],
       "@upskill-app/web-modules/tutorial-detail": [
         "libs/web-modules/src/feature-tutorial-detail/index.ts"
-      ],
-      "@upskill-app/web-modules/analytics": [
-        "libs/web-modules/src/feature-analytics/index.ts"
-      ],
-      "@upskill-app/web-modules/community": [
-        "libs/web-modules/src/feature-community/index.ts"
-      ],
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
