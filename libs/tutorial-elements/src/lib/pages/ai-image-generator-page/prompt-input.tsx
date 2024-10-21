@@ -57,7 +57,7 @@ export const PromptInput = () => {
       <Textarea
         placeholder="Lets build something"
         classNames={{
-          input: 'min-h-[100px]',
+          input: 'min-h-[100px] text-base',
           inputWrapper: 'pb-16',
         }}
         isMultiline
