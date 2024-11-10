@@ -1,9 +1,9 @@
-import { Divider, Skeleton, Spacer } from '@nextui-org/react';
+import { Chip, Divider, Skeleton, Spacer } from '@nextui-org/react';
 
 export default function Loading() {
   return (
     <div className="flex min-h-screen flex-col">
-      <section className="w-full pt-12">
+      <section className="w-full pt-4">
         <div className="space-y-10 px-4 xl:space-y-16">
           <div className="flex flex-col items-start gap-4 lg:flex-row">
             <div className="w-full flex-1 lg:w-auto">
@@ -53,6 +53,16 @@ export default function Loading() {
             </div>
             <div className="w-full lg:w-1/3">
               <div className="flex flex-col items-center justify-center gap-4">
+                <Chip
+                  variant="bordered"
+                  startContent={
+                    <div className="bg-success-500 relative mx-1 size-2 rounded-full">
+                      <div className="bg-success-500 size-2 animate-ping rounded-full " />
+                    </div>
+                  }
+                >
+                  Live Preview
+                </Chip>
                 <Skeleton className="bg-default-200 h-[604px] w-[320px] rounded-lg" />
               </div>
             </div>

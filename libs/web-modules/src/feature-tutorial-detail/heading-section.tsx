@@ -28,7 +28,7 @@ export const HeadingSection = ({
 }: HeadingSectionProps) => {
   return (
     <section className="w-full space-y-10 px-4 xl:space-y-16">
-      <div className="flex flex-col items-start gap-4 pt-12 lg:flex-row">
+      <div className="flex flex-col items-start gap-4 pt-4 lg:flex-row">
         <div className="flex-1">
           <p className="text-3xl font-bold lg:text-4xl">{title}</p>
           <Spacer y={4} />

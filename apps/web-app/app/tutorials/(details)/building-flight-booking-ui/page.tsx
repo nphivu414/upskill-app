@@ -38,19 +38,16 @@ export default function FlightBookingUI() {
             </Paragraph>
           </div>
         }
-        targetAudience="React developers, from junior to intermediate levels, looking to enhance their skills in building complex, interactive web applications"
         prerequisites={[
-          'Basic to intermediate knowledge of React and TypeScript',
-          'Familiarity with modern JavaScript (ES6+) concepts',
+          'Basic knowledge of React and TypeScript',
+          'Familiarity with modern JavaScript concepts',
           'Understanding of component-based architecture in React',
-          'Basic knowledge of CSS and responsive design principles',
+          'Basic knowledge of CSS and Tailwind',
           'Familiarity with package managers (npm or yarn) and command-line interfaces',
           'Basic understanding of form handling and state management in React',
           '(Optional) Experience with NextUI or similar component libraries is helpful but not required',
         ]}
-        previewComponent={
-          <FlightBookingPagePreview showStorySourceLink={false} />
-        }
+        previewComponent={<FlightBookingPagePreview />}
       />
       <Divider className="my-12" />
       <ContentSection

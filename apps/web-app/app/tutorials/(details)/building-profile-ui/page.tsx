@@ -37,17 +37,16 @@ export default function ProfileUI() {
             </Paragraph>
           </div>
         }
-        targetAudience="React developers, from junior to intermediate levels, seeking to improve their skills in creating complex, interactive web applications with modern UI components."
         prerequisites={[
-          'Basic to intermediate knowledge of React and TypeScript',
+          'Basic knowledge of React and TypeScript',
           'Familiarity with modern JavaScript (ES6+) concepts',
           'Understanding of component-based architecture in React',
-          'Basic knowledge of CSS and responsive design principles',
+          'Basic knowledge of CSS and Tailwind',
           'Familiarity with package managers (npm or yarn) and command-line interfaces',
           'Basic understanding of state management in React',
           '(Optional) Experience with NextUI or similar component libraries is helpful but not required',
         ]}
-        previewComponent={<ProfilePagePreview showStorySourceLink={false} />}
+        previewComponent={<ProfilePagePreview />}
       />
       <Divider className="my-12" />
       <ContentSection
