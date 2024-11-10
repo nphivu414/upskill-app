@@ -9,7 +9,7 @@ import {
   ScrollShadow,
   Textarea,
 } from '@nextui-org/react';
-import { ChevronDown, Forward, WandSparkles } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, WandSparkles } from 'lucide-react';
 
 export const PromptInput = () => {
   return (
@@ -21,36 +21,37 @@ export const PromptInput = () => {
       >
         <div className="flex w-max flex-nowrap gap-3 p-2">
           <Button
-            radius="full"
-            size="sm"
+            radius="lg"
             variant="flat"
-            endContent={<Forward size={14} />}
+            size="lg"
+            endContent={<ArrowUpRight size={16} />}
           >
-            A city of light
+            <div className="flex flex-col items-start gap-px">
+              <div className="text-muted text-xs">Fantasy</div>
+              <div className="text-sm">A city of light</div>
+            </div>
           </Button>
           <Button
-            radius="full"
-            size="sm"
+            radius="lg"
             variant="flat"
-            endContent={<Forward size={14} />}
+            size="lg"
+            endContent={<ArrowUpRight size={16} />}
           >
-            A city of light
+            <div className="flex flex-col items-start gap-px">
+              <div className="text-muted text-xs">Fantasy</div>
+              <div className="text-sm">A city of light</div>
+            </div>
           </Button>
           <Button
-            radius="full"
-            size="sm"
+            radius="lg"
             variant="flat"
-            endContent={<Forward size={14} />}
+            size="lg"
+            endContent={<ArrowUpRight size={16} />}
           >
-            A city of light
-          </Button>
-          <Button
-            radius="full"
-            size="sm"
-            variant="flat"
-            endContent={<Forward size={14} />}
-          >
-            A city of light
+            <div className="flex flex-col items-start gap-px">
+              <div className="text-muted text-xs">Fantasy</div>
+              <div className="text-sm">A city of light</div>
+            </div>
           </Button>
         </div>
       </ScrollShadow>
@@ -61,7 +62,7 @@ export const PromptInput = () => {
           inputWrapper: 'pb-16',
         }}
         isMultiline
-        minRows={5}
+        minRows={3}
       />
       <div className="absolute bottom-0 flex w-full justify-between p-4">
         <div>
