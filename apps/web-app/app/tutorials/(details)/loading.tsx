@@ -25,15 +25,31 @@ export default function Loading() {
               <Spacer y={3} />
               <Skeleton className="bg-default-200 h-3 w-full rounded-lg" />
               <Spacer y={3} />
+              <Skeleton className="bg-default-200 h-3 w-full rounded-lg" />
+              <Spacer y={3} />
+              <Skeleton className="bg-default-200 h-3 w-full rounded-lg" />
+              <Spacer y={3} />
               <Skeleton className="bg-default-200 h-3 w-4/5 rounded-lg" />
               <Spacer y={3} />
-              <Skeleton className="bg-default-200 h-3 w-1/2 rounded-lg" />
-              <Spacer y={6} />
+              <Skeleton className="bg-default-200 h-3 w-2/3 rounded-lg" />
+              <Spacer y={3} />
+              <Skeleton className="bg-default-200 h-3 w-4/5 rounded-lg lg:hidden" />
+              <Spacer className="lg:hidden" y={3} />
+              <Skeleton className="bg-default-200 h-3 w-2/3 rounded-lg lg:hidden" />
+              <Spacer className="lg:hidden" y={3} />
+              <Skeleton className="bg-default-200 h-3 w-4/5 rounded-lg lg:hidden" />
+              <Spacer className="lg:hidden" y={3} />
+              <Skeleton className="bg-default-200 h-3 w-1/2 rounded-lg lg:hidden" />
+              <Spacer className="lg:hidden" y={6} />
               <div>
                 <Spacer y={2} />
                 <Skeleton className="bg-default-200 h-3 w-full rounded-lg" />
                 <Spacer y={2} />
                 <Skeleton className="bg-default-200 h-3 w-full rounded-lg" />
+                <Spacer className="lg:hidden" y={2} />
+                <Skeleton className="bg-default-200 h-3 w-full rounded-lg lg:hidden" />
+                <Spacer className="lg:hidden" y={2} />
+                <Skeleton className="bg-default-200 h-3 w-full rounded-lg lg:hidden" />
               </div>
               <Spacer y={6} />
               <div>
@@ -43,10 +59,28 @@ export default function Loading() {
                     <Skeleton className="h-3 w-full rounded-lg" />
                   </li>
                   <li className="py-2 text-sm">
-                    <Skeleton className="h-3 w-full rounded-lg" />
+                    <Skeleton className="h-3 w-4/5 rounded-lg" />
                   </li>
                   <li className="py-2 text-sm">
-                    <Skeleton className="h-3 w-full rounded-lg" />
+                    <Skeleton className="h-3 w-4/5 rounded-lg" />
+                  </li>
+                  <li className="py-2 text-sm">
+                    <Skeleton className="h-3 w-2/3 rounded-lg" />
+                  </li>
+                  <li className="py-2 text-sm lg:hidden">
+                    <Skeleton className="h-3 w-2/3 rounded-lg" />
+                  </li>
+                  <li className="py-2 text-sm lg:hidden">
+                    <Skeleton className="h-3 w-1/2 rounded-lg" />
+                  </li>
+                  <li className="py-2 text-sm lg:hidden">
+                    <Skeleton className="h-3 w-2/3 rounded-lg" />
+                  </li>
+                  <li className="py-2 text-sm lg:hidden">
+                    <Skeleton className="h-3 w-3/4 rounded-lg" />
+                  </li>
+                  <li className="py-2 text-sm lg:hidden">
+                    <Skeleton className="h-3 w-1/3 rounded-lg" />
                   </li>
                 </ul>
               </div>
