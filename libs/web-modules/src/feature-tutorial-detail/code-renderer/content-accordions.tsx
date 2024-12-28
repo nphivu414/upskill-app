@@ -16,7 +16,7 @@ type ContentAccordionData = {
 
 type ContentAccordionProps = {
   data: ContentAccordionData[];
-  stepConfigs: StepConfig[];
+  stepConfigs?: StepConfig[];
 };
 
 export const ContentAccordion = ({
@@ -55,7 +55,7 @@ export const ContentAccordion = ({
     };
   };
 
-  const renderStepContent = (index: number) => {
+  const renderStepContent = (index: number, stepConfigs: StepConfig[]) => {
     return <div className="not-prose">{stepConfigs[index].content}</div>;
   };
 
@@ -83,22 +83,33 @@ export const ContentAccordion = ({
         >
           <div className="prose prose-zinc dark:prose-invert max-w-full">
             <div className="block items-start lg:flex">
-              <div className="w-full flex-none text-sm lg:w-1/2 lg:text-base [&>p:first-child]:mt-0">
+              <div
+                className={cn(
+                  'w-full flex-none text-sm lg:text-base [&>p:first-child]:mt-0',
+                  {
+                    'lg:w-1/2': stepConfigs?.length,
+                  }
+                )}
+              >
                 {accordionItem.children}
               </div>
-              <StickyBox
-                offsetTop={65}
-                className={cn('w-full flex-col lg:flex lg:w-1/2 lg:pl-8', {
-                  hidden: index !== 0,
-                })}
-              >
-                {renderStepContent(index)}
-              </StickyBox>
-              {index !== 0 && (
-                <ShowCodeModal>
-                  <>{renderStepContent(index)}</>
-                </ShowCodeModal>
-              )}
+              {stepConfigs?.length ? (
+                <>
+                  <StickyBox
+                    offsetTop={65}
+                    className={cn('w-full flex-col lg:flex lg:w-1/2 lg:pl-8', {
+                      hidden: index !== 0,
+                    })}
+                  >
+                    {renderStepContent(index, stepConfigs)}
+                  </StickyBox>
+                  {index !== 0 && (
+                    <ShowCodeModal>
+                      {renderStepContent(index, stepConfigs)}
+                    </ShowCodeModal>
+                  )}
+                </>
+              ) : null}
             </div>
           </div>
         </AccordionItem>

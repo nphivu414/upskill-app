@@ -11,7 +11,7 @@ import { ContentAccordion } from './content-accordions';
 
 const AccordionCodeSchema = Block.extend({
   accordions: z.array(Block),
-  stepConfigs: z.custom<StepConfig[]>(),
+  stepConfigs: z.custom<StepConfig[]>().optional(),
 });
 
 const TabCodeSchema = Block.extend({
