@@ -67,14 +67,14 @@ export const calloutHandler: AnnotationHandler = {
       <>
         {children}
         <div
-          style={{ minWidth: `${character || column + 4}ch` }}
+          style={{ minWidth: `${character ? character + 4 : column + 4}ch` }}
           className={cn(
             'bg-content3 text-muted border-current relative mt-1 w-fit whitespace-break-spaces rounded border px-2 py-1',
             className
           )}
         >
           <div
-            style={{ left: `${character || column + 1}ch` }}
+            style={{ left: `${character ? character + 4 : column + 1}ch` }}
             className="bg-content3 absolute -top-px size-2 -translate-y-1/2 rotate-45 border-l border-t border-current"
           />
           {annotation.query}

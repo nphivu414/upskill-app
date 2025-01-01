@@ -3,29 +3,52 @@ import { Link } from '@nextui-org/react'
 import { CollapsibleBlock } from '../../collapsible-block.tsx'
 
 <CodeWithAccoridions>
-## !!accordions Section 1: Setup and initialize a new React project with NextUI
+## !!accordions Section 1: What are generics in TypeScript?
 
-Before we dive into coding the profile page, let's set up our project:
+Generics are a TypeScript feature that allows us to pass in various types of data and create reusable code to handle 
+different inputs. They allow us to define placeholder types which are then replaced when the code is executed with the actual types passed in.
 
 ```ts
-const hi = "Hello"
+const createSet = <T>(value) => {
+  return new Set<T>();
+};
+
+const stringSet = createSet<string>("");
+//    ^?
+
+const numberSet = createSet<number>(5);
+//    ^?
+
+```
+
+Now so why do we need generics here? Let's say at first we want to create a set of string
+```ts
+const createSet = () => {
+  return new Set();
+};
+
+const stringSet = createSet();
+//    ^?
+```
+
+{/* ```ts
+const hi = 'Hello'
 const msg = `${hi}, world`
+//    ^?
 
 // @errors: 2588 2322
 msg = 123
 
-let a: string;
+let a: string
 a = 5
-
 ```
 
 ```ts
 function identity<T>(value: T): T {
-    return value;
+  return value
 }
-const num = identity({name: "Vu"});  // T inferred as number
-const text = identity<string>("Hello");
-
-``` 
+const num = identity({ name: 'Vu' }) // T inferred as number
+const text = identity<string>('Hello')
+``` */}
 
 </CodeWithAccoridions>
