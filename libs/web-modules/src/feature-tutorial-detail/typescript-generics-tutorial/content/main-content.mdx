@@ -5,20 +5,93 @@ import { CollapsibleBlock } from '../../collapsible-block.tsx'
 <CodeWithAccoridions>
 ## !!accordions Section 1: What are generics in TypeScript?
 
-Generics are a TypeScript feature that allows us to pass in various types of data and create reusable code to handle 
-different inputs. They allow us to define placeholder types which are then replaced when the code is executed with the actual types passed in.
+Generics are a TypeScript feature that allows developers to write reusable and flexible code while maintaining strict 
+type safety. By enabling types to be passed as parameters, they help create structures and functions that adapt to the 
+specific type of data they operate on, without losing the benefits of TypeScript’s static typing.
+
+#### Why Do We Need Generics?
+Let’s look at a practical scenario and explore how TypeScript without generics, and TypeScript with generics handle it.
+
+Scenario: ```filterByKey``` Function
+Imagine you need to filter an array of objects by a specific key-value pair.
 
 ```ts
-const createSet = <T>(value) => {
+// Example in TypeScript Without Generics
+
+type User = {
+  id: number;
+  name: string;
+}
+
+const users: User[] = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+];
+
+function filterByKey(array, key, value) {
+    return array.filter((item) => item[key] === value);
+}
+
+const result = filterByKey(users, "name", "Alice");
+// 🚫 The return type is any, losing the structure of the objects.
+// 🚫 No compile-time validation for "key" and "value".
+
+const id = result[0].id
+const address = result[0].address
+// 🚫 No type-checking or IntelliSense when typing "result[0]."
+// 🚫 TypeScript doesn't knows what type "id" is
+// 🚫 No compile-time validation for getting "address" from result[0]
+```
+
+```ts
+// Let's try to create another version with better typing
+
+// @errors: 2345 2339
+type User = {
+  id: number;
+  name: string;
+}
+
+const users: User[] = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+];
+
+function filterUserByKey(array: User[], key: keyof User, value: string) {
+    return array.filter((item) => item[key] === value);
+}
+
+const filteredUsers = filterUserByKey(users, "name", "Alice");
+const userId = filteredUsers[0].id
+
+const filteredUsers2 = filterUserByKey(users, "test", "Alice");
+
+const user2 = filteredUsers[0]
+const user2Id = user2.address
+```
+
+
+
+{/* 1. Passing types to functions
+
+```ts
+// @errors: 2345
+const createSet = <T>() => {
   return new Set<T>();
 };
 
-const stringSet = createSet<string>("");
-//    ^?
+const stringSet = createSet<string>();
+const numberSet = createSet<number>();
 
-const numberSet = createSet<number>(5);
-//    ^?
+// Error code
+stringSet.add(123);
 
+numberSet.add("abc");
+
+// Valid code
+numberSet.add(123);
+
+stringSet.add("abc");
 ```
 
 Now so why do we need generics here? Let's say at first we want to create a set of string
@@ -29,7 +102,7 @@ const createSet = () => {
 
 const stringSet = createSet();
 //    ^?
-```
+``` */}
 
 {/* ```ts
 const hi = 'Hello'

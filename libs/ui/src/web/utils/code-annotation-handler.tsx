@@ -67,14 +67,14 @@ export const calloutHandler: AnnotationHandler = {
       <>
         {children}
         <div
-          style={{ minWidth: `${character ? character + 4 : column + 4}ch` }}
+          style={{ minWidth: `${character ? character + 2 : column + 4}ch` }}
           className={cn(
             'bg-content3 text-muted border-current relative mt-1 w-fit whitespace-break-spaces rounded border px-2 py-1',
             className
           )}
         >
           <div
-            style={{ left: `${character ? character + 4 : column + 1}ch` }}
+            style={{ left: `${character ? character + 2 : column + 1}ch` }}
             className="bg-content3 absolute -top-px size-2 -translate-y-1/2 rotate-45 border-l border-t border-current"
           />
           {annotation.query}
@@ -96,7 +96,7 @@ export const tooltipHandler: AnnotationHandler = {
       <Tooltip
         showArrow={true}
         classNames={{
-          content: 'bg-content2 shadow-lg p-4',
+          content: 'bg-content1 shadow-lg p-2',
         }}
         content={
           <>
