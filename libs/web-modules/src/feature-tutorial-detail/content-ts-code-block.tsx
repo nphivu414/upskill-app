@@ -70,6 +70,7 @@ export async function Code({ codeblock, tooltips }: CodeBlockProps) {
       className="bg-content2"
       tooltips={tooltips}
       showCopyButton
+      showTryCodeButton
     />
   );
 }

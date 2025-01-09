@@ -13,29 +13,92 @@ Generics appear in TypeScript code inside angle brackets, in the format `<T>`, w
 `<T>` can be read as a generic of type T. In this case, T will operate in the same way that parameters work in functions, 
 as placeholders for a type that will be declared when an instance of the structure is created.
 
+1. Passing type argument to `type`, `interface`, `class`
+  - Type aliases can use generics to create flexible and reusable types.
 ```ts
-const createSet = <T>() => {
+type ApiResponse<T> = {
+    data: T;
+    status: number;
+    error?: string;
+};
+
+// Usage
+type User = { id: number; name: string };
+const userResponse: ApiResponse<User> = {
+    data: { id: 1, name: "Alice" },
+    status: 200,
+};
+
+type Company = { id: number; name: string; address: string };
+const companyResponse: ApiResponse<Company> = {
+    data: { id: 1, name: "Alice", address: "Saigon, Vietnam" },
+    status: 200,
+};
+```
+
+  - Interfaces can also take generic parameters, enabling more specific and reusable contracts.
+```ts
+interface KeyValuePair<K, V> {
+    key: K;
+    value: V;
+}
+
+// Usage
+const stringPair: KeyValuePair<string, string> = { key: "name", value: "Alice" };
+const numberPair: KeyValuePair<number, boolean> = { key: 42, value: true };
+```
+
+  - Classes can take generic types to define properties and methods with flexible type handling.
+```ts
+class MyStorage<T> {
+    private items: T[] = [];
+
+    addItem(item: T): void {
+        this.items.push(item);
+    }
+
+    getAllItems(): T[] {
+        return this.items;
+    }
+}
+
+// Usage
+const stringStorage = new MyStorage<string>();
+stringStorage.addItem("Hello");
+stringStorage.addItem("World");
+
+const numberStorage = new MyStorage<number>();
+numberStorage.addItem(42);
+numberStorage.addItem(100);
+```
+
+2. Passing type argument to `function`
+Functions can accept generic parameters to work with varying types dynamically.
+
+```ts
+function createSet<T>() {
   return new Set<T>();
 };
 
 const stringSet = createSet<string>();
 //      ^?
 
+
+// Generic syntax for arrow functions
 const createSetWithInitialValue = <T>(initialValue: T) => {
   return new Set<T>([initialValue]);
 };
+
+// Notice that in this case we didn’t have to explicitly pass the type in the angle brackets (<>)
+// This behaviour is called "type argument inference", the TS compiler just looked at the value "initialValue", and set Type to its type.
 const numberSet = createSetWithInitialValue(14);
 //      ^?
-
-
-````
-
-
+```
 
 ## !!accordions Section 2: Why Do We Need Generics?
 Let’s look at a practical scenario and explore how TypeScript without generics, and TypeScript with generics handle it.
 
-Scenario: ```filterByKey``` Function
+Scenario: `filterByKey` Function
 Imagine you need to filter an array of objects by a specific key-value pair.
 
 ```ts
@@ -82,7 +145,7 @@ const users: User[] = [
     { id: 2, name: "Bob" },
 ];
 
-function filterByKey(array: User[], key: keyof User, value: User[keyof User]): User[] | undefined {
+function filterByKey(array: User[], key: keyof User, value: User[keyof User]) {
     return array.filter((item) => item[key] === value);
 }
 
@@ -93,8 +156,6 @@ const filteredUsers = filterByKey(users, "name", "Alice");
 const filteredUsers2 = filterByKey(users, "test", "Alice"); // ✅ Error checking for "key" parameter type
 
 const filteredUsers3 = filterByKey(users, "name", true); // ✅ Error checking for "value" parameter type
-
-const firstUser = filteredUsers2[0] // ✅ Error checking for possibly 'undefined' code
 
 // ------------------------------------------------------------------------------------------------------------ //
 
@@ -145,7 +206,7 @@ const apps: Application[] = [
     { id: "oiudxs-rte", title: "Photos" },
 ];
 
-function filterByKey<T>(array: T[], key: keyof T, value: T[keyof T]): T[] | undefined {
+function filterByKey<T>(array: T[], key: keyof T, value: T[keyof T]) {
     return array.filter((item) => item[key] === value);
 }
 
