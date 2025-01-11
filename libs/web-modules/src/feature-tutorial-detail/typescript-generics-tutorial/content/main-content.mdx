@@ -17,6 +17,7 @@ as placeholders for a type that will be declared when an instance of the structu
   - Type aliases can use generics to create flexible and reusable types.
 ```ts
 type ApiResponse<T> = {
+//                ^?
     data: T;
     status: number;
     error?: string;
@@ -93,6 +94,42 @@ const createSetWithInitialValue = <T>(initialValue: T) => {
 // This behaviour is called "type argument inference", the TS compiler just looked at the value "initialValue", and set Type to its type.
 const numberSet = createSetWithInitialValue(14);
 //      ^?
+```
+
+```tsx
+type DropdownProps<T> = {
+    items: T[];
+    getLabel: (item: T) => string;
+    onSelect: (item: T) => void;
+};
+
+function Dropdown<T>({ items, getLabel, onSelect }: DropdownProps<T>) {
+    return (
+        <select onChange={(e) => onSelect(items[Number(e.target.value)])}>
+            {items.map((item, index) => (
+                <option key={index} value={index}>
+                    {getLabel(item)}
+                </option>
+            ))}
+        </select>
+    );
+}
+
+// Usage
+const ProductDropdown = () => {
+    const products = [
+        { id: 1, name: "Laptop" },
+        { id: 2, name: "Phone" },
+    ];
+
+    return (
+        <Dropdown
+            items={products}
+            getLabel={(product) => product.name}
+            onSelect={(product) => console.log("Selected:", product)}
+        />
+    );
+};
 ```
 
 ## !!accordions Section 2: Why Do We Need Generics?

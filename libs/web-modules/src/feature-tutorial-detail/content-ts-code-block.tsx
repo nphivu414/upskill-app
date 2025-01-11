@@ -3,7 +3,7 @@ import { CodeBlockProps } from '@upskill-app/shared';
 import { CodeBlock } from '@upskill-app/ui/web';
 import { highlight } from 'codehike/code';
 import { createTwoslasher } from 'twoslash';
-import ts, { ModuleKind, ScriptTarget } from 'typescript';
+import ts, { JsxEmit, ModuleKind, ScriptTarget } from 'typescript';
 
 export async function Code({ codeblock, tooltips }: CodeBlockProps) {
   const fsMap = await createDefaultMapFromCDN(
@@ -22,6 +22,8 @@ export async function Code({ codeblock, tooltips }: CodeBlockProps) {
       noImplicitAny: false,
       module: ModuleKind.ES2015,
       allowJs: true,
+      types: ['react', 'node'],
+      jsx: JsxEmit.Preserve,
     },
   });
   const { hovers, code, queries, errors } = twoslasher(

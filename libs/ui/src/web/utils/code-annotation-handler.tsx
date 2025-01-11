@@ -49,7 +49,6 @@ export const calloutHandler: AnnotationHandler = {
   name: 'callout',
   transform: (annotation: InlineAnnotation) => {
     const { name, query, lineNumber, fromColumn, toColumn, data } = annotation;
-    console.log('🚀 ~ data?.isTsCode:', data?.isTsCode);
     if (data?.isTsCode) {
       return annotation;
     }
