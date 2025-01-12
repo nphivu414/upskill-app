@@ -115,9 +115,14 @@ function Dropdown<T>({ items, getLabel, onSelect }: DropdownProps<T>) {
     );
 }
 
+
 // Usage
+type Product = {
+  id: number;
+  name: string;
+}
 const ProductDropdown = () => {
-    const products = [
+    const products: Product[] = [
         { id: 1, name: "Laptop" },
         { id: 2, name: "Phone" },
     ];

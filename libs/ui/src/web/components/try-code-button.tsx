@@ -14,7 +14,7 @@ import { SquarePen } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 import { useResponsive } from '../hooks';
-import { cn } from '../utils';
+import { cn, getFileExtension } from '../utils';
 
 type TryCodeButtonProps = {
   code: string;
@@ -31,6 +31,10 @@ export function TryCodeButton({
   const { theme } = useTheme();
   const { isMobile } = useResponsive();
 
+  const renderEditor = () => {
+
+  }
+
   return (
     <>
       <Button
@@ -45,7 +49,7 @@ export function TryCodeButton({
       <Drawer
         isOpen={isOpen}
         placement={isMobile ? 'bottom' : 'right'}
-        size="3xl"
+        size="4xl"
         onOpenChange={onOpenChange}
         classNames={{
           base: 'h-full max-h-full',
@@ -63,13 +67,12 @@ export function TryCodeButton({
                   value={code}
                   theme={theme === 'dark' ? 'vs-dark' : 'light'}
                   onMount={async (editor, monaco) => {
-                    if (defaultLanguage !== 'tsx') {
-                      return undefined;
-                    }
+                    const defaultFileExtension = getFileExtension(defaultLanguage)
+                    const defaultFileName = `file:///main.${defaultFileExtension}`
                     monaco.languages.typescript.typescriptDefaults.setCompilerOptions(
                       {
                         target: monaco.languages.typescript.ScriptTarget.Latest,
-                        allowNonTsExtensions: true,
+                        // allowNonTsExtensions: true,
                         moduleResolution:
                           monaco.languages.typescript.ModuleResolutionKind
                             .NodeJs,
@@ -102,7 +105,7 @@ export function TryCodeButton({
                     const model = monaco.editor.createModel(
                       code,
                       'typescript',
-                      monaco.Uri.parse('file:///main.tsx')
+                      monaco.Uri.parse(defaultFileName)
                     );
 
                     editor.setModel(model);
