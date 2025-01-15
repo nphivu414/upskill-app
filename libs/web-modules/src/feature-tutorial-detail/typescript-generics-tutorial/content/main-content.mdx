@@ -96,6 +96,8 @@ const numberSet = createSetWithInitialValue(14);
 //      ^?
 ```
 
+You can also write generic React functional components
+
 ```tsx
 type DropdownProps<T> = {
     items: T[];
@@ -143,6 +145,7 @@ Let’s look at a practical scenario and explore how TypeScript without generics
 Scenario: `filterByKey` Function
 Imagine you need to filter an array of objects by a specific key-value pair.
 
+Here's our first approach
 ```ts
 // #1 Approach
 
@@ -173,6 +176,7 @@ So with the first apprach, the code may look fine at first but it's actually bad
     - 🚫 No compile-time error validation
     - 🚫 No type-checking or IntelliSense
 
+Now we go to the second approach
 ```ts
 // #2 Approach
 
@@ -187,7 +191,7 @@ const users: User[] = [
     { id: 2, name: "Bob" },
 ];
 
-function filterByKey(array: User[], key: keyof User, value: User[keyof User]) {
+function filterByKey(array: User[], key: keyof User, value: unknown) {
     return array.filter((item) => item[key] === value);
 }
 
@@ -196,8 +200,6 @@ const filteredUsers = filterByKey(users, "name", "Alice");
 // ✅ Has compile-time validation for "key"
 
 const filteredUsers2 = filterByKey(users, "test", "Alice"); // ✅ Error checking for "key" parameter type
-
-const filteredUsers3 = filterByKey(users, "name", true); // ✅ Error checking for "value" parameter type
 
 // ------------------------------------------------------------------------------------------------------------ //
 
@@ -248,7 +250,7 @@ const apps: Application[] = [
     { id: "oiudxs-rte", title: "Photos" },
 ];
 
-function filterByKey<T>(array: T[], key: keyof T, value: T[keyof T]) {
+function filterByKey<T>(array: T[], key: keyof T, value: unknown) {
     return array.filter((item) => item[key] === value);
 }
 
@@ -267,56 +269,57 @@ Why Generics Are a Game-Changer:
 - ✅ Scalability: Your code can handle future data changes or new use cases with minimal updates.
 - ✅ Developer Productivity: Autocomplete and type inference save time and reduce redundant load.
 
-{/* 1. Passing types to functions
+## !!accordions Section 3: Some Techniques You Need for Writing Good Generic TypeScript Code
+Writing efficient and maintainable generic TypeScript code requires a solid grasp of its capabilities and best practices. Here are essential techniques to master:
+1. Define Generic Constraints:
+  - Type Safety: Ensures the generic type meets certain requirements, avoiding runtime errors.
+  - Flexibility: Generic constraints provide reusable, strongly-typed utilities.
+  - Clarity: Clearly communicates the expected structure of the input to other developers.
 
+When working with APIs, you can constrain a generic type to represent the available endpoints and their return types.
 ```ts
 // @errors: 2345
-const createSet = <T>() => {
-  return new Set<T>();
+type APIEndpoints = {
+    "/users": { id: number; name: string }[];
+    "/posts": { id: number; title: string; content: string }[];
 };
 
-const stringSet = createSet<string>();
-const numberSet = createSet<number>();
-
-// Error code
-stringSet.add(123);
-
-numberSet.add("abc");
-
-// Valid code
-numberSet.add(123);
-
-stringSet.add("abc");
-```
-
-Now so why do we need generics here? Let's say at first we want to create a set of string
-```ts
-const createSet = () => {
-  return new Set();
-};
-
-const stringSet = createSet();
-//    ^?
-``` */}
-
-{/* ```ts
-const hi = 'Hello'
-const msg = `${hi}, world`
-//    ^?
-
-// @errors: 2588 2322
-msg = 123
-
-let a: string
-a = 5
-```
-
-```ts
-function identity<T>(value: T): T {
-  return value
+function fetchData<T extends keyof APIEndpoints>(endpoint: T): Promise<APIEndpoints[T]> {
+    return fetch(endpoint).then((res) => res.json());
 }
-const num = identity({ name: 'Vu' }) // T inferred as number
-const text = identity<string>('Hello')
-``` */}
 
+// Usage
+fetchData("/users").then((users) => console.log(users[0].name)); // ✅ Valid
+fetchData("/posts").then((posts) => console.log(posts[0].title)); // ✅ Valid
+
+fetchData("/comments");
+```
+When working with APIs, you can use generics to enforce type constraints for responses, ensuring that only objects with specific properties are accepted.
+```ts
+// @errors: 2345
+interface ApiResponse<T> {
+    data: T;
+    success: boolean;
+}
+
+// Constraint: T must have an `id` property
+function validateApiResponse<T extends { id: number }>(response: ApiResponse<T>): boolean {
+    return response.success && response.data.id > 0;
+}
+
+// Usage
+const userResponse = {
+    data: { id: 1, name: "Alice" },
+    success: true,
+};
+console.log(validateApiResponse(userResponse)); // ✅ Valid
+
+const invalidResponse = {
+    data: { name: "Bob" },
+    success: false,
+};
+
+console.log(validateApiResponse(invalidResponse));
+
+```
 </CodeWithAccoridions>
