@@ -1,0 +1,322 @@
+import { Link } from '@nextui-org/react'
+
+import { CollapsibleBlock } from '../../collapsible-block.tsx'
+
+<CodeWithAccoridions>
+## !!accordions Section 1: What are generics in TypeScript?
+
+Generics are a TypeScript feature that allows developers to write reusable and flexible code while maintaining strict 
+type safety. By enabling types to be passed as parameters, they help create structures and functions that adapt to the 
+specific type of data they operate on, without losing the benefits of TypeScript’s static typing.
+
+Generics appear in TypeScript code inside angle brackets, in the format `<T>`, where T represents a passed-in type. 
+`<T>` can be read as a generic of type T. In this case, T will operate in the same way that parameters work in functions, 
+as placeholders for a type that will be declared when an instance of the structure is created.
+
+1. Passing type argument to `type`, `interface`, `class`
+  - Type aliases can use generics to create flexible and reusable types.
+```ts
+type ApiResponse<T> = {
+//                ^?
+    data: T;
+    status: number;
+    error?: string;
+};
+
+// Usage
+type User = { id: number; name: string };
+const userResponse: ApiResponse<User> = {
+    data: { id: 1, name: "Alice" },
+    status: 200,
+};
+
+type Company = { id: number; name: string; address: string };
+const companyResponse: ApiResponse<Company> = {
+    data: { id: 1, name: "Alice", address: "Saigon, Vietnam" },
+    status: 200,
+};
+```
+
+  - Interfaces can also take generic parameters, enabling more specific and reusable contracts.
+```ts
+interface KeyValuePair<K, V> {
+    key: K;
+    value: V;
+}
+
+// Usage
+const stringPair: KeyValuePair<string, string> = { key: "name", value: "Alice" };
+const numberPair: KeyValuePair<number, boolean> = { key: 42, value: true };
+```
+
+  - Classes can take generic types to define properties and methods with flexible type handling.
+```ts
+class MyStorage<T> {
+    private items: T[] = [];
+
+    addItem(item: T): void {
+        this.items.push(item);
+    }
+
+    getAllItems(): T[] {
+        return this.items;
+    }
+}
+
+// Usage
+const stringStorage = new MyStorage<string>();
+stringStorage.addItem("Hello");
+stringStorage.addItem("World");
+
+const numberStorage = new MyStorage<number>();
+numberStorage.addItem(42);
+numberStorage.addItem(100);
+```
+
+2. Passing type argument to `function`
+Functions can accept generic parameters to work with varying types dynamically.
+
+```ts
+function createSet<T>() {
+  return new Set<T>();
+};
+
+const stringSet = createSet<string>();
+//      ^?
+
+
+// Generic syntax for arrow functions
+const createSetWithInitialValue = <T>(initialValue: T) => {
+  return new Set<T>([initialValue]);
+};
+
+// Notice that in this case we didn’t have to explicitly pass the type in the angle brackets (<>)
+// This behaviour is called "type argument inference", the TS compiler just looked at the value "initialValue", and set Type to its type.
+const numberSet = createSetWithInitialValue(14);
+//      ^?
+```
+
+```tsx
+type DropdownProps<T> = {
+    items: T[];
+    getLabel: (item: T) => string;
+    onSelect: (item: T) => void;
+};
+
+function Dropdown<T>({ items, getLabel, onSelect }: DropdownProps<T>) {
+    return (
+        <select onChange={(e) => onSelect(items[Number(e.target.value)])}>
+            {items.map((item, index) => (
+                <option key={index} value={index}>
+                    {getLabel(item)}
+                </option>
+            ))}
+        </select>
+    );
+}
+
+
+// Usage
+type Product = {
+  id: number;
+  name: string;
+}
+const ProductDropdown = () => {
+    const products: Product[] = [
+        { id: 1, name: "Laptop" },
+        { id: 2, name: "Phone" },
+    ];
+
+    return (
+        <Dropdown
+            items={products}
+            getLabel={(product) => product.name}
+            onSelect={(product) => console.log("Selected:", product)}
+        />
+    );
+};
+```
+
+## !!accordions Section 2: Why Do We Need Generics?
+Let’s look at a practical scenario and explore how TypeScript without generics, and TypeScript with generics handle it.
+
+Scenario: `filterByKey` Function
+Imagine you need to filter an array of objects by a specific key-value pair.
+
+```ts
+// #1 Approach
+
+type User = {
+  id: number;
+  name: string;
+}
+
+const users: User[] = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+];
+
+function filterByKey(array, key, value) {
+    return array.filter((item) => item[key] === value);
+}
+
+const result = filterByKey(users, "name", "Alice");
+//      ^?
+
+const result2 = filterByKey(users, "address", "Saigon");
+const firstItem = result2[0]
+
+```
+
+So with the first apprach, the code may look fine at first but it's actually bad
+    - 🚫 The return type is any, losing the structure of the objects.
+    - 🚫 No compile-time error validation
+    - 🚫 No type-checking or IntelliSense
+
+```ts
+// #2 Approach
+
+// @errors: 2345 2339 564 18048
+type User = {
+  id: number;
+  name: string;
+}
+
+const users: User[] = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+];
+
+function filterByKey(array: User[], key: keyof User, value: User[keyof User]) {
+    return array.filter((item) => item[key] === value);
+}
+
+const filteredUsers = filterByKey(users, "name", "Alice");
+// ✅ The return type is User[]
+// ✅ Has compile-time validation for "key"
+
+const filteredUsers2 = filterByKey(users, "test", "Alice"); // ✅ Error checking for "key" parameter type
+
+const filteredUsers3 = filterByKey(users, "name", true); // ✅ Error checking for "value" parameter type
+
+// ------------------------------------------------------------------------------------------------------------ //
+
+type Application = {
+  id: string;
+  title: string;
+}
+const apps: Application[] = [
+    { id: "gfrlj-ukhn", title: "Settings" },
+    { id: "oiudxs-rte", title: "Photos" },
+];
+
+const filteredApps = filterByKey(apps, "title", "Settings");
+
+```
+
+With the second apprach, the code is fully typed, much safer and better but it's still not good enough
+  - Improvements:
+    - ✅ The return type is `User[]`
+    - ✅ Compile-time error validation
+    - ✅ Type-checking or IntelliSense works as expected
+
+  - Problems:
+    - 🚫 The code is not reusable and flexible enough, we can't use `filterByKey` for a other data structure
+
+
+So what we really need here is to write reusable and flexible code while maintaining strict type safety, that's when generics shine:
+
+```ts
+// #3 Approach
+
+type User = {
+  id: number;
+  name: string;
+}
+
+const users: User[] = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+];
+
+type Application = {
+  id: string;
+  title: string;
+}
+const apps: Application[] = [
+    { id: "gfrlj-ukhn", title: "Settings" },
+    { id: "oiudxs-rte", title: "Photos" },
+];
+
+function filterByKey<T>(array: T[], key: keyof T, value: T[keyof T]) {
+    return array.filter((item) => item[key] === value);
+}
+
+const filteredUsers = filterByKey(users, "name", "Alice");
+//     ^?
+
+const filteredApps = filterByKey(apps, "title", "Settings");
+//     ^?
+
+```
+
+Why Generics Are a Game-Changer:
+
+- ✅ Reusability: Write once, use everywhere. Generics adapt to any type you provide.
+- ✅ Type Safety: Prevent invalid inputs and incorrect usage at compile time.
+- ✅ Scalability: Your code can handle future data changes or new use cases with minimal updates.
+- ✅ Developer Productivity: Autocomplete and type inference save time and reduce redundant load.
+
+{/* 1. Passing types to functions
+
+```ts
+// @errors: 2345
+const createSet = <T>() => {
+  return new Set<T>();
+};
+
+const stringSet = createSet<string>();
+const numberSet = createSet<number>();
+
+// Error code
+stringSet.add(123);
+
+numberSet.add("abc");
+
+// Valid code
+numberSet.add(123);
+
+stringSet.add("abc");
+```
+
+Now so why do we need generics here? Let's say at first we want to create a set of string
+```ts
+const createSet = () => {
+  return new Set();
+};
+
+const stringSet = createSet();
+//    ^?
+``` */}
+
+{/* ```ts
+const hi = 'Hello'
+const msg = `${hi}, world`
+//    ^?
+
+// @errors: 2588 2322
+msg = 123
+
+let a: string
+a = 5
+```
+
+```ts
+function identity<T>(value: T): T {
+  return value
+}
+const num = identity({ name: 'Vu' }) // T inferred as number
+const text = identity<string>('Hello')
+``` */}
+
+</CodeWithAccoridions>

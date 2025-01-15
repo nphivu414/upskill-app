@@ -10,9 +10,11 @@ import {
   tooltipHandler,
 } from '../utils';
 import { CopyButton } from './copy-button';
+import { TryCodeButton } from './try-code-button';
 
 type CodeBlockProps = React.ComponentPropsWithoutRef<typeof Pre> & {
   showCopyButton?: boolean;
+  showTryCodeButton?: boolean;
   tooltips?: {
     title?: string | undefined;
     children?: React.ReactNode;
@@ -24,7 +26,14 @@ export const CodeBlock = React.forwardRef<
   CodeBlockProps
 >(
   (
-    { className, showCopyButton, code: highlightedCode, tooltips, ...props },
+    {
+      className,
+      showCopyButton,
+      showTryCodeButton,
+      code: highlightedCode,
+      tooltips,
+      ...props
+    },
     ref
   ) => {
     highlightedCode.annotations = highlightedCode.annotations.map((a) => {
@@ -39,8 +48,17 @@ export const CodeBlock = React.forwardRef<
     return (
       <div className="relative">
         <div className="absolute right-2 top-2">
-          {showCopyButton && <CopyButton text={highlightedCode.code} />}
+          <div className="flex gap-2">
+            {showTryCodeButton && (
+              <TryCodeButton
+                defaultLanguage={highlightedCode.lang}
+                code={highlightedCode.code}
+              />
+            )}
+            {showCopyButton && <CopyButton text={highlightedCode.code} />}
+          </div>
         </div>
+
         <Pre
           ref={ref}
           className={cn('bg-content1 text-xs scrollbar-thin py-4', className)}

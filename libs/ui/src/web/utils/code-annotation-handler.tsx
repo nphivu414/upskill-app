@@ -3,10 +3,14 @@ import { Tooltip } from '@nextui-org/react';
 import {
   AnnotationHandler,
   getPreRef,
+  highlight,
   InlineAnnotation,
   InnerLine,
   InnerPre,
+  Pre,
 } from 'codehike/code';
+
+import { cn } from './tailwind';
 
 export const codeLineMarkHander: AnnotationHandler = {
   name: 'mark',
@@ -45,6 +49,9 @@ export const calloutHandler: AnnotationHandler = {
   name: 'callout',
   transform: (annotation: InlineAnnotation) => {
     const { name, query, lineNumber, fromColumn, toColumn, data } = annotation;
+    if (data?.isTsCode) {
+      return annotation;
+    }
     return {
       name,
       query,
@@ -54,19 +61,22 @@ export const calloutHandler: AnnotationHandler = {
     };
   },
   Block: ({ annotation, children }) => {
-    const { column } = annotation.data;
+    const { column, className, character } = annotation.data;
     return (
       <>
         {children}
         <div
-          style={{ minWidth: `${column + 4}ch` }}
-          className="bg-content2 border-divider relative mt-1 w-fit whitespace-break-spaces rounded border px-2 py-1"
+          style={{ minWidth: `${character ? character + 2 : column + 4}ch` }}
+          className={cn(
+            'bg-content3 text-muted border-current relative mt-1 w-fit whitespace-break-spaces rounded border px-2 py-1',
+            className
+          )}
         >
           <div
-            style={{ left: `${column}ch` }}
-            className="bg-content2 border-divider absolute -top-px size-2 -translate-y-1/2 rotate-45 border-l border-t"
+            style={{ left: `${character ? character + 2 : column + 1}ch` }}
+            className="bg-content3 absolute -top-px size-2 -translate-y-1/2 rotate-45 border-l border-t border-current"
           />
-          <span className="text-muted text-xs">{annotation.query}</span>
+          {annotation.query}
         </div>
       </>
     );
@@ -75,15 +85,25 @@ export const calloutHandler: AnnotationHandler = {
 
 export const tooltipHandler: AnnotationHandler = {
   name: 'tooltip',
-  Inline: ({ children, annotation }) => {
+  Inline: async ({ children, annotation }) => {
     const { query, data } = annotation;
+    const highlighted = await highlight(
+      { value: query, lang: 'ts', meta: '' },
+      'github-from-css'
+    );
     return (
       <Tooltip
         showArrow={true}
         classNames={{
-          content: 'bg-content2 shadow-lg p-4',
+          content: 'bg-content1 shadow-lg p-2',
         }}
-        content={<>{data?.children || query}</>}
+        content={
+          <>
+            {data?.children || (
+              <Pre code={highlighted} className="m-0 bg-transparent p-1" />
+            )}
+          </>
+        }
       >
         <span className="text-warning underline decoration-dashed">
           {children}
