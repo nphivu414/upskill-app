@@ -271,17 +271,39 @@ Why Generics Are a Game-Changer:
 
 ## !!accordions Section 3: Some Techniques You Need for Writing Good Generic TypeScript Code
 Writing efficient and maintainable generic TypeScript code requires a solid grasp of its capabilities and best practices. Here are essential techniques to master:
-1. Define Generic Constraints:
-  - Type Safety: Ensures the generic type meets certain requirements, avoiding runtime errors.
-  - Flexibility: Generic constraints provide reusable, strongly-typed utilities.
-  - Clarity: Clearly communicates the expected structure of the input to other developers.
-
-When working with APIs, you can constrain a generic type to represent the available endpoints and their return types.
+1. Leverage `extends` to Add Type Constraints
+    - Use `extends` to specify the shape or properties a generic type must follow to.
 ```ts
 // @errors: 2345
+interface User {
+    id: number;
+    name: string;
+}
+
+function printUserName<T extends User>(user: T): void {
+    console.log(user.name);
+}
+
+printUserName({ id: 1, name: "Alice" }); // ✅ Valid
+
+printUserName({ id: 1, name: "Vu", age: 30 }); // ✅ Valid
+
+printUserName({ id: 2 });
+
+```
+
+2. Use `keyof` to Constrain Keys
+    - When working with object keys, use `keyof` to ensure generic parameters align with valid keys.
+
+```ts
+// @errors: 2345
+
+interface User { id: number; name: string }
+interface Post { id: number; title: string; content: string }
+
 type APIEndpoints = {
-    "/users": { id: number; name: string }[];
-    "/posts": { id: number; title: string; content: string }[];
+    "/users": User[];
+    "/posts": Post[];
 };
 
 function fetchData<T extends keyof APIEndpoints>(endpoint: T): Promise<APIEndpoints[T]> {
@@ -293,33 +315,90 @@ fetchData("/users").then((users) => console.log(users[0].name)); // ✅ Valid
 fetchData("/posts").then((posts) => console.log(posts[0].title)); // ✅ Valid
 
 fetchData("/comments");
+
 ```
-When working with APIs, you can use generics to enforce type constraints for responses, ensuring that only objects with specific properties are accepted.
+
+3. Use default Generic Parameters
+    - Provide defaults for generic types to make your API easier to use.
 ```ts
-// @errors: 2345
-interface ApiResponse<T> {
+interface Response<T = string> {
     data: T;
-    success: boolean;
+    status: number;
 }
 
-// Constraint: T must have an `id` property
-function validateApiResponse<T extends { id: number }>(response: ApiResponse<T>): boolean {
-    return response.success && response.data.id > 0;
+const response: Response = { data: "Success", status: 200 }; // Uses default `string`
+const typedResponse: Response<number> = { data: 42, status: 200 };
+
+```
+
+4. Use Conditional Types for Flexible Constraints
+    - Conditional types allow enforcing rules that vary based on the provided type.
+```ts
+type ExtractArrayType<T> = T extends (infer U)[] ? U : never;
+
+type StringArrayType = ExtractArrayType<string[]>; // string
+type NonArrayType = ExtractArrayType<number>; // never
+
+```
+
+5. Combine Generics with Discriminated Unions
+    - Use discriminated unions to simplify handling multiple types within a generic context.
+```ts
+// @errors: 2353
+type Shape = 
+    | { type: "circle"; radius: number }
+    | { type: "square"; side: number }
+    | { type: "unknown" };
+
+function calculateArea<T extends Shape>(shape: T): number {
+    if (shape.type === "circle") {
+        return Math.PI * shape.radius ** 2;
+    } else if (shape.type === "square") {
+        return shape.side ** 2;
+    }
+    return 0;
 }
 
-// Usage
-const userResponse = {
-    data: { id: 1, name: "Alice" },
-    success: true,
-};
-console.log(validateApiResponse(userResponse)); // ✅ Valid
+console.log(calculateArea({ type: "circle", radius: 5 })); // ✅ 78.54
+console.log(calculateArea({ type: "square", side: 2 })); // ✅ 4
+console.log(calculateArea({ type: "unknown" })); // ✅ 0
 
-const invalidResponse = {
-    data: { name: "Bob" },
-    success: false,
-};
+console.log(calculateArea({ type: "square", radius: 4 }));
 
-console.log(validateApiResponse(invalidResponse));
+```
+
+6. Layer Generics for Complex Scenarios
+    - Use multiple generics when handling relationships between types.
+```ts
+function mapObject<T, U>(obj: Record<string, T>, transform: (value: T) => U): Record<string, U> {
+    const result: Record<string, U> = {};
+    for (const key in obj) {
+        result[key] = transform(obj[key]);
+    }
+    return result;
+}
+
+const input = { a: 1, b: 2 };
+const output = mapObject(input, (x) => x * 2); // { a: 2, b: 4 }
+
+```
+
+7. Combine Generics with Overloads
+    - For functions with varied behaviors, use overloads to improve clarity.
+```ts
+function processInput<T extends string>(input: T): string;
+function processInput<T extends number>(input: T): number;
+function processInput(input: unknown): unknown {
+    if (typeof input === "string") {
+        return input.toUpperCase();
+    } else if (typeof input === "number") {
+        return input * 2;
+    }
+    return input;
+}
+
+console.log(processInput("hello")); // HELLO
+console.log(processInput(42));      // 84
 
 ```
 </CodeWithAccoridions>
