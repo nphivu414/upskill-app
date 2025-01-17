@@ -7,7 +7,7 @@ import ts, { JsxEmit, ModuleKind, ScriptTarget } from 'typescript';
 
 export async function Code({ codeblock, tooltips }: CodeBlockProps) {
   const fsMap = await createDefaultMapFromCDN(
-    { target: ScriptTarget.ES2015 },
+    { target: ScriptTarget.ES2017 },
     '3.7.3',
     false,
     ts
@@ -16,8 +16,8 @@ export async function Code({ codeblock, tooltips }: CodeBlockProps) {
   const twoslasher = createTwoslasher({
     fsMap,
     compilerOptions: {
-      target: ScriptTarget.ES2015,
-      lib: ['dom', 'es2015'],
+      target: ScriptTarget.ES2017,
+      lib: ['dom', 'es2017'],
       strict: true,
       noImplicitAny: false,
       module: ModuleKind.ES2015,

@@ -96,6 +96,8 @@ const numberSet = createSetWithInitialValue(14);
 //      ^?
 ```
 
+You can also write generic React functional components
+
 ```tsx
 type DropdownProps<T> = {
     items: T[];
@@ -143,6 +145,7 @@ Let’s look at a practical scenario and explore how TypeScript without generics
 Scenario: `filterByKey` Function
 Imagine you need to filter an array of objects by a specific key-value pair.
 
+Here's our first approach
 ```ts
 // #1 Approach
 
@@ -173,6 +176,7 @@ So with the first apprach, the code may look fine at first but it's actually bad
     - 🚫 No compile-time error validation
     - 🚫 No type-checking or IntelliSense
 
+Now we go to the second approach
 ```ts
 // #2 Approach
 
@@ -187,7 +191,7 @@ const users: User[] = [
     { id: 2, name: "Bob" },
 ];
 
-function filterByKey(array: User[], key: keyof User, value: User[keyof User]) {
+function filterByKey(array: User[], key: keyof User, value: unknown) {
     return array.filter((item) => item[key] === value);
 }
 
@@ -196,8 +200,6 @@ const filteredUsers = filterByKey(users, "name", "Alice");
 // ✅ Has compile-time validation for "key"
 
 const filteredUsers2 = filterByKey(users, "test", "Alice"); // ✅ Error checking for "key" parameter type
-
-const filteredUsers3 = filterByKey(users, "name", true); // ✅ Error checking for "value" parameter type
 
 // ------------------------------------------------------------------------------------------------------------ //
 
@@ -248,7 +250,7 @@ const apps: Application[] = [
     { id: "oiudxs-rte", title: "Photos" },
 ];
 
-function filterByKey<T>(array: T[], key: keyof T, value: T[keyof T]) {
+function filterByKey<T>(array: T[], key: keyof T, value: unknown) {
     return array.filter((item) => item[key] === value);
 }
 
@@ -267,56 +269,165 @@ Why Generics Are a Game-Changer:
 - ✅ Scalability: Your code can handle future data changes or new use cases with minimal updates.
 - ✅ Developer Productivity: Autocomplete and type inference save time and reduce redundant load.
 
-{/* 1. Passing types to functions
+## !!accordions Section 3: Some Techniques You Need for Writing Good Generic TypeScript Code
+Writing efficient and maintainable generic TypeScript code requires a solid grasp of its capabilities and best practices. Here are essential techniques to master:
+
+**1. Leverage `extends` to Add Type Constraints**
+    - Use `extends` to specify the shape or properties a generic type must follow to.
+```ts
+// @errors: 2345
+interface User {
+    id: number;
+    name: string;
+}
+
+function printUserName<T extends User>(user: T): void {
+    console.log(user.name);
+}
+
+printUserName({ id: 1, name: "Alice" }); // ✅ Valid
+
+printUserName({ id: 1, name: "Vu", age: 30 }); // ✅ Valid
+
+printUserName({ id: 2 });
+
+```
+
+**2. Use `keyof` to Constrain Keys**
+    - When working with object keys, use `keyof` to ensure generic parameters align with valid keys.
 
 ```ts
 // @errors: 2345
-const createSet = <T>() => {
-  return new Set<T>();
+
+interface User { id: number; name: string }
+interface Post { id: number; title: string; content: string }
+
+type APIEndpoints = {
+    "/users": User[];
+    "/posts": Post[];
 };
 
-const stringSet = createSet<string>();
-const numberSet = createSet<number>();
-
-// Error code
-stringSet.add(123);
-
-numberSet.add("abc");
-
-// Valid code
-numberSet.add(123);
-
-stringSet.add("abc");
-```
-
-Now so why do we need generics here? Let's say at first we want to create a set of string
-```ts
-const createSet = () => {
-  return new Set();
-};
-
-const stringSet = createSet();
-//    ^?
-``` */}
-
-{/* ```ts
-const hi = 'Hello'
-const msg = `${hi}, world`
-//    ^?
-
-// @errors: 2588 2322
-msg = 123
-
-let a: string
-a = 5
-```
-
-```ts
-function identity<T>(value: T): T {
-  return value
+function fetchData<T extends keyof APIEndpoints>(endpoint: T): Promise<APIEndpoints[T]> {
+    return fetch(endpoint).then((res) => res.json());
 }
-const num = identity({ name: 'Vu' }) // T inferred as number
-const text = identity<string>('Hello')
-``` */}
 
+// Usage
+fetchData("/users").then((users) => console.log(users[0].name)); // ✅ Valid
+fetchData("/posts").then((posts) => console.log(posts[0].title)); // ✅ Valid
+
+fetchData("/comments");
+
+```
+
+**3. Use default Generic Parameters**
+    - Provide defaults for generic types to make your API easier to use.
+```ts
+interface Response<T = string> {
+    data: T;
+    status: number;
+}
+
+const response: Response = { data: "Success", status: 200 }; // Uses default `string`
+const typedResponse: Response<number> = { data: 42, status: 200 };
+
+```
+
+**4. Use Conditional Types for Flexible Constraints**
+    - Conditional types allow enforcing rules that vary based on the provided type.
+```ts
+type ExtractArrayType<T> = T extends (infer U)[] ? U : never;
+
+type StringArrayType = ExtractArrayType<string[]>; // string
+type NonArrayType = ExtractArrayType<number>; // never
+
+```
+
+**5. Combine Generics with Discriminated Unions**
+    - Use discriminated unions to simplify handling multiple types within a generic context.
+```ts
+// @errors: 2353
+type Shape = 
+    | { type: "circle"; radius: number }
+    | { type: "square"; side: number }
+    | { type: "unknown" };
+
+function calculateArea<T extends Shape>(shape: T): number {
+    if (shape.type === "circle") {
+        return Math.PI * shape.radius ** 2;
+    } else if (shape.type === "square") {
+        return shape.side ** 2;
+    }
+    return 0;
+}
+
+console.log(calculateArea({ type: "circle", radius: 5 })); // ✅ 78.54
+console.log(calculateArea({ type: "square", side: 2 })); // ✅ 4
+console.log(calculateArea({ type: "unknown" })); // ✅ 0
+
+console.log(calculateArea({ type: "square", radius: 4 }));
+
+```
+
+**6. Layer Generics for Complex Scenarios**
+    - Use multiple generics when handling relationships between types.
+```ts
+function mapObject<T, U>(obj: Record<string, T>, transform: (value: T) => U): Record<string, U> {
+    const result: Record<string, U> = {};
+    for (const key in obj) {
+        result[key] = transform(obj[key]);
+    }
+    return result;
+}
+
+const input = { a: 1, b: 2 };
+const output = mapObject(input, (x) => x * 2); // { a: 2, b: 4 }
+
+```
+
+**7. Combine Generics with Overloads**
+    - For functions with varied behaviors, use overloads to improve clarity.
+```ts
+function processInput<T extends string>(input: T): string;
+function processInput<T extends number>(input: T): number;
+function processInput(input: unknown): unknown {
+    if (typeof input === "string") {
+        return input.toUpperCase();
+    } else if (typeof input === "number") {
+        return input * 2;
+    }
+    return input;
+}
+
+console.log(processInput("hello")); // HELLO
+console.log(processInput(42));      // 84
+
+```
+
+**8. Creating Mapped Types with Generics**
+    - When working with TypeScript, there are times when you will need to create a type that should have the same shape as another type
+```ts
+type BooleanFields<T> = {
+  [K in keyof T]: boolean;
+};
+
+type User = {
+  email: string;
+  name: string;
+}
+
+type UserFetchOptions = BooleanFields<User>;
+//          ^?
+```
+
+**9. Compose with Utility Types**
+    - TypeScript provides utility types (e.g., `Partial`, `Pick`, `Omit`) to extend generics without redefining functionality.
+```ts
+function updateObject<T>(obj: T, updates: Partial<T>): T {
+    return { ...obj, ...updates };
+}
+
+const user = { id: 1, name: "Alice" };
+const updated = updateObject(user, { name: "Bob" });
+//       ^?
+```
 </CodeWithAccoridions>
