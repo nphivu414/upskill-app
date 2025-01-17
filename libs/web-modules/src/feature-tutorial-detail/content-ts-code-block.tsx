@@ -20,7 +20,7 @@ export async function Code({ codeblock, tooltips }: CodeBlockProps) {
       lib: ['dom', 'es2017'],
       strict: true,
       noImplicitAny: false,
-      module: ModuleKind.ESNext,
+      module: ModuleKind.ES2015,
       allowJs: true,
       types: ['react', 'node'],
       jsx: JsxEmit.Preserve,
