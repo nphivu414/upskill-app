@@ -31,10 +31,6 @@ export function TryCodeButton({
   const { theme } = useTheme();
   const { isMobile } = useResponsive();
 
-  const renderEditor = () => {
-
-  }
-
   return (
     <>
       <Button
@@ -67,8 +63,9 @@ export function TryCodeButton({
                   value={code}
                   theme={theme === 'dark' ? 'vs-dark' : 'light'}
                   onMount={async (editor, monaco) => {
-                    const defaultFileExtension = getFileExtension(defaultLanguage)
-                    const defaultFileName = `file:///main.${defaultFileExtension}`
+                    const defaultFileExtension =
+                      getFileExtension(defaultLanguage);
+                    const defaultFileName = `file:///main.${defaultFileExtension}`;
                     monaco.languages.typescript.typescriptDefaults.setCompilerOptions(
                       {
                         target: monaco.languages.typescript.ScriptTarget.Latest,
