@@ -1,4 +1,4 @@
-import { Divider } from '@nextui-org/react';
+import { Divider } from '@heroui/react';
 import { AppFooter, NavigationBar } from '@upskill-app/ui/web';
 import {
   CourseOfferingSection,

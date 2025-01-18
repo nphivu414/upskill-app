@@ -1,4 +1,4 @@
-import { Chip } from '@nextui-org/react';
+import { Chip } from "@heroui/react";
 import { Subtle } from '@upskill-app/ui/web';
 
 import { Flight } from '../types';

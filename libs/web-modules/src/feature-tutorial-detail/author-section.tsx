@@ -1,4 +1,4 @@
-import { Avatar, Button, Link, Spacer } from '@nextui-org/react';
+import { Avatar, Button, Link, Spacer } from "@heroui/react";
 import { CustomIcons, Paragraph } from '@upskill-app/ui/web';
 
 export const AuthorSection = () => {

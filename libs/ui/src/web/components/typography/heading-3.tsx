@@ -1,4 +1,4 @@
-import { cn } from '@nextui-org/react';
+import { cn } from "@heroui/react";
 import { TypographyProps } from './types';
 
 export function Heading3({ text, className, children }: TypographyProps) {

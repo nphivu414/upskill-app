@@ -1,5 +1,5 @@
 import { DateFormatter, Time } from '@internationalized/date';
-import { SliderProps } from '@nextui-org/react';
+import { SliderProps } from "@heroui/react";
 import { SliderField, SliderFieldProps, Subtle } from '@upskill-app/ui/web';
 import { useFormContext } from 'react-hook-form';
 

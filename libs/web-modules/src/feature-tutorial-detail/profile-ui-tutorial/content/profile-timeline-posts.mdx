@@ -22,7 +22,7 @@ import {
   DropdownTrigger,
   Link,
   User,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { Subtle } from './typography.tsx'; // We've defined the 'Subtle' component in the Section 3: Designing the Profile Information Section
 import { MarkdownRenderer } from './markdown-renderer.tsx';
 import { Ellipsis } from 'lucide-react';
@@ -337,7 +337,7 @@ export const Posts = ({ posts }: PostsProps) => {
 
 ```tsx
 import React from 'react';
-import { Image } from '@nextui-org/react';
+import { Image } from '@heroui/react';
 import Markdown, { Options } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -407,7 +407,7 @@ export const formatDate = (date: string) => {
 ### !!tabs types.ts
 
 ```ts
-import { CardProps } from '@nextui-org/react';
+import { CardProps } from '@heroui/react';
 
 export interface PostStats {
   likes: number;

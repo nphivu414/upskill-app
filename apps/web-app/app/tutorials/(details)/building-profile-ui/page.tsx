@@ -1,4 +1,4 @@
-import { Divider } from '@nextui-org/react';
+import { Divider } from '@heroui/react';
 import { ProfilePagePreview } from '@upskill-app/tutorial-elements';
 import { Paragraph } from '@upskill-app/ui/web';
 import {

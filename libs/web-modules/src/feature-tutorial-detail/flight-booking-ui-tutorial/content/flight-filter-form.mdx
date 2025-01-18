@@ -11,7 +11,7 @@ import { FlightFilterFormPreview } from '@upskill-app/tutorial-elements';
 ```tsx
 import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 import {
@@ -149,7 +149,7 @@ export const flightFilterSchema = z.object({
 ### !!tabs slider-field.tsx
 
 ```tsx
-import { Slider, SliderProps } from '@nextui-org/react';
+import { Slider, SliderProps } from '@heroui/react';
 import { Controller, FieldError, FieldValues } from 'react-hook-form';
 
 import { ControlledFormFieldProps } from './types';
@@ -214,7 +214,7 @@ export function SliderField<T extends FieldValues>(props: SliderFieldProps<T>) {
 ### !!tabs price-range-slider.tsx
 
 ```tsx
-import { SliderProps } from '@nextui-org/react';
+import { SliderProps } from '@heroui/react';
 import { SliderField } from './slider-field';
 import { Subtle } from './typography';
 import { useFormContext } from 'react-hook-form';
@@ -253,7 +253,7 @@ export const PriceRangeSlider = (props: Omit<SliderProps, 'name'>) => {
 
 ```tsx
 import { DateFormatter, Time } from '@internationalized/date';
-import { SliderProps } from '@nextui-org/react';
+import { SliderProps } from '@heroui/react';
 import { SliderField, SliderFieldProps } from './slider-field';
 import { Subtle } from './typography';
 import { useFormContext } from 'react-hook-form';
@@ -312,7 +312,7 @@ import {
   CheckboxGroup,
   CheckboxGroupProps,
   CheckboxProps,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import {
   Controller,
   ControllerRenderProps,

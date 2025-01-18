@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react';
-import { cn } from '@nextui-org/react';
+import { cn } from "@heroui/react";
 import { ComponentWithChildren } from '@upskill-app/shared';
 
 type ScreenContainerProps = ComponentWithChildren &

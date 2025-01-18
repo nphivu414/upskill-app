@@ -1,4 +1,4 @@
-import { Spacer, User } from '@nextui-org/react';
+import { Spacer, User } from "@heroui/react";
 import { Heading1 } from '@upskill-app/ui/web';
 
 type AuthorProps = {

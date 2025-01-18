@@ -1,4 +1,4 @@
-import { Divider, Spacer } from '@nextui-org/react';
+import { Divider, Spacer } from '@heroui/react';
 import { ComponentWithChildren } from '@upskill-app/shared';
 import { AppContainer, AppFooter, NavigationBar } from '@upskill-app/ui/web';
 import { CommunitySection } from '@upskill-app/web-modules/community';
