@@ -6,7 +6,7 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from '@nextui-org/react';
+} from "@heroui/react";
 import { ComponentWithChildren } from '@upskill-app/shared';
 import { Code } from 'lucide-react';
 

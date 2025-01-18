@@ -11,7 +11,7 @@ import {
   DropdownTrigger,
   Link,
   User,
-} from '@nextui-org/react';
+} from "@heroui/react";
 import { MarkdownRenderer, Subtle } from '@upskill-app/ui/web';
 import { Ellipsis } from 'lucide-react';
 

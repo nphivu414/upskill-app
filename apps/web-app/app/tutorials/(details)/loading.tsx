@@ -1,4 +1,4 @@
-import { Chip, Divider, Skeleton, Spacer } from '@nextui-org/react';
+import { Chip, Divider, Skeleton, Spacer } from '@heroui/react';
 
 export default function Loading() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn, Spinner } from '@nextui-org/react';
+import { cn, Spinner } from "@heroui/react";
 import { ComponentWithChildren } from '@upskill-app/shared';
 import { motion } from 'framer-motion';
 

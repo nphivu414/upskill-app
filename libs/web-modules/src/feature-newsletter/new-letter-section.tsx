@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Button, Input } from '@nextui-org/react';
+import { Button, Input } from "@heroui/react";
 import { AppLogo, GridOverlay, NeonBackground } from '@upskill-app/ui/web';
 import { toast } from 'sonner';
 

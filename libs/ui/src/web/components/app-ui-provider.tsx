@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { NextUIProvider } from '@nextui-org/react';
+import { HeroUIProvider } from "@heroui/react";
 import { ComponentWithChildren } from '@upskill-app/shared';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
@@ -9,7 +9,7 @@ export const AppUiProvider = ({ children }: ComponentWithChildren) => {
   const router = useRouter();
   return (
     <NextThemesProvider attribute="class" defaultTheme="dark">
-      <NextUIProvider navigate={router.push}>{children}</NextUIProvider>
+      <HeroUIProvider navigate={router.push}>{children}</HeroUIProvider>
     </NextThemesProvider>
   );
 };

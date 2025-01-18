@@ -1,11 +1,11 @@
-const { nextui }  = require('@nextui-org/react');
+const { heroui }  = require("@heroui/react");
 const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
 const { join } = require('path');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    '../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    "../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
     join(
       __dirname,
       '{src,pages,components,app}/**/*!(*.stories|*.spec).{ts,tsx,html}'
@@ -34,7 +34,7 @@ module.exports = {
     require('@tailwindcss/typography'),
     require('tailwind-scrollbar'),
     require('tailwindcss-animated'),
-    nextui({
+    heroui({
       themes: {
         light: {
           colors: {
