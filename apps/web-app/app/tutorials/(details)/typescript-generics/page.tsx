@@ -1,4 +1,4 @@
-import { Divider, Image } from '@nextui-org/react';
+import { Divider, Image } from '@heroui/react';
 import { Paragraph } from '@upskill-app/ui/web';
 import {
   AuthorSection,

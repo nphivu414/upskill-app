@@ -1,7 +1,7 @@
 'use client';
 
 import React, { Key } from 'react';
-import { cn, Tab, Tabs, TabsProps } from '@nextui-org/react';
+import { cn, Tab, Tabs, TabsProps } from "@heroui/react";
 
 import { CustomIcons } from './custom-icon';
 

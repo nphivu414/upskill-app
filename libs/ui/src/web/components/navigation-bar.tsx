@@ -14,7 +14,7 @@ import {
   NavbarMenuToggle,
   NavbarProps,
   Spacer,
-} from '@nextui-org/react';
+} from "@heroui/react";
 
 import { cn } from '../utils';
 import { AppLogo } from './app-logo';

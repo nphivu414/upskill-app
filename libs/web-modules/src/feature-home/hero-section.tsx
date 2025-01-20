@@ -1,4 +1,4 @@
-import { Spacer } from '@nextui-org/react';
+import { Spacer } from "@heroui/react";
 import { GridOverlay, NeonBackground } from '@upskill-app/ui/web';
 
 export const HeroSection = () => {

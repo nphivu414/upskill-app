@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Accordion, AccordionItem, cn, Selection } from '@nextui-org/react';
+import { Accordion, AccordionItem, cn, Selection } from "@heroui/react";
 import { ComponentWithChildren } from '@upskill-app/shared';
 import StickyBox from 'react-sticky-box';
 

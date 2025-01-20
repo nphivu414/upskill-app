@@ -1,4 +1,4 @@
-import { Spacer } from '@nextui-org/react';
+import { Spacer } from "@heroui/react";
 import { CustomIcons } from '@upskill-app/ui/web';
 
 import { CommunityCard } from './comunity-card';
