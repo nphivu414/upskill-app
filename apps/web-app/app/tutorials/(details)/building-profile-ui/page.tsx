@@ -9,7 +9,7 @@ import {
 } from '@upskill-app/web-modules/tutorial-detail';
 
 export const metadata = {
-  title: 'Build a User Profile Page with React and HeroUI',
+  title: 'Build a User Profile Page with React, Tailwind and HeroUI',
   description:
     'This in-depth tutorial guides you through the process of creating a modern, interactive user profile page using React and HeroUI.',
 };
@@ -18,7 +18,7 @@ export default function ProfileUI() {
   return (
     <div className="flex min-h-screen flex-col">
       <HeadingSection
-        title="Build a User Profile Page with React and HeroUI"
+        title="Build a User Profile Page with React, Tailwind and HeroUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',

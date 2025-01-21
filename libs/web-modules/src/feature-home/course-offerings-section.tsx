@@ -14,7 +14,7 @@ export const CourseOfferingSection = () => {
       className="mx-auto max-w-screen-xl py-12 md:py-24 lg:px-12"
     >
       <HeadingSection
-        title="Build a User Profile Page with React and HeroUI"
+        title="Build a User Profile Page with React, Tailwind and HeroUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',

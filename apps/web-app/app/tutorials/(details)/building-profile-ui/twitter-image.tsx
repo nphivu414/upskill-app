@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
 
-export const alt = 'Build a User Profile Page with React and HeroUI';
+export const alt = 'Build a User Profile Page with React, Tailwind and HeroUI';
 export const size = {
   width: 800,
   height: 418,
