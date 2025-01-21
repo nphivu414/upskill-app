@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
 
-export const alt = 'Build a User Profile Page with React and NextUI';
+export const alt = 'Build a User Profile Page with React and HeroUI';
 export const size = {
   width: 800,
   height: 418,
@@ -53,7 +53,7 @@ export default async function Image() {
             maxWidth: '90%',
           }}
         >
-          Build a Flight Booking UI with React, Tailwind, and NextUI
+          Build a Flight Booking UI with React, Tailwind, and HeroUI
         </h1>
         <p
           style={{
@@ -64,7 +64,7 @@ export default async function Image() {
           }}
         >
           A comprehensive guide to creating a modern, interactive user profile
-          page using React, Tailwind, and NextUI.
+          page using React, Tailwind, and HeroUI.
         </p>
         <div
           style={{
