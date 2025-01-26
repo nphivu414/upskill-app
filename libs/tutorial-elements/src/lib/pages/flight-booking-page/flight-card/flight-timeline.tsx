@@ -1,4 +1,4 @@
-import { Slider } from '@nextui-org/react';
+import { Slider } from "@heroui/react";
 import { Subtle } from '@upskill-app/ui/web';
 
 import { Flight } from '../types';

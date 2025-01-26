@@ -1,4 +1,4 @@
-import { Divider } from '@nextui-org/react';
+import { Divider } from '@heroui/react';
 import { FlightBookingPagePreview } from '@upskill-app/tutorial-elements';
 import { Paragraph } from '@upskill-app/ui/web';
 import {
@@ -9,16 +9,16 @@ import {
 } from '@upskill-app/web-modules/tutorial-detail';
 
 export const metadata = {
-  title: 'Build a Flight Booking UI with React, Tailwind and NextUI',
+  title: 'Build a Flight Booking UI with React, Tailwind and HeroUI',
   description:
-    'This comprehensive tutorial guides you through creating a modern, interactive flight booking page using React and NextUI.',
+    'This comprehensive tutorial guides you through creating a modern, interactive flight booking page using React and HeroUI.',
 };
 
 export default function FlightBookingUI() {
   return (
     <div className="flex flex-col">
       <HeadingSection
-        title="Build a Flight Booking UI with React, Tailwind and NextUI"
+        title="Build a Flight Booking UI with React, Tailwind and HeroUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',
@@ -28,7 +28,7 @@ export default function FlightBookingUI() {
           <div>
             <Paragraph>
               This comprehensive tutorial guides you through creating a modern,
-              interactive flight booking page using React and NextUI.
+              interactive flight booking page using React and HeroUI.
               You&apos;ll learn how to build reusable components for displaying
               flight information, implementing advanced filtering and sorting
               functionalities, and creating a responsive user interface. By the
@@ -45,7 +45,7 @@ export default function FlightBookingUI() {
           'Basic knowledge of CSS and Tailwind',
           'Familiarity with package managers (npm or yarn) and command-line interfaces',
           'Basic understanding of form handling and state management in React',
-          '(Optional) Experience with NextUI or similar component libraries is helpful but not required',
+          '(Optional) Experience with HeroUI or similar component libraries is helpful but not required',
         ]}
         previewComponent={<FlightBookingPagePreview />}
       />

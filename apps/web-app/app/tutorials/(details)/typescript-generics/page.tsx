@@ -1,4 +1,4 @@
-import { Divider, Image } from '@nextui-org/react';
+import { Divider, Image } from '@heroui/react';
 import { Paragraph } from '@upskill-app/ui/web';
 import {
   AuthorSection,
@@ -10,7 +10,7 @@ import {
 export const metadata = {
   title: 'Understanding TypeScript Generics',
   description:
-    'This in-depth tutorial guides you through the process of creating a modern, interactive user profile page using React and NextUI.',
+    'This in-depth tutorial guides you through the process of creating a modern, interactive user profile page using React and HeroUI.',
 };
 
 export default function TypescriptGenerics() {

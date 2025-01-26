@@ -1,4 +1,4 @@
-import { Link } from '@nextui-org/react'
+import { Link } from '@heroui/react'
 import { CollapsibleBlock } from '../../collapsible-block.tsx'
 import {
    steps
@@ -6,7 +6,7 @@ import {
 import { CodeTabTrigger } from '../../code-tab-trigger.tsx'
 
 <CodeWithAccoridions stepConfigs={steps}>
-## !!accordions Section 1: Setup and initialize a new React project with NextUI
+## !!accordions Section 1: Setup and initialize a new React project with HeroUI
 
 Before we dive into coding the profile page, let's set up our project:
 
@@ -32,7 +32,7 @@ Now you can now head over to the `src/pages/index.tsx` file and start building t
 
 ## !!accordions Section 2: Building the FeaturePhotos component
 
-In this section, we'll craft a captivating header showcasing a rotating carousel of feature photos using NextUI for styling, Embla Carousel React for the core carousel functionality, and Tailwind CSS for additional customization.
+In this section, we'll craft a captivating header showcasing a rotating carousel of feature photos using HeroUI for styling, Embla Carousel React for the core carousel functionality, and Tailwind CSS for additional customization.
 
 1. Files and Structure:
 
@@ -84,12 +84,12 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
    - **Rendering:**
 
      - The component returns a `<section>` element with two main parts:
-       - A block containing the carousel. Photos are mapped elements containing an `<Image>` component from '@nextui-org/react' for each photo. Each image's height is set to `FEATURE_HEADER_HEIGHT` pixels, and the width is set to fill the screen.
+       - A block containing the carousel. Photos are mapped elements containing an `<Image>` component from '@heroui/react' for each photo. Each image's height is set to `FEATURE_HEADER_HEIGHT` pixels, and the width is set to fill the screen.
        - A conditional block that renders navigation dots using `<CarouselDotButton/>` if `showDots` to visually indicate the currently selected dot.
 
    - **Styling:**
      - The carousel and its elements are styled using Tailwind CSS classes for layout and appearance. The `className` properties dynamically apply styles based on the component's state and props, such as adjusting the opacity of the active dot.
-     - We use the `cn` utility class from NextUI to conditionally apply classes based on the active state of the dot. This util function is also used to join `classNames` together avoiding the TailwindCSS classes conflicts.
+     - We use the `cn` utility class from HeroUI to conditionally apply classes based on the active state of the dot. This util function is also used to join `classNames` together avoiding the TailwindCSS classes conflicts.
      ```tsx
      <CarouselDotButton
         ...
@@ -153,13 +153,13 @@ In this section, we'll create the ProfileInfo component which is responsible for
    - **Rendering:**
 
      - The component returns a `<section>` element with the user's avatar, name, username, title, bio, location, website, and an edit profile button.
-     - The user's avatar is displayed using the `Avatar` component from '@nextui-org/react'. If the avatar URL is not provided, a fallback text generated from the user's name is displayed.
-     - The user's company name is displayed as a clickable link to their website using the `Link` component from '@nextui-org/react'.
+     - The user's avatar is displayed using the `Avatar` component from '@heroui/react'. If the avatar URL is not provided, a fallback text generated from the user's name is displayed.
+     - The user's company name is displayed as a clickable link to their website using the `Link` component from '@heroui/react'.
      - The user's location and website are displayed using the `InfoLine` component, which shows an icon and text in a row.
 
 4. Deep dive into <CodeTabTrigger section="profile-info" tab="info-line.tsx"/> and `typography.tsx` files:
       - This component takes an icon, classname, and children as props to display an icon and content in a row.
-      - We're using the `Icon` component from '@nextui-org/react' to render the icon and `Spacer` component for spacing between the icon and content.
+      - We're using the `Icon` component from '@heroui/react' to render the icon and `Spacer` component for spacing between the icon and content.
       - The `Paragraph` and `Subtle` components are custom typography components for consistent text styling across the profile page.
 
 So far, we've created the `FeaturePhotos` and `ProfileInfo` components. Next, we'll implement the Profile Stats section.
@@ -359,7 +359,7 @@ In this section, we'll create the `PhotoCard` component to display individual ph
    - **Rendering:**
       - The component returns a `Card` component that wraps the photo.
       - Inside the `Card`, there is a `CardBody` that contains an `Image` component displaying the photo.
-      - The `Image` component is from '@nextui-org/react' and displays the photo with the provided URL.
+      - The `Image` component is from '@heroui/react' and displays the photo with the provided URL.
    
 3. **Deep dive into <CodeTabTrigger section="profile-timeline-photos" tab="photos.tsx"/> file:** <br/> <br/>
    In this file, we define the `Photos` component that renders a list of photos. We're using an <a href="https://flowbite.com/docs/components/gallery/#masonry-grid" target="_blank">example from flowbite</a> to create a masonry grid layout for the photos.
@@ -387,7 +387,7 @@ In this section, we'll create the `ProfileTimeline` component, which displays a 
       - `likedPosts`: An array of liked post objects containing the post content, date, and likes.
    
    - **Rendering:**
-      - The component returns a `<section>` element with a `Tabs` component from '@nextui-org/react' for switching between different timeline views.
+      - The component returns a `<section>` element with a `Tabs` component from '@heroui/react' for switching between different timeline views.
       - The `Tabs` component uses the `useTimelineTabs` hook to generate tab data for posts, photos, and liked posts. We will explore this hook later.
       ```tsx
       const tabs = useTimelineTabs({ likedPosts, photos, posts });
@@ -449,7 +449,7 @@ So far, we've built the individual components for the profile page, including `F
       - `profileTimeline`: An object containing the user's timeline data.
    
    - **Rendering:**
-      - We use `ScrollShadow` component from '@nextui-org/react' that wraps the profile page content to create a shadow effect when scrolling.
+      - We use `ScrollShadow` component from '@heroui/react' that wraps the profile page content to create a shadow effect when scrolling.
       - The `useScroll` hook from `framer-motion` library is used to get the `scrollYProgress` and pass it to the `useParallaxHeader` hook, which calculates the `y` value for the parallax effect.
       ```tsx
       export const ProfilePage = (...) => {

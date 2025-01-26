@@ -1,4 +1,4 @@
-import { Link } from '@nextui-org/react'
+import { Link } from '@heroui/react'
 import { CollapsibleBlock } from '../../collapsible-block.tsx'
 import { CodeTabTrigger } from '../../code-tab-trigger.tsx'
 
@@ -7,7 +7,7 @@ import {
 } from '../step-config.tsx'
 
 <CodeWithAccoridions stepConfigs={steps}>
-## !!accordions Section 1: Setup and initialize a new React project with NextUI
+## !!accordions Section 1: Setup and initialize a new React project with HeroUI
 
 Before we dive into coding the profile page, let's set up our project:
 
@@ -120,7 +120,7 @@ The card will also show the flight timeline, fare details, and benefits like mea
       - `arrivalAirport`: The arrival airport.
       - `totalStops`: The total stops.
    - **Rendering:** The component displays the timeline of the flight including departure, arrival, stops, and duration. We use the `<Subtle>` component to style the text to be subtle.
-      - We use the `Slider` component from `@nextui-org/react` with a custom style to display the timeline. It shows departure time and airport on the start and arrival time and airport on the end.
+      - We use the `Slider` component from `@heroui/react` with a custom style to display the timeline. It shows departure time and airport on the start and arrival time and airport on the end.
       - Flight duration will be displayed above the timeline.
       - Total stops will be displayed below the timeline.
 
@@ -130,22 +130,22 @@ The card will also show the flight timeline, fare details, and benefits like mea
       - `isRoundTrip`: A boolean to indicate if the flight is round trip.
    - **Rendering:**
       - The price will be formatted to display the currency symbol and the price using the <CodeTabTrigger section="flight-card" tab="utils.ts">`formatNumber`</CodeTabTrigger> utility function.
-      - If the flight is round trip, we use `Chip` component from `@nextui-org/react` to display a round trip badge.
+      - If the flight is round trip, we use `Chip` component from `@heroui/react` to display a round trip badge.
 
 5. Deep dive into <CodeTabTrigger section="flight-card" tab="airline-logo.tsx"/> file:
-   - **Props:** The component accepts all the props from `Avatar` component from `@nextui-org/react`.
+   - **Props:** The component accepts all the props from `Avatar` component from `@heroui/react`.
    - **Rendering:** We add a default size `sm` and a skeleton fallback so that the UI doesn't break if the airline image is not loaded.
 
 6. Deep dive into <CodeTabTrigger section="flight-card" tab="flight-benefits.tsx"/> file:
    - **Props:** The component accepts the following props:
       - `benefits`: An array of benefits like meals, entertainment, etc.
-   - **Rendering:** The component displays the benefits of the flight like meals, entertainment, etc. We use the `Chip` component from `@nextui-org/react` with a custom `startContent` to display the benefit icon before the benefit name.
+   - **Rendering:** The component displays the benefits of the flight like meals, entertainment, etc. We use the `Chip` component from `@heroui/react` with a custom `startContent` to display the benefit icon before the benefit name.
       - We create the <CodeTabTrigger section="flight-card" tab="utils.ts">`getBenefitIcon`</CodeTabTrigger> utility function to get the right icon for each benefit based on the name.
 
 7. Deep dive into <CodeTabTrigger section="flight-card" tab="flight-card.tsx"/> file:
    - Now that we've covered all the sub-components, let's put them all together in the main `FlightCard` component.
    - **Props:** The component literally accepts all the data needed to render other sub-components.
-   - **Rendering:** We use the `<Card>` component from `@nextui-org/react` to wrap the flight card. Inside the card, `FlightOverview` will be rendered as the Card Header, `FlightTimeline` and `FlightFareDetails` will be rendered as the Card Body, and `FlightBenefits` will be rendered as the Card Footer.
+   - **Rendering:** We use the `<Card>` component from `@heroui/react` to wrap the flight card. Inside the card, `FlightOverview` will be rendered as the Card Header, `FlightTimeline` and `FlightFareDetails` will be rendered as the Card Body, and `FlightBenefits` will be rendered as the Card Footer.
 
 Now that we've completed building the flight card component, we can move on to the next section: building the `<FlightList/>` component.
 
@@ -305,7 +305,7 @@ In this section, we will build the flight filter form component that allows user
 
 4. Deep dive into <CodeTabTrigger section="flight-filter-form" tab="slider-field.tsx"/> file: This component is the base for the `PriceRangeSlider` and `TimeRangeSlider` components. It uses React Hook Form's `Controller` component to manage form state and render a custom slider with optional value display.
    - **Props:**
-      - All props from the `Slider` component from `@nextui-org/react`.
+      - All props from the `Slider` component from `@heroui/react`.
       - `renderCustomValue`: A function to render the custom value display for the slider.
       - We've built a generic type called `ControlledFormFieldProps` to define the props that are common to all controlled form fields.
       ```tsx
@@ -327,7 +327,7 @@ In this section, we will build the flight filter form component that allows user
 
    7. Deep dive into <CodeTabTrigger section="flight-filter-form" tab="checkbox-group-field.tsx"/> file: This component is the base for the `AirlineSelector`, `CabinClassSelector`, `StopSelector`, and `BenefitSelector` components. It uses React Hook Form's `Controller` component to manage form state and render a group of checkboxes with support for "Select All" functionality.
    - **Props:**
-      - All props from the `CheckboxGroup` component from `@nextui-org/react`.
+      - All props from the `CheckboxGroup` component from `@heroui/react`.
       - `data`: An array of checkbox options.
       - `enableSelectAll`: A boolean to enable the "Select All" checkbox.
    - **Rendering:** The `CheckboxGroup` component also uses the `Controller` component to connect the checkbox group to the form state. The checkbox group will render a list of checkboxes based on the `data` prop.
@@ -395,7 +395,7 @@ In this section, we will build the flight filter drawer component that allows us
       - `benefits`: An array of available benefits.
       - `initialFilterData`: The initial form data.
       - `onFormSubmit`: A callback function to handle form submission.
-   - **Rendering:** We use `Drawer` component to wrap the `FlightFilterForm` component which we built in the previous section, and the `Button` from `@nextui-org/react` as the trigger to open the drawer.
+   - **Rendering:** We use `Drawer` component to wrap the `FlightFilterForm` component which we built in the previous section, and the `Button` from `@heroui/react` as the trigger to open the drawer.
    - **Handle Form Submit:** The `handleSubmit` function is called when the form is submitted. It calls the `onFormSubmit` callback with the form data and closes the drawer.
 
 ## !!accordions Section 7: Building Flight Sort Menu Component
@@ -407,7 +407,7 @@ In this section, we will build the flight sort menu component that allows users 
 2. Deep dive into <CodeTabTrigger section="flight-sort-menu" tab="flight-sort-menu.tsx"/> file:
    - **Props:** This component accepts the following props:
       - `onSortChange`: A callback function to handle sort changes.
-   - **Rendering:** The component renders a `Dropdown` component from `@nextui-org/react` with a `Button` as the trigger. The dropdown menu contains a list of sort options that are mapped from the `SORT_OPTIONS` constant.
+   - **Rendering:** The component renders a `Dropdown` component from `@heroui/react` with a `Button` as the trigger. The dropdown menu contains a list of sort options that are mapped from the `SORT_OPTIONS` constant.
    - **Handle Selection Change:** The `handleSelectionChange` function is called when the selection changes. It calls the `onSortChange` callback with the selected sort key.
 Now that we've completed building the flight sort menu component, we can move on to the next section: building the `<FlightPreferences/>` component.
 

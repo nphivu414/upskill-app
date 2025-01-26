@@ -1,4 +1,4 @@
-import { Spacer } from '@nextui-org/react';
+import { Spacer } from "@heroui/react";
 import { Subtle } from '@upskill-app/ui/web';
 
 import { FlightCard } from '../flight-card';

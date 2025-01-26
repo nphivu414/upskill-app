@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonGroup, Chip, Link } from '@nextui-org/react';
+import { Button, ButtonGroup, Chip, Link } from "@heroui/react";
 import { ComponentWithChildren } from '@upskill-app/shared';
 
 import { cn } from '../utils';

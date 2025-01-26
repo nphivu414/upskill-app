@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from '@nextui-org/react';
+import { Link } from "@heroui/react";
 import { ComponentWithChildren } from '@upskill-app/shared';
 
 type CodeTabTriggerProps = {

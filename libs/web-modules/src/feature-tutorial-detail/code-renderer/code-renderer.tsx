@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabsProps } from '@nextui-org/react';
+import { TabsProps } from "@heroui/react";
 import { CodeBlockTabs } from '@upskill-app/ui/web';
 import { Block, parseProps } from 'codehike/blocks';
 import { HighlightedCode } from 'codehike/code';

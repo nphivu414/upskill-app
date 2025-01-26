@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Card, CardBody, Spacer } from '@nextui-org/react';
+import { Card, CardBody, Spacer } from "@heroui/react";
 import {
   getGithubSourceUrl,
   getStorybookUrl,

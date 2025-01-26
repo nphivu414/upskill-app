@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardHeader, Image } from '@nextui-org/react';
+import { Card, CardBody, CardHeader, Image } from "@heroui/react";
 
 type DemoComponentProps = {
   title: string;

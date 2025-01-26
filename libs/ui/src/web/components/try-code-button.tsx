@@ -9,7 +9,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   useDisclosure,
-} from '@nextui-org/react';
+} from "@heroui/react";
 import { SquarePen } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
