@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Accordion, AccordionItem, cn, Selection } from "@heroui/react";
+import { Accordion, AccordionItem, cn, Selection } from '@heroui/react';
 import { ComponentWithChildren } from '@upskill-app/shared';
 import StickyBox from 'react-sticky-box';
 
@@ -77,19 +77,16 @@ export const ContentAccordion = ({
           key={index}
           data-key={index}
           aria-label={accordionItem.title}
-          title={<p className="text-lg font-semibold">{accordionItem.title}</p>}
+          title={<p className="text-xl font-semibold">{accordionItem.title}</p>}
           onPress={onAccordionItemPress(index)}
           motionProps={accordionItemMotionProps}
         >
           <div className="prose prose-zinc dark:prose-invert max-w-full">
             <div className="block items-start lg:flex">
               <div
-                className={cn(
-                  'w-full flex-none text-sm lg:text-base [&>p:first-child]:mt-0',
-                  {
-                    'lg:w-1/2': stepConfigs?.length,
-                  }
-                )}
+                className={cn('w-full flex-none [&>p:first-child]:mt-0', {
+                  'lg:w-1/2': stepConfigs?.length,
+                })}
               >
                 {accordionItem.children}
               </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from "@heroui/react";
+import { Button } from '@heroui/react';
 import { Check, Copy } from 'lucide-react';
 
 import { useCopyToClipboard } from '../hooks';
@@ -23,7 +23,7 @@ export function CopyButton({ text, className }: CopyButtonProps) {
       size="sm"
       aria-label="Copy to clipboard"
       className={cn('opacity-50 hover:opacity-100', className)}
-      onClick={handleCopy}
+      onPress={handleCopy}
     >
       {isCopied ? <Check size={14} /> : <Copy size={14} />}
     </Button>

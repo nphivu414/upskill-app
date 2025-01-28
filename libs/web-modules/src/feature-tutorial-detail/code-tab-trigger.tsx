@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from "@heroui/react";
+import { Link } from '@heroui/react';
 import { ComponentWithChildren } from '@upskill-app/shared';
 
 type CodeTabTriggerProps = {
@@ -15,7 +15,7 @@ export const CodeTabTrigger = ({
 }: CodeTabTriggerProps) => {
   let isAnimating = false;
 
-  const onClick = () => {
+  const onPress = () => {
     const element = document.getElementById(`${section}-${tab}`);
     if (!element) return;
     const ariaSelected = element?.getAttribute('aria-selected');
@@ -39,7 +39,7 @@ export const CodeTabTrigger = ({
     <Link
       className="lg:text-primary lg:bg-primary-500/20 pointer-events-none cursor-pointer rounded-lg px-1 font-semibold text-current lg:pointer-events-auto"
       size="sm"
-      onClick={onClick}
+      onPress={onPress}
       role="button"
     >
       {children || tab}
