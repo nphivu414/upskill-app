@@ -1,4 +1,4 @@
-import { Button, Link, Spacer } from "@heroui/react";
+import { Button, Link, Spacer } from '@heroui/react';
 import {
   FlightBookingPagePreview,
   ProfilePagePreview,
@@ -14,7 +14,7 @@ export const CourseOfferingSection = () => {
       className="mx-auto max-w-screen-xl py-12 md:py-24 lg:px-12"
     >
       <HeadingSection
-        title="Build a User Profile Page with React and NextUI"
+        title="Build a User Profile Page with React, Tailwind and HeroUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',
@@ -24,7 +24,7 @@ export const CourseOfferingSection = () => {
           <div>
             <Paragraph>
               This in-depth tutorial guides you through the process of creating
-              a modern, interactive user profile page using React and NextUI.
+              a modern, interactive user profile page using React and HeroUI.
               You&apos;ll learn how to construct reusable components for
               showcasing user information, implementing a feature photo
               carousel, and displaying user posts and photos. By the end of this
@@ -70,7 +70,7 @@ export const CourseOfferingSection = () => {
       />
       <Spacer className="my-8 md:my-24" />
       <HeadingSection
-        title="Build a Flight Booking UI with React, Tailwind and NextUI"
+        title="Build a Flight Booking UI with React, Tailwind and HeroUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',
@@ -80,7 +80,7 @@ export const CourseOfferingSection = () => {
           <div>
             <Paragraph>
               This comprehensive tutorial guides you through creating a modern,
-              interactive flight booking page using React and NextUI.
+              interactive flight booking page using React and HeroUI.
               You&apos;ll learn how to build reusable components for displaying
               flight information, implementing advanced filtering and sorting
               functionalities, and creating a responsive user interface. By the

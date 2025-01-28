@@ -9,16 +9,16 @@ import {
 } from '@upskill-app/web-modules/tutorial-detail';
 
 export const metadata = {
-  title: 'Build a User Profile Page with React and NextUI',
+  title: 'Build a User Profile Page with React, Tailwind and HeroUI',
   description:
-    'This in-depth tutorial guides you through the process of creating a modern, interactive user profile page using React and NextUI.',
+    'This in-depth tutorial guides you through the process of creating a modern, interactive user profile page using React and HeroUI.',
 };
 
 export default function ProfileUI() {
   return (
     <div className="flex min-h-screen flex-col">
       <HeadingSection
-        title="Build a User Profile Page with React and NextUI"
+        title="Build a User Profile Page with React, Tailwind and HeroUI"
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',
@@ -28,7 +28,7 @@ export default function ProfileUI() {
           <div>
             <Paragraph>
               This in-depth tutorial guides you through the process of creating
-              a modern, interactive user profile page using React and NextUI.
+              a modern, interactive user profile page using React and HeroUI.
               You&apos;ll learn how to construct reusable components for
               showcasing user information, implementing a feature photo
               carousel, and displaying user posts and photos. By the end of this
@@ -44,7 +44,7 @@ export default function ProfileUI() {
           'Basic knowledge of CSS and Tailwind',
           'Familiarity with package managers (npm or yarn) and command-line interfaces',
           'Basic understanding of state management in React',
-          '(Optional) Experience with NextUI or similar component libraries is helpful but not required',
+          '(Optional) Experience with HeroUI or similar component libraries is helpful but not required',
         ]}
         previewComponent={<ProfilePagePreview />}
       />

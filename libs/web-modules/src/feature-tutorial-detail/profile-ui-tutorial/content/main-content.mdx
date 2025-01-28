@@ -6,7 +6,7 @@ import {
 import { CodeTabTrigger } from '../../code-tab-trigger.tsx'
 
 <CodeWithAccoridions stepConfigs={steps}>
-## !!accordions Section 1: Setup and initialize a new React project with NextUI
+## !!accordions Section 1: Setup and initialize a new React project with HeroUI
 
 Before we dive into coding the profile page, let's set up our project:
 
@@ -32,7 +32,7 @@ Now you can now head over to the `src/pages/index.tsx` file and start building t
 
 ## !!accordions Section 2: Building the FeaturePhotos component
 
-In this section, we'll craft a captivating header showcasing a rotating carousel of feature photos using NextUI for styling, Embla Carousel React for the core carousel functionality, and Tailwind CSS for additional customization.
+In this section, we'll craft a captivating header showcasing a rotating carousel of feature photos using HeroUI for styling, Embla Carousel React for the core carousel functionality, and Tailwind CSS for additional customization.
 
 1. Files and Structure:
 
@@ -89,7 +89,7 @@ In this section, we'll craft a captivating header showcasing a rotating carousel
 
    - **Styling:**
      - The carousel and its elements are styled using Tailwind CSS classes for layout and appearance. The `className` properties dynamically apply styles based on the component's state and props, such as adjusting the opacity of the active dot.
-     - We use the `cn` utility class from NextUI to conditionally apply classes based on the active state of the dot. This util function is also used to join `classNames` together avoiding the TailwindCSS classes conflicts.
+     - We use the `cn` utility class from HeroUI to conditionally apply classes based on the active state of the dot. This util function is also used to join `classNames` together avoiding the TailwindCSS classes conflicts.
      ```tsx
      <CarouselDotButton
         ...
