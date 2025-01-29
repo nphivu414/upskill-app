@@ -61,7 +61,7 @@ export const CodeBlock = React.forwardRef<
 
         <Pre
           ref={ref}
-          className={cn('bg-content1 text-xs scrollbar-thin py-4', className)}
+          className={cn('bg-content1 scrollbar-thin py-4', className)}
           code={highlightedCode}
           handlers={[
             codeLineMarkHander,

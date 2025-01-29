@@ -393,12 +393,17 @@ interface ApiError {
 - ✅ Override Flexibility: While defaults simplify usage, they still allow for explicit overrides when needed.
 
 ## !!accordions Section 4: Generic Constraints
-Generic constraints are a method we can use to restrict the types that can be used as generic arguments; 
-this helps us enforce specific rules on the types being passed into a function, for example. 
-Here are a few examples of doing that:
+Generic constraints are a way to limit the types that can be used as arguments in generics. 
+This ensures that the provided types adhere to specific rules or structures, enhancing type safety and enabling more predictable 
+functionality. For example, constraints can be used to restrict the types passed into a function. 
+
+Below are some examples demonstrating how this can be done:
 
 **1. Use `extends` to Add Type Constraints**
-    - Use `extends` to specify the shape or properties a generic type must follow to.
+
+- The function `printUserName` is defined with a generic type parameter `T`.
+- The constraint `T` extends `User` ensures that `T` must be a type that includes at least the properties defined in the `User` interface.
+- This means that `T` can be `User` or any other type that has at least the `id` and `name` properties.
 ```ts
 // @errors: 2345
 interface User {
@@ -408,6 +413,7 @@ interface User {
 
 function printUserName<T extends User>(user: T): void {
     console.log(user.name);
+//               ^?
 }
 
 printUserName({ id: 1, name: "Alice" }); // ✅ Valid
@@ -417,76 +423,15 @@ printUserName({ id: 1, name: "Vu", age: 30 }); // ✅ Valid
 printUserName({ id: 2 }); // ⚠️ Invalid argument 
 
 ```
-
-```ts
-// @errors: 2353
-interface Shape {
-    getArea(): number;
-}
-
-class ShapeContainer<T extends Shape> {
-    private shapes: T[] = [];
-
-    addShape(shape: T): void {
-        this.shapes.push(shape);
-    }
-
-    getTotalArea(): number {
-        return this.shapes.reduce((sum, shape) => sum + shape.getArea(), 0);
-    }
-}
-
-// Usage
-class Circle implements Shape {
-    constructor(public radius: number) {}
-    getArea() {
-        return Math.PI * this.radius * this.radius;
-    }
-}
-
-class Rectangle implements Shape {
-    constructor(public width: number, public height: number) {}
-    getArea() {
-        return this.width * this.height;
-    }
-}
-
-const container = new ShapeContainer<Shape>();
-container.addShape(new Circle(5)); // ✅ Valid
-container.addShape(new Rectangle(4, 6)); // ✅ Valid
-console.log(container.getTotalArea()); // ✅ Get total area of all shapes
-
-container.addShape({
-    name: "square"
-});
-
-```
+- The first call is valid because the object `{ id: 1, name: "Alice" }` matches the `User` interface.
+- The second call is also valid because the object `{ id: 1, name: "Vu", age: 30 }` includes the required `id` and `name` properties, even though it has an additional age property.
+- The third call is invalid because the object `{ id: 2 }` does not include the `name` property, which is required by the `User` interface.
 
 **2. Use `keyof` to Constrain Keys**
-    - When working with object keys, use `keyof` to ensure generic parameters align with valid keys.
 
-```ts
-// @errors: 2345
-
-interface User { id: number; name: string }
-interface Post { id: number; title: string; content: string }
-
-type APIEndpoints = {
-    "/users": User[];
-    "/posts": Post[];
-};
-
-function fetchData<T extends keyof APIEndpoints>(endpoint: T): Promise<APIEndpoints[T]> {
-    return fetch(endpoint).then((res) => res.json());
-}
-
-// Usage
-fetchData("/users").then((users) => console.log(users[0].name)); // ✅ Valid
-fetchData("/posts").then((posts) => console.log(posts[0].title)); // ✅ Valid
-
-fetchData("/comments");
-
-```
+- The class `KeyValueStore` is defined with two generic type parameters, `T` and `K`.
+- The constraint `K extends keyof T` ensures that the key type `K` must be a valid key of the object type `T`. 
+This means that `K` can only be a key that exists in the object type `T`.
 
 ```ts
 // @errors: 2345
@@ -518,11 +463,25 @@ console.log(userStore.get("id")); // ✅ 123
 userStore.set("name", "John");
 
 ```
+
+- The first two calls to `set` are valid because the `KeyValueStore` instance is created with the `User` type and the keys `"id"` and `"email"`.
+- The call to `get` is also valid because the key `"id"` is part of the `User` type.
+- The last call to `set` is invalid because the key `"name"` is not part of the keys specified when creating the `KeyValueStore` instance.
+
+**Key Takeaways:**
+- ✅ Type Safety: Constraints ensure that only valid types are used in generics.
+- ✅ Predictable Behavior: Constraints help prevent runtime errors by enforcing type rules at compile time.
+- ✅ Enhanced Flexibility: Constraints allow for more specific and structured generic usage.
+
 ## !!accordions Section 5: Conditional types with generics
 Conditional types allow us to conditionally choose the right type based on a condition we define; 
 we can take this one step further, however, and pair them with generics to allow us to write more reusable code. 
 
 **1. Creating types that transform union types into more usable structures**
+
+- In this example, we define a conditional type `InterationEvent<T>` that transforms a union of event types into more specific event types. 
+The conditional type checks if the type `T` is `"click"` or `"keypress"` and adds additional properties to the base event type accordingly.
+
 ```ts
 // @errors: 2353
 type BaseEvent = { type: string }
@@ -543,8 +502,13 @@ const keypress: KeypressEvent = { type: "keypress", key: "Enter" }; // ✅ Valid
 const invalidEvent: KeypressEvent = { type: "keypress", x: 50, y: 10 };
 
 ```
+- The first two assignments are valid because the `ClickEvent` and `KeypressEvent` types are correctly inferred based on the conditional type.
+- The last assignment is invalid because the `KeypressEvent` type does not include the `x` and `y` properties.
 
 **2. Enforcing Proper Key-Value Relationships**
+
+- In this example, we define a conditional type `KeyValue<T>` that enforces a key-value relationship between the keys and values of an object.
+The conditional type checks if the type `T` is an object and ensures that the keys and values are of the same type.
 ```ts
 type Config<T extends Record<string, any>> = {
     [K in keyof T]: T[K] extends boolean ? boolean
@@ -578,6 +542,13 @@ const invalidConfig: AppConfig = {
 };
 
 ```
+- The `config` object is valid because it adheres to the `AppConfig` type, which enforces the correct key-value relationships.
+- The `invalidConfig` object is invalid because the `darkMode` key is assigned a string value instead of a boolean.
+
+**Key Takeaways:**
+- ✅ Enhanced Type Safety: Conditional types with generics allow for more precise type checking.
+- ✅ Improved Reusability: Conditional types can be used to create reusable type transformations.
+- ✅ Better Code Structure: Conditional types help enforce consistent data structures and relationships.
 
 ## !!accordions Section 3: Techniques to write effective TypeScript generics
 Writing efficient and maintainable generic TypeScript code requires a solid grasp of its capabilities and best practices. Here are essential techniques to master:
