@@ -1,17 +1,16 @@
 import { Link } from '@heroui/react'
 
 import { CollapsibleBlock } from '../../collapsible-block.tsx'
+import { AiExamplesButton } from '../../ai-examples-button.tsx'
 
 <CodeWithAccoridions>
 ## !!accordions Section 1: What are generics in TypeScript?
 
-Generics are a TypeScript feature that allows developers to write reusable and flexible code while maintaining strict 
-type safety. By enabling types to be passed as parameters, they help create structures and functions that adapt to the 
-specific type of data they operate on, without losing the benefits of TypeScript’s static typing.
+Generics in TypeScript let developers create reusable and adaptable code while preserving strict type safety. 
+By allowing types to be passed as parameters, generics help build structures and functions that can handle specific data types, without sacrificing the benefits of TypeScript’s static typing.
 
-Generics appear in TypeScript code inside angle brackets, in the format `<T>`, where T represents a passed-in type. 
-`<T>` can be read as a generic of type T. In this case, T will operate in the same way that parameters work in functions, 
-as placeholders for a type that will be declared when an instance of the structure is created.
+In TypeScript, generics are represented using angle brackets like `<T>`, where T stands for a passed-in type. 
+This notation works similarly to function parameters, acting as placeholders for a type that will be specified when the structure is instantiated.
 
 **1. Passing type parameter to `type`, `interface`, `class`**
 
@@ -277,128 +276,137 @@ This feature simplifies APIs and makes code more user-friendly, reducing the nee
 
 Here are some common scenarios where default generic parameters can help us write more concise and flexible code:
 
-**1. In a file-upload system, you might deal with metadata that varies depending on the type of file.**
-```ts
-interface FileMetadata<T = {}> {
-    filename: string;
-    size: number;
-    metadata: T; // metadata info is flexible and not always required.
-}
+**1. Using Default Generics for Flexible Metadata Handling**
+- The generic parameter `T` in the `FileMetadata` interface has a default value of `{}` (an empty object).
+- This allows the metadata property to be flexible and not always required to have a specific structure.
+- The `commonFile` object uses the default empty object for metadata, while the `pdfFile` object specifies a more specific `PdfMetadata` type for the metadata property.
+    ```ts
+    interface FileMetadata<T = {}> {
+        filename: string;
+        size: number;
+        metadata: T; // metadata object structure can be flexible
+    }
 
-// Set metadata as empty object for all common files
-const commonFile: FileMetadata = {
-    filename: "image.png",
-    size: 12345,
-    metadata: {},
-};
+    // Set metadata as empty object for all common files that don't have specific metadata
+    const commonFile: FileMetadata = {
+        filename: "image.png",
+        size: 12345,
+        metadata: {},
+    };
 
-// Set PDF metadata for PDF file 
-type PdfMetadata = { version: string, pages: number, resolution: string }
-const pdfFile: FileMetadata<PdfMetadata> = {
-    filename: "image.png",
-    size: 12345,
-    metadata: {
-        version: '1.0.0',
-        pages: 5,
-        resolution: '594 x 841'
-    },
-};
+    // Set PDF metadata for PDF file 
+    type PdfMetadata = { version: string, pages: number, resolution: string }
+    const pdfFile: FileMetadata<PdfMetadata> = {
+        filename: "image.png",
+        size: 12345,
+        metadata: {
+            version: '1.0.0',
+            pages: 5,
+            resolution: '594 x 841'
+        },
+    };
 
-```
-The generic parameter `T` in the `FileMetadata` interface has a default value of `{}` (an empty object). This allows the metadata property to be flexible and not always required to have a specific structure.
-The `commonFile` object uses the default empty object for metadata, while the `pdfFile` object specifies a more specific `PdfMetadata` type for the metadata property.
+    ```
 
+**2. Using Default Generics for Simplified Function Signatures**
 
-**2. Another common pattern is fetching data from an API. Default generics will simplify the function interface for typical use cases.**
-```ts
-type FetchOptions = {
-    headers?: Record<string, string>;
-    method?: "GET" | "POST" | "PUT" | "DELETE";
-    body?: string;
-};
+- The function fetchData uses two generic parameters `T` and `E with default values `unknown` and `Error`, respectively.
+- `T` represents the type of the data expected from the API response.
+- `E` represents the type of the error that might occur.
+- The function returns a `FetchResult` object with a `data` property of type `T` and an `error` property of type `E`.
 
-type FetchResult<T, E> = {
-    data?: T;
-    error?: E;
-};
+    ```ts
 
-async function fetchData<T = unknown, E = Error>(
-    url: string,
-    options?: FetchOptions
-): Promise<FetchResult<T, E>> {
-    try {
-        const response = await fetch(url, {
-            headers: {
-                "Content-Type": "application/json",
-                ...(options?.headers || {}),
-            },
-            method: options?.method || "GET",
-            body: options?.body,
-        });
+    type FetchResult<T, E> = {
+        data?: T;
+        error?: E;
+    };
 
-        if (!response.ok) {
-            const errorBody = await response.json();
-            throw new Error(errorBody.message || "Something went wrong");
+    type FetchOptions = {
+        headers?: Record<string, string>;
+        method?: "GET" | "POST" | "PUT" | "DELETE";
+        body?: string;
+    };
+
+    async function fetchData<T = unknown, E = Error>(
+        url: string,
+        options?: FetchOptions
+    ): Promise<FetchResult<T, E>> {
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    ...(options?.headers || {}),
+                },
+                method: options?.method || "GET",
+                body: options?.body,
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json();
+                throw new Error(errorBody.message || "Something went wrong");
+            }
+
+            const data: T = await response.json();
+            return { data };
+        } catch (error) {
+            return { error: error as E };
         }
-
-        const data: T = await response.json();
-        return { data };
-    } catch (error) {
-        return { error: error as E };
     }
-}
 
-// Basic Usage with Defaults
-(async () => {
-    const result = await fetchData("https://api.example.com/users");
+    // Basic Usage with Defaults
+    (async () => {
+        const result = await fetchData("https://api.example.com/users");
 
-    const data = result.data
-//         ^?
+        const data = result.data
+    //         ^?
 
-    const error = result.error
-//         ^?
+        const error = result.error
+    //         ^?
 
-    if (data) {
-        console.log("Fetched data:", data);
-    } else {
-        console.error("Error:", error);
+        if (data) {
+            console.log("Fetched data:", data);
+        } else {
+            console.error("Error:", error);
+        }
+    })();
+
+
+    // Custom Data and Error Type
+    interface User {
+        id: number;
+        name: string;
     }
-})();
 
-
-// Custom Data and Error Type
-interface User {
-    id: number;
-    name: string;
-}
-
-interface ApiError {
-    statusCode: number;
-    message: string;
-}
-
-(async () => {
-    const result = await fetchData<User, ApiError>("https://api.example.com/users");
-    const data = result.data
-//         ^?
-
-    const error = result.error
-//         ^?
-
-    if (data) {
-        console.log("Fetched user:", data);
-    } else {
-        console.error("Error Code:", error?.statusCode);
-        console.error("Message:", error?.message);
+    interface ApiError {
+        statusCode: number;
+        message: string;
     }
-})();
 
-```
+    (async () => {
+        const result = await fetchData<User, ApiError>("https://api.example.com/users");
+        const data = result.data
+    //         ^?
+
+        const error = result.error
+    //         ^?
+
+        if (data) {
+            console.log("Fetched user:", data);
+        } else {
+            console.error("Error Code:", error?.statusCode);
+            console.error("Message:", error?.message);
+        }
+    })();
+
+    ```
 
 **Key Takeaways:**
 - ✅ Ease of Use: Default generics reduce verbosity and make APIs more approachable.
 - ✅ Common Defaults: Defaults should represent the most commonly used type, streamlining development.
 - ✅ Override Flexibility: While defaults simplify usage, they still allow for explicit overrides when needed.
+
+<AiExamplesButton sectionTitle="Generic Parameter Defaults" sectionContent="" defaultLanguage='typescript'/>
 
 ## !!accordions Section 4: Generic Constraints
 Generic constraints are a way to limit the types that can be used as parameters in generics. 
@@ -409,83 +417,79 @@ Below are some examples demonstrating how this can be done:
 
 **1. Use `extends` to Add Type Constraints**
 
-The function `printUserName` is defined with a generic type parameter `T`.
-The constraint `T` extends `User` ensures that `T` must be a type that includes at least the properties defined in the `User` interface.
-This means that `T` can be `User` or any other type that has at least the `id` and `name` properties.
-```ts
-// @errors: 2345
-interface User {
-    id: number;
-    name: string;
-}
+- The function `printUserName` is defined with a generic type parameter `T`.
+- The constraint `T` extends `User` ensures that `T` must be a type that includes at least the properties defined in the `User` interface.
+- This means that `T` can be `User` or any other type that has at least the `id` and `name` properties.
+    ```ts
+    // @errors: 2345
+    interface User {
+        id: number;
+        name: string;
+    }
 
-function printUserName<T extends User>(user: T): void {
-    console.log(user.name);
-//               ^?
-}
+    function printUserName<T extends User>(user: T): void {
+        console.log(user.name);
+    //               ^?
+    }
 
-printUserName({ id: 1, name: "Alice" }); // ✅ Valid
+    printUserName({ id: 1, name: "Alice" }); // ✅ Valid
 
-printUserName({ id: 1, name: "Vu", age: 30 }); // ✅ Valid
+    printUserName({ id: 1, name: "Vu", age: 30 }); // ✅ Valid
 
-printUserName({ id: 2 }); // 🚫 Invalid parameter
+    printUserName({ id: 2 }); // 🚫 Invalid parameter
 
-```
-The first call is valid because the object `{ id: 1, name: "Alice" }` matches the `User` interface.
-
-The second call is also valid because the object `{ id: 1, name: "Vu", age: 30 }` includes the required `id` and `name` properties, even though it has an additional age property.
-
-The third call is invalid because the object `{ id: 2 }` does not include the `name` property, which is required by the `User` interface.
+    ```
+- The first call is valid because the object `{ id: 1, name: "Alice" }` matches the `User` interface.
+- The second call is also valid because the object `{ id: 1, name: "Vu", age: 30 }` includes the required `id` and `name` properties, even though it has an additional age property.
+- The third call is invalid because the object `{ id: 2 }` does not include the `name` property, which is required by the `User` interface.
 
 **2. Use `keyof` to Constrain Keys**
 
-The class `KeyValueStore` is defined with two generic type parameters, `T` and `K`.
+- The class `KeyValueStore` is defined with two generic type parameters, `T` and `K`.
+- The constraint `K extends keyof T` ensures that the key type `K` must be a valid key of the object type `T`. 
+- This means that `K` can only be a key that exists in the object type `T`.
 
-The constraint `K extends keyof T` ensures that the key type `K` must be a valid key of the object type `T`. 
+    ```ts
+    // @errors: 2345
+    class KeyValueStore<T extends object, K extends keyof T> {
+        private store: Record<K, T[K]> = {} as Record<K, T[K]>;
 
-This means that `K` can only be a key that exists in the object type `T`.
+        set(key: K, value: T[K]): void {
+            this.store[key] = value;
+        }
 
-```ts
-// @errors: 2345
-class KeyValueStore<T extends object, K extends keyof T> {
-    private store: Record<K, T[K]> = {} as Record<K, T[K]>;
-
-    set(key: K, value: T[K]): void {
-        this.store[key] = value;
+        get(key: K): T[K] | undefined {
+            return this.store[key];
+        }
     }
 
-    get(key: K): T[K] | undefined {
-        return this.store[key];
-    }
-}
+    // Usage
+    type User = {
+        id: number;
+        name: string;
+        email: string;
+    };
 
-// Usage
-type User = {
-    id: number;
-    name: string;
-    email: string;
-};
+    const userStore = new KeyValueStore<User, "id" | "email">();
+    userStore.set("id", 123); // ✅ Valid
+    userStore.set("email", "test@example.com"); // ✅ Valid
 
-const userStore = new KeyValueStore<User, "id" | "email">();
-userStore.set("id", 123); // ✅ Valid
-userStore.set("email", "test@example.com"); // ✅ Valid
+    console.log(userStore.get("id")); // ✅ 123
 
-console.log(userStore.get("id")); // ✅ 123
+    userStore.set("name", "John");
 
-userStore.set("name", "John");
+    ```
 
-```
-
-The first two calls to `set` are valid because the `KeyValueStore` instance is created with the `User` type and the keys `"id"` and `"email"`.
-
-The call to `get` is also valid because the key `"id"` is part of the `User` type.
-
-The last call to `set` is invalid because the key `"name"` is not part of the keys specified when creating the `KeyValueStore` instance.
+- The first two calls to `set` are valid because the `KeyValueStore` instance is created with the `User` type and the keys `"id"` and `"email"`.
+- The call to `get` is also valid because the key `"id"` is part of the `User` type.
+- The last call to `set` is invalid because the key `"name"` is not part of the keys specified when creating the `KeyValueStore` instance.
 
 **Key Takeaways:**
 - ✅ Type Safety: Constraints ensure that only valid types are used in generics.
 - ✅ Predictable Behavior: Constraints help prevent runtime errors by enforcing type rules at compile time.
 - ✅ Enhanced Flexibility: Constraints allow for more specific and structured generic usage.
+
+<AiExamplesButton sectionTitle="Use generic constraints to limit the types that can be used as parameters in generics." sectionContent="" defaultLanguage='typescript'/>
 
 ## !!accordions Section 5: Conditional types with generics
 Conditional types allow us to conditionally choose the right type based on a condition we define; 
@@ -493,78 +497,77 @@ we can take this one step further, however, and pair them with generics to allow
 
 **1. Creating types that transform union types into more usable structures**
 
-In this example, we define a conditional type `InterationEvent<T>` that transforms a union of event types into more specific event types. 
-The conditional type checks if the type `T` is `"click"` or `"keypress"` and adds additional properties to the base event type accordingly.
+- In this example, we define a conditional type `InterationEvent<T>` that transforms a union of event types into more specific event types. 
+- The conditional type checks if the type `T` is `"click"` or `"keypress"` and adds additional properties to the base event type accordingly.
 
-```ts
-// @errors: 2353
-type BaseEvent = { type: string }
+    ```ts
+    // @errors: 2353
+    type BaseEvent = { type: string }
 
-type InterationEvent<T> = T extends "click"
-    ? BaseEvent & { x: number; y: number }
-    : T extends "keypress"
-    ? BaseEvent & { key: string }
-    : never;
+    type InterationEvent<T> = T extends "click"
+        ? BaseEvent & { x: number; y: number }
+        : T extends "keypress"
+        ? BaseEvent & { key: string }
+        : never;
 
-// Usage
-type ClickEvent = InterationEvent<"click">;
-type KeypressEvent = InterationEvent<"keypress">;
+    // Usage
+    type ClickEvent = InterationEvent<"click">;
+    type KeypressEvent = InterationEvent<"keypress">;
 
-const click: ClickEvent = { type: "click", x: 100, y: 200 }; // ✅ Valid
-const keypress: KeypressEvent = { type: "keypress", key: "Enter" }; // ✅ Valid
+    const click: ClickEvent = { type: "click", x: 100, y: 200 }; // ✅ Valid
+    const keypress: KeypressEvent = { type: "keypress", key: "Enter" }; // ✅ Valid
 
-const invalidEvent: KeypressEvent = { type: "keypress", x: 50, y: 10 };
+    const invalidEvent: KeypressEvent = { type: "keypress", x: 50, y: 10 };
 
-```
-The first two assignments are valid because the `ClickEvent` and `KeypressEvent` types are correctly inferred based on the conditional type.
-
-The last assignment is invalid because the `KeypressEvent` type does not include the `x` and `y` properties.
+    ```
+- The first two assignments are valid because the `ClickEvent` and `KeypressEvent` types are correctly inferred based on the conditional type.
+- The last assignment is invalid because the `KeypressEvent` type does not include the `x` and `y` properties.
 
 **2. Enforcing Proper Key-Value Relationships**
 
-In this example, we define a conditional type `KeyValue<T>` that enforces a key-value relationship between the keys and values of an object.
-The conditional type checks if the type `T` is an object and ensures that the keys and values are of the same type.
-```ts
-type Config<T extends Record<string, any>> = {
-    [K in keyof T]: T[K] extends boolean ? boolean
-        : T[K] extends Array<Record<string, any>> ? Array<Record<string, any>>
-        : T[K] extends Array<any> ? Array<any>
-        : string;
-};
+- In this example, we define a conditional type `KeyValue<T>` that enforces a key-value relationship between the keys and values of an object.
+- The conditional type checks if the type `T` is an object and ensures that the keys and values are of the same type.
+    ```ts
+    type Config<T extends Record<string, any>> = {
+        [K in keyof T]: T[K] extends boolean ? boolean
+            : T[K] extends Array<Record<string, any>> ? Array<Record<string, any>>
+            : T[K] extends Array<any> ? Array<any>
+            : string;
+    };
 
-// Usage
-// @errors: 2322
-type AppConfig = Config<{
-    darkMode: boolean;
-    language: string;
-    themes: string[];
-    stores: Record<string, string>[];
-}>;
+    // Usage
+    // @errors: 2322
+    type AppConfig = Config<{
+        darkMode: boolean;
+        language: string;
+        themes: string[];
+        stores: Record<string, string>[];
+    }>;
 
-const config: AppConfig = { // ✅ Correct type
-    darkMode: true, 
-    language: "en",
-    themes: ["retro", "flat", "material"],
-    stores: [{
-        appstore: "https://apps.apple.com/us/charts/iphone",
-        playstore: "https://play.google.com/store/apps"
-    }]
-};
+    const config: AppConfig = { // ✅ Correct type
+        darkMode: true, 
+        language: "en",
+        themes: ["retro", "flat", "material"],
+        stores: [{
+            appstore: "https://apps.apple.com/us/charts/iphone",
+            playstore: "https://play.google.com/store/apps"
+        }]
+    };
 
-const invalidConfig: AppConfig = {
-    ...config,
-    darkMode: "true", 
-};
+    const invalidConfig: AppConfig = {
+        ...config,
+        darkMode: "true", 
+    };
 
-```
-The `config` object is valid because it adheres to the `AppConfig` type, which enforces the correct key-value relationships.
-
-The `invalidConfig` object is invalid because the `darkMode` key is assigned a string value instead of a boolean.
+    ```
+- The `config` object is valid because it adheres to the `AppConfig` type, which enforces the correct key-value relationships.
+- The `invalidConfig` object is invalid because the `darkMode` key is assigned a string value instead of a boolean.
 
 **Key Takeaways:**
 - ✅ Enhanced Type Safety: Conditional types with generics allow for more precise type checking.
 - ✅ Improved Reusability: Conditional types can be used to create reusable type transformations.
 - ✅ Better Code Structure: Conditional types help enforce consistent data structures and relationships.
+<AiExamplesButton sectionTitle="Use conditional type technique with generics to create more reusable and type-safe code." sectionContent="" defaultLanguage='typescript'/>
 
 ## !!accordions Section 6: Closing thoughts
 Generics can be a really helpful tool when working with TypeScript and can help us write more reusable, flexible, and easier-to-maintain code. However, 

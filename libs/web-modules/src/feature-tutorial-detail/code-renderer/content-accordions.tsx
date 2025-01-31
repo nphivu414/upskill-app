@@ -68,6 +68,7 @@ export const ContentAccordion = ({
       onSelectionChange={onSelectionChange}
       itemClasses={{
         content: 'py-4',
+        heading: 'z-10 bg-content1 sticky top-[64px]',
       }}
     >
       {data.map((accordionItem, index) => (
