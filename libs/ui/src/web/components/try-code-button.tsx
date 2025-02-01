@@ -53,7 +53,7 @@ export function TryCodeButton({
           {(onClose) => (
             <>
               <DrawerHeader className="flex flex-col gap-1">
-                Playground
+                Coding Playground
               </DrawerHeader>
               <DrawerBody>
                 <CodeEditor code={code} defaultLanguage={defaultLanguage} />

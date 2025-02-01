@@ -1,4 +1,4 @@
-import { Link } from '@heroui/react'
+import { Link, Alert } from '@heroui/react'
 
 import { CollapsibleBlock } from '../../collapsible-block.tsx'
 import { AiExamplesButton } from '../../ai-examples-button.tsx'
@@ -406,7 +406,16 @@ Here are some common scenarios where default generic parameters can help us writ
 - ✅ Common Defaults: Defaults should represent the most commonly used type, streamlining development.
 - ✅ Override Flexibility: While defaults simplify usage, they still allow for explicit overrides when needed.
 
-<AiExamplesButton sectionTitle="Generic Parameter Defaults" sectionContent="" defaultLanguage='typescript'/>
+<Alert
+    color="primary"
+    variant="faded"
+    title="Need more examples of Generic Parameter Defaults?"
+    description="Checkout our AI-generated examples for more code snippets and use cases."
+>
+    <div className='mt-2'>
+        <AiExamplesButton topic="Generic Parameter Defaults" defaultLanguage='typescript'/>
+    </div>
+</Alert>
 
 ## !!accordions Section 4: Generic Constraints
 Generic constraints are a way to limit the types that can be used as parameters in generics. 
@@ -489,7 +498,16 @@ Below are some examples demonstrating how this can be done:
 - ✅ Predictable Behavior: Constraints help prevent runtime errors by enforcing type rules at compile time.
 - ✅ Enhanced Flexibility: Constraints allow for more specific and structured generic usage.
 
-<AiExamplesButton sectionTitle="Use generic constraints to limit the types that can be used as parameters in generics." sectionContent="" defaultLanguage='typescript'/>
+<Alert
+    color="primary"
+    variant="faded"
+    title="Need more examples of Generic Constraints?"
+    description="Checkout our AI-generated examples for more code snippets and use cases."
+>
+    <div className='mt-2'>
+        <AiExamplesButton topic="Use generic constraints to limit the types that can be used as parameters in generics." defaultLanguage='typescript'/>
+    </div>
+</Alert>
 
 ## !!accordions Section 5: Conditional types with generics
 Conditional types allow us to conditionally choose the right type based on a condition we define; 
@@ -567,7 +585,17 @@ we can take this one step further, however, and pair them with generics to allow
 - ✅ Enhanced Type Safety: Conditional types with generics allow for more precise type checking.
 - ✅ Improved Reusability: Conditional types can be used to create reusable type transformations.
 - ✅ Better Code Structure: Conditional types help enforce consistent data structures and relationships.
-<AiExamplesButton sectionTitle="Use conditional type technique with generics to create more reusable and type-safe code." sectionContent="" defaultLanguage='typescript'/>
+
+<Alert
+    color="primary"
+    variant="faded"
+    title="Need more examples of Condition Types and Generics?"
+    description="Checkout our AI-generated examples for more code snippets and use cases."
+>
+    <div className='mt-2'>
+        <AiExamplesButton topic="Use typescript generics with conditional type to create more reusable and type-safe code." defaultLanguage='typescript'/>
+    </div>
+</Alert>
 
 ## !!accordions Section 6: Closing thoughts
 Generics can be a really helpful tool when working with TypeScript and can help us write more reusable, flexible, and easier-to-maintain code. However, 
