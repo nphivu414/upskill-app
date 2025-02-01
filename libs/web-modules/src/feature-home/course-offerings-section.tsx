@@ -14,7 +14,11 @@ export const CourseOfferingSection = () => {
       className="mx-auto max-w-screen-xl py-12 md:py-24 lg:px-12"
     >
       <HeadingSection
-        title="Build a User Profile Page with React, Tailwind and HeroUI"
+        title={
+          <p className="text-3xl font-bold lg:text-4xl">
+            Build a User Profile Page with React, Tailwind and HeroUI
+          </p>
+        }
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',
@@ -70,7 +74,11 @@ export const CourseOfferingSection = () => {
       />
       <Spacer className="my-8 md:my-24" />
       <HeadingSection
-        title="Build a Flight Booking UI with React, Tailwind and HeroUI"
+        title={
+          <p className="text-3xl font-bold lg:text-4xl">
+            Build a Flight Booking UI with React, Tailwind and HeroUI
+          </p>
+        }
         author={{
           avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
           name: 'Vu Nguyen',

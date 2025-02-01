@@ -1,4 +1,4 @@
-import { Spacer, User } from "@heroui/react";
+import { Spacer, User } from '@heroui/react';
 import { Heading1 } from '@upskill-app/ui/web';
 
 type AuthorProps = {
@@ -8,7 +8,7 @@ type AuthorProps = {
 };
 
 type HeadingSectionProps = {
-  title: string;
+  title: string | React.ReactNode;
   description: React.ReactNode;
   author: AuthorProps;
   targetAudience?: string;
@@ -30,7 +30,7 @@ export const HeadingSection = ({
     <section className="w-full space-y-10 px-4 xl:space-y-16">
       <div className="flex flex-col items-start gap-4 pt-4 lg:flex-row">
         <div className="flex-1">
-          <p className="text-3xl font-bold lg:text-4xl">{title}</p>
+          {typeof title === 'string' ? <Heading1>{title}</Heading1> : title}
           <Spacer y={4} />
           <div className="flex items-center gap-4">
             <User
@@ -58,7 +58,7 @@ export const HeadingSection = ({
               <Spacer y={2} />
               <ul className="ml-4 list-disc">
                 {prerequisites?.map((prerequisite, index) => (
-                  <li key={index} className="py-1 text-sm">
+                  <li key={index} className="py-1">
                     {prerequisite}
                   </li>
                 ))}

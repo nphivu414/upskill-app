@@ -14,7 +14,7 @@ import {
   NavbarMenuToggle,
   NavbarProps,
   Spacer,
-} from "@heroui/react";
+} from '@heroui/react';
 
 import { cn } from '../utils';
 import { AppLogo } from './app-logo';
@@ -63,6 +63,7 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
           <Button
             as={Link}
             size="sm"
+            className="hidden sm:flex"
             href="https://discord.gg/MvKZvDZ36T"
             variant="flat"
             isIconOnly
@@ -84,6 +85,7 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
           </Button>
           <Button
             as={Link}
+            className="hidden sm:flex"
             size="sm"
             href="https://x.com/nphivu414"
             variant="flat"
@@ -101,7 +103,7 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
           <Link
             color="foreground"
             href="/#highlighted-tutorials"
-            onClick={() => setIsMenuOpen(false)}
+            onPress={() => setIsMenuOpen(false)}
           >
             Tutorials
           </Link>
@@ -110,7 +112,7 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
           <Link
             color="foreground"
             href="/#newsletter"
-            onClick={() => setIsMenuOpen(false)}
+            onPress={() => setIsMenuOpen(false)}
           >
             Follow us
           </Link>

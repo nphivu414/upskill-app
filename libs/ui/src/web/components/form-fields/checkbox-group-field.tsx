@@ -7,7 +7,7 @@ import {
   CheckboxGroup,
   CheckboxGroupProps,
   CheckboxProps,
-} from "@heroui/react";
+} from '@heroui/react';
 import {
   Controller,
   ControllerRenderProps,
@@ -63,7 +63,7 @@ export function CheckboxGroupField<T extends FieldValues>(
           size="sm"
           color="primary"
           variant="light"
-          onClick={onSelectAll(onChange)}
+          onPress={onSelectAll(onChange)}
         >
           {isSelectedAll ? 'Deselect All' : 'Select All'}
         </Button>

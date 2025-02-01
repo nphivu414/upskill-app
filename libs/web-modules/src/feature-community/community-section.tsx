@@ -1,4 +1,4 @@
-import { Spacer } from "@heroui/react";
+import { Spacer } from '@heroui/react';
 import { CustomIcons } from '@upskill-app/ui/web';
 
 import { CommunityCard } from './comunity-card';
@@ -6,7 +6,7 @@ import { CommunityCard } from './comunity-card';
 export const CommunitySection = () => {
   return (
     <section className="w-full px-4">
-      <p className="text-2xl font-bold">Upskills Community</p>
+      <p className="text-3xl font-bold">Upskills Community</p>
       <Spacer y={6} />
       <div className="flex flex-col items-start gap-4 md:flex-row">
         <CommunityCard

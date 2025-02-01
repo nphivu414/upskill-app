@@ -11,7 +11,7 @@ import {
   DropdownTrigger,
   Link,
   User,
-} from "@heroui/react";
+} from '@heroui/react';
 import { MarkdownRenderer, Subtle } from '@upskill-app/ui/web';
 import { Ellipsis } from 'lucide-react';
 
@@ -86,7 +86,7 @@ export const PostCard = ({
                   aria-label={title}
                   color={type === 'delete' ? 'danger' : 'default'}
                   endContent={icon}
-                  onClick={handleOnMenuDropdownAction(type)}
+                  onPress={handleOnMenuDropdownAction(type)}
                 >
                   {title}
                 </DropdownItem>
@@ -109,7 +109,7 @@ export const PostCard = ({
                 variant="light"
                 startContent={icon}
                 isIconOnly={content === null}
-                onClick={handleOnPostAction(type)}
+                onPress={handleOnPostAction(type)}
               >
                 {content}
               </Button>

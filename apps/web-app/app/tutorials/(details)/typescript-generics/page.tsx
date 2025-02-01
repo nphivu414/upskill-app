@@ -26,28 +26,24 @@ export default function TypescriptGenerics() {
         description={
           <>
             <Paragraph>
-              Generics are a fundamental feature of statically-typed languages,
-              allowing developers to pass types as parameters to another type,
-              function, or other structure. When a developer makes their
-              component a generic component, they give that component the
-              ability to accept and enforce typing that is passed in when the
-              component is used, which improves code flexibility, makes
-              components reusable, and removes duplication.
+              Generics are a core feature in statically-typed languages like
+              TypeScript, enabling developers to define components, functions,
+              or structures that can accept and enforce types passed during use.
+              This enhances flexibility, promotes reusability, and reduces code
+              duplication.
             </Paragraph>
             <Paragraph>
-              TypeScript fully supports generics as a way to introduce
-              type-safety into components that accept arguments and return
-              values whose type will be indeterminate until they are consumed
-              later in your code. In this tutorial, you will try out real-world
-              examples of TypeScript generics and explore how they are used in
-              functions, types, classes, and interfaces.
+              In this tutorial, we&apos;ll explore practical examples of
+              TypeScript generics and learn how to use them effectively in
+              functions, types, classes, and interfaces to improve type safety
+              and adaptability in your code.
             </Paragraph>
           </>
         }
         previewComponent={
           <Image
             src="/images/ts-generics-thumb.webp"
-            className="md:m-2 xl:m-5"
+            className="md:m-2 md:h-[350px] xl:m-5"
             isBlurred
             alt="Typescript Generics"
           />

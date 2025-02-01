@@ -1,20 +1,20 @@
-import { Link } from '@heroui/react'
+import { Link, Alert } from '@heroui/react'
 
 import { CollapsibleBlock } from '../../collapsible-block.tsx'
+import { AiExamplesButton } from '../../ai-examples-button.tsx'
 
 <CodeWithAccoridions>
 ## !!accordions Section 1: What are generics in TypeScript?
 
-Generics are a TypeScript feature that allows developers to write reusable and flexible code while maintaining strict 
-type safety. By enabling types to be passed as parameters, they help create structures and functions that adapt to the 
-specific type of data they operate on, without losing the benefits of TypeScript’s static typing.
+Generics in TypeScript let developers create reusable and adaptable code while preserving strict type safety. 
+By allowing types to be passed as parameters, generics help build structures and functions that can handle specific data types, without sacrificing the benefits of TypeScript’s static typing.
 
-Generics appear in TypeScript code inside angle brackets, in the format `<T>`, where T represents a passed-in type. 
-`<T>` can be read as a generic of type T. In this case, T will operate in the same way that parameters work in functions, 
-as placeholders for a type that will be declared when an instance of the structure is created.
+In TypeScript, generics are represented using angle brackets like `<T>`, where T stands for a passed-in type. 
+This notation works similarly to function parameters, acting as placeholders for a type that will be specified when the structure is instantiated.
 
-1. Passing type argument to `type`, `interface`, `class`
-  - Type aliases can use generics to create flexible and reusable types.
+**1. Passing type parameter to `type`, `interface`, `class`**
+
+Type aliases can use generics to create flexible and reusable types.
 ```ts
 type ApiResponse<T> = {
 //                ^?
@@ -37,7 +37,7 @@ const companyResponse: ApiResponse<Company> = {
 };
 ```
 
-  - Interfaces can also take generic parameters, enabling more specific and reusable contracts.
+Interfaces can also take generic parameters, enabling more specific and reusable contracts.
 ```ts
 interface KeyValuePair<K, V> {
     key: K;
@@ -49,7 +49,7 @@ const stringPair: KeyValuePair<string, string> = { key: "name", value: "Alice" }
 const numberPair: KeyValuePair<number, boolean> = { key: 42, value: true };
 ```
 
-  - Classes can take generic types to define properties and methods with flexible type handling.
+Classes can take generic types to define properties and methods with flexible type handling.
 ```ts
 class MyStorage<T> {
     private items: T[] = [];
@@ -73,9 +73,9 @@ numberStorage.addItem(42);
 numberStorage.addItem(100);
 ```
 
-2. Passing type argument to `function`
-Functions can accept generic parameters to work with varying types dynamically.
+**2. Passing type parameter to `function`**
 
+Functions can accept generic parameters to work with varying types dynamically.
 ```ts
 function createSet<T>() {
   return new Set<T>();
@@ -91,13 +91,14 @@ const createSetWithInitialValue = <T>(initialValue: T) => {
 };
 
 // Notice that in this case we didn’t have to explicitly pass the type in the angle brackets (<>)
-// This behaviour is called "type argument inference", the TS compiler just looked at the value "initialValue", and set Type to its type.
+// This behaviour is called "type parameter inference", the TS compiler just looked at the value "initialValue", and set Type to its type.
 const numberSet = createSetWithInitialValue(14);
 //      ^?
 ```
 
-You can also write generic React functional components
+**3. Passing type parameter to React components**
 
+React components can also accept generic parameters to define the type of props they receive.
 ```tsx
 type DropdownProps<T> = {
     items: T[];
@@ -262,172 +263,342 @@ const filteredApps = filterByKey(apps, "title", "Settings");
 
 ```
 
-Why Generics Are a Game-Changer:
+**Key Takeaways:**
 
 - ✅ Reusability: Write once, use everywhere. Generics adapt to any type you provide.
 - ✅ Type Safety: Prevent invalid inputs and incorrect usage at compile time.
 - ✅ Scalability: Your code can handle future data changes or new use cases with minimal updates.
 - ✅ Developer Productivity: Autocomplete and type inference save time and reduce redundant load.
 
-## !!accordions Section 3: Some Techniques You Need for Writing Good Generic TypeScript Code
-Writing efficient and maintainable generic TypeScript code requires a solid grasp of its capabilities and best practices. Here are essential techniques to master:
+## !!accordions Section 3: Generic Parameter Defaults
+Generic parameter defaults allow developers to specify a fallback type for generic parameters when they are not explicitly provided. 
+This feature simplifies APIs and makes code more user-friendly, reducing the need for repetitive type annotations while maintaining flexibility for advanced use cases.
 
-**1. Leverage `extends` to Add Type Constraints**
-    - Use `extends` to specify the shape or properties a generic type must follow to.
-```ts
-// @errors: 2345
-interface User {
-    id: number;
-    name: string;
-}
+Here are some common scenarios where default generic parameters can help us write more concise and flexible code:
 
-function printUserName<T extends User>(user: T): void {
-    console.log(user.name);
-}
+**1. Using Default Generics for Flexible Metadata Handling**
+- The generic parameter `T` in the `FileMetadata` interface has a default value of `{}` (an empty object).
+- This allows the metadata property to be flexible and not always required to have a specific structure.
+- The `commonFile` object uses the default empty object for metadata, while the `pdfFile` object specifies a more specific `PdfMetadata` type for the metadata property.
+    ```ts
+    interface FileMetadata<T = {}> {
+        filename: string;
+        size: number;
+        metadata: T; // metadata object structure can be flexible
+    }
 
-printUserName({ id: 1, name: "Alice" }); // ✅ Valid
+    // Set metadata as empty object for all common files that don't have specific metadata
+    const commonFile: FileMetadata = {
+        filename: "image.png",
+        size: 12345,
+        metadata: {},
+    };
 
-printUserName({ id: 1, name: "Vu", age: 30 }); // ✅ Valid
+    // Set PDF metadata for PDF file 
+    type PdfMetadata = { version: string, pages: number, resolution: string }
+    const pdfFile: FileMetadata<PdfMetadata> = {
+        filename: "image.png",
+        size: 12345,
+        metadata: {
+            version: '1.0.0',
+            pages: 5,
+            resolution: '594 x 841'
+        },
+    };
 
-printUserName({ id: 2 });
+    ```
 
-```
+**2. Using Default Generics for Simplified Function Signatures**
+
+- The function fetchData uses two generic parameters `T` and `E with default values `unknown` and `Error`, respectively.
+- `T` represents the type of the data expected from the API response.
+- `E` represents the type of the error that might occur.
+- The function returns a `FetchResult` object with a `data` property of type `T` and an `error` property of type `E`.
+
+    ```ts
+
+    type FetchResult<T, E> = {
+        data?: T;
+        error?: E;
+    };
+
+    type FetchOptions = {
+        headers?: Record<string, string>;
+        method?: "GET" | "POST" | "PUT" | "DELETE";
+        body?: string;
+    };
+
+    async function fetchData<T = unknown, E = Error>(
+        url: string,
+        options?: FetchOptions
+    ): Promise<FetchResult<T, E>> {
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    ...(options?.headers || {}),
+                },
+                method: options?.method || "GET",
+                body: options?.body,
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json();
+                throw new Error(errorBody.message || "Something went wrong");
+            }
+
+            const data: T = await response.json();
+            return { data };
+        } catch (error) {
+            return { error: error as E };
+        }
+    }
+
+    // Basic Usage with Defaults
+    (async () => {
+        const result = await fetchData("https://api.example.com/users");
+
+        const data = result.data
+    //         ^?
+
+        const error = result.error
+    //         ^?
+
+        if (data) {
+            console.log("Fetched data:", data);
+        } else {
+            console.error("Error:", error);
+        }
+    })();
+
+
+    // Custom Data and Error Type
+    interface User {
+        id: number;
+        name: string;
+    }
+
+    interface ApiError {
+        statusCode: number;
+        message: string;
+    }
+
+    (async () => {
+        const result = await fetchData<User, ApiError>("https://api.example.com/users");
+        const data = result.data
+    //         ^?
+
+        const error = result.error
+    //         ^?
+
+        if (data) {
+            console.log("Fetched user:", data);
+        } else {
+            console.error("Error Code:", error?.statusCode);
+            console.error("Message:", error?.message);
+        }
+    })();
+
+    ```
+
+**Key Takeaways:**
+- ✅ Ease of Use: Default generics reduce verbosity and make APIs more approachable.
+- ✅ Common Defaults: Defaults should represent the most commonly used type, streamlining development.
+- ✅ Override Flexibility: While defaults simplify usage, they still allow for explicit overrides when needed.
+
+<Alert
+    color="primary"
+    variant="faded"
+    title="Need more examples of Generic Parameter Defaults?"
+    description="Checkout our AI-generated examples for more code snippets and use cases."
+>
+    <div className='mt-2'>
+        <AiExamplesButton topic="Generic Parameter Defaults" defaultLanguage='typescript'/>
+    </div>
+</Alert>
+
+## !!accordions Section 4: Generic Constraints
+Generic constraints are a way to limit the types that can be used as parameters in generics. 
+This ensures that the provided types adhere to specific rules or structures, enhancing type safety and enabling more predictable 
+functionality. For example, constraints can be used to restrict the types passed into a function. 
+
+Below are some examples demonstrating how this can be done:
+
+**1. Use `extends` to Add Type Constraints**
+
+- The function `printUserName` is defined with a generic type parameter `T`.
+- The constraint `T` extends `User` ensures that `T` must be a type that includes at least the properties defined in the `User` interface.
+- This means that `T` can be `User` or any other type that has at least the `id` and `name` properties.
+    ```ts
+    // @errors: 2345
+    interface User {
+        id: number;
+        name: string;
+    }
+
+    function printUserName<T extends User>(user: T): void {
+        console.log(user.name);
+    //               ^?
+    }
+
+    printUserName({ id: 1, name: "Alice" }); // ✅ Valid
+
+    printUserName({ id: 1, name: "Vu", age: 30 }); // ✅ Valid
+
+    printUserName({ id: 2 }); // 🚫 Invalid parameter
+
+    ```
+- The first call is valid because the object `{ id: 1, name: "Alice" }` matches the `User` interface.
+- The second call is also valid because the object `{ id: 1, name: "Vu", age: 30 }` includes the required `id` and `name` properties, even though it has an additional age property.
+- The third call is invalid because the object `{ id: 2 }` does not include the `name` property, which is required by the `User` interface.
 
 **2. Use `keyof` to Constrain Keys**
-    - When working with object keys, use `keyof` to ensure generic parameters align with valid keys.
 
-```ts
-// @errors: 2345
+- The class `KeyValueStore` is defined with two generic type parameters, `T` and `K`.
+- The constraint `K extends keyof T` ensures that the key type `K` must be a valid key of the object type `T`. 
+- This means that `K` can only be a key that exists in the object type `T`.
 
-interface User { id: number; name: string }
-interface Post { id: number; title: string; content: string }
+    ```ts
+    // @errors: 2345
+    class KeyValueStore<T extends object, K extends keyof T> {
+        private store: Record<K, T[K]> = {} as Record<K, T[K]>;
 
-type APIEndpoints = {
-    "/users": User[];
-    "/posts": Post[];
-};
+        set(key: K, value: T[K]): void {
+            this.store[key] = value;
+        }
 
-function fetchData<T extends keyof APIEndpoints>(endpoint: T): Promise<APIEndpoints[T]> {
-    return fetch(endpoint).then((res) => res.json());
-}
-
-// Usage
-fetchData("/users").then((users) => console.log(users[0].name)); // ✅ Valid
-fetchData("/posts").then((posts) => console.log(posts[0].title)); // ✅ Valid
-
-fetchData("/comments");
-
-```
-
-**3. Use default Generic Parameters**
-    - Provide defaults for generic types to make your API easier to use.
-```ts
-interface Response<T = string> {
-    data: T;
-    status: number;
-}
-
-const response: Response = { data: "Success", status: 200 }; // Uses default `string`
-const typedResponse: Response<number> = { data: 42, status: 200 };
-
-```
-
-**4. Use Conditional Types for Flexible Constraints**
-    - Conditional types allow enforcing rules that vary based on the provided type.
-```ts
-type ExtractArrayType<T> = T extends (infer U)[] ? U : never;
-
-type StringArrayType = ExtractArrayType<string[]>; // string
-type NonArrayType = ExtractArrayType<number>; // never
-
-```
-
-**5. Combine Generics with Discriminated Unions**
-    - Use discriminated unions to simplify handling multiple types within a generic context.
-```ts
-// @errors: 2353
-type Shape = 
-    | { type: "circle"; radius: number }
-    | { type: "square"; side: number }
-    | { type: "unknown" };
-
-function calculateArea<T extends Shape>(shape: T): number {
-    if (shape.type === "circle") {
-        return Math.PI * shape.radius ** 2;
-    } else if (shape.type === "square") {
-        return shape.side ** 2;
+        get(key: K): T[K] | undefined {
+            return this.store[key];
+        }
     }
-    return 0;
-}
 
-console.log(calculateArea({ type: "circle", radius: 5 })); // ✅ 78.54
-console.log(calculateArea({ type: "square", side: 2 })); // ✅ 4
-console.log(calculateArea({ type: "unknown" })); // ✅ 0
+    // Usage
+    type User = {
+        id: number;
+        name: string;
+        email: string;
+    };
 
-console.log(calculateArea({ type: "square", radius: 4 }));
+    const userStore = new KeyValueStore<User, "id" | "email">();
+    userStore.set("id", 123); // ✅ Valid
+    userStore.set("email", "test@example.com"); // ✅ Valid
 
-```
+    console.log(userStore.get("id")); // ✅ 123
 
-**6. Layer Generics for Complex Scenarios**
-    - Use multiple generics when handling relationships between types.
-```ts
-function mapObject<T, U>(obj: Record<string, T>, transform: (value: T) => U): Record<string, U> {
-    const result: Record<string, U> = {};
-    for (const key in obj) {
-        result[key] = transform(obj[key]);
-    }
-    return result;
-}
+    userStore.set("name", "John");
 
-const input = { a: 1, b: 2 };
-const output = mapObject(input, (x) => x * 2); // { a: 2, b: 4 }
+    ```
 
-```
+- The first two calls to `set` are valid because the `KeyValueStore` instance is created with the `User` type and the keys `"id"` and `"email"`.
+- The call to `get` is also valid because the key `"id"` is part of the `User` type.
+- The last call to `set` is invalid because the key `"name"` is not part of the keys specified when creating the `KeyValueStore` instance.
 
-**7. Combine Generics with Overloads**
-    - For functions with varied behaviors, use overloads to improve clarity.
-```ts
-function processInput<T extends string>(input: T): string;
-function processInput<T extends number>(input: T): number;
-function processInput(input: unknown): unknown {
-    if (typeof input === "string") {
-        return input.toUpperCase();
-    } else if (typeof input === "number") {
-        return input * 2;
-    }
-    return input;
-}
+**Key Takeaways:**
+- ✅ Type Safety: Constraints ensure that only valid types are used in generics.
+- ✅ Predictable Behavior: Constraints help prevent runtime errors by enforcing type rules at compile time.
+- ✅ Enhanced Flexibility: Constraints allow for more specific and structured generic usage.
 
-console.log(processInput("hello")); // HELLO
-console.log(processInput(42));      // 84
+<Alert
+    color="primary"
+    variant="faded"
+    title="Need more examples of Generic Constraints?"
+    description="Checkout our AI-generated examples for more code snippets and use cases."
+>
+    <div className='mt-2'>
+        <AiExamplesButton topic="Use generic constraints to limit the types that can be used as parameters in generics." defaultLanguage='typescript'/>
+    </div>
+</Alert>
 
-```
+## !!accordions Section 5: Conditional types with generics
+Conditional types allow us to conditionally choose the right type based on a condition we define; 
+we can take this one step further, however, and pair them with generics to allow us to write more reusable code. 
 
-**8. Creating Mapped Types with Generics**
-    - When working with TypeScript, there are times when you will need to create a type that should have the same shape as another type
-```ts
-type BooleanFields<T> = {
-  [K in keyof T]: boolean;
-};
+**1. Creating types that transform union types into more usable structures**
 
-type User = {
-  email: string;
-  name: string;
-}
+- In this example, we define a conditional type `InterationEvent<T>` that transforms a union of event types into more specific event types. 
+- The conditional type checks if the type `T` is `"click"` or `"keypress"` and adds additional properties to the base event type accordingly.
 
-type UserFetchOptions = BooleanFields<User>;
-//          ^?
-```
+    ```ts
+    // @errors: 2353
+    type BaseEvent = { type: string }
 
-**9. Compose with Utility Types**
-    - TypeScript provides utility types (e.g., `Partial`, `Pick`, `Omit`) to extend generics without redefining functionality.
-```ts
-function updateObject<T>(obj: T, updates: Partial<T>): T {
-    return { ...obj, ...updates };
-}
+    type InterationEvent<T> = T extends "click"
+        ? BaseEvent & { x: number; y: number }
+        : T extends "keypress"
+        ? BaseEvent & { key: string }
+        : never;
 
-const user = { id: 1, name: "Alice" };
-const updated = updateObject(user, { name: "Bob" });
-//       ^?
-```
+    // Usage
+    type ClickEvent = InterationEvent<"click">;
+    type KeypressEvent = InterationEvent<"keypress">;
+
+    const click: ClickEvent = { type: "click", x: 100, y: 200 }; // ✅ Valid
+    const keypress: KeypressEvent = { type: "keypress", key: "Enter" }; // ✅ Valid
+
+    const invalidEvent: KeypressEvent = { type: "keypress", x: 50, y: 10 };
+
+    ```
+- The first two assignments are valid because the `ClickEvent` and `KeypressEvent` types are correctly inferred based on the conditional type.
+- The last assignment is invalid because the `KeypressEvent` type does not include the `x` and `y` properties.
+
+**2. Enforcing Proper Key-Value Relationships**
+
+- In this example, we define a conditional type `KeyValue<T>` that enforces a key-value relationship between the keys and values of an object.
+- The conditional type checks if the type `T` is an object and ensures that the keys and values are of the same type.
+    ```ts
+    type Config<T extends Record<string, any>> = {
+        [K in keyof T]: T[K] extends boolean ? boolean
+            : T[K] extends Array<Record<string, any>> ? Array<Record<string, any>>
+            : T[K] extends Array<any> ? Array<any>
+            : string;
+    };
+
+    // Usage
+    // @errors: 2322
+    type AppConfig = Config<{
+        darkMode: boolean;
+        language: string;
+        themes: string[];
+        stores: Record<string, string>[];
+    }>;
+
+    const config: AppConfig = { // ✅ Correct type
+        darkMode: true, 
+        language: "en",
+        themes: ["retro", "flat", "material"],
+        stores: [{
+            appstore: "https://apps.apple.com/us/charts/iphone",
+            playstore: "https://play.google.com/store/apps"
+        }]
+    };
+
+    const invalidConfig: AppConfig = {
+        ...config,
+        darkMode: "true", 
+    };
+
+    ```
+- The `config` object is valid because it adheres to the `AppConfig` type, which enforces the correct key-value relationships.
+- The `invalidConfig` object is invalid because the `darkMode` key is assigned a string value instead of a boolean.
+
+**Key Takeaways:**
+- ✅ Enhanced Type Safety: Conditional types with generics allow for more precise type checking.
+- ✅ Improved Reusability: Conditional types can be used to create reusable type transformations.
+- ✅ Better Code Structure: Conditional types help enforce consistent data structures and relationships.
+
+<Alert
+    color="primary"
+    variant="faded"
+    title="Need more examples of Condition Types and Generics?"
+    description="Checkout our AI-generated examples for more code snippets and use cases."
+>
+    <div className='mt-2'>
+        <AiExamplesButton topic="Use typescript generics with conditional type to create more reusable and type-safe code." defaultLanguage='typescript'/>
+    </div>
+</Alert>
+
+## !!accordions Section 6: Closing thoughts
+Generics can be a really helpful tool when working with TypeScript and can help us write more reusable, flexible, and easier-to-maintain code. However, 
+they do have an initial barrier to entry that might be difficult to overcome, but once you do, they open up a wide variety of possibilities and benefits in your code.
+
 </CodeWithAccoridions>

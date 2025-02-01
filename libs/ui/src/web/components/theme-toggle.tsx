@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from "@heroui/react";
+import { Button } from '@heroui/react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
@@ -17,7 +17,7 @@ export function ThemeToggle() {
       color="secondary"
       size="sm"
       isIconOnly
-      onClick={toggleTheme}
+      onPress={toggleTheme}
     >
       <Sun
         size={18}
