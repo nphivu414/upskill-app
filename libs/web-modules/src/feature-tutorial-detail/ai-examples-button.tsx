@@ -64,6 +64,15 @@ export const AiExamplesButton = ({
     }
   };
 
+  const handleOnOpenChange = (isOpen: boolean) => {
+    if (!isOpen) {
+      setGeneration('');
+      setIsError(false);
+    }
+
+    onOpenChange();
+  };
+
   return (
     <>
       <Button
@@ -87,7 +96,7 @@ export const AiExamplesButton = ({
         isOpen={isOpen}
         placement={isMobile ? 'bottom' : 'right'}
         size="4xl"
-        onOpenChange={onOpenChange}
+        onOpenChange={handleOnOpenChange}
         classNames={{
           base: 'h-full max-h-full',
         }}
@@ -98,7 +107,7 @@ export const AiExamplesButton = ({
               <DrawerHeader className="flex flex-col gap-1">
                 AI-Generated Examples
               </DrawerHeader>
-              <DrawerBody>
+              <DrawerBody className="relative">
                 {isLoading && (
                   <div className="bg-background absolute inset-0 z-10 flex items-center justify-center bg-opacity-50 backdrop-blur-sm">
                     <Spinner label="Generating examples..." />
