@@ -44,7 +44,7 @@ module.exports = {
         },
         dark: {
           colors: {
-            muted: "#d4d4d8"
+            muted: "#909090"
           },
         },
       },

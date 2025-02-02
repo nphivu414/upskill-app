@@ -28,7 +28,7 @@ export const HeadingSection = ({
 }: HeadingSectionProps) => {
   return (
     <section className="w-full space-y-10 px-4 xl:space-y-16">
-      <div className="flex flex-col items-start gap-4 pt-4 lg:flex-row">
+      <div className="flex flex-col items-start gap-4 pt-4 lg:flex-row lg:gap-6">
         <div className="flex-1">
           {typeof title === 'string' ? <Heading1>{title}</Heading1> : title}
           <Spacer y={4} />

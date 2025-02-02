@@ -6,7 +6,7 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from "@heroui/react";
+} from '@heroui/react';
 import { ComponentWithChildren } from '@upskill-app/shared';
 import { Code } from 'lucide-react';
 
@@ -14,7 +14,7 @@ export const ShowCodeModal = ({ children }: ComponentWithChildren) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <div className="sticky bottom-4 flex w-full justify-end lg:hidden">
+    <div className="sticky bottom-14 z-10 flex w-full justify-end lg:hidden">
       <Button
         variant="shadow"
         startContent={<Code size={14} />}

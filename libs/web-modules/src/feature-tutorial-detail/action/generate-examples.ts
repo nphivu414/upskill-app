@@ -1,10 +1,31 @@
 'use server';
 
+import { headers } from 'next/headers';
 import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 import { createStreamableValue } from 'ai/rsc';
 
+const rateLimit = new Map<string, { count: number; timestamp: number }>();
+const LIMIT_PER_MINUTE = 10;
+
 export async function generateTypeScriptExamples(context: string) {
+  const ip = headers().get('x-forwarded-for') || 'unknown';
+
+  const now = Date.now();
+  const userRateLimit = rateLimit.get(ip) || { count: 0, timestamp: now };
+
+  if (now - userRateLimit.timestamp > 60000) {
+    userRateLimit.count = 0;
+    userRateLimit.timestamp = now;
+  }
+
+  if (userRateLimit.count >= LIMIT_PER_MINUTE) {
+    throw new Error('Rate limit exceeded. Please try again in a minute.');
+  }
+
+  userRateLimit.count++;
+  rateLimit.set(ip, userRateLimit);
+
   const stream = createStreamableValue('');
 
   (async () => {
