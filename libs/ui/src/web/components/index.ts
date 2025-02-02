@@ -21,3 +21,4 @@ export * from './toaster';
 export * from './grid-overlay';
 export * from './neon-background';
 export * from './try-code-button';
+export * from './code-editor';

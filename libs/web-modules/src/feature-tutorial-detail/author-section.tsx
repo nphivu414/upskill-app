@@ -1,10 +1,10 @@
-import { Avatar, Button, Link, Spacer } from "@heroui/react";
+import { Avatar, Button, Link, Spacer } from '@heroui/react';
 import { CustomIcons, Paragraph } from '@upskill-app/ui/web';
 
 export const AuthorSection = () => {
   return (
     <section className="w-full px-4">
-      <p className="text-2xl font-bold">About the author</p>
+      <p className="text-3xl font-bold">About the author</p>
       <Spacer y={6} />
       <div className="flex flex-col items-start gap-6 md:flex-row">
         <div className="shrink-0">

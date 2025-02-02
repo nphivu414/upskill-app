@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Button } from "@heroui/react";
+import { Button } from '@heroui/react';
 import { ComponentWithChildren } from '@upskill-app/shared';
 import { Subtle } from '@upskill-app/ui/web';
 import { Minus, Plus } from 'lucide-react';
@@ -31,7 +31,7 @@ export const ContentSection = ({
   const handleToggleExpand = () => {
     setToggleExpand(!toggleExpand);
     if (toggleExpand) {
-      setSelectedSections(['empty']);
+      setSelectedSections(['']);
     } else {
       setSelectedSections(
         Array.from(Array(totalSections).keys()).map((num) => String(num + 1))
@@ -43,8 +43,8 @@ export const ContentSection = ({
     <section className="w-full px-4">
       <div className="space-y-6">
         <div className="flex justify-between">
-          <div className="flex shrink-0 flex-col">
-            <p className="text-xl font-bold lg:text-2xl">Tutorial Content</p>
+          <div className="flex flex-col">
+            <p className="text-3xl font-bold">Tutorial Content</p>
             <Subtle className="md:text-lg">{introText}</Subtle>
           </div>
           <div>
@@ -54,7 +54,7 @@ export const ContentSection = ({
               startContent={
                 toggleExpand ? <Minus size={14} /> : <Plus size={14} />
               }
-              onClick={handleToggleExpand}
+              onPress={handleToggleExpand}
             >
               {toggleExpand ? 'Collapse All' : 'Expand All'}
             </Button>
