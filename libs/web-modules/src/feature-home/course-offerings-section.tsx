@@ -1,4 +1,5 @@
-import { Button, Link, Spacer } from '@heroui/react';
+import { Button, Spacer, Image } from '@heroui/react';
+import { Link } from 'next-view-transitions'
 import {
   FlightBookingPagePreview,
   ProfilePagePreview,
@@ -6,6 +7,9 @@ import {
 import { Paragraph } from '@upskill-app/ui/web';
 
 import { HeadingSection } from '../feature-tutorial-detail/heading-section';
+import TypescriptGenericThumbContent from './typescript-generic-code.mdx';
+import { Code } from '../feature-tutorial-detail/content-code-block';
+import { TypescriptGenericThumb } from '../feature-tutorial-detail/typescript-generics-tutorial';
 
 export const CourseOfferingSection = () => {
   return (
@@ -128,6 +132,60 @@ export const CourseOfferingSection = () => {
               variant="shadow"
               color="primary"
               href="/tutorials/building-flight-booking-ui"
+            >
+              View Tutorial
+            </Button>
+          </div>
+        }
+      />
+      <Spacer className="my-8 md:my-24" />
+      <HeadingSection
+        title={
+          <p className="text-3xl font-bold lg:text-4xl">
+            Understading Typescript Generics
+          </p>
+        }
+        author={{
+          avatar: 'https://avatars.githubusercontent.com/u/22409039?v=4',
+          name: 'Vu Nguyen',
+          description: 'Software Engineer, NAB',
+        }}
+        description={
+          <Paragraph>
+            Generics are a core feature in statically-typed languages like
+            TypeScript, enabling developers to define components, functions,
+            or structures that can accept and enforce types passed during use.
+            This enhances flexibility, promotes reusability, and reduces code
+            duplication.
+          </Paragraph>
+        }
+        extraContent={
+          <div className="space-y-4">
+            {[
+              'What are generics in TypeScript?',
+              'Making Your Code Flexible with Generics',
+              'Generic Parameter Defaults',
+              'Generic Constraints',
+              'Conditional types with generics',
+              'Closing thoughts'
+            ].map((section, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <span className="bg-divider text-muted flex size-6 shrink-0 items-center justify-center rounded-full text-sm">
+                  {index + 1}
+                </span>
+                <p>{section}</p>
+              </div>
+            ))}
+          </div>
+        }
+        previewComponent={
+          <div className="mt-4 flex flex-col items-center justify-center gap-4 md:mt-0">
+            <TypescriptGenericThumb/>
+            <Button
+              as={Link}
+              variant="shadow"
+              color="primary"
+              href="/tutorials/typescript-generics"
             >
               View Tutorial
             </Button>

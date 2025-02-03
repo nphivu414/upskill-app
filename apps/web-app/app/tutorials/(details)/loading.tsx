@@ -87,16 +87,6 @@ export default function Loading() {
             </div>
             <div className="w-full lg:w-1/3">
               <div className="flex flex-col items-center justify-center gap-4">
-                <Chip
-                  variant="bordered"
-                  startContent={
-                    <div className="bg-success-500 relative mx-1 size-2 rounded-full">
-                      <div className="bg-success-500 size-2 animate-ping rounded-full " />
-                    </div>
-                  }
-                >
-                  Live Preview
-                </Chip>
                 <Skeleton className="bg-default-200 h-[604px] w-[320px] rounded-lg" />
               </div>
             </div>

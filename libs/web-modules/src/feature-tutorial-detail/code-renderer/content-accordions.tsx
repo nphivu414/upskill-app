@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Accordion, AccordionItem, cn, Selection } from '@heroui/react';
+import { Accordion, AccordionItem, Button, cn, Selection } from '@heroui/react';
 import { ComponentWithChildren } from '@upskill-app/shared';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import StickyBox from 'react-sticky-box';
 
 import { StepConfig } from '../types';
@@ -67,8 +68,8 @@ export const ContentAccordion = ({
       selectedKeys={selectedAccordionKeys}
       onSelectionChange={onSelectionChange}
       itemClasses={{
-        content: 'py-4',
-        heading: 'z-10 bg-content1 sticky top-[64px]',
+        content: 'pt-4',
+        heading: 'z-10 bg-content1',
       }}
     >
       {data.map((accordionItem, index) => (
@@ -90,6 +91,11 @@ export const ContentAccordion = ({
                 })}
               >
                 {accordionItem.children}
+                <div className="bg-content1/95 sticky bottom-0 z-10">
+                  <p className="text-muted m-0 px-0 py-4 text-center text-sm">
+                    {accordionItem.title}
+                  </p>
+                </div>
               </div>
               {stepConfigs?.length ? (
                 <>

@@ -5,6 +5,7 @@ import {
   ContentSection,
   HeadingSection,
   TypescriptGenericsContent,
+  TypescriptGenericThumb,
 } from '@upskill-app/web-modules/tutorial-detail';
 
 export const metadata = {
@@ -40,18 +41,17 @@ export default function TypescriptGenerics() {
             </Paragraph>
           </>
         }
+        prerequisites={[
+          'Basic knowledge of TypeScript',
+          'Familiarity with JavaScript (ES6+) concepts',
+        ]}
         previewComponent={
-          <Image
-            src="/images/ts-generics-thumb.webp"
-            className="md:m-2 md:h-[350px] xl:m-5"
-            isBlurred
-            alt="Typescript Generics"
-          />
+          <TypescriptGenericThumb/>
         }
       />
       <Divider className="my-12" />
       <ContentSection
-        introText="8 sections • 3 hours and 30 minutes"
+        introText="6 sections • approximately 2 hours"
         totalSections={8}
       >
         <TypescriptGenericsContent />

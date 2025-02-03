@@ -1,0 +1,22 @@
+```ts
+class MyStorage<T> {
+    private items: T[] = [];
+
+    addItem(item: T): void {
+        this.items.push(item);
+    }
+
+    getAllItems(): T[] {
+        return this.items;
+    }
+}
+
+// Usage
+const stringStorage = new MyStorage<string>();
+stringStorage.addItem("Hello");
+stringStorage.addItem("World");
+
+const numberStorage = new MyStorage<number>();
+numberStorage.addItem(42);
+numberStorage.addItem(100);
+```
