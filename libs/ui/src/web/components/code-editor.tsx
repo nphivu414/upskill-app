@@ -4,6 +4,7 @@ import { Editor } from '@monaco-editor/react';
 import { useTheme } from 'next-themes';
 
 import { getFileExtension } from '../utils';
+import { Spinner } from '@heroui/react';
 
 type CodeEditorProps = {
   code: string;
@@ -18,6 +19,7 @@ export const CodeEditor = ({ code, defaultLanguage }: CodeEditorProps) => {
       defaultLanguage={defaultLanguage}
       value={code}
       theme={theme === 'dark' ? 'vs-dark' : 'light'}
+      loading={<Spinner label="Loading" />}
       onMount={async (editor, monaco) => {
         const defaultFileExtension = getFileExtension(defaultLanguage);
         const defaultFileName = `file:///main.${defaultFileExtension}`;

@@ -27,7 +27,7 @@ export default function TypescriptGenerics() {
         description={
           <>
             <Paragraph>
-              Generics are a core feature in statically-typed languages like
+              Generics is a core feature in statically-typed languages like
               TypeScript, enabling developers to define components, functions,
               or structures that can accept and enforce types passed during use.
               This enhances flexibility, promotes reusability, and reduces code

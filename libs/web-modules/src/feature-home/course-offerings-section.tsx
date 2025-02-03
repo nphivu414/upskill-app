@@ -1,5 +1,4 @@
-import { Button, Spacer, Image } from '@heroui/react';
-import { Link } from 'next-view-transitions'
+import { Button, Spacer, Link } from '@heroui/react';
 import {
   FlightBookingPagePreview,
   ProfilePagePreview,
@@ -7,8 +6,6 @@ import {
 import { Paragraph } from '@upskill-app/ui/web';
 
 import { HeadingSection } from '../feature-tutorial-detail/heading-section';
-import TypescriptGenericThumbContent from './typescript-generic-code.mdx';
-import { Code } from '../feature-tutorial-detail/content-code-block';
 import { TypescriptGenericThumb } from '../feature-tutorial-detail/typescript-generics-tutorial';
 
 export const CourseOfferingSection = () => {
@@ -152,7 +149,7 @@ export const CourseOfferingSection = () => {
         }}
         description={
           <Paragraph>
-            Generics are a core feature in statically-typed languages like
+            Generics is a core feature in statically-typed languages like
             TypeScript, enabling developers to define components, functions,
             or structures that can accept and enforce types passed during use.
             This enhances flexibility, promotes reusability, and reduces code

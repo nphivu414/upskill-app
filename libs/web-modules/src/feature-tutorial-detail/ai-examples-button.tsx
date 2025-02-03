@@ -12,7 +12,7 @@ import {
   Spinner,
   useDisclosure,
 } from '@heroui/react';
-import { CodeEditor, useResponsive } from '@upskill-app/ui/web';
+import { cn, CodeEditor, useResponsive } from '@upskill-app/ui/web';
 import { readStreamableValue } from 'ai/rsc';
 import { RefreshCcw, WandSparkles } from 'lucide-react';
 
@@ -142,12 +142,14 @@ export const AiExamplesButton = ({
                   <div className="flex gap-2">
                     <Button
                       color="primary"
-                      variant="light"
+                      variant="flat"
                       onPress={regenerateExamples}
-                      startContent={<RefreshCcw size={14} />}
+                      startContent={<RefreshCcw size={14}  className={cn({
+                        'animate-spin': isStreaming,
+                      })}/>}
                       isDisabled={isStreaming}
                     >
-                      Regenerate
+                      {isStreaming ? 'Generating...' : 'Regenerate'}
                     </Button>
                     <Button color="default" variant="light" onPress={onClose}>
                       Close
