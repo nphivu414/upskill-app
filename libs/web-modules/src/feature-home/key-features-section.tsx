@@ -1,4 +1,5 @@
-import { Card, CardBody, CardHeader } from "@heroui/react";
+import { Card, CardBody, CardHeader } from '@heroui/react';
+import { CodeBlockProps } from '@upskill-app/shared';
 
 import { CodeWithTabs } from '../feature-tutorial-detail/code-renderer';
 import { Code } from '../feature-tutorial-detail/content-code-block';
@@ -31,6 +32,10 @@ const cardData: CardData[] = [
   },
 ];
 
+const FeatureCode = (props: CodeBlockProps) => {
+  return <Code {...props} className="text-xs" />;
+};
+
 export const KeyFeaturesSection = () => {
   return (
     <section className="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -60,7 +65,9 @@ export const KeyFeaturesSection = () => {
         <div className="flex w-full flex-col items-center justify-center">
           {/* Temporary fix for mdx tailwind class issue */}
           <div className="hidden h-[340px] w-[85vw] md:w-[75vw] lg:w-full" />
-          <KeyFeatureCodeContent components={{ CodeWithTabs, Code }} />
+          <KeyFeatureCodeContent
+            components={{ CodeWithTabs, Code: FeatureCode }}
+          />
         </div>
       </div>
     </section>

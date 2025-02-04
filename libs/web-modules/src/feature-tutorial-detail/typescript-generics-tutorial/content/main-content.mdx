@@ -65,12 +65,12 @@ class MyStorage<T> {
 
 // Usage
 const stringStorage = new MyStorage<string>();
-stringStorage.addItem("Hello");
-stringStorage.addItem("World");
+stringStorage.addItem("Hello world");
+const stringItems = stringStorage.getAllItems();
 
 const numberStorage = new MyStorage<number>();
 numberStorage.addItem(42);
-numberStorage.addItem(100);
+const numberItems = numberStorage.getAllItems();
 ```
 
 **2. Passing type parameter to `function`**
@@ -152,7 +152,7 @@ Let's explore a common programming challenge that highlights why generics are es
 
 Imagine we need to filter arrays of different object types by their properties. Let's build this step by step.
 
-**1: Untyped Solution**
+**1. Untyped Solution**
 ```ts
 type User = {
   id: number;
@@ -181,7 +181,7 @@ const firstItem = result2[0]
 - Missing compile-time validation
 - Lost IDE support (no autocomplete)
 
-**2: Type-Specific Solution**
+**2. Type-Specific Solution**
 ```ts
 
 // @errors: 2345 2339 564 18048
@@ -232,7 +232,7 @@ const filteredApps = filterByKey(apps, "title", "Settings");
 
 This is exactly where generics come in - they allow us to write reusable functions that work with any type while maintaining full type safety!
 
-**3: Generic Solution**
+**3. Generic Solution**
 ```ts
 type User = {
   id: number;
@@ -290,7 +290,7 @@ Here are some common scenarios where default generic parameters can help us writ
 
     // Set metadata as empty object for all common files that don't have specific metadata
     const commonFile: FileMetadata = {
-        filename: "image.png",
+        filename: "image.xyz",
         size: 12345,
         metadata: {},
     };
