@@ -1,4 +1,4 @@
-import { Divider, Image } from '@heroui/react';
+import { Divider } from '@heroui/react';
 import { Paragraph } from '@upskill-app/ui/web';
 import {
   AuthorSection,
@@ -45,9 +45,7 @@ export default function TypescriptGenerics() {
           'Basic knowledge of TypeScript',
           'Familiarity with JavaScript (ES6+) concepts',
         ]}
-        previewComponent={
-          <TypescriptGenericThumb/>
-        }
+        previewComponent={<TypescriptGenericThumb />}
       />
       <Divider className="my-12" />
       <ContentSection

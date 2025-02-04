@@ -34,12 +34,13 @@ export async function generateTypeScriptExamples(context: string) {
       'with emphasis on data processing patterns',
       'demonstrating common web development use cases',
       'showing real-world application architecture',
-      'highlighting modern TypeScript patterns'
+      'highlighting modern TypeScript patterns',
     ];
-    
-    const randomVariation = variations[Math.floor(Math.random() * variations.length)];
+
+    const randomVariation =
+      variations[Math.floor(Math.random() * variations.length)];
     const timestamp = Date.now();
-    
+
     const { textStream } = streamText({
       model: openai('gpt-4o-mini'),
       temperature: 0.8, // Add randomness to responses
@@ -48,7 +49,7 @@ export async function generateTypeScriptExamples(context: string) {
       prompt: `Generate 3 unique and different examples related to this TypeScript concept: ${context} ${randomVariation}.
       Seed: ${timestamp}
       The examples should be simple, straightforward and easy to understand. They should demonstrate how the current concept is beneficial in specific scenarios.
-      Each example should demonstrate the topic in function, type and interface.
+      Each example should demonstrate the topic in function, type and interface. You should avoid fetch API topics or Storage topics.
       In each example, when creating types or variables, avoid names that can be conflicted with built-in types or global vars in web api and nodejs api like "Event", "Storage", "ResponseType", "name", "length", etc.
       You must not add any comments or explanations along with the code.
       Return the result as code snippets with comments explaining the code in detail.
