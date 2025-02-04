@@ -77,22 +77,27 @@ numberStorage.addItem(100);
 
 Functions can accept generic parameters to work with varying types dynamically.
 ```ts
-function createSet<T>() {
-  return new Set<T>();
-};
+function createKeyValueStore<K, V>() {
+  return new Map<K, V>();
+}
 
-const stringSet = createSet<string>();
-//      ^?
+const userAges = createKeyValueStore<string, number>();
+//     ^?
+
+userAges.set("Alice", 28);
+userAges.set("Bob", 35);
 
 
 // Generic syntax for arrow functions
-const createSetWithInitialValue = <T>(initialValue: T) => {
-  return new Set<T>([initialValue]);
+const createStoreWithInitialValue = <K, V>(key: K, value: V) => {
+  const store = new Map<K, V>();
+  store.set(key, value);
+  return store;
 };
 
 // Notice that in this case we didn’t have to explicitly pass the type in the angle brackets (<>)
 // This behaviour is called "type parameter inference", the TS compiler just looked at the value "initialValue", and set Type to its type.
-const numberSet = createSetWithInitialValue(14);
+const productPrices = createStoreWithInitialValue("Laptop", 1200);
 //      ^?
 ```
 

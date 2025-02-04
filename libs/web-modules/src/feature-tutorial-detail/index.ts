@@ -6,3 +6,4 @@ export * from './profile-ui-tutorial';
 export * from './flight-booking-ui-tutorial';
 export * from './typescript-generics-tutorial';
 export * from './ai-examples-button';
+export * from './typescript-generics-tutorial/content/typescript-generic-code.mdx';

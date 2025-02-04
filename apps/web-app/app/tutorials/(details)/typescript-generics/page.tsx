@@ -5,6 +5,7 @@ import {
   ContentSection,
   HeadingSection,
   TypescriptGenericsContent,
+  TypescriptGenericThumb,
 } from '@upskill-app/web-modules/tutorial-detail';
 
 export const metadata = {
@@ -26,7 +27,7 @@ export default function TypescriptGenerics() {
         description={
           <>
             <Paragraph>
-              Generics are a core feature in statically-typed languages like
+              Generics is a core feature in statically-typed languages like
               TypeScript, enabling developers to define components, functions,
               or structures that can accept and enforce types passed during use.
               This enhances flexibility, promotes reusability, and reduces code
@@ -45,15 +46,7 @@ export default function TypescriptGenerics() {
           'Familiarity with JavaScript (ES6+) concepts',
         ]}
         previewComponent={
-          <Image
-            src="/images/ts-generics-thumb.png"
-            className="h-[400px] object-contain md:m-2 xl:m-5"
-            isBlurred
-            classNames={{
-              wrapper: 'mx-auto',
-            }}
-            alt="Typescript Generics"
-          />
+          <TypescriptGenericThumb/>
         }
       />
       <Divider className="my-12" />
