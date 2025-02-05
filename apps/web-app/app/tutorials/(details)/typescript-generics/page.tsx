@@ -11,7 +11,7 @@ import {
 export const metadata = {
   title: 'Understanding TypeScript Generics',
   description:
-    'This in-depth tutorial guides you through the process of creating a modern, interactive user profile page using React and HeroUI.',
+    'In this tutorial, we will explore practical examples of TypeScript generics and learn how to use them effectively.'
 };
 
 export default function TypescriptGenerics() {
