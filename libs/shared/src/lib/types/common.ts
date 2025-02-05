@@ -5,6 +5,9 @@ export type ComponentWithChildren<T = {}> = T & { children?: React.ReactNode };
 
 export type CodeBlockProps = {
   codeblock: HighlightedCode;
+  className?: string;
+  showCopyButton?: boolean;
+  showToolbar?: boolean;
   tooltips?: {
     title?: string | undefined;
     children?: React.ReactNode;

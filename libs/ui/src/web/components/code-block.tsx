@@ -15,6 +15,7 @@ import { TryCodeButton } from './try-code-button';
 type CodeBlockProps = React.ComponentPropsWithoutRef<typeof Pre> & {
   showCopyButton?: boolean;
   showTryCodeButton?: boolean;
+  showToolbar?: boolean;
   tooltips?: {
     title?: string | undefined;
     children?: React.ReactNode;
@@ -30,6 +31,7 @@ export const CodeBlock = React.forwardRef<
       className,
       showCopyButton,
       showTryCodeButton,
+      showToolbar,
       code: highlightedCode,
       tooltips,
       ...props
@@ -46,7 +48,8 @@ export const CodeBlock = React.forwardRef<
     });
 
     return (
-      <div className="relative">
+      <div className={cn('relative', { 'mockup-browser': showToolbar })}>
+        {showToolbar ? <div className="mockup-browser-toolbar" /> : null}
         <div className="absolute right-2 top-2">
           <div className="flex gap-2">
             {showTryCodeButton && (
@@ -61,7 +64,7 @@ export const CodeBlock = React.forwardRef<
 
         <Pre
           ref={ref}
-          className={cn('bg-content1 scrollbar-thin py-4', className)}
+          className={cn('bg-content1 scrollbar-thin py-4 text-sm', className)}
           code={highlightedCode}
           handlers={[
             codeLineMarkHander,

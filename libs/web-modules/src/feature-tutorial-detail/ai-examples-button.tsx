@@ -32,6 +32,7 @@ export const AiExamplesButton = ({
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isError, setIsError] = React.useState<boolean>(false);
   const [isStreaming, setIsStreaming] = React.useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
   const [generation, setGeneration] = React.useState<string>('');
 
   React.useEffect(() => {
@@ -53,6 +54,7 @@ export const AiExamplesButton = ({
     try {
       const context = `Main topic: ${topic}`;
       const { output } = await generateTypeScriptExamples(context);
+      setIsLoaded(true);
 
       for await (const delta of readStreamableValue(output)) {
         setGeneration((currentGeneration) => {
@@ -64,12 +66,13 @@ export const AiExamplesButton = ({
       setIsError(true);
     } finally {
       setIsStreaming(false);
+      setIsLoaded(true);
     }
   };
 
   const regenerateExamples = async () => {
     setGeneration('');
-      await generateExamples(true);
+    await generateExamples(true);
   };
 
   const handleOnOpenChange = (isOpen: boolean) => {
@@ -78,6 +81,10 @@ export const AiExamplesButton = ({
     }
 
     onOpenChange();
+  };
+
+  const onViewMoreExamples = () => {
+    generateExamples();
   };
 
   return (
@@ -94,7 +101,7 @@ export const AiExamplesButton = ({
             />
           </span>
         }
-        onPress={() => generateExamples()}
+        onPress={onViewMoreExamples}
       >
         View more examples
       </Button>
@@ -127,12 +134,12 @@ export const AiExamplesButton = ({
                       title="Failed to generate examples. Please try again later!"
                     />
                   </div>
-                ) : (
+                ) : isLoaded ? (
                   <CodeEditor
                     code={generation}
                     defaultLanguage={defaultLanguage}
                   />
-                )}
+                ) : null}
               </DrawerBody>
               <DrawerFooter>
                 <div className="flex w-full items-center justify-between">
@@ -144,9 +151,14 @@ export const AiExamplesButton = ({
                       color="primary"
                       variant="flat"
                       onPress={regenerateExamples}
-                      startContent={<RefreshCcw size={14}  className={cn({
-                        'animate-spin': isStreaming,
-                      })}/>}
+                      startContent={
+                        <RefreshCcw
+                          size={14}
+                          className={cn({
+                            'animate-spin': isStreaming,
+                          })}
+                        />
+                      }
                       isDisabled={isStreaming}
                     >
                       {isStreaming ? 'Generating...' : 'Regenerate'}

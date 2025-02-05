@@ -1,7 +1,7 @@
 'use client';
 
 import React, { Key } from 'react';
-import { cn, Tab, Tabs, TabsProps } from "@heroui/react";
+import { cn, Tab, Tabs, TabsProps } from '@heroui/react';
 
 import { CustomIcons } from './custom-icon';
 
@@ -72,7 +72,7 @@ export function CodeBlockTabs(props: CodeBlockTabsProps) {
             {
               <div
                 className={cn({
-                  'flex items-center justify-center py-4':
+                  'flex items-center justify-center py-4 text-sm':
                     tab.title === 'Preview',
                 })}
               >

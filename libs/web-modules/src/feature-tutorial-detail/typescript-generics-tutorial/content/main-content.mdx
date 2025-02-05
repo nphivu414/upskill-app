@@ -65,12 +65,12 @@ class MyStorage<T> {
 
 // Usage
 const stringStorage = new MyStorage<string>();
-stringStorage.addItem("Hello");
-stringStorage.addItem("World");
+stringStorage.addItem("Hello world");
+const stringItems = stringStorage.getAllItems();
 
 const numberStorage = new MyStorage<number>();
 numberStorage.addItem(42);
-numberStorage.addItem(100);
+const numberItems = numberStorage.getAllItems();
 ```
 
 **2. Passing type parameter to `function`**
@@ -152,7 +152,7 @@ Let's explore a common programming challenge that highlights why generics are es
 
 Imagine we need to filter arrays of different object types by their properties. Let's build this step by step.
 
-**Approach 1: Untyped Solution**
+**1. Untyped Solution**
 ```ts
 type User = {
   id: number;
@@ -176,12 +176,12 @@ const firstItem = result2[0]
 
 ```
 
-❌ Problems with Approach 1:
+❌ Problems with solution 1:
 - No type information in the return value
 - Missing compile-time validation
 - Lost IDE support (no autocomplete)
 
-**Approach 2: Type-Specific Solution**
+**2. Type-Specific Solution**
 ```ts
 
 // @errors: 2345 2339 564 18048
@@ -230,9 +230,9 @@ const filteredApps = filterByKey(apps, "title", "Settings");
 - Can't reuse for other object types
 
 
-This is exactly where generics come in - they allow us to write type-safe, reusable functions that work with any type while maintaining full type safety
+This is exactly where generics come in - they allow us to write reusable functions that work with any type while maintaining full type safety!
 
-**Approach 3: Generic Solution**
+**3. Generic Solution**
 ```ts
 type User = {
   id: number;
@@ -269,7 +269,6 @@ const filteredApps = filterByKey(apps, "title", "Settings");
 
 - **Reusability**: Write once, use everywhere. Generics adapt to any type you provide.
 - **Type Safety**: Prevent invalid inputs and incorrect usage at compile time.
-- **Scalability**: Your code can handle future data changes or new use cases with minimal updates.
 - **Developer Productivity**: Autocomplete and type inference save time and reduce redundant load.
 
 ## !!accordions Section 3: Generic Parameter Defaults
@@ -291,7 +290,7 @@ Here are some common scenarios where default generic parameters can help us writ
 
     // Set metadata as empty object for all common files that don't have specific metadata
     const commonFile: FileMetadata = {
-        filename: "image.png",
+        filename: "image.xyz",
         size: 12345,
         metadata: {},
     };
@@ -319,9 +318,9 @@ Here are some common scenarios where default generic parameters can help us writ
 
     ```ts
 
-    type FetchResult<T, E> = {
-        data?: T;
-        error?: E;
+    type FetchResult<TData, TError> = {
+        data?: TData;
+        error?: TError;
     };
 
     type FetchOptions = {
@@ -330,10 +329,10 @@ Here are some common scenarios where default generic parameters can help us writ
         body?: string;
     };
 
-    async function fetchData<T = unknown, E = Error>(
+    async function fetchData<TData = unknown, TError = Error>(
         url: string,
         options?: FetchOptions
-    ): Promise<FetchResult<T, E>> {
+    ): Promise<FetchResult<TData, TError>> {
         try {
             const response = await fetch(url, {
                 headers: {
@@ -349,21 +348,20 @@ Here are some common scenarios where default generic parameters can help us writ
                 throw new Error(errorBody.message || "Something went wrong");
             }
 
-            const data: T = await response.json();
+            const data: TData = await response.json();
             return { data };
         } catch (error) {
-            return { error: error as E };
+            return { error: error as TError };
         }
     }
 
     // Basic Usage with Defaults
     (async () => {
-        const result = await fetchData("https://api.example.com/users");
-
-        const data = result.data
+        const result = await fetchData("https://api.example.com/data");
+        const data = result.data;
     //         ^?
 
-        const error = result.error
+        const error = result.error;
     //         ^?
 
         if (data) {
@@ -387,10 +385,10 @@ Here are some common scenarios where default generic parameters can help us writ
 
     (async () => {
         const result = await fetchData<User, ApiError>("https://api.example.com/users");
-        const data = result.data
+        const data = result.data;
     //         ^?
 
-        const error = result.error
+        const error = result.error;
     //         ^?
 
         if (data) {

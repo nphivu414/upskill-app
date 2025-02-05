@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: ComponentWithChildren) {
   return (
-      <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-        <head>
-          <GoogleAnalytics gaId={GA_ID} />
-        </head>
-        <body>
-          <AppUiProvider>{children}</AppUiProvider>
-        </body>
-        <Toaster richColors closeButton />
-      </html>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <head>
+        <GoogleAnalytics gaId={GA_ID} />
+      </head>
+      <body>
+        <AppUiProvider>{children}</AppUiProvider>
+      </body>
+      <Toaster richColors closeButton />
+    </html>
   );
 }
