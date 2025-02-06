@@ -96,7 +96,7 @@ const createStoreWithInitialValue = <K, V>(key: K, value: V) => {
 };
 
 // Notice that in this case we didn’t have to explicitly pass the type in the angle brackets (<>)
-// This behaviour is called "type parameter inference", the TS compiler just looked at the value "initialValue", and set Type to its type.
+// This behaviour is called "type parameter inference", the TS compiler just looked at the values of "key" and "value", and set Type to its type.
 const productPrices = createStoreWithInitialValue("Laptop", 1200);
 //      ^?
 ```
@@ -136,14 +136,27 @@ const ProductDropdown = () => {
     ];
 
     return (
-        <Dropdown
-            items={products}
-            getLabel={(product) => product.name}
-            onSelect={(product) => console.log("Selected:", product)}
-        />
+        <>
+            <Dropdown
+//              ^?
+                items={products}
+                getLabel={(product) => product.name}
+                onSelect={(product) => console.log("Selected:", product)}
+            />
+
+            {/*You can also manually pass the explicit type to the Dropdown component just like what you do with normal functions*/}
+            <Dropdown<string>
+//              ^?
+                items={['Apple', 'Banana', 'Orange']}
+                getLabel={(item) => item}
+                onSelect={(item) => console.log("Selected:", item)}
+            />
+        </>
     );
 };
 ```
+In React, we don't usually need to pass the type explicitly to the component, because most of the time, the type can be inferred from the props that we pass to the component.
+And it's also a good practice to let the TS compiler infer the type for you, because it makes your code cleaner and more readable.
 
 ## !!accordions Section 2: Making Your Code Flexible with Generics
 Let's explore a common programming challenge that highlights why generics are essential.
@@ -311,10 +324,10 @@ Here are some common scenarios where default generic parameters can help us writ
 
 **2. Using Default Generics for Simplified Function Signatures**
 
-- The function fetchData uses two generic parameters `T` and `E with default values `unknown` and `Error`, respectively.
-- `T` represents the type of the data expected from the API response.
-- `E` represents the type of the error that might occur.
-- The function returns a `FetchResult` object with a `data` property of type `T` and an `error` property of type `E`.
+- The function fetchData uses two generic parameters `TData` and `TError` with default values `unknown` and `Error`, respectively.
+- `TData` represents the type of the data expected from the API response.
+- `TError` represents the type of the error that might occur.
+- The function returns a `FetchResult` object with a `data` property of type `TData` and an `error` property of type `TError`.
 
     ```ts
 
