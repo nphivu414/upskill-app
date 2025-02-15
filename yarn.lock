@@ -5453,6 +5453,25 @@
   resolved "https://registry.yarnpkg.com/@one-ini/wasm/-/wasm-0.1.1.tgz#6013659736c9dbfccc96e8a9c2b3de317df39323"
   integrity sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==
 
+"@openpanel/nextjs@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@openpanel/nextjs/-/nextjs-1.0.7.tgz#c4931f362cbcaf7c0b01c7380a203ff7b63b007e"
+  integrity sha512-XygTPiVlxUkcnZ3DYYwnWiogDgCL1hFK5G8nxokdrFKKuM0XQ+9mFElW/+dKgnVfmV2QiP1aAscudHAlRSUQhg==
+  dependencies:
+    "@openpanel/web" "1.0.1"
+
+"@openpanel/sdk@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@openpanel/sdk/-/sdk-1.0.0.tgz#f92a40a9f8accc855e1d063182751f8e9eab469f"
+  integrity sha512-FNmmfjdXoC/VHEjA+WkrQ4lyM5lxEmV7xDd57uj4E+lIS0sU3DLG2mV/dpS8AscnZbUvuMn3kPhiLCqYzuv/gg==
+
+"@openpanel/web@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@openpanel/web/-/web-1.0.1.tgz#2a42668966aca8a604659941fb3d4f398174f238"
+  integrity sha512-cVZ7Kr9SicczJ/RDIfEtZs8+1iGDzwkabVA/j3NqSl8VSucsC8m1+LVbjmCDzCJNnK4yVn6tEcc9PJRi2rtllw==
+  dependencies:
+    "@openpanel/sdk" "1.0.0"
+
 "@opentelemetry/api@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.9.0.tgz#d03eba68273dc0f7509e2a3d5cba21eae10379fe"

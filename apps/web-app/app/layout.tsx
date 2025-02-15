@@ -5,8 +5,8 @@ import { GeistSans } from 'geist/font/sans';
 import './styles/global.css';
 
 import type { Metadata } from 'next';
-import { ComponentWithChildren, GA_ID } from '@upskill-app/shared';
-import { GoogleAnalytics } from '@upskill-app/web-modules/analytics';
+import { ComponentWithChildren } from '@upskill-app/shared';
+import { OpenPanelAnalytics } from '@upskill-app/web-modules/analytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://upskills.dev/'),
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: ComponentWithChildren) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
-        <GoogleAnalytics gaId={GA_ID} />
+        <OpenPanelAnalytics />
       </head>
       <body>
         <AppUiProvider>{children}</AppUiProvider>

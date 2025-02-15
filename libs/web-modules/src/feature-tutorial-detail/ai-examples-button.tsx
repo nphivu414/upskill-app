@@ -102,6 +102,9 @@ export const AiExamplesButton = ({
           </span>
         }
         onPress={onViewMoreExamples}
+        data-track={`view_ai_examples_${topic
+          .toLowerCase()
+          .replace(/\s+/g, '_')}_click`}
       >
         View more examples
       </Button>

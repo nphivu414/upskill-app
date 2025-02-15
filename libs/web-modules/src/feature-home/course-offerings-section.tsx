@@ -61,6 +61,7 @@ export const CourseOfferingSection = () => {
               variant="shadow"
               color="primary"
               href="/tutorials/typescript-generics"
+              data-track="view_home_typescript_generics_click"
             >
               View Tutorial
             </Button>
@@ -121,6 +122,7 @@ export const CourseOfferingSection = () => {
               color="primary"
               variant="shadow"
               href="/tutorials/building-profile-ui"
+              data-track="view_home_building_profile_ui_click"
             >
               View Tutorial
             </Button>
@@ -183,6 +185,7 @@ export const CourseOfferingSection = () => {
               variant="shadow"
               color="primary"
               href="/tutorials/building-flight-booking-ui"
+              data-track="view_home_building_flight_booking_ui_click"
             >
               View Tutorial
             </Button>

@@ -1,0 +1,12 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Allow crawling of all content
+Allow: /tutorials/
+
+# Sitemap
+Sitemap: https://upskills.dev/sitemap.txt
+
+# Crawl-delay
+Crawl-delay: 10
