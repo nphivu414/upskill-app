@@ -1,9 +1,10 @@
 {
   "expo": {
-    "name": "NativeApp",
-    "slug": "native-app",
+    "name": "Upskills",
+    "slug": "upskills",
     "scheme": "upskill-app-scheme",
     "version": "1.0.0",
+    "newArchEnabled": true,
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -30,6 +31,56 @@
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "@ai-sdk/openai",
+          "@heroui/react",
+          "@hookform/resolvers",
+          "@ianvs/prettier-plugin-sort-imports",
+          "@internationalized/date",
+          "@mdx-js/loader",
+          "@mdx-js/react",
+          "@monaco-editor/react",
+          "@next/mdx",
+          "@openpanel/nextjs",
+          "@prisma/client",
+          "@radix-ui/react-collapsible",
+          "@react-email/components",
+          "@storybook/addon-interactions",
+          "@t3-oss/env-nextjs",
+          "@tailwindcss/typography",
+          "@tamagui/babel-plugin",
+          "@tamagui/config",
+          "ai",
+          "class-variance-authority",
+          "codehike",
+          "embla-carousel-react",
+          "express-rate-limit",
+          "framer-motion",
+          "geist",
+          "isbot",
+          "lucide-react",
+          "next",
+          "next-themes",
+          "next-view-transitions",
+          "nuqs",
+          "prisma",
+          "react-email",
+          "react-markdown",
+          "react-sticky-box",
+          "remark-gfm",
+          "resend",
+          "sonner",
+          "tailwindcss",
+          "tailwindcss-animated",
+          "tslib",
+          "twoslash",
+          "usehooks-ts",
+          "vaul"
+        ]
+      }
+    }
   }
 }
