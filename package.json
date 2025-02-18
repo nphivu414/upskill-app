@@ -7,8 +7,8 @@
     "start:web": "nx run web-app:dev",
     "build:web": "nx run web-app:build",
     "start:native": "nx start native-app",
-    "start:ios": "nx run:ios native-app",
-    "start:android": "nx run:android native-app",
+    "start:ios": "nx run-ios native-app",
+    "start:android": "nx run-android native-app",
     "lint:web": "nx lint web-app --fix",
     "storybook:start": "nx storybook tutorial-elements -p 9009",
     "storybook:build": "nx build-storybook tutorial-elements"
@@ -42,6 +42,7 @@
     "embla-carousel-react": "^8.2.0",
     "expo": "52.0.35",
     "expo-constants": "~17.0.6",
+    "expo-dev-client": "~5.0.12",
     "expo-font": "~13.0.3",
     "expo-linking": "~7.0.5",
     "expo-router": "~4.0.17",
