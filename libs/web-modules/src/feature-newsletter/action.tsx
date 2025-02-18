@@ -15,7 +15,7 @@ export async function subscribeToNewsletter(
   preferredName: string
 ) {
   try {
-    if (!checkRateLimit()) {
+    if (!(await checkRateLimit())) {
       return {
         success: false,
         message: 'Too many subscription attempts, please try again later.',
