@@ -1,8 +1,8 @@
 'use server';
 
 import { headers } from 'next/headers';
-import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
+import { anthropic } from '@ai-sdk/anthropic';
+import { LanguageModel, streamText } from 'ai';
 import { createStreamableValue } from 'ai/rsc';
 
 const rateLimit = new Map<string, { count: number; timestamp: number }>();
@@ -42,8 +42,8 @@ export async function generateTypeScriptExamples(context: string) {
       variations[Math.floor(Math.random() * variations.length)];
 
     const { textStream } = streamText({
-      model: openai('gpt-4o-mini'),
-      temperature: 0.8, // Add randomness to responses
+      model: anthropic('claude-3-5-haiku-latest') as LanguageModel,
+      temperature: 0.8,
       system:
         'You are a TypeScript expert especially dealing with Generics concept. Generate practical, real-world examples that demonstrate the concept being discussed.',
       prompt: `Generate 3 unique and different examples related to this TypeScript concept: ${context} ${randomVariation}.
