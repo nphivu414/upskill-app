@@ -127,7 +127,7 @@ export const AiExamplesButton = ({
               <DrawerBody className="relative">
                 {isLoading && (
                   <div className="bg-background absolute inset-0 z-10 flex items-center justify-center bg-opacity-50 backdrop-blur-sm">
-                    <Spinner label="Generating examples..." />
+                    <Spinner variant="dots" label="Generating examples..." />
                   </div>
                 )}
                 {isError ? (
@@ -154,17 +154,12 @@ export const AiExamplesButton = ({
                       color="primary"
                       variant="flat"
                       onPress={regenerateExamples}
-                      startContent={
-                        <RefreshCcw
-                          size={14}
-                          className={cn({
-                            'animate-spin': isStreaming,
-                          })}
-                        />
-                      }
+                      isLoading={isStreaming}
+                      spinner={<Spinner variant="dots" size="sm" />}
+                      spinnerPlacement="end"
                       isDisabled={isStreaming}
                     >
-                      {isStreaming ? 'Generating...' : 'Regenerate'}
+                      {isStreaming ? 'Generating' : 'Regenerate'}
                     </Button>
                     <Button color="default" variant="light" onPress={onClose}>
                       Close

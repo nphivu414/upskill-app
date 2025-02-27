@@ -13,7 +13,7 @@ export const AppFooter = ({ className }: AppFooterProps) => {
       )}
     >
       <p className="text-default-500 text-xs">
-        © 2024 Upskills. All rights reserved.
+        © 2025 Upskills. All rights reserved.
       </p>
     </footer>
   );

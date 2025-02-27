@@ -3,7 +3,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from '@react-navigation/native';
-import { Slot, Stack, Tabs } from 'expo-router';
+import { Tabs } from 'expo-router';
 import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TamaguiProvider } from 'tamagui';

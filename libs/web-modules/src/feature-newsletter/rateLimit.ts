@@ -8,8 +8,8 @@ interface RateLimitData {
   timestamp: number;
 }
 
-export function checkRateLimit(): boolean {
-  const cookieStore = cookies();
+export async function checkRateLimit() {
+  const cookieStore = await cookies();
   const rateLimitCookie = cookieStore.get('rate_limit');
 
   let rateLimitData: RateLimitData = rateLimitCookie

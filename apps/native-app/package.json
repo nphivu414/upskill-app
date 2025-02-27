@@ -2,17 +2,33 @@
   "name": "native-app",
   "version": "0.0.1",
   "private": true,
-  "main": "expo-router/entry",
+  "main": "index.js",
   "dependencies": {
+    "@expo/metro-config": "*",
+    "@expo/metro-runtime": "*",
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
     "metro-config": "*",
     "react-native": "*",
     "expo": "*",
+    "expo-constants": "*",
+    "expo-dev-client": "*",
+    "expo-font": "*",
+    "expo-linking": "*",
+    "expo-router": "*",
+    "expo-splash-screen": "*",
+    "expo-status-bar": "*",
     "react-native-svg": "*",
-    "react-native-web": "*"
+    "react-native-web": "*",
+    "react": "18.3.1",
+    "react-native-safe-area-context": "*",
+    "react-native-screens": "*",
+    "react-native-svg-transformer": "*",
+    "react-native-reanimated": "*"
   },
   "scripts": {
-    "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/native-app"
+    "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/native-app",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   }
 }
