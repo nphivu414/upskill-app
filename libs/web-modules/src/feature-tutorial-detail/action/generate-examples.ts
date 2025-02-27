@@ -9,7 +9,8 @@ const rateLimit = new Map<string, { count: number; timestamp: number }>();
 const LIMIT_PER_MINUTE = 10;
 
 export async function generateTypeScriptExamples(context: string) {
-  const ip = headers().get('x-forwarded-for') || 'unknown';
+  const reqHeaders = await headers();
+  const ip = reqHeaders.get('x-forwarded-for') || 'unknown';
 
   const now = Date.now();
   const userRateLimit = rateLimit.get(ip) || { count: 0, timestamp: now };
