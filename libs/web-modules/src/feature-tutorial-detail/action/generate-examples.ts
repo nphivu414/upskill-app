@@ -2,7 +2,7 @@
 
 import { headers } from 'next/headers';
 import { anthropic } from '@ai-sdk/anthropic';
-import { streamText } from 'ai';
+import { LanguageModel, streamText } from 'ai';
 import { createStreamableValue } from 'ai/rsc';
 
 const rateLimit = new Map<string, { count: number; timestamp: number }>();
@@ -42,7 +42,7 @@ export async function generateTypeScriptExamples(context: string) {
       variations[Math.floor(Math.random() * variations.length)];
 
     const { textStream } = streamText({
-      model: anthropic('claude-3-5-haiku-latest'),
+      model: anthropic('claude-3-5-haiku-latest') as LanguageModel,
       temperature: 0.8,
       system:
         'You are a TypeScript expert especially dealing with Generics concept. Generate practical, real-world examples that demonstrate the concept being discussed.',
