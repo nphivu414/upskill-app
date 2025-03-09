@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {
-  Avatar,
   Button,
   Link,
   Navbar,
@@ -48,7 +47,7 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="/#highlighted-tutorials">
+          <Link color="foreground" href="/tutorials">
             Tutorials
           </Link>
         </NavbarItem>
@@ -102,7 +101,7 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
         <NavbarMenuItem>
           <Link
             color="foreground"
-            href="/#highlighted-tutorials"
+            href="/tutorials"
             onPress={() => setIsMenuOpen(false)}
           >
             Tutorials
