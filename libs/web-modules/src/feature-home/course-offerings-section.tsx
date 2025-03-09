@@ -12,7 +12,7 @@ export const CourseOfferingSection = () => {
   return (
     <section
       id="highlighted-tutorials"
-      className="mx-auto max-w-screen-xl py-12 md:py-24 lg:px-12"
+      className="mx-auto max-w-screen-xl lg:px-12"
     >
       <HeadingSection
         title={
