@@ -1,6 +1,7 @@
 import { AppUiProvider, Toaster } from '@upskill-app/ui/web';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import './styles/global.css';
 
@@ -22,7 +23,9 @@ export default function RootLayout({ children }: ComponentWithChildren) {
         <OpenPanelAnalytics />
       </head>
       <body>
-        <AppUiProvider>{children}</AppUiProvider>
+        <NuqsAdapter>
+          <AppUiProvider>{children}</AppUiProvider>
+        </NuqsAdapter>
       </body>
       <Toaster richColors closeButton />
     </html>
