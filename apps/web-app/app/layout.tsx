@@ -18,7 +18,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: ComponentWithChildren) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <OpenPanelAnalytics />
       </head>
