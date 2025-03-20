@@ -1,4 +1,5 @@
-import { Button, Link, Spacer } from '@heroui/react';
+import Link from 'next/link';
+import { Button, Spacer } from '@heroui/react';
 import {
   FlightBookingPagePreview,
   ProfilePagePreview,
@@ -58,6 +59,7 @@ export const CourseOfferingSection = () => {
             <TypescriptGenericThumb />
             <Button
               as={Link}
+              prefetch
               variant="shadow"
               color="primary"
               href="/tutorials/typescript-generics"
@@ -119,6 +121,7 @@ export const CourseOfferingSection = () => {
             <ProfilePagePreview showStorySourceLink={false} />
             <Button
               as={Link}
+              prefetch
               color="primary"
               variant="shadow"
               href="/tutorials/building-profile-ui"
@@ -182,6 +185,7 @@ export const CourseOfferingSection = () => {
             <FlightBookingPagePreview showStorySourceLink={false} />
             <Button
               as={Link}
+              prefetch
               variant="shadow"
               color="primary"
               href="/tutorials/building-flight-booking-ui"

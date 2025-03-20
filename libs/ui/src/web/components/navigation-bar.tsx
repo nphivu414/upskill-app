@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import NextLink from 'next/link';
 import {
   Button,
   Link,
@@ -101,6 +102,8 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
         <NavbarMenuItem>
           <Link
             color="foreground"
+            as={NextLink}
+            prefetch
             href="/tutorials"
             onPress={() => setIsMenuOpen(false)}
           >
