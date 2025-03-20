@@ -42,7 +42,7 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
       <NavbarBrand>
         <AppLogo className="!size-6" />
         <Spacer x={1} />
-        <Link href="/" color="foreground">
+        <Link as={NextLink} href="/" color="foreground" prefetch>
           <p className="font-bold text-inherit">Upskills</p>
         </Link>
       </NavbarBrand>
