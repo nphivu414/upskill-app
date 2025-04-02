@@ -13,6 +13,7 @@ export * from './embed-story';
 export * from './embed-preview';
 export * from './collapsible';
 export * from './alert';
+export * from './table';
 export * from './custom-icon';
 export * from './live-preview';
 export * from './drawer';
