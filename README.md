@@ -42,7 +42,9 @@ libs/
 yarn install
 ```
 
-2. Start development server:
+2. Create an .env file based on `apps/web-app/.env.example`
+
+3. Start development server:
 ```sh
 yarn start
 ```
