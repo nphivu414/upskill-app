@@ -48,7 +48,7 @@ export const NavigationBar = ({ className, ...rest }: NavigationBarProps) => {
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="/tutorials">
+          <Link color="foreground" as={NextLink} prefetch href="/tutorials">
             Tutorials
           </Link>
         </NavbarItem>
