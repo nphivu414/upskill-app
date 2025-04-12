@@ -3,7 +3,6 @@
 import React, { CSSProperties } from 'react';
 import {
   Column,
-  ColumnDef,
   ColumnPinningState,
   flexRender,
   getCoreRowModel,
@@ -20,63 +19,16 @@ import {
 
 import mockEmployees from './mock-data';
 import { Employee } from './types';
+import { columns } from './utils';
 
-export const columns: ColumnDef<Employee>[] = [
-  {
-    accessorKey: 'id',
-    header: 'Employee ID',
-  },
-  {
-    accessorKey: 'name',
-    header: 'Name',
-  },
-  {
-    accessorKey: 'email',
-    header: 'Email',
-  },
-  {
-    accessorKey: 'role',
-    header: 'Role',
-  },
-  {
-    accessorKey: 'country',
-    header: 'Country',
-  },
-  {
-    accessorKey: 'annualSalary',
-    header: 'Annual Salary',
-  },
-  {
-    accessorKey: 'dateOfJoining',
-    header: 'Date of Joining',
-  },
-  {
-    accessorKey: 'hireType',
-    header: 'Hire Type',
-  },
-  {
-    accessorKey: 'contractType',
-    header: 'Contract Type',
-  },
-  {
-    accessorKey: 'contractEndDate',
-    header: 'Contract End Date',
-  },
-  {
-    accessorKey: 'probationEndDate',
-    header: 'Probation End Date',
-  },
-  {
-    accessorKey: 'manager.name',
-    header: 'Manager Name',
-  },
-];
+import './table.css';
 
 export const DataTable = () => {
   const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
     left: ['name'],
     right: [''],
   });
+  const columnResizeMode = 'onChange';
 
   const getCommonPinningStyles = (column: Column<Employee>): CSSProperties => {
     const isPinned = column.getIsPinned();
@@ -102,18 +54,33 @@ export const DataTable = () => {
   };
 
   const table = useReactTable({
+    columns,
     data: mockEmployees,
     state: {
       columnPinning,
     },
     onColumnPinningChange: setColumnPinning,
-    columns,
     getCoreRowModel: getCoreRowModel(),
+    defaultColumn: {
+      size: 150, //starting column size
+      minSize: 50, //enforced during column resizing
+      maxSize: 500, //enforced during column resizing
+    },
+    columnResizeMode,
+    columnResizeDirection: 'ltr',
+    debugTable: true,
+    debugHeaders: true,
+    debugColumns: true,
   });
 
   return (
     <div>
-      <Table className="!border-separate border-spacing-0 p-4">
+      <Table
+        className="!border-separate border-spacing-0 p-4"
+        style={{
+          width: table.getCenterTotalSize(),
+        }}
+      >
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -122,7 +89,11 @@ export const DataTable = () => {
                 return (
                   <TableHead
                     key={header.id}
-                    style={{ ...getCommonPinningStyles(column) }}
+                    colSpan={header.colSpan}
+                    style={{
+                      ...getCommonPinningStyles(column),
+                      width: header.getSize(),
+                    }}
                   >
                     {header.isPlaceholder
                       ? null
@@ -130,6 +101,29 @@ export const DataTable = () => {
                           header.column.columnDef.header,
                           header.getContext()
                         )}
+                    <div
+                      {...{
+                        onDoubleClick: () => header.column.resetSize(),
+                        onMouseDown: header.getResizeHandler(),
+                        onTouchStart: header.getResizeHandler(),
+                        className: `resizer ${
+                          table.options.columnResizeDirection
+                        } ${header.column.getIsResizing() ? 'isResizing' : ''}`,
+                        style: {
+                          transform:
+                            columnResizeMode === 'onEnd' &&
+                            header.column.getIsResizing()
+                              ? `translateX(${
+                                  (table.options.columnResizeDirection === 'rtl'
+                                    ? -1
+                                    : 1) *
+                                  (table.getState().columnSizingInfo
+                                    .deltaOffset ?? 0)
+                                }px)`
+                              : '',
+                        },
+                      }}
+                    />
                   </TableHead>
                 );
               })}
@@ -148,7 +142,10 @@ export const DataTable = () => {
                   return (
                     <TableCell
                       key={cell.id}
-                      style={{ ...getCommonPinningStyles(column) }}
+                      style={{
+                        ...getCommonPinningStyles(column),
+                        width: cell.column.getSize(),
+                      }}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
