@@ -9,6 +9,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  cn,
   Table,
   TableBody,
   TableCell,
@@ -23,12 +24,16 @@ import { columns } from './utils';
 
 import './table.css';
 
+import { MockupBrowser } from 'libs/tutorial-elements/src/lib/components';
+
 export const DataTable = () => {
   const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
     left: ['name'],
     right: [''],
   });
-  const columnResizeMode = 'onChange';
+  const [columnResizeMode] = React.useState<'onChange' | 'onEnd' | undefined>(
+    'onChange'
+  );
 
   const getCommonPinningStyles = (column: Column<Employee>): CSSProperties => {
     const isPinned = column.getIsPinned();
@@ -62,109 +67,123 @@ export const DataTable = () => {
     onColumnPinningChange: setColumnPinning,
     getCoreRowModel: getCoreRowModel(),
     defaultColumn: {
-      size: 150, //starting column size
-      minSize: 50, //enforced during column resizing
-      maxSize: 500, //enforced during column resizing
+      size: 150,
+      minSize: 50,
+      maxSize: 500,
     },
     columnResizeMode,
     columnResizeDirection: 'ltr',
-    debugTable: true,
-    debugHeaders: true,
-    debugColumns: true,
   });
 
   return (
     <div>
-      <Table
-        className="!border-separate border-spacing-0 p-4"
-        style={{
-          width: table.getCenterTotalSize(),
-        }}
-      >
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                const { column } = header;
-                return (
-                  <TableHead
-                    key={header.id}
-                    colSpan={header.colSpan}
-                    style={{
-                      ...getCommonPinningStyles(column),
-                      width: header.getSize(),
-                    }}
+      <MockupBrowser className="w-full max-w-full">
+        <div className="max-h-[500px] overflow-auto">
+          <Table
+            className="!border-separate border-spacing-0"
+            style={{
+              width: table.getCenterTotalSize(),
+            }}
+          >
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    const { column } = header;
+                    return (
+                      <TableHead
+                        key={header.id}
+                        colSpan={header.colSpan}
+                        className="group"
+                        style={{
+                          ...getCommonPinningStyles(column),
+                          width: header.getSize(),
+                        }}
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                        <div
+                          className={cn(
+                            'bg-divider absolute top-0 h-full w-1 cursor-col-resize touch-none select-none opacity-0 group-hover:opacity-100',
+                            {
+                              'right-0':
+                                table.options.columnResizeDirection === 'ltr',
+                              'left-0':
+                                table.options.columnResizeDirection === 'rtl',
+                              'bg-divider opacity-100':
+                                header.column.getIsResizing(),
+                            }
+                          )}
+                          onDoubleClick={() => header.column.resetSize()}
+                          onMouseDown={header.getResizeHandler()}
+                          onTouchStart={header.getResizeHandler()}
+                          {...{
+                            style: {
+                              transform:
+                                columnResizeMode === 'onEnd' &&
+                                header.column.getIsResizing()
+                                  ? `translateX(${
+                                      (table.options.columnResizeDirection ===
+                                      'rtl'
+                                        ? -1
+                                        : 1) *
+                                      (table.getState().columnSizingInfo
+                                        .deltaOffset ?? 0)
+                                    }px)`
+                                  : '',
+                            },
+                          }}
+                        />
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && 'selected'}
                   >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                    <div
-                      {...{
-                        onDoubleClick: () => header.column.resetSize(),
-                        onMouseDown: header.getResizeHandler(),
-                        onTouchStart: header.getResizeHandler(),
-                        className: `resizer ${
-                          table.options.columnResizeDirection
-                        } ${header.column.getIsResizing() ? 'isResizing' : ''}`,
-                        style: {
-                          transform:
-                            columnResizeMode === 'onEnd' &&
-                            header.column.getIsResizing()
-                              ? `translateX(${
-                                  (table.options.columnResizeDirection === 'rtl'
-                                    ? -1
-                                    : 1) *
-                                  (table.getState().columnSizingInfo
-                                    .deltaOffset ?? 0)
-                                }px)`
-                              : '',
-                        },
-                      }}
-                    />
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
-              >
-                {row.getVisibleCells().map((cell) => {
-                  const { column } = cell;
-                  return (
-                    <TableCell
-                      key={cell.id}
-                      style={{
-                        ...getCommonPinningStyles(column),
-                        width: cell.column.getSize(),
-                      }}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+                    {row.getVisibleCells().map((cell) => {
+                      const { column } = cell;
+                      return (
+                        <TableCell
+                          key={cell.id}
+                          style={{
+                            ...getCommonPinningStyles(column),
+                            width: cell.column.getSize(),
+                          }}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </MockupBrowser>
     </div>
   );
 };
