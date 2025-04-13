@@ -34,10 +34,7 @@
       ],
       "@upskill-app/web-modules/tutorial-detail": [
         "libs/web-modules/src/feature-tutorial-detail/index.ts"
-      ],
-      "@upskill-app/web-modules/showcase": [
-        "libs/web-modules/src/feature-showcase/index.ts"
-      ],
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

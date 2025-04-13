@@ -1,5 +1,5 @@
-import { DataTable } from '@upskill-app/web-modules/showcase';
+import { DataTablePagePreview } from '@upskill-app/tutorial-elements';
 
 export default function DataTableShowcase() {
-  return <DataTable />;
+  return <DataTablePagePreview />;
 }
