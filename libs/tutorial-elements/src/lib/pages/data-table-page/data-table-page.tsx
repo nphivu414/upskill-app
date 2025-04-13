@@ -24,8 +24,8 @@ import { columns } from './utils';
 
 export const DataTablePage = () => {
   const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
-    left: ['name'],
-    right: [''],
+    left: ['name', 'id'],
+    right: ['hireType'],
   });
   const [columnResizeMode] = React.useState<'onChange' | 'onEnd' | undefined>(
     'onChange'
@@ -37,7 +37,6 @@ export const DataTablePage = () => {
       isPinned === 'left' && column.getIsLastColumn('left');
     const isFirstRightPinnedColumn =
       isPinned === 'right' && column.getIsFirstColumn('right');
-
     return {
       boxShadow: isLastLeftPinnedColumn
         ? '-4px 0 4px -4px gray inset'
@@ -74,7 +73,7 @@ export const DataTablePage = () => {
   return (
     <div className="max-h-[500px] overflow-auto">
       <Table
-        className="!border-separate border-spacing-0"
+        className="table-fixed !border-separate border-spacing-0"
         style={{
           width: table.getCenterTotalSize(),
         }}
@@ -97,12 +96,14 @@ export const DataTablePage = () => {
                       width: header.getSize(),
                     }}
                   >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                    <div className="truncate break-words">
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </div>
                     <div
                       className={cn(
                         'bg-divider absolute top-0 h-full w-1 cursor-col-resize touch-none select-none opacity-0 group-hover:opacity-100',
@@ -157,10 +158,12 @@ export const DataTablePage = () => {
                         width: cell.column.getSize(),
                       }}
                     >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      <div className="truncate break-words">
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </div>
                     </TableCell>
                   );
                 })}
