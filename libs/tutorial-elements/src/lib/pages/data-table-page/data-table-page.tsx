@@ -70,7 +70,7 @@ export const DataTablePage = () => {
   });
 
   return (
-    <div className="flex max-h-[calc(90vh-64px)]">
+    <div className="flex max-h-[calc(95vh-64px)]">
       <div className="w-full flex-1 overflow-auto">
         <Table
           className="table-fixed !border-separate border-spacing-0"
