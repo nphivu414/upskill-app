@@ -6,6 +6,7 @@ export const columns: ColumnDef<Employee>[] = [
   {
     accessorKey: 'id',
     header: 'Employee ID',
+    size: 100,
   },
   {
     accessorKey: 'name',

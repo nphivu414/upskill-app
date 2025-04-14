@@ -5,7 +5,7 @@ import { DataTablePage } from '../data-table-page';
 
 export const DataTablePagePreview = () => {
   return (
-    <MockupBrowser className="w-full max-w-full">
+    <MockupBrowser className="mx-auto w-full max-w-full resize-x">
       <DataTablePage />
     </MockupBrowser>
   );
