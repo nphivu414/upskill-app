@@ -19,6 +19,7 @@ import {
 } from '@upskill-app/ui/web';
 
 import mockEmployees from './mock-data';
+import { SettingSidebar } from './setting-sidebar/setting-sidebar';
 import { Employee } from './types';
 import { columns } from './utils';
 
@@ -70,7 +71,7 @@ export const DataTablePage = () => {
   });
 
   return (
-    <div className="flex max-h-[calc(95vh-64px)]">
+    <div className="flex max-h-[calc(90vh-64px-36px-32px)]">
       <div className="w-full flex-1 overflow-auto">
         <Table
           className="table-fixed !border-separate border-spacing-0"
@@ -183,21 +184,7 @@ export const DataTablePage = () => {
           </TableBody>
         </Table>
       </div>
-      <div className="bg-content2 border-divider min-h-full w-80 border-l-2">
-        <div className="flex flex-col gap-2 p-4">
-          <h3 className="text-lg font-semibold">Column Pinning</h3>
-          <p className="text-muted-foreground text-sm">
-            You can pin columns to the left or right by dragging the column
-            header to the desired side. The pinned columns will remain visible
-            while scrolling through the table.
-          </p>
-          <h3 className="text-lg font-semibold">Column Resizing</h3>
-          <p className="text-muted-foreground text-sm">
-            You can resize columns by dragging the right edge of the column
-            header. The column width will adjust dynamically as you drag.
-          </p>
-        </div>
-      </div>
+      <SettingSidebar />
     </div>
   );
 };
